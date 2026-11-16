@@ -492,6 +492,11 @@ a.lnk{color:var(--blue);cursor:pointer;font-weight:600}a.lnk:hover{text-decorati
 .pnl-r label{display:inline-flex;align-items:center;gap:8px;cursor:pointer;flex:1;min-width:0;white-space:nowrap}
 .pnl input[type=checkbox]{width:16px;height:16px;accent-color:var(--blue);margin:0;cursor:pointer}
 .pnl-d{width:9px;height:9px;border-radius:50%;display:inline-block;flex:none}
+/* 5-Week Rolling picker (left of Forecast accuracy) */
+.w5-btn{margin-right:10px;align-self:center}.w5-ic{display:inline-flex;color:var(--blue)}
+.w5-btn.w5-on{border-color:var(--blue);background:var(--sky)}.w5-btn.w5-on .cbtn-v{color:var(--blue);font-weight:700}
+.w5-pnl{width:440px}.pnl input[type=radio]{width:16px;height:16px;accent-color:var(--blue);margin:0;cursor:pointer}
+.w5-note{font-size:11.5px;color:var(--muted);margin:6px 2px 0}
 .pnl-r select{border:1px solid var(--line);border-radius:7px;padding:5px 8px;font:inherit;font-size:12.5px;background:#fff;width:230px}
 .an-t{width:100%;border-collapse:collapse;font-size:12.5px}
 .an-t th{font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:700;text-align:right;padding:6px 8px;border-bottom:1px solid var(--line);white-space:nowrap}
@@ -1134,6 +1139,7 @@ body.sd-lkd .sd-ws{box-shadow:0 0 0 2px #F3D28A,var(--shadow)}
 /* ---- v24 · McKesson logo = start over ---- */
 #tbLogo{cursor:pointer;border-radius:9px;padding:4px 8px;margin:-4px -8px;transition:background .15s}
 #tbLogo:hover{background:var(--sky)}
+#tbLogo svg{height:17px !important}
 #tbLogo:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
 #tbLogo .mark{transition:transform .15s}
 #tbLogo:active .mark{transform:scale(.92)}
@@ -1447,7 +1453,9 @@ table.t.acc-t th,table.t.acc-t td{padding:6px 8px}
 .sd-cbs{display:none}
 .sd-hero .sd-flow{display:none}
 .gd-rl b,.gd-rl small{white-space:normal;overflow:visible;text-overflow:clip;line-height:1.3}
-table.t.acc-t th.acc-uh{white-space:normal;overflow-wrap:anywhere}
+table.t.acc-t th.acc-uh{white-space:normal;overflow-wrap:normal;word-break:normal;hyphens:none;text-align:center;vertical-align:top;padding-left:6px;padding-right:6px;width:108px;min-width:104px;max-width:116px}
+table.t.acc-t th.acc-uh .acc-pav{display:flex;margin:0 auto 6px}
+table.t.acc-t th.acc-uh b{display:block;text-align:center;font-size:11.5px;line-height:1.3}
 table.t.acc-t{width:auto;min-width:100%}
 .acc-t td.acc-fn,.acc-t th.acc-fh{position:sticky;left:0;background:#fff;z-index:1;box-shadow:1px 0 0 var(--line)}
 .acc-t thead th.acc-fh{z-index:3}
@@ -1540,14 +1548,14 @@ table.t.ns-t th{font-size:10px;white-space:normal;line-height:1.2;vertical-align
     <div class="logo white" id="lgLogo"></div>
     <div class="hero">
       <h1>Cash Flow Intelligence Platform</h1>
-      <p class="sub">Cash forecasting for receivables, payables and inventory: 13 weeks by day, month and quarter to fiscal year-end, and the long-term plan.</p>
-      <div class="cap"><span>Performance Workspace</span><span>Forecasting Studio</span><span>Risk Intelligence</span><span>Alerts &amp; Exceptions</span><span>Scenario Workspace</span></div>
-      <div class="mods">
+      <!-- <p class="sub">Cash forecasting for receivables, payables and inventory: 13 weeks by day, month and quarter to fiscal year-end, and the long-term plan.</p> -->
+      <!-- <div class="cap"><span>Performance Workspace</span><span>Forecasting Studio</span><span>Risk Intelligence</span><span>Alerts &amp; Exceptions</span><span>Scenario Workspace</span></div> -->
+      <!-- <div class="mods">
         <div class="mod"><b>Accounts Receivable</b> <span class="st">PHASE 1 · LIVE</span></div>
         <div class="mod"><b>Accounts Payable</b> <span class="st pv">PHASE 2 · PREVIEW</span></div>
         <div class="mod"><b>Inventory</b> <span class="st pv">PHASE 2 · PREVIEW</span></div>
         <div class="mod"><b>End-to-end cash flow</b> &amp; working capital <span class="st pv">PHASE 2 · PREVIEW</span></div>
-      </div>
+      </div> -->
     </div>
     <div class="lg-foot">Prototype for demonstration · Illustrative data calibrated to public McKesson scale</div>
   </div>
@@ -1584,16 +1592,16 @@ table.t.ns-t th{font-size:10px;white-space:normal;line-height:1.2;vertical-align
 
 <script>
 /* ============================ DATA ============================ */
-const LOGO_MARK = c => `<svg width="16" height="16" viewBox="0 0 16 16"><path d="M2 13V3l6 6 6-6v10" fill="none" stroke="${c}" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/></svg>`;
-function logoHTML(white){return `<span class="mark">${LOGO_MARK(white?'#0060AF':'#fff')}</span><span class="word">McKESSON</span>`}
+const LOGO_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 216 29.42" height="24" style="height:24px;width:auto;display:block;flex:0 0 auto" role="img" aria-label="McKesson"><defs><style>.cls-1{fill:#005a8c;}.cls-2{fill:#ef8200;}</style></defs><title>McKesson</title><path class="cls-1" d="M209.6.85V19.11L199.14.85h-8.3V29.14h6.41V10.4C198.33,12.28,208,29.14,208,29.14h8V.85Z" transform="translate(0 -0.29)"/><path class="cls-1" d="M20.25.85s-5.1,15.66-5.63,17.3C14.08,16.5,9,.85,9,.85H0v28.3H6.26V9.82c1,3.34,5.86,19.32,5.86,19.32h4.75S22,13,23,9.75V29.14h6.29V.85h-9" transform="translate(0 -0.29)"/><polygon class="cls-1" points="103.47 28.85 82.56 28.85 82.56 0.56 103.47 0.56 103.47 6.05 89.37 6.05 89.37 11.32 102.29 11.32 102.29 16.8 89.37 16.8 89.37 23.37 103.47 23.37 103.47 28.85"/><rect class="cls-2" x="35.03" y="23.74" width="15.33" height="5.11"/><path class="cls-1" d="M70.78.85s-7.56,9.47-8.66,10.72V.85H55.69v28.3h6.43V16.65C63.25,18,71,29.14,71,29.14h9S68.07,14.47,67.64,14L79.28.85Z" transform="translate(0 -0.29)"/><path class="cls-1" d="M159.66,14.92c0,8.73,4.62,14.79,13.38,14.79s13.37-6.19,13.37-14.79S181.61.29,173,.29s-13.38,5.92-13.38,14.63m6.83,0c0-4.29,1.91-8.68,6.55-8.68s6.56,4.4,6.56,8.68-1.76,8.83-6.56,8.83-6.55-4.43-6.55-8.83" transform="translate(0 -0.29)"/><path class="cls-1" d="M121.43,11.94c-3.09-.82-6-1.32-6.06-3.31A1.83,1.83,0,0,1,116,7.18c1.09-1,3.57-1.33,5.53-1.18a15.37,15.37,0,0,1,7.08,2.07L130,2.31a28,28,0,0,0-10.29-2c-7.1.07-11.48,3.56-11.48,9.11s5.39,7.11,9.91,8.41c2.94.82,5.88,1.26,5.88,3.45s-3.55,3-5.94,3a15.84,15.84,0,0,1-8.32-2.51l-1.83,5.7c4.08,1.6,6.55,2.29,10.49,2.29,4.31,0,7.86-1.19,10-3.35a8.14,8.14,0,0,0,2.38-5.93c0-5.76-5.06-7.36-9.36-8.47" transform="translate(0 -0.29)"/><path class="cls-1" d="M147.1,11.94c-3.09-.82-6-1.32-6.08-3.31a1.91,1.91,0,0,1,.61-1.45c1.11-1,3.58-1.33,5.53-1.18a15.49,15.49,0,0,1,7.09,2.07l1.38-5.75a27.94,27.94,0,0,0-10.29-2c-7.09.07-11.48,3.56-11.48,9.11s5.39,7.11,9.91,8.41c2.94.82,5.88,1.26,5.88,3.45s-3.55,3-5.94,3a15.82,15.82,0,0,1-8.32-2.51l-1.84,5.7c4.07,1.6,6.55,2.29,10.5,2.29,4.29,0,7.86-1.19,10-3.35a8.21,8.21,0,0,0,2.37-5.93c0-5.76-5.08-7.36-9.36-8.47" transform="translate(0 -0.29)"/><path class="cls-1" d="M44.57,21.07a15.41,15.41,0,0,0,6.55-1.3l-1.95-4.57a6.45,6.45,0,0,1-3.37.94c-3.32,0-6.06-1.65-6.06-5.43s2.74-5.43,6.06-5.43a6.57,6.57,0,0,1,3.37.92l1.95-4.56A15.63,15.63,0,0,0,44.57.32C37.8.32,33.5,4.21,33.5,10.7s4.3,10.36,11.07,10.36" transform="translate(0 -0.29)"/></svg>`;
+function logoHTML(white){return white?LOGO_SVG.replace(/class="cls-1"/g,'fill="#fff"'):LOGO_SVG}
 
 const PERSONAS = {
   fpa:{key:'fpa',name:'Jordan Hayes',role:'FP&A Manager',ini:'JH',email:'jordan.hayes@mckesson.com',col:'#0060AF',approver:'Priya Shah (Director, FP&A)'},
   dir:{key:'dir',name:'Priya Shah',role:'Director, FP&A',ini:'PS',email:'priya.shah@mckesson.com',col:'#E8870E',approver:'Daniel Brooks (VP, FP&A)'},
   vp:{key:'vp',name:'Daniel Brooks',role:'VP, FP&A',ini:'DB',email:'daniel.brooks@mckesson.com',col:'#00264D',approver:'CFO staff review'}
 };
-const BU = {All:{f:1,label:'All'},USPD:{f:0.74,label:'USPD'},'O&M':{f:0.26,label:'O&M'}};
-const BU_NAMES = {All:'All business units',USPD:'U.S. Pharmaceutical Distribution','O&M':'Oncology & Multispecialty'};
+const BU = {All:{f:1,label:'Combined View'},USPD:{f:0.74,label:'USPD'},'O&M':{f:0.26,label:'O&M'}};
+const BU_NAMES = {All:'Combined view business units',USPD:'U.S. Pharmaceutical Distribution','O&M':'Oncology & Multispecialty'};
 
 function spread(total, w){const s=w.reduce((a,b)=>a+b,0);return w.map(x=>total*x/s)}
 const HZ = {
@@ -2054,7 +2062,7 @@ function personaBanner(n){
   if(n.rvB)return n.rvB();
   const hz=H().label, k=keyCusts()[0];
   if(S.persona==='fpa') return {t:`<b>Forecast collections are tracking ${fs(n.v)} to target</b> over ${hzPh(1)}. Billings are running ahead of plan, but payment-behavior drift, ${H().holiday.replace('Holiday','holiday')} and short-pays ${n.v<0?'pull cash below target':'are more than offset'+(n.drivers.length>4?' by the Forecasting Studio inputs':'')}. ${n.drivers.length} drivers identified.`,b:'Explain the variance',a:"go('tower','bridge')"};
-  if(S.persona==='dir') return {t:`<b>Sales are on plan, but cash isn't.</b> Billings are ${fs(n.bill-n.billPlan)} vs plan while collections are ${fs(n.v)}. A large customer, <b>${k?k.name:'Florida Cancer Specialists'}</b>, has slipped ${k?k.drift:12} days to pay.`,b:'Open situation room',a:"document.getElementById('sitroom').scrollIntoView({behavior:'smooth'})"};
+  if(S.persona==='dir') return {t:`<b>Sales are on plan, but cash isn't.</b> Billings are ${fs(n.bill-n.billPlan)} vs plan while collections are ${fs(n.v)}. A large customer, <b>${k?k.name:'Florida Cancer Specialists'}</b>, has slipped ${k?k.drift:12} days to pay.`,b:PW_SHOW_EXTRAS?'Open situation room':'Open Risk Intelligence',a:PW_SHOW_EXTRAS?"document.getElementById('sitroom').scrollIntoView({behavior:'smooth'})":"go('risk')"};
   return {t:`<b>We're growing fast. Is the growth funding itself?</b> Revenue is up 12% YoY, but open AR is up 15%. At ${n.dso0.toFixed(1)} days DSO today, every day of drift ties up ${fm(n.perDay)} of cash.`,b:'Model growth scenario',a:"S.scTab='scen';S.scn='growth';go('scen')"};
 }
 const esc=s=>String(s).replace(/"/g,'&quot;');
@@ -2118,6 +2126,9 @@ function modelCard(n,rng){
   return `<div class="card"><div class="ch"><h3>Forecast confidence &amp; model health</h3><span class="sp"></span><span class="badge b-ok">● Monitored</span></div>
     <table class="t cmp"><tbody>${rows.map(r=>`<tr><td class="txt-mut">${r[0]}</td><td class="r" style="font-weight:600;white-space:normal">${r[1]}</td></tr>`).join('')}</tbody></table></div>`;
 }
+// Performance Workspace: Situation room, Does growth sustain itself?, Phase 1 pilot value scorecard and
+// Working-capital playbook are hidden for now. Set true to show them again.
+var PW_SHOW_EXTRAS=false;
 function scorecard(n){
   const cash=LEVERS.fpa.reduce((a,l)=>a+leverMax(l),0);
   const t=[
@@ -2178,11 +2189,11 @@ function pageTower(){
   <div class="page-h"><div><h1>Performance Workspace</h1><div class="meta">${asOf()}</div></div><span class="sp"></span>${sdChip()}${accPill()}</div>
   <div class="banner"><div class="ai">${AI_ICON}</div><div class="t">${b.t}</div><div class="sp"></div><button onclick="${b.a}">${b.b} →</button></div>
   ${eqRow(n)}
-  ${sit}
-  ${S.persona==='vp'?scorecard(n):''}
+  ${PW_SHOW_EXTRAS?sit:''}
+  ${PW_SHOW_EXTRAS&&S.persona==='vp'?scorecard(n):''}
   <div class="mb">${bcCard2(n)}</div>
   <div class="mb">${aiCard(n)}</div>
-  ${H().rv==='past'?'':`<div class="card mb"><div class="ch"><h3>Working-capital playbook</h3><span class="sp"></span><span class="sub">${P().role} · actions within your role</span></div>
+  ${!PW_SHOW_EXTRAS||H().rv==='past'?'':`<div class="card mb"><div class="ch"><h3>Working-capital playbook</h3><span class="sp"></span><span class="sub">${P().role} · actions within your role</span></div>
     <div class="prac">${practices(n)}</div></div>`}`;
 }
 
@@ -3377,10 +3388,11 @@ function sideHTML(arAlerts){
     ['e2e','End-to-end cash flow','PHASE 2','e2e.flow','Phase 2 preview · End-to-end cash','Cash A → B, working capital, cash on the table, ratio lab, long-range, benchmarks']];
   const agent={ar:['6 AI agents active','Forecast run 06:10 ET · 1.24M invoices scored'],ap:['5 AI agents active','Payment forecast 06:20 ET · 412K open invoices'],
     inv:['5 AI agents active','Inventory run 06:25 ET · 58K SKUs × 13 DCs'],e2e:['Stitched view','AR 06:10 · AP 06:20 · Inventory 06:25 · Treasury plan Nov 13']}[m];
-  return `<div class="grp">${cfg.grp}</div>${items}<div class="grp" style="margin-top:14px">Cash-flow roadmap</div>`+
-    rows.map(r=>`<button class="modrow ${r[0]==='ar'?'live':'prev'} ${m===r[0]?'cur':''}" onclick="go('${r[3]}')" data-tip="<div class='tt'>${r[4]}</div>${r[5]}">${r[1]}<span class="pill">${r[2]}</span></button>`).join('')+
-    `<div class="agentbox" data-tip="<div class='tt'>Agent governance</div>Agents monitor, alert, summarize and recommend. Supplier payments, purchase orders, customer actions and ERP changes need human approval."><div><span class="dot"></span><b style="color:#fff">${agent[0]}</b></div>
-     <div style="margin-top:6px;color:#9DB8D3">${agent[1]}</div><div style="margin-top:4px;color:#9DB8D3">✓ Human approval on all actions</div></div>`;
+  const SHOW_ROADMAP=false; // temporarily hidden: set true to restore the Cash-flow roadmap section
+  return `<div class="grp">${cfg.grp}</div>${items}`+(SHOW_ROADMAP?`<div class="grp" style="margin-top:14px">Cash-flow roadmap</div>`+
+    rows.map(r=>`<button class="modrow ${r[0]==='ar'?'live':'prev'} ${m===r[0]?'cur':''}" onclick="go('${r[3]}')" data-tip="<div class='tt'>${r[4]}</div>${r[5]}">${r[1]}<span class="pill">${r[2]}</span></button>`).join(''):'')+
+    `<div class="agentbox" data-tip="<div class='tt'>Agent governance</div>Agents monitor, alert, summarize and recommend. Supplier payments, purchase orders, customer actions and ERP changes need human approval."><!-- hidden for now: <div><span class="dot"></span><b style="color:#fff">${agent[0]}</b></div> -->
+     <div style="color:#9DB8D3">${agent[1]}</div><!-- hidden for now: <div style="margin-top:4px;color:#9DB8D3">✓ Human approval on all actions</div> --></div>`;
 }
 function p2Head(t,btns,sub){return `<div class="page-h"><div><h1>${t} <span class="badge b-prev" style="vertical-align:4px">Phase 2 preview</span></h1><div class="meta">${sub||asOf()}</div></div><div class="sp"></div>${btns||''}</div>`}
 function eqGen(tiles,ops){return `<div class="eq mb">${tiles.map((x,i)=>x+(i<tiles.length-1?`<div class="eq-op">${ops[i]}</div>`:'')).join('')}</div>`}
@@ -7477,7 +7489,7 @@ render=(function(f0){return function(){const h=HZ[S.hz];if(!h||(!V30[S.hz]&&!h.r
 
 /* ---- cache: everything below follows Studio inputs, the demo day, the comparison picks and the scenarios ---- */
 const V30X=new Map();
-function v30C(id,fn){const k=id+'|'+sdCK()+'|'+d5T()+'|'+JSON.stringify(S.cmpP||0)+'|'+JSON.stringify(S.sc3||0);if(V30X.has(k))return V30X.get(k);if(V30X.size>800)V30X.clear();const v=fn();V30X.set(k,v);return v}
+function v30C(id,fn){const k=id+(S.w5?'|w5':'')+'|'+sdCK()+'|'+d5T()+'|'+JSON.stringify(S.cmpP||0)+'|'+JSON.stringify(S.sc3||0);if(V30X.has(k))return V30X.get(k);if(V30X.size>800)V30X.clear();const v=fn();V30X.set(k,v);return v}
 const v30AF=()=>{const p=(S.cmpP||{}).aop||'FY27';return {af:{FY27:1,FY26:1/1.105,FY25:1/(1.105*1.092)}[p]||1,ao:{FY27:1,FY26:1/1.12,FY25:1/(1.12*1.10)}[p]||1}};
 /* plan and last year for days already closed: their ratio to actual in the closed months of FY27 */
 function v30Rt(bu){return v30C('rt'+bu,()=>{const C=rvCalc({g:'Y',y:2027,i:0},bu,0),r={};['b','c','x'].forEach(e=>{let a=0,p=0,l=0;C.subs.forEach((s,j)=>{if(C.done[j]){a+=C.A[e][j];p+=C.AOP[e][j];l+=C.LY[e][j]}});r[e]=a?p/a:1;r['l'+e]=a?l/a:.9});return r})}
@@ -7497,7 +7509,7 @@ function v30Days(k,bu){return v30C('d'+k+bu,()=>{
   const PE=atHz(pk,()=>{const m=atHz(pk,()=>N(bu));return {m,b:elPeriods(m,'bill'),c:elPeriods(m,'coll'),x:elPeriods(m,'ded')}});
   const wk=d=>Math.floor(Math.round((d-ASOF_DT)/864e5)/7),pix=k==='W13'?wk:v30Mi,tg=i=>({b:PE.m.billArr[i],c:PE.m.fc[i],x:PE.m.dedArr[i]});
   if(k==='W13'){const D=dlyData(bu).days,s5=d5(bu),ix=new Map(D5_DAYS.map((d,i)=>[hzIso(d),i]));
-    D.filter(o=>o.d>=ASOF_DT).forEach(o=>{const i=ix.get(o.iso);if(o.act&&i!=null)fw.push({d:o.d,iso:o.iso,st:'land',v:{b:s5.bill[i],c:s5.coll[i],x:s5.ded[i]},a:{b:o.b,c:o.c,x:o.x}});
+    D.filter(o=>o.d>=ASOF_DT&&o.d<=V30_E.W13).forEach(o=>{const i=ix.get(o.iso);if(o.act&&i!=null)fw.push({d:o.d,iso:o.iso,st:'land',v:{b:s5.bill[i],c:s5.coll[i],x:s5.ded[i]},a:{b:o.b,c:o.c,x:o.x}});
       else fw.push({d:o.d,iso:o.iso,st:'fc',v:{b:o.b,c:o.c,x:o.x},a:null})})}
   else rvFwd(bu).forEach((e,iso)=>{const d=hzParse(iso);if(d>FY_END)return;fw.push({d,iso,st:e.a?'land':'fc',v:{b:e.b,c:e.c,x:e.x},a:e.a?{b:e.a.b,c:e.a.c,x:e.a.x}:null})});
   /* each week (13 Weeks) or month (the others) adds up to the horizon's own number for it */
@@ -7540,7 +7552,7 @@ function v30Tree(k,bu){bu=bu||S.bu;return v30C('t'+k+bu,()=>{
 function v30Find(R,key){const p=[];const f=nd=>{p.push(nd);if(nd.key===key)return true;if(nd.kids)for(const c of nd.kids)if(f(c))return true;p.pop();return false};f(R);return p}
 
 /* ---- the landing window as the tiles read it (13 Weeks is the forecast window itself) ---- */
-function v30Win(k,bu){bu=bu||S.bu;const n=atHz(k,()=>N(bu));if(k==='W13')return n;
+function v30Win(k,bu){bu=bu||S.bu;if(k==='W13'&&S.w5)return atHz('5W',()=>N(bu));const n=atHz(k,()=>N(bu));if(k==='W13')return n;
   return v30C('w'+k+bu,()=>{const R=v30Tree(k,bu),el=R.el,ae=R.elAp,P=S.cmpP||{aop:'FY27',pf:1,ly:1},{ao}=v30AF(),cv=atHz(k,()=>cmpVals(n)),rt=v30Rt(bu);
     const w=Object.assign({},n,{open:R.open,bill:n.bill+el.b,coll:n.coll+el.c,ded:n.ded+el.x,billPlan:n.billPlan+ae.b,target:n.target+ae.c,dedPlan:n.dedPlan+ae.x,win:{k,s:V30_S[k],el}});
     w.close=w.open+w.bill-w.coll-w.ded;w.v=w.coll-w.target;w.drivers=n.drivers.slice();w.drivers[1]+=el.c-ae.c;
@@ -7589,7 +7601,7 @@ function v30Chart(cols,o){o=o||{};const W=1120,H=o.h||300,ml=64,mr=16,mt=26,mb=o
   g+=`<line x1="${ml}" x2="${W-mr}" y1="${mt+ph}" y2="${mt+ph}" stroke="#B7C2CE"/>`;
   return `<svg class="dly-svg v30-svg" viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="${esc(o.label||'Forecast chart')}">${g}</svg>`}
 /* 13 Weeks by day: actual, already in the system, forecast */
-function v30DayChart(mode){const ds=dlyData().days.filter(o=>o.d>=ASOF_DT),W=1120,H=300,ml=64,mr=14,mt=18,mb=46,pw=W-ml-mr,ph=H-mt-mb,n0=ASOF_DT,nd=Math.round((V30_E.W13-n0)/864e5)+1,dx=pw/nd,bw=Math.max(3,dx*.72),f=mode==='ar'?'c':mode;
+function v30DayChart(mode){const ds=dlyData().days.filter(o=>o.d>=ASOF_DT&&o.d<=V30_E.W13),W=1120,H=300,ml=64,mr=14,mt=18,mb=46,pw=W-ml-mr,ph=H-mt-mb,n0=ASOF_DT,nd=Math.round((V30_E.W13-n0)/864e5)+1,dx=pw/nd,bw=Math.max(3,dx*.72),f=mode==='ar'?'c':mode;
   const X=d=>ml+(Math.round((d-n0)/864e5)+.5)*dx;let ymin=0,ymax;
   if(mode==='ar'){const lo=ds.map(o=>o.close-1.2816*o.sAR),hi=ds.map(o=>o.close+1.2816*o.sAR);ymin=Math.min(...lo)*.99;ymax=Math.max(...hi)*1.006}else ymax=Math.max(...ds.map(o=>o[f]))*1.12;
   const Y=v=>mt+ph-(v-ymin)/(ymax-ymin)*ph,step=(()=>{const r=(ymax-ymin)/4,p=Math.pow(10,Math.floor(Math.log10(r)));return [1,2,2.5,5,10].map(k=>k*p).find(k=>k>=r)})();
@@ -7736,7 +7748,7 @@ function gdAccDraw(){const g=S.gd.g,n=g==='M'?12:8,a=fxAccHist(S.bu,g,n).reverse
 /* ---- the page ---- */
 function v30Meta(k){return `As of Mon, Nov 16 2026 · 06:10 ET · ${BU_NAMES[S.bu]} · ${v30Dt(V30_S[k])} – ${v30Dt(V30_E[k])}`}
 function v30Banner(k,w,R){let t;
-  if(k==='W13'){const fc=dlyData(S.bu).days.filter(o=>!o.act),p=Math.round(dlyKn(fc.slice(0,10),'c')*100);t=`<b>Collections ${fmc(w.coll)} over the next 13 weeks, ${fs(w.v)} vs AOP.</b> ${p}% of the next 2 weeks is already known.`}
+  if(k==='W13'){const fc=dlyData(S.bu).days.filter(o=>!o.act),p=Math.round(dlyKn(fc.slice(0,10),'c')*100);t=`<b>Collections ${fmc(w.coll)} over the next ${S.w5?'5':'13'} weeks, ${fs(w.v)} vs AOP.</b> ${p}% of the next 2 weeks is already known.`}
   else if(k==='YE')t=`<b>AR closes the year at ${fmc(R.close)}.</b> Collections ${fmc(w.coll)} from Nov 1, ${fs(w.v)} vs AOP.`;
   else if(k==='QE'){const q=R.kids;t=`<b>Quarter-end AR: ${fmc(q[0].close)} for ${q[0].lab}, ${fmc(q[q.length-1].close)} for ${q[q.length-1].lab}.</b> Collections ${fs(w.v)} vs AOP from Oct 1.`}
   else{const L=R.kids[R.kids.length-1];t=`<b>AR reaches ${fmc(L.close)} by Mar 31, 2030</b>, ${fs(L.close-L.apClose)} vs plan; downside to upside ${fmc(L.lo)} – ${fmc(L.hi)}.`}
@@ -7749,13 +7761,13 @@ function v32BuTable(k){const rows=['USPD','O&M','All'].map(b=>{const T=v30Tree(k
     <td class="r tnum"><span class="${g>=0?'txt-good':'txt-bad'}">${fs(g)}</span></td><td class="r tnum">${all?'100%':(r.c/tot*100).toFixed(1)+'%'}</td></tr>`};
   return `<div class="card mb v32-bu"><div class="ch"><h3>Balance by business unit</h3></div><div class="dly-tw"><table class="t v32-but"><thead><tr><th>Business unit</th><th class="r">Opening AR</th><th class="r">Forecasted billings</th>
     <th class="r">Forecasted collections</th><th class="r">Forecasted deductions</th><th class="r">Forecasted closing AR</th><th class="r">Collections vs AOP</th><th class="r">Share of collections</th></tr></thead><tbody>${rows.map(tr).join('')}</tbody></table></div></div>`}
-function pageFx(){const k=S.hz,n=N(),w=v30Win(k,S.bu),R=v30Tree(k,S.bu);
+function pageFx(){const k=S.hz,n=k==='W13'&&S.w5?atHz('5W',()=>N()):N(),w=v30Win(k,S.bu),R=v30Tree(k,S.bu);
   return `<div class="v30">
-    <div class="page-h"><div><h1>Performance Workspace</h1><div class="meta">${v30Meta(k)}</div></div><span class="sp"></span>${sdChip()}${v30AccPill(k)}</div>
+    <div class="page-h"><div><h1>Performance Workspace</h1><div class="meta">${v30Meta(k)}</div></div><span class="sp"></span>${sdChip()}${k==='W13'?w5Btn():''}${v30AccPill(k)}</div>
     ${v30Tiles(k,w)}${v32BuTable(k)}${v30Banner(k,w,R)}${v30ChartCard(k,R)}${v30Table(k,R)}
     ${k==='Y3'?`<div class="grid g2 mb">${v30CustCard(k,R)}${v30ScenCard()}</div>`:`<div class="mb">${v30CustCard(k,R)}</div>`}
-    <div class="mb">${aiCard(n)}</div>${v30Exec(n)}
-    <div class="card mb fx-pb"><div class="ch"><h3>Working-capital playbook</h3></div><div class="prac">${practices(n)}</div></div></div>`}
+    <div class="mb">${aiCard(n)}</div>${PW_SHOW_EXTRAS?v30Exec(n)+`
+    <div class="card mb fx-pb"><div class="ch"><h3>Working-capital playbook</h3></div><div class="prac">${practices(n)}</div></div>`:''}</div>`}
 
 /* ---- assistant: the four horizons by name ---- */
 botDo=(function(f0){return function(q){const x=String(q).toLowerCase();let k=null;
@@ -7875,10 +7887,12 @@ function accMeTab(){const me=accMe(),f=me.fns;
   return `<div class="acc-mods">${ACC_MODS.map(m=>{const mf=accModFns(m),on=f.includes(mf[0]),ic=ACC_MOD_IC[m];
     return `<div class="card acc-mc${on?'':' off'}"><div class="acc-mch">${ic?`<span class="acc-mi">${ICONS[ic]||ICONS2[ic]||''}</span>`:''}<b>${m.replace('&','&amp;')}</b><span class="sp"></span>${accSw(on,`accSetMod('${me.id}','${m}',${!on})`,m)}</div>
       ${mf.slice(1).length?`<div class="acc-fl">${mf.slice(1).map(x=>{const o=f.includes(x);return `<div class="acc-fr"><span>${ACC_NM[x]}</span>${accSw(o&&on,`accSetFn('${me.id}','${x}',${!o})`,ACC_NM[x],!on)}</div>`}).join('')}</div>`:''}</div>`}).join('')}</div>`}
+const ACC_PERSON='<svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><circle cx="12" cy="8" r="4.2"/><path d="M3.8 21c.6-4.4 4-7 8.2-7s7.6 2.6 8.2 7z"/></svg>';
 function accUsersTab(){const me=accMe(),cols=ACC.users;
-  const hd=cols.map(u=>`<th class="acc-uh${u.id===me.id?' me':''}"><span class="av" style="background:${u.col}">${u.ini}</span><b>${escH(u.name.split(' ')[0])}</b><small>${accTitle(u)}</small></th>`).join('');
-  const body=ACC_MODS.map(m=>{const mf=accModFns(m);return `<tr class="acc-g"><td class="acc-fn">${m.replace('&','&amp;')}</td>${cols.map(u=>`<td class="acc-c"><input type="checkbox"${u.fns.includes(mf[0])?' checked':''} aria-label="${esc(m)} for ${esc(u.name)}" onchange="accSetMod('${u.id}','${m}',this.checked)"></td>`).join('')}</tr>`+
-    mf.slice(1).map(x=>`<tr><td class="acc-fn acc-sub">${ACC_NM[x]}</td>${cols.map(u=>{const mo=u.fns.includes(mf[0]);return `<td class="acc-c"><input type="checkbox"${u.fns.includes(x)&&mo?' checked':''}${mo?'':' disabled'} aria-label="${esc(ACC_NM[x])} for ${esc(u.name)}" onchange="accSetFn('${u.id}','${x}',this.checked)"></td>`}).join('')}</tr>`).join('')}).join('');
+  // role-based columns: a person icon and the role, no names or initials
+  const hd=cols.map(u=>`<th class="acc-uh${u.id===me.id?' me':''}"><span class="av acc-pav" style="background:${u.col}" aria-hidden="true">${ACC_PERSON}</span><b>${accTitle(u)}</b></th>`).join('');
+  const body=ACC_MODS.map(m=>{const mf=accModFns(m);return `<tr class="acc-g"><td class="acc-fn">${m.replace('&','&amp;')}</td>${cols.map(u=>`<td class="acc-c"><input type="checkbox"${u.fns.includes(mf[0])?' checked':''} aria-label="${esc(m)} for ${esc(accTitle(u))}" onchange="accSetMod('${u.id}','${m}',this.checked)"></td>`).join('')}</tr>`+
+    mf.slice(1).map(x=>`<tr><td class="acc-fn acc-sub">${ACC_NM[x]}</td>${cols.map(u=>{const mo=u.fns.includes(mf[0]);return `<td class="acc-c"><input type="checkbox"${u.fns.includes(x)&&mo?' checked':''}${mo?'':' disabled'} aria-label="${esc(ACC_NM[x])} for ${esc(accTitle(u))}" onchange="accSetFn('${u.id}','${x}',this.checked)"></td>`}).join('')}</tr>`).join('')}).join('');
   const ft=cols.map(u=>`<td class="acc-c"><b>${u.fns.length}</b>${u.fns.length<ACC_ALL.length?`<button class="acc-lk" onclick="accAllOn('${u.id}')">All on</button>`:''}${!ACC_U0.some(z=>z.id===u.id)&&u.id!==me.id?`<button class="acc-lk" onclick="accRemove('${u.id}')">Remove</button>`:''}</td>`).join('');
   return `<div class="acc-tw"><table class="t acc-t"><thead><tr><th class="acc-fh">Module and function</th>${hd}</tr></thead><tbody>${body}</tbody><tfoot><tr><td class="acc-fn"><b>Functions on</b></td>${ft}</tr></tfoot></table></div>`}
 function pageAccess(){const me=accMe(),adm=can('adm.users'),tab=adm&&S.accTab==='users'?'users':'me',n=me.fns.length;
@@ -8063,6 +8077,27 @@ function towerSit(n){
       ${kt({lab:'If DSO holds at target (12M)',val:fs(m.close-m.closeT),vcls:'txt-good',chip:`<span class="dl nt">offsets ${Math.round((m.close-m.closeT)/ab*100)}%</span>`,click:"S.scTab='scen';S.scn='growth';go('scen')",tip:T('Holding DSO at target, next 12 months',[['Closing AR forecast',fmc(m.close)],['Closing AR at target',fmc(m.closeT)],['Cash released',fs(m.close-m.closeT),1],['DSO cut to self-fund growth',(ab/m.perDay).toFixed(1)+' days']],'Click to model it')})}
     </div></div>`;}
   return sit}
+
+/* ---- 5-Week Rolling: a view of the 13-Week Rolling forecast cut to its first 5 weeks (Mon Nov 16 – Fri Dec 18).
+   Same page, tiles, charts, roll-forward and drill-downs; the tiles read the 5-week daily release, which is weeks 1–5 of the 13 weeks.
+   Picked from the button left of Forecast accuracy; leaving 13-Week Rolling for another horizon turns it off. */
+const W5_END=D5_DAYS[D5_DAYS.length-1], W13_END=V30_E.W13;
+S.w5=false;
+const W5_OPTS=[[true,'5-Week Rolling',()=>HZ_MON[ASOF_DT.getMonth()]+' '+ASOF_DT.getDate()+' – '+v30Dt(W5_END)+' · first 5 weeks by day']];
+const W5_IC='<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/><path d="M7 14h4v3H7z"/></svg>';
+function w5Set(on){S.w5=!!on;V30_E.W13=S.w5?W5_END:W13_END;V31_PH.W13=S.w5?'the next 5 weeks':'the next 13 weeks';if(HZ.W13)HZ.W13.label=S.w5?'5-Week Rolling':'13-Week Rolling';S.gd=null}
+function w5Btn(){return `<button class="cbtn w5-btn${S.w5?' w5-on':''}" id="w5Btn" onclick="w5Open(event)" aria-haspopup="dialog" aria-expanded="false" data-tip="${S.w5?'Showing the first 5 weeks. Untick, or click 13-Week Rolling above, for 13 weeks':'Show the first 5 weeks of the 13-week forecast'}"><span class="w5-ic">${W5_IC}</span><span class="cbtn-v">5-Week Rolling</span><span class="cbtn-c">▾</span></button>`}
+function w5Close(){const p=document.getElementById('w5Pnl');if(p)p.remove();document.removeEventListener('keydown',w5Esc);const b=document.getElementById('w5Btn');if(b){b.classList.remove('open');b.setAttribute('aria-expanded','false')}}
+function w5Esc(e){if(e.key==='Escape')w5Close()}
+function w5Open(ev){if(ev)ev.stopPropagation();if(document.getElementById('w5Pnl')){w5Close();return}if(typeof pnlClose==='function')pnlClose();
+  const b=document.getElementById('w5Btn');if(!b)return;const p=document.createElement('div');p.id='w5Pnl';p.className='pnl w5-pnl';p.setAttribute('role','dialog');p.setAttribute('aria-label','Rolling window');p.onclick=e=>e.stopPropagation();
+  p.innerHTML=`<div class="pnl-h"><b>Rolling window</b><span class="sp"></span><button class="hzm-x" onclick="w5Close()" aria-label="Close">✕</button></div>`+
+    W5_OPTS.map(([v,l,d])=>{const on=S.w5===v;return `<div class="pnl-r${on?' on':''}"><label><input type="checkbox" ${on?'checked':''} onchange="w5Pick(this.checked)"><b>${l}</b></label><span class="rv-pd">${d()}</span></div>`}).join('')+
+    `<div class="w5-note">The first 5 weeks of the 13-week forecast. Untick to go back to 13 weeks.</div>`;
+  document.body.appendChild(p);const r=b.getBoundingClientRect();p.style.top=(r.bottom+8)+'px';p.style.left=Math.max(12,Math.min(innerWidth-p.offsetWidth-12,r.right-p.offsetWidth))+'px';
+  b.classList.add('open');b.setAttribute('aria-expanded','true');document.addEventListener('keydown',w5Esc);setTimeout(()=>document.addEventListener('click',w5Close,{once:true}),0)}
+function w5Pick(on){w5Close();if(S.w5===on)return;w5Set(on);render()}
+v30Hz=(function(f0){return function(k){if(S.w5)w5Set(false);w5Close();return f0(k)}})(v30Hz);   // any horizon click above, including 13-Week Rolling, goes back to the default view
 
 hzInit();
 </script>
