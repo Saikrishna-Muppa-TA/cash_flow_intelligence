@@ -1353,6 +1353,34 @@ table.t.v30-ct td,table.t.v30-ct th{padding:7px 10px}
 table.t.v30-ctb td{padding:6px 8px;vertical-align:middle}
 .v30-ctb small{display:block;font-size:10.5px;color:var(--muted);font-weight:600}
 .v30-ctb .v30-bc{width:28%}
+/* Top 10 customers: horizon slider and sortable columns */
+.v30-hzs{display:flex;align-items:flex-start;gap:16px;margin:2px 0 12px;padding:10px 14px;border:1px solid var(--line2);border-radius:10px;background:#FAFCFE}
+.v30-hzs-k{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding-top:3px;white-space:nowrap}
+.v30-hzs-w{flex:1;min-width:0;max-width:640px}
+.v30-hzs input[type=range]{width:100%;margin:0;accent-color:var(--blue);cursor:pointer}
+.v30-hzs-t{display:flex;justify-content:space-between;margin-top:4px}
+.v30-hzs-t span{font-size:12px;color:var(--muted);cursor:pointer;white-space:nowrap;flex:1;text-align:center}
+.v30-hzs-t span:first-child{text-align:left}.v30-hzs-t span:last-child{text-align:right}
+.v30-hzs-t span.on{color:var(--blue);font-weight:700}
+/* period range slicer: two handles on one track */
+.v30-rs-box .v30-hzs-w{max-width:780px}
+.v30-rs{position:relative;height:22px}
+.v30-rs-tr{position:absolute;left:8px;right:8px;top:9px;height:4px;border-radius:2px;background:#DCE4EC}
+.v30-rs-tr i{position:absolute;top:0;height:100%;background:var(--blue);border-radius:2px}
+.v30-hzs .v30-rs input[type=range]{position:absolute;left:0;top:0;width:100%;height:22px;margin:0;background:none;pointer-events:none;-webkit-appearance:none;appearance:none}
+.v30-rs input[type=range]::-webkit-slider-runnable-track{background:none;height:22px}
+.v30-rs input[type=range]::-moz-range-track{background:none}
+.v30-rs input[type=range]::-webkit-slider-thumb{pointer-events:auto;-webkit-appearance:none;appearance:none;width:16px;height:16px;margin-top:3px;border-radius:50%;background:#fff;border:2px solid var(--blue);cursor:grab;box-shadow:0 1px 3px rgba(0,0,0,.2)}
+.v30-rs input[type=range]::-moz-range-thumb{pointer-events:auto;width:12px;height:12px;border-radius:50%;background:#fff;border:2px solid var(--blue);cursor:grab;box-shadow:0 1px 3px rgba(0,0,0,.2)}
+.v30-rs input[type=range]:focus-visible::-webkit-slider-thumb{outline:2px solid var(--blue);outline-offset:2px}
+.v30-rs-t{position:relative;height:18px;margin:3px 8px 0}
+.v30-rs-t span{position:absolute;top:0;transform:translateX(-50%);font-size:11px;color:var(--muted);white-space:nowrap;cursor:pointer}
+.v30-rs-t span:first-child{transform:none}.v30-rs-t span:last-child{transform:translateX(-100%)}
+.v30-rs-t span.on{color:var(--blue);font-weight:700}.v30-rs-t span.thin{color:transparent!important}
+.v30-rs-v{display:flex;align-items:center;gap:10px;margin-top:6px;font-size:12.5px;color:var(--ink2);flex-wrap:wrap}
+.v30-cu10 th.v30-srt{cursor:pointer;user-select:none;white-space:nowrap}
+.v30-cu10 th.v30-srt i{font-style:normal;margin-left:4px;font-size:10px;color:var(--muted)}
+.v30-cu10 th.v30-srt.on{color:var(--blue)}.v30-cu10 th.v30-srt.on i{color:var(--blue)}
 .v30-ac .dly-sts,.v30-cu .dly-sts{margin-bottom:6px}
 /* the drawer */
 .gd{position:fixed;top:64px;right:14px;bottom:14px;width:min(540px,calc(100vw - 28px));background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:0 18px 50px rgba(0,38,77,.22);z-index:70;display:flex;flex-direction:column;overflow:hidden;animation:gdIn .18s ease-out}
@@ -7667,11 +7695,52 @@ function v30Cust(k,key,el,bu){const bus=bu==='All'?['USPD','O&M']:[bu],rows=[];l
   bus.forEach(b=>{const nd=v30Find(v30Tree(k,b),key).pop(),open=split(HZ['5W'].open,b),L=CUST40.filter(c=>c.bu===b),arT=L.reduce((a,c)=>a+c.ar,0),V=el==='ar'?nd.close:nd.v[el];
     L.forEach(c=>rows.push({c,v:V*(el==='ar'?c.ar/open:c.sh)}));oth+=V*(el==='ar'?(open-arT)/open:CUST_OTH[b].sh);on+=CUST_OTH[b].n});
   rows.sort((a,b)=>b.v-a.v);return {rows,oth,on}}
-// top 10 customers, read-only: rows no longer open Risk Intelligence (hidden from the menu for now)
-function v30CustCard(k,R){const el='c',C=v30Cust(k,'root',el,S.bu),top=C.rows.slice(0,10),tot=R.v.c,mx=top[0]?top[0].v:1,ok=false;
-  return `<div class="card v30-cu"><div class="ch"><h3>Top customers by collections</h3><span class="sp"></span><button class="btn sm ghost" onclick="gdOpen('c','root');S.gd.tab='p';gdDraw()">All customers</button></div>
-    <table class="t v30-ctb"><thead><tr><th>#</th><th>Customer · ID · BU</th><th>Relative to #1</th><th class="r">Collections · % of total</th><th class="r">Days to pay · change</th></tr></thead><tbody>${top.map((r,i)=>`<tr${ok?` class="v30-tr" onclick="S.cust='${r.c.id}';go('risk','customer')"`:''}><td class="txt-mut tnum">${i+1}</td><td><b>${r.c.name}</b><small>${r.c.id} · ${r.c.bu}</small></td><td class="v30-bc"><span class="v30-bar"><i style="width:${(r.v/mx*100).toFixed(1)}%"></i></span></td><td class="r tnum"><b>${fmc(r.v)}</b><small>${(r.v/tot*100).toFixed(1)}%</small></td><td class="r tnum">${Math.round(r.c.dtp)} d<small class="${r.c.drift>0?'txt-bad':'txt-good'}">${r.c.drift>0?'+':'−'}${Math.abs(r.c.drift).toFixed(0)} d</small></td></tr>`).join('')}</tbody></table></div>`}
-
+/* ---- Top 10 customers (landing page): a period slicer, the same five columns as the summary table, sortable, read-only ----
+   The slicer works inside the horizon picked in the top bar: 13-Week Rolling (and 5 weeks) → weeks, Month to FYE → months,
+   Quarter to FYE → months, Long-Range Plan → fiscal years. Drag either handle to pick a custom range of periods.
+   Per customer over the range: Opening AR = AR at the start of the first period × the customer's share of its BU's open AR;
+   billings, collections and deductions = the range's totals × the customer's share of collections;
+   Ending AR = Opening AR + Billings − Collections − Deductions. Rows do not open the risk profile; payment-behaviour drift is not shown. */
+S.cuS=S.cuS||{k:'c',d:-1};S.cuR=null;
+const CU_COLS=[['open','Opening AR'],['b','Billings'],['c','Collections'],['x','Deductions'],['close','Ending AR'],['dtp','Days to pay']];
+const cuGrain=k=>k==='Y3'?'Y':k==='W13'?'W':'M';
+const cuUnit=k=>({W:['week','weeks'],M:['month','months'],Y:['fiscal year','fiscal years']})[cuGrain(k)];
+function cuPer(R,k){return k==='QE'?R.kids.flatMap(q=>q.kids||[q]):R.kids}
+const cuId=()=>S.hz+(S.w5?'·5':'');
+function cuRange(k,n){const r=S.cuR;if(!r||r.id!==cuId()||r.b>n-1)return {a:0,b:n-1};return {a:Math.max(0,Math.min(r.a,n-1)),b:Math.max(0,Math.min(r.b,n-1))}}
+function v30CustRows(k,bu,a,b){const bus=bu==='All'?['USPD','O&M']:[bu],rows=[];
+  bus.forEach(u=>{const P=cuPer(v30Tree(k,u),k).slice(a,b+1),open=split(HZ['5W'].open,u),o0=P[0].open,t=v30Z();P.forEach(p=>v30Ad(t,p.v));
+    CUST40.filter(c=>c.bu===u).forEach(c=>{const o={cu:c,open:o0*c.ar/open,b:t.b*c.sh,c:t.c*c.sh,x:t.x*c.sh,dtp:c.dtp};o.close=o.open+o.b-o.c-o.x;rows.push(o)})});
+  return rows}
+function cuRedraw(){const el=document.getElementById('v30cu');if(el)el.outerHTML=v30CustCard(S.hz,v30Tree(S.hz,S.bu))}
+function v30CuSort(key){const s=S.cuS;if(s.k===key)s.d=-s.d;else{s.k=key;s.d=-1}cuRedraw()}
+const cuDt=(d,y)=>HZ_MON[d.getMonth()]+' '+d.getDate()+(y?', '+d.getFullYear():'');
+function cuRangeTxt(P,a,b,k){const u=cuUnit(k),n=b-a+1,s=P[a].s,e=P[b].e;
+  return `<b>${P[a].lab}${a!==b?' – '+P[b].lab:''}</b> · ${cuDt(s,s.getFullYear()!==e.getFullYear())} – ${cuDt(e,true)} · ${n} ${n===1?u[0]:u[1]}`}
+/* live while dragging: keep the handles in order, move the fill and the label; the table follows on release */
+function cuRsIn(i){const A=document.getElementById('cuA'),B=document.getElementById('cuB');if(!A||!B)return;let a=+A.value,b=+B.value;
+  if(a>b){if(i===0){a=b;A.value=a}else{b=a;B.value=b}}const n=+A.max+1,P=cuPer(v30Tree(S.hz,S.bu),S.hz);A.style.zIndex=a===n-1?3:1;
+  const f=document.getElementById('cuRsF');if(f){f.style.left=(n>1?a/(n-1)*100:0)+'%';f.style.width=(n>1?(b-a)/(n-1)*100:100)+'%'}
+  const t=document.getElementById('cuRsT');if(t)t.innerHTML=cuRangeTxt(P,a,b,S.hz);
+  document.querySelectorAll('#v30cu .v30-rs-t span').forEach((s,j)=>s.classList.toggle('on',j>=a&&j<=b))}
+function cuRsSet(a,b){const A=document.getElementById('cuA'),B=document.getElementById('cuB');if(a==null){a=+A.value;b=+B.value}S.cuR={id:cuId(),a:Math.min(a,b),b:Math.max(a,b)};cuRedraw()}
+function cuRsTick(j){const r=cuRange(S.hz,(document.getElementById('cuA')||{max:0}).max*1+1);   // click a label: move the nearer handle there
+  if(Math.abs(j-r.a)<=Math.abs(j-r.b))cuRsSet(j,Math.max(j,r.b));else cuRsSet(Math.min(j,r.a),j)}
+function v30PerSlicer(k,P,a,b){const n=P.length,gr=cuGrain(k),pc=i=>n>1?i/(n-1)*100:0,full=a===0&&b===n-1,thin=n>8;
+  const lab=p=>gr==='W'?p.lab.replace('W/E ',''):gr==='M'?HZ_MON[p.s.getMonth()]+(p.s.getMonth()===0?" '"+String(p.s.getFullYear()).slice(2):''):p.lab;
+  return `<div class="v30-hzs v30-rs-box"><span class="v30-hzs-k">Time period</span><div class="v30-hzs-w">
+    <div class="v30-rs"><div class="v30-rs-tr"><i id="cuRsF" style="left:${pc(a)}%;width:${n>1?pc(b)-pc(a):100}%"></i></div>
+      <input type="range" id="cuA" min="0" max="${n-1}" step="1" value="${a}" aria-label="Period from" style="z-index:${a===n-1?3:1}" oninput="cuRsIn(0)" onchange="cuRsSet()">
+      <input type="range" id="cuB" min="0" max="${n-1}" step="1" value="${b}" aria-label="Period to" style="z-index:2" oninput="cuRsIn(1)" onchange="cuRsSet()"></div>
+    <div class="v30-rs-t">${P.map((p,j)=>`<span class="${j>=a&&j<=b?'on':''}${thin&&j%2&&j!==n-1?' thin':''}" style="left:${pc(j)}%" onclick="cuRsTick(${j})" title="${esc(p.lab)}">${lab(p)}</span>`).join('')}</div>
+    <div class="v30-rs-v"><span id="cuRsT">${cuRangeTxt(P,a,b,k)}</span>${full?'':`<button class="btn sm ghost" onclick="S.cuR=null;cuRedraw()">Full ${V30[k].lab}</button>`}</div></div></div>`}
+function v30CustCard(k,R){const P=cuPer(R,k),{a,b}=cuRange(k,P.length),s=S.cuS,rows=v30CustRows(k,S.bu,a,b).sort((x,y)=>s.d*(x[s.k]-y[s.k])),top=rows.slice(0,10),lab=CU_COLS.find(x=>x[0]===s.k)[1];
+  const th=([key,l])=>`<th class="r v30-srt${s.k===key?' on':''}" onclick="v30CuSort('${key}')" aria-sort="${s.k===key?(s.d<0?'descending':'ascending'):'none'}" role="button" tabindex="0" onkeydown="if(event.key==='Enter')this.click()">${l}<i>${s.k===key?(s.d<0?'▼':'▲'):'↕'}</i></th>`;
+  return `<div class="card v30-cu" id="v30cu"><div class="ch"><h3>Top 10 customers by ${lab.toLowerCase()}</h3><span class="sp"></span><button class="btn sm ghost" onclick="gdOpen('c','root');S.gd.tab='p';gdDraw()">All customers</button></div>
+    ${v30PerSlicer(k,P,a,b)}
+    <div class="dly-tw"><table class="t v30-ctb v30-cu10"><thead><tr><th>#</th><th>Customer</th>${CU_COLS.map(th).join('')}</tr></thead><tbody>${top.map((r,i)=>`<tr><td class="txt-mut tnum">${i+1}</td><td><b>${r.cu.name}</b><small>${r.cu.id} · ${r.cu.bu}</small></td>
+      <td class="r tnum">${fmc(r.open)}</td><td class="r tnum">${fmc(r.b)}</td><td class="r tnum"><b>${fmc(r.c)}</b></td><td class="r tnum">${fmc(r.x)}</td><td class="r tnum"><b>${fmc(r.close)}</b></td><td class="r tnum">${Math.round(r.dtp)} d</td></tr>`).join('')}</tbody></table></div>
+    <div class="txt-mut" style="font-size:11.5px;margin-top:8px">${V30[k].lab} · ${S.bu==='All'?'both business units':S.bu} · drag the time period to pick a range · click a column to sort</div></div>`}
 /* ---- accuracy ---- */
 function v30AccVal(k){if(k==='W13')return fxAccM1().daily;if(k==='Y3'){const L=v30Tree('Y3',S.bu).kids.slice(-1)[0];return 100-Math.abs(L.close-L.apClose)/L.apClose*100}
   const a=fxAccHist(S.bu,k==='YE'?'M':'Q',k==='YE'?12:8);return a.reduce((x,y)=>x+y.e,0)/a.length}
@@ -7764,7 +7833,7 @@ function pageFx(){const k=S.hz,n=k==='W13'&&S.w5?atHz('5W',()=>N()):N(),w=v30Win
   return `<div class="v30">
     <div class="page-h"><div><h1>Performance Workspace</h1><div class="meta">${v30Meta(k)}</div></div><span class="sp"></span>${sdChip()}${k==='W13'?w5Btn():''}${v30AccPill(k)}</div>
     ${v30Tiles(k,w)}${v32BuTable(k)}${v30Banner(k,w,R)}${v30ChartCard(k,R)}${v30Table(k,R)}
-    ${k==='Y3'?`<div class="grid g2 mb">${v30CustCard(k,R)}${v30ScenCard()}</div>`:`<div class="mb">${v30CustCard(k,R)}</div>`}
+    <div class="mb">${v30CustCard(k,R)}</div>${k==='Y3'?`<div class="mb">${v30ScenCard()}</div>`:''}
     <div class="mb">${aiCard(n)}</div>${PW_SHOW_EXTRAS?v30Exec(n)+`
     <div class="card mb fx-pb"><div class="ch"><h3>Working-capital playbook</h3></div><div class="prac">${practices(n)}</div></div>`:''}</div>`}
 
@@ -7934,7 +8003,7 @@ const GLOSS=[
   [/Lockbox file late \(BAI2\)/g,'Bank payment file late'],[/Bank lockbox & BAI2/g,'Bank payment file'],[/lockbox BAI2 file/g,'bank payment file'],[/\s*\(BAI2\)/g,''],[/\bBAI2 ?/g,''],
   [/Remittance missing \(EDI 820\)/g,'Remittance details missing'],[/EDI 820 remittances/g,'Customer remittance advices'],[/\bEDI 820\b/g,'remittance'],
   [/Duplicate invoices in FDP extract/g,'Duplicate invoices in the sales data'],[/FDP sales \(billings\)/g,'Sales data (billings)'],[/\bthe FDP extract\b/g,'the sales data'],[/\bFDP\b/g,'sales system'],
-  [/AR subledger vs GL break/g,'AR ledger out of balance with the general ledger'],[/SAP S\/4HANA AR subledger/g,'AR ledger (SAP)'],[/\bsubledger\b/g,'ledger'],[/\bGL break\b/g,'ledger mismatch'],[/\bGL\b/g,'general ledger'],
+  [/AR subledger vs GL break/g,'AR ledger out of balance with the general ledger'],[/SAP S\/4HANA AR subledger/g,'AR ledger'],[/\bsubledger\b/g,'ledger'],[/\bGL break\b/g,'ledger mismatch'],[/\bGL\b/g,'general ledger'],
   [/T-2 instead of T-1/g,'two days old instead of one'],[/Data & feed health/g,'Data readiness'],[/\bfeeds\b/g,'data sources'],[/\bfeed\b/g,'data'],
   // releases are forecasts; cohorts are segments
   [/\bMonday's release\b/g,"Monday's forecast"],[/\brelease note\b/g,'forecast note'],[/\bPrior release\b/g,'Prior forecast'],[/\bForecast release\b/g,'Forecast version'],
