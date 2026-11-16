@@ -7802,12 +7802,13 @@ const ACC_NM=Object.fromEntries(ACC_FN.map(f=>[f[0],f[2]]));
 const ACC_MODS=[...new Set(ACC_FN.map(f=>f[1]))];
 const ACC_MOD_IC={'Performance Workspace':'tower','Forecasting Studio':'studio','Risk Intelligence':'risk','Alerts & Exceptions':'alerts','Scenario Workspace':'scen'};
 const ACC_PAGE_MODS=['Performance Workspace','Forecasting Studio','Risk Intelligence','Alerts & Exceptions','Scenario Workspace'];
-const ACC_TITLES={an:['FP&A Analyst','fpa'],mgr:['FP&A Manager','fpa'],dir:['Director, FP&A','dir'],vp:['VP, FP&A','vp'],tre:['Treasury Analyst','fpa'],cc:['Credit & Collections Lead','fpa'],adm:['Platform Administrator','fpa']};
+const ACC_TITLES={an:['FP&A Analyst','fpa'],mgr:['FP&A Manager','fpa'],dir:['Director, FP&A','dir'],vp:['VP, FP&A','vp'],adm:['Platform Administrator','fpa']};
 const ACC_U0=[{id:'u1',name:'Jordan Hayes',role:'mgr',ini:'JH',col:'#0060AF'},{id:'u2',name:'Priya Shah',role:'dir',ini:'PS',col:'#E8870E'},{id:'u3',name:'Daniel Brooks',role:'vp',ini:'DB',col:'#00264D'},
-  {id:'u4',name:'Sam Ortiz',role:'an',ini:'SO',col:'#1E8E3E'},{id:'u5',name:'Casey Lin',role:'tre',ini:'CL',col:'#6A4FC4'},{id:'u6',name:'Morgan Price',role:'cc',ini:'MP',col:'#B5650A'},{id:'u7',name:'Taylor Reed',role:'adm',ini:'TR',col:'#46566A'}];
+  {id:'u4',name:'Sam Ortiz',role:'an',ini:'SO',col:'#1E8E3E'},{id:'u7',name:'Taylor Reed',role:'adm',ini:'TR',col:'#46566A'}];
 const ACC_COLS=['#0060AF','#E8870E','#00264D','#1E8E3E','#6A4FC4','#B5650A','#46566A','#C62828','#00838F'];
 let ACC=null;
 function accLoad(){let a=null;try{a=JSON.parse(localStorage.getItem('mk.access')||'null')}catch(e){a=null}
+  if(a&&Array.isArray(a.users))a.users=a.users.filter(u=>ACC_TITLES[u.role]);   // five personas only: drops saved Treasury Analyst / Credit & Collections Lead users
   if(!a||a.v!==31||!Array.isArray(a.users)||!a.users.length)a={v:31,users:ACC_U0.map(u=>Object.assign({},u,{fns:ACC_ALL.slice()}))};ACC=a}
 function accSave(){try{localStorage.setItem('mk.access',JSON.stringify(ACC))}catch(e){}}
 accLoad();
@@ -7818,9 +7819,10 @@ const accTitle=u=>(ACC_TITLES[u.role]||ACC_TITLES.an)[0];
 const accEmail=u=>u.name.toLowerCase().replace(/[^a-z ]/g,'').trim().replace(/\s+/g,'.')+'@mckesson.com';
 function accP(){const u=accMe(),lv=(ACC_TITLES[u.role]||ACC_TITLES.an)[1],L=PERSONAS[lv]||PERSONAS.fpa;return {key:lv,name:u.name,role:accTitle(u),ini:u.ini,col:u.col,email:accEmail(u),approver:L.approver}}
 const ACC_PG={tower:'pw.view',studio:'sd.view',risk:'ri.view',alerts:'al.view',scen:'sc.view'};
-function accPage(t,v){if(t==='access')return true;if(/^(ap|inv|e2e)\./.test(t))return can('p2.view');if(ACC_PG[t]&&!can(ACC_PG[t]))return false;
+const ACC_PANEL=false;   // Users and access / My access moved to Phase 2: set true to bring the page back
+function accPage(t,v){if(t==='access')return ACC_PANEL;if(/^(ap|inv|e2e)\./.test(t))return can('p2.view');if(ACC_PG[t]&&!can(ACC_PG[t]))return false;
   if(t==='risk'&&v==='customer'&&!can('ri.cust'))return false;if(t==='tower'&&v==='bridge'&&!can('pw.bridge'))return false;return true}
-function accHome(){return ['tower','studio','risk','alerts','scen'].find(t=>accPage(t))||'access'}
+function accHome(){return ['tower','studio','risk','alerts','scen'].find(t=>accPage(t))||(ACC_PANEL?'access':'tower')}
 
 /* ---- sign-in and the user menu ---- */
 function enter(k){const id=ACC.users.some(u=>u.id===k)?k:({fpa:'u1',dir:'u2',vp:'u3'}[k]||ACC.users[0].id);S.user=id;S.persona=(ACC_TITLES[accMe().role]||ACC_TITLES.an)[1];
@@ -7838,7 +7840,6 @@ function verify(k){const u=ACC.users.find(x=>x.id===k)||ACC.users[0];
 const ACC_IC='<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19c.6-3 2.8-4.6 5.5-4.6s4.9 1.6 5.5 4.6"/><path d="M16 11.5l1.6 1.6 3.2-3.4"/></svg>';
 function toggleMenu(e){e.stopPropagation();const ex=document.querySelector('.menu');if(ex){ex.remove();return}const me=accMe(),m=document.createElement('div');m.className='menu acc-menu';
   m.innerHTML=`<div class="acc-mh"><span class="av" style="background:${me.col}">${me.ini}</span><span><b>${escH(me.name)}</b><small>${accTitle(me)}</small></span></div>
-    <div class="mi" onclick="closeMenu();S.accTab='me';go('access')">${ACC_IC}<span>My access</span></div>
     <div class="lab">Switch user</div><div class="acc-ml">${ACC.users.map(u=>`<div class="mi" onclick="closeMenu();accSwitch('${u.id}')"><span class="av" style="background:${u.col};width:26px;height:26px;font-size:10.5px">${u.ini}</span><span>${escH(u.name)}<div class="txt-mut" style="font-size:11.5px">${accTitle(u)}</div></span>${u.id===me.id?'<span style="margin-left:auto;color:var(--blue)">✓</span>':''}</div>`).join('')}</div>
     <div style="height:1px;background:var(--line);margin:6px 0"></div><div class="mi" onclick="signOut()">↩ Sign out</div>`;
   document.getElementById('userChip').appendChild(m)}
