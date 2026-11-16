@@ -4473,7 +4473,7 @@ function drawFvA(){const o=S.fva,key=o.key,bu=S.bu,m=fvM(key,bu),T=d5T(),good=FV
   const tot=m.bal?'':`<tr class="fv-tot"><td>5 weeks</td><td class="r tnum">${fmc(fTot)}</td>${comps.map(c=>{if(c.k==='act'){const ad=done(all);if(!ad.length)return '<td class="r tnum">—</td><td></td>';const A=sum(m.a,ad),F=sum(m.f,ad);return `<td class="r tnum">${fmc(A)}</td><td class="r tnum">${fvC(A-F,good)}</td>`}const cT=sum(c.arr,all);return `<td class="r tnum">${fmc(cT)}</td><td class="r tnum">${fvC(fTot-cT,good)}</td>`}).join('')}${hasA?`<td class="txt-mut" style="font-size:11.5px">${done(all).length} of 25 days in</td>`:''}</tr>`;
   const head=`<th>Day</th><th class="r">${m.bal?'Forecast AR':'Forecast'}</th>`+comps.map(c=>`<th class="r"><i class="fv-dot" style="background:${c.op.col}"></i>${c.k==='act'?'Actual':c.op.short}</th><th class="r">${c.k==='act'?'Actual − fcst':'Fcst − '+c.op.short}</th>`).join('')+(hasA?'<th>Status</th>':'');
   const seg=(k2,opts)=>`<div class="seg">${opts.map(([v,l])=>`<button class="${o[k2]===v?'on':''}" onclick="fvSet('${k2}','${v}')">${l}</button>`).join('')}</div>`;
-  const chips=CMP_OPTS.map(c=>{const on=S.cmpSel.includes(c.k);return `<button class="cmpc sm${on?' on':''}" onclick="cmpToggle('${c.k}')" aria-pressed="${on}" data-tip="${esc('<b>Forecast vs '+c.l+'</b> · '+c.s+'<br>'+c.d)}"><span class="ck">${on?'✓':''}</span><i style="background:${c.col}"></i>${c.l} <span class="cms">${cmpParamTxt(c.k)}</span></button>`}).join('');
+  const chips=cmpVis().map(c=>{const on=S.cmpSel.includes(c.k);return `<button class="cmpc sm${on?' on':''}" onclick="cmpToggle('${c.k}')" aria-pressed="${on}" data-tip="${esc('<b>Forecast vs '+c.l+'</b> · '+c.s+'<br>'+c.d)}"><span class="ck">${on?'✓':''}</span><i style="background:${c.col}"></i>${c.l} <span class="cms">${cmpParamTxt(c.k)}</span></button>`}).join('');
   const d0=D5_DAYS[cw*5],d4=D5_DAYS[cw*5+4];
   ov.innerHTML=`<div class="modal xp fva"><div class="xp-h"><div><div class="xp-k">FORECAST VS ${S.cmpSel.map(k=>CMP_OPTS.find(x=>x.k===k).l.toUpperCase()).join(' · ')} · ${BU_NAMES[bu]} · 5 weeks by day</div><h3>${FV_NAME[key]}</h3></div><span class="sp"></span><div class="xp-v tnum">${fmc(m.bal&&key==='open'?m.open:fTot)}</div><button class="xp-x" onclick="closeExplain()">✕</button></div>
    <div class="fv-bar">${seg('range',[['week','This week · '+HZ_MON[d0.getMonth()]+' '+d0.getDate()+'–'+d4.getDate()],['all','All 5 weeks']])}${m.bal?'':seg('mode',[['daily','By day'],['cum','Cumulative']])}<span class="sp"></span><span class="fvs-k">Today (demo)</span>${fvTodaySel('drawFvA()')}</div>
@@ -4500,7 +4500,11 @@ const CMP_OPTS=[
  {k:'pf',l:'Prior forecast',s:'what changed',short:'Prior',col:'#CC79A7',d:'5 weeks: last Monday\'s release (Nov 9) for the same days. Longer horizons: the November BD9 submission (Nov 12).'},
  {k:'act',l:'Actuals',s:'forecast accuracy',short:'Actual',col:'#D55E00',d:'Actuals landed so far (prior business day, by 06:10 ET) against the forecast for the same days.'},
  {k:'ly',l:'Last year',s:'seasonality',short:'LY',col:'#E69F00',d:'The same days last year (Thanksgiving falls in the same week). Revenue +12% and open AR +15% year on year.'}];
-S.cmpSel=(()=>{try{const v=JSON.parse(localStorage.getItem('mk.compare')||'null');if(Array.isArray(v)&&v.length&&v.every(x=>CMP_OPTS.some(o=>o.k===x)))return v}catch(e){}return ['aop','act']})();
+// Compare dropdown: AOP removed; Actuals, Prior forecast and Last year stay. AOP stays in the data (bridges, "vs AOP" chips).
+const CMP_HIDE=['aop'];
+const cmpVis=()=>CMP_OPTS.filter(o=>!CMP_HIDE.includes(o.k));
+const cmpClean=a=>{const v=(a||[]).filter(x=>!CMP_HIDE.includes(x)&&CMP_OPTS.some(o=>o.k===x));return v.length?v:['act']};
+S.cmpSel=(()=>{try{const v=JSON.parse(localStorage.getItem('mk.compare')||'null');if(Array.isArray(v)&&v.length)return cmpClean(v)}catch(e){}return ['act']})();
 function cmpToggle(k){const on=S.cmpSel.includes(k);if(on&&S.cmpSel.length===1){toast('Keep at least one comparison selected.');return}
   S.cmpSel=CMP_OPTS.map(o=>o.k).filter(x=>x===k?!on:S.cmpSel.includes(x));try{localStorage.setItem('mk.compare',JSON.stringify(S.cmpSel))}catch(e){}const mo=!!document.querySelector('.modal.fva');render();if(mo)drawFvA()}
 const PF_FR={open:-.00225,bill:-.00023,coll:.00066,ded:-.022};   // last run vs this run: AR came in $64M above last week's forecast; collections cut $26M; billings +$9M; deductions +$7M (5 weeks, All)
@@ -4525,7 +4529,7 @@ function cmpRows(key,n){const cv=cmpVals(n),cur={open:n.open,bill:n.bill,coll:n.
     if(k==='act'){const r=cmpAct(key);return row(r.col?Object.assign({},o,{col:r.col}):o,r.lab,r.val,r.chip,r.tip)}
     const c=cv[k][key],d=cur[key]-c,p=c?d/c*100:0;
     return row(o,H().rv?{aop:'AOP',pf:'BD9',ly:'LY'}[o.k]:o.short,fmcT(c),dl(d,good),`<b>${CMP_NM[key]} · ${o.l}</b><br>${H().rv?rvCmpName(o.k):o.l}: ${fmc(c)} · ${H().rv?(H().rv==='past'?'actual':'landing'):'this forecast'}: ${fmc(cur[key])}<br>Difference: <b>${fs(d)}</b> (${p>=0?'+':'−'}${Math.abs(p).toFixed(1)}%)<br><span style='opacity:.8'>${H().rv?rvCmpD(o.k):o.d}</span>`)}).join('')}</div>`}
-function cmpBar(){return `<div class="cmpb"><span class="fvs-k">Compare with</span>${CMP_OPTS.map(o=>{const on=S.cmpSel.includes(o.k);
+function cmpBar(){return `<div class="cmpb"><span class="fvs-k">Compare with</span>${cmpVis().map(o=>{const on=S.cmpSel.includes(o.k);
     return `<span class="cmpw${on?' on':''}"><button class="cmpc${on?' on':''}" onclick="cmpToggle('${o.k}')" aria-pressed="${on}" data-tip="${esc('<b>Forecast vs '+o.l+'</b> · '+o.s+'<br>'+o.d)}"><span class="ck">${on?'✓':''}</span><i style="background:${o.col}"></i><b>${o.l}</b></button><button class="cmpp" onclick="openCmpP(event,'${o.k}')" data-tip="${esc('Choose which '+o.l+' to compare with')}">${cmpParamTxt(o.k)} ▾</button></span>`}).join('')}
 </div>`}
 
@@ -4986,7 +4990,7 @@ function cmpPanel(){if(H().rv)return rvCmpPanel();const P=S.cmpP,T=d5T();
     act:`<select aria-label="Actuals through" onchange="pnlCmpP('act',this.value)"><option value="0" ${T===0?'selected':''}>None yet · release day</option>${D5_DAYS.map((d,i)=>`<option value="${i+1}" ${T===i+1?'selected':''}>Through ${d5Lab(d)}</option>`).join('')}</select>`,
     ly:`<select aria-label="Last year" onchange="pnlCmpP('ly',this.value)">${[1,2,3].map(y=>`<option value="${y}" ${P.ly===y?'selected':''}>FY${27-y} · ${LY_WIN[y]}</option>`).join('')}</select>`};
   return `<div class="pnl-h"><b>Compare with</b><span class="sp"></span><button class="hzm-x" onclick="pnlClose()" aria-label="Close">✕</button></div>`+
-    CMP_OPTS.map(o=>{const on=S.cmpSel.includes(o.k);return `<div class="pnl-r${on?' on':''}" data-tip="${esc('<b>Forecast vs '+o.l+'</b><br>'+o.d)}"><label><input type="checkbox" ${on?'checked':''} onchange="pnlCmpTog('${o.k}')"><i class="pnl-d" style="background:${o.col}"></i><b>${o.l}</b></label>${sel[o.k]}</div>`}).join('')}
+    cmpVis().map(o=>{const on=S.cmpSel.includes(o.k);return `<div class="pnl-r${on?' on':''}" data-tip="${esc('<b>Forecast vs '+o.l+'</b><br>'+o.d)}"><label><input type="checkbox" ${on?'checked':''} onchange="pnlCmpTog('${o.k}')"><i class="pnl-d" style="background:${o.col}"></i><b>${o.l}</b></label>${sel[o.k]}</div>`}).join('')}
 function pnlCmpTog(k){cmpToggle(k);pnlFill()}
 function pnlCmpP(k,v){if(k==='act')S.today=+v;else{S.cmpP[k]=k==='aop'?v:+v;try{localStorage.setItem('mk.compareP',JSON.stringify(S.cmpP))}catch(e){}cmpSync()}
   if(!S.cmpSel.includes(k)){S.cmpSel=CMP_OPTS.map(o=>o.k).filter(x=>x===k||S.cmpSel.includes(x));try{localStorage.setItem('mk.compare',JSON.stringify(S.cmpSel))}catch(e){}}
@@ -6567,7 +6571,7 @@ function rvCmpD(k){const h=H(),past=h.rv==='past',C=N().rvX;
     k==='act'?(past?(C.live?'The '+C.relTxt+' release, at the start of the period: the accuracy check':'The back-tested forecast at the start of the period: the accuracy check'):'Actuals landed to '+C.lastLab+' vs the forecast at the start of the period for those days'):'The same period last year ('+rvLyName(h)+')'}
 function rvCmpPanel(){const past=H().rv==='past';
   return `<div class="pnl-h"><b>Compare with</b><span class="sp"></span><button class="hzm-x" onclick="pnlClose()" aria-label="Close">✕</button></div>`+
-    CMP_OPTS.map(o=>{const on=S.cmpSel.includes(o.k);return `<div class="pnl-r${on?' on':''}"><label><input type="checkbox" ${on?'checked':''} onchange="pnlCmpTog('${o.k}')"><i class="pnl-d" style="background:${past&&o.k==='act'?FC_COL:o.col}"></i><b>${rvCmpName(o.k)}</b></label><span class="rv-pd">${rvCmpD(o.k)}</span></div>`}).join('')}
+    cmpVis().map(o=>{const on=S.cmpSel.includes(o.k);return `<div class="pnl-r${on?' on':''}"><label><input type="checkbox" ${on?'checked':''} onchange="pnlCmpTog('${o.k}')"><i class="pnl-d" style="background:${past&&o.k==='act'?FC_COL:o.col}"></i><b>${rvCmpName(o.k)}</b></label><span class="rv-pd">${rvCmpD(o.k)}</span></div>`}).join('')}
 const RV_SH={coll:[['Payment timing',.46,'Customers paid earlier or later than the release assumed'],['Billing timing',.22,'Invoices raised earlier or later in the period'],['Calendar & month-end',.16,'Bank holidays and month-end payment runs'],['Deductions & short-pays',.16,'Short-pays held back cash']],
   bill:[['Volume',.55,'More or fewer units shipped than assumed'],['Price & mix',.30,'Specialty and GLP-1 mix'],['Billing timing',.15,'Invoices raised earlier or later in the period']],
   ded:[['Pricing deductions',.45,'Price and contract disputes'],['Returns',.25,'Product returns and credits'],['Rebates & chargebacks',.30,'Rebate and chargeback accruals']]};
@@ -6664,7 +6668,7 @@ function rvCmpPanel(){const h=H(),past=h.rv==='past',C=N().rvX;
   const ex={aop:`<span class="rv-pd">${rvChip('aop')}</span>`,pf:`<span class="rv-pd">Submitted ${C.bd9Txt}</span>`,ly:`<span class="rv-pd">${rvLyName(h)}</span>`,
     act:`<select aria-label="Forecast release" onchange="rvRelPick(this.value)">${C.rs.map(opt).join('')}</select>`};
   return `<div class="pnl-h"><b>Compare ${past?'the actual':'the landing'} with</b><span class="sp"></span><button class="hzm-x" onclick="pnlClose()" aria-label="Close">✕</button></div>`+
-    CMP_OPTS.map(o=>{const on=S.cmpSel.includes(o.k);return `<div class="pnl-r${on?' on':''}" data-tip="${esc('<b>'+rvCmpName(o.k)+'</b><br>'+rvCmpD(o.k))}"><label><input type="checkbox" ${on?'checked':''} onchange="pnlCmpTog('${o.k}')"><i class="pnl-d" style="background:${past&&o.k==='act'?FC_COL:o.col}"></i><b>${rvCmpName(o.k)}</b></label>${ex[o.k]}</div>`}).join('')}
+    cmpVis().map(o=>{const on=S.cmpSel.includes(o.k);return `<div class="pnl-r${on?' on':''}" data-tip="${esc('<b>'+rvCmpName(o.k)+'</b><br>'+rvCmpD(o.k))}"><label><input type="checkbox" ${on?'checked':''} onchange="pnlCmpTog('${o.k}')"><i class="pnl-d" style="background:${past&&o.k==='act'?FC_COL:o.col}"></i><b>${rvCmpName(o.k)}</b></label>${ex[o.k]}</div>`}).join('')}
 function rvCmpAct(key){const n=N(),C=n.rvX,h=H(),cur=h.rv==='cur',e={bill:'b',coll:'c',ded:'x'}[key];
   if(key==='open')return {lab:cur?'Actual':'Fcst',col:cur?null:FC_COL,val:fmc(C.open),chip:`<span class="dl nt">${cur?'actual':'same start'}</span>`,tip:'Opening AR is the actual AR on '+hzLong(h.start)+'.'};
   if(cur){if(key==='close')return {lab:'Actual',val:'—',chip:'<span class="dl nt">period open</span>',tip:'Closing AR is final once the period closes on '+hzLong(h.end)+'.'};
@@ -8105,6 +8109,8 @@ function w5Open(ev){if(ev)ev.stopPropagation();if(document.getElementById('w5Pnl
   document.body.appendChild(p);const r=b.getBoundingClientRect();p.style.top=(r.bottom+8)+'px';p.style.left=Math.max(12,Math.min(innerWidth-p.offsetWidth-12,r.right-p.offsetWidth))+'px';
   b.classList.add('open');b.setAttribute('aria-expanded','true');document.addEventListener('keydown',w5Esc);setTimeout(()=>document.addEventListener('click',w5Close,{once:true}),0)}
 function w5Pick(on){w5Close();if(S.w5===on)return;w5Set(on);render()}
+// AOP is not a Compare choice: whatever adds it (Ask AI "compare with plan", saved settings), it is dropped before drawing
+render=(function(f0){return function(){S.cmpSel=cmpClean(S.cmpSel);return f0.apply(this,arguments)}})(render);
 v30Hz=(function(f0){return function(k){if(S.w5)w5Set(false);w5Close();return f0(k)}})(v30Hz);   // any horizon click above, including 13-Week Rolling, goes back to the default view
 
 hzInit();
