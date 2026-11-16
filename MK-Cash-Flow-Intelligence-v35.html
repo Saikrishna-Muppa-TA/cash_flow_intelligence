@@ -2373,17 +2373,17 @@ function pageBridge(){
   const n=N(),k=sc(),kc=keyCusts();
   const items=[{l:'Target collections',v:0,total:true,sub:fmc(n.target),lab:fmc(n.target)}].concat(n.drivers.map((v,i)=>({l:DRIVER_NAMES[i]==='Holiday timing'?(S.hz==='5W'?'Thanksgiving timing':'Holiday timing'):DRIVER_NAMES[i],v,sub:n.notes[i]}))).concat([{l:H().rv?'Variance to target':'Forecast variance',v:n.v,total:true,sub:(H().rv?(H().rv==='past'?'Actual ':'Landing '):'Forecast ')+fmc(n.coll),lab:n.drivers.length>4?fs(n.v):fs(n.v)+' → '+fmc(n.coll)}]);
   const levers=LEVERS[S.persona];
-  const custRows=kc.map(c=>{const v=custImpact(c);return `<tr class="hov"><td><input type="checkbox" ${S.sel[c.id]?'checked':''} onclick="event.stopPropagation();S.sel['${c.id}']=this.checked;updSel()"></td>
+  // read-only bridge: the waterfall and the accounts with their risk rating. Removed: ways to close the gap, recovery plan,
+  // adopt as override, assign to owner and the row checkboxes.
+  const custRows=kc.map(c=>{const v=custImpact(c);return `<tr class="hov">
     <td onclick="S.cust='${c.id}';go('risk','customer')"><div style="font-weight:600">${c.name}</div><div class="txt-mut" style="font-size:11.5px">Acct ${c.id} · ${c.bu}</div></td>
     <td class="r txt-bad tnum" style="font-weight:700">${fs(v)}</td><td class="r tnum">+${c.drift}d</td><td><span class="badge ${c.risk==='Critical'?'b-crit':c.risk==='High'?'b-high':'b-med'}">${c.risk}</span></td></tr>`}).join('');
   const othV=n.drivers[1]-kc.reduce((a,c)=>a+custImpact(c),0);
-  const other=`<tr><td></td><td class="txt-mut">Other accounts (${S.bu==='All'?'1,236':S.bu==='USPD'?'914':'322'})</td><td class="r txt-bad tnum">${fs(othV,1)}</td><td class="r txt-mut">+0.3d</td><td></td></tr>
-    <tr style="background:#F7FAFD"><td></td><td style="font-weight:700">Total payment-behavior drift</td><td class="r txt-bad tnum" style="font-weight:700">${fs(n.drivers[1],1)}</td><td></td><td></td></tr>`;
-  after(updLevers);
+  const other=`<tr><td class="txt-mut">Other accounts (${S.bu==='All'?'1,236':S.bu==='USPD'?'914':'322'})</td><td class="r txt-bad tnum">${fs(othV,1)}</td><td class="r txt-mut">+0.3d</td><td></td></tr>
+    <tr style="background:#F7FAFD"><td style="font-weight:700">Total payment-behavior drift</td><td class="r txt-bad tnum" style="font-weight:700">${fs(n.drivers[1],1)}</td><td></td><td></td></tr>`;
   return `
   <div class="crumb"><a onclick="go('tower')">Performance Workspace</a> › Collections variance bridge</div>
-  <div class="page-h"><div><h1>Why collections are ${fs(n.v)} to target</h1><div class="meta">${asOf()}</div></div><div class="sp"></div>
-    ${H().rv?'':'<button class="btn" onclick="adoptOverride()">✓ Adopt forecast as override</button>'}<button class="btn pri" onclick="assignModal('Collections variance ${fs(n.v)} (${S.hz})')">Assign to owner</button></div>
+  <div class="page-h"><div><h1>Why collections are ${fs(n.v)} to target</h1><div class="meta">${asOf()}</div></div><div class="sp"></div></div>
   ${eqRow(n,true)}
   <div class="grid g-7-5 mb brow">
     <div class="card"><div class="ch"><div><h3>What makes up the ${fs(n.v)} gap</h3><div class="sub">Variance to target collections by driver · hover a bar</div></div><span class="sp"></span><div class="legend"><span><i class="dot" style="background:var(--good)"></i>Adds cash</span><span><i class="dot" style="background:var(--bad)"></i>Reduces cash</span></div></div>
@@ -2392,29 +2392,10 @@ function pageBridge(){
         ${n.drivers.map((v,i)=>`<div class="mg" style="position:relative;padding-right:40px"><button class="ib" style="top:8px;right:8px" data-info="${esc(T(driverLabel(i),[['Impact vs target',fs(v)]],n.notes[i]))}" onclick="event.stopPropagation();showInfo(this)">i</button><div class="l">${driverLabel(i)} <b class="${v>=0?'txt-good':'txt-bad'}" style="float:right">${fs(v)}</b></div></div>`).join('')}
       </div>
     </div>
-    <div class="card"><div class="ch"><div><h3>Accounts behind the payment-behavior drift</h3><div class="sub">${fs(n.drivers[1])} · select rows to act · click a name to deep dive</div></div></div>
-      <table class="t"><thead><tr><th></th><th>Customer</th><th class="r">Impact</th><th class="r">DTP drift</th><th>Risk</th></tr></thead><tbody>${custRows}${other}</tbody></table>
-      <div style="display:flex;gap:8px;margin-top:12px;align-items:center"><span class="txt-mut" id="selCnt" style="font-size:12px;flex:1">No rows selected</span>
-        <button class="btn sm" id="selOv" disabled onclick="adoptOverride(true)">Adopt as override</button><button class="btn sm pri" id="selAs" disabled onclick="assignModal(selNames())">Assign to owner</button></div>
+    <div class="card"><div class="ch"><div><h3>Accounts behind the payment-behavior drift</h3><div class="sub">${fs(n.drivers[1])} · click a name to deep dive</div></div></div>
+      <table class="t"><thead><tr><th>Customer</th><th class="r">Impact</th><th class="r">DTP drift</th><th>Risk</th></tr></thead><tbody>${custRows}${other}</tbody></table>
     </div>
-  </div>
-  <div class="card"><div class="ch"><div><h3>Ways to close the gap</h3><div class="sub">Levers the engine recommends for a ${P().role}. Open a lever to see its customers from connected sources and pick who to act on, or drag to size it.</div></div><span class="sp"></span><span class="badge b-ai">AI-recommended</span></div>
-    <div class="grid lvgrid">
-      <div>${levers.map(l=>l.locked?`<div class="lever locked"><span>🔒</span><div><div class="nm">${l.n}</div><div class="ds">${l.d}</div></div><div class="amt"><span class="lockchip">AP · Coming soon</span></div></div>`:
-        leverHTML(l)).join('')}</div>
-      <div class="gap card" style="background:#FAFCFE;box-shadow:none;position:sticky;top:0;align-self:start">
-        <div class="txt-mut" style="font-size:12px;font-weight:600">Remaining gap to target</div>
-        <div class="bignum tnum" id="gapNum">${fs(n.v)}</div>
-        <div class="gapbar"><i id="gapBar" style="width:0%"></i></div>
-        <div style="display:flex;justify-content:space-between;font-size:12px"><span>Recovered <b id="gapRec" class="txt-good">$0M</b></span><span>Gap <b class="txt-bad">${fs(n.v)}</b></span></div>
-        <div id="gapCost" class="txt-mut" style="font-size:12px"></div>
-        <div id="gapMsg" style="font-size:12.5px;padding:10px;border-radius:8px;background:var(--warn-soft);color:var(--warn)">Select levers to build a plan.</div>
-        <button class="btn pri" id="apprBtn" style="justify-content:center" onclick="sendPlanModal()" disabled>✉ Send plan →</button>
-        <div class="txt-mut" style="font-size:11.5px;text-align:center">Email the plan to ${P().approver} or anyone else</div>
-      </div>
-    </div>
-  </div>
-  <div class="card" style="margin-top:16px"><div class="ch"><h3>Recovery plan by customer</h3><span class="sp"></span><span class="sub">Built from the records you selected above</span></div><div id="planTbl"></div></div>`;
+  </div>`;
 }
 /* ============================ LEVER SOURCE DATA ============================ */
 // Each lever is backed by the records it would act on. v = cash inside the 5-week window (All BUs, $M);
