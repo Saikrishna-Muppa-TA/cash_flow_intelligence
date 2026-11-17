@@ -489,6 +489,7 @@ a.lnk{color:var(--blue);cursor:pointer;font-weight:600}a.lnk:hover{text-decorati
 .pnl-h{display:flex;align-items:center;gap:10px;margin-bottom:6px}.pnl-h .sp{flex:1}
 .pnl-r{display:flex;align-items:center;gap:10px;padding:7px 8px 7px 10px;border:1px solid var(--line2);border-radius:9px;margin:6px 0}
 .pnl-r.on{border-color:#C5DBF2;background:#F5F9FD}
+.pnl-one{color:var(--blue);font-weight:800;font-size:12px;width:14px;text-align:center;flex:none}.pnl-r label:has(.pnl-one){cursor:default}
 .pnl-r label{display:inline-flex;align-items:center;gap:8px;cursor:pointer;flex:1;min-width:0;white-space:nowrap}
 .pnl input[type=checkbox]{width:16px;height:16px;accent-color:var(--blue);margin:0;cursor:pointer}
 .pnl-d{width:9px;height:9px;border-radius:50%;display:inline-block;flex:none}
@@ -2057,7 +2058,7 @@ function go(tab,view){const cur=snap();S.tab=tab;S.view=view||'home';
   render();document.getElementById('main').scrollTop=0}
 function navBack(){if(!NAV.back.length)return;NAV.fwd.push(snap());Object.assign(S,NAV.back.pop());render();document.getElementById('main').scrollTop=0}
 function navFwd(){if(!NAV.fwd.length)return;NAV.back.push(snap());Object.assign(S,NAV.fwd.pop());render();document.getElementById('main').scrollTop=0}
-const PAGE_NAME=s=>P2_NAMES[s.tab]?P2_NAMES[s.tab]:s.tab==='tower'?(s.view==='bridge'?'Variance bridge':'Performance Workspace'):s.tab==='risk'?(s.view==='customer'?'Customer deep dive':'Risk Intelligence'):s.tab==='alerts'?'Alerts & Exceptions':s.tab==='studio'?'Forecasting Studio':s.tab==='access'?'Users & access':'Scenario Workspace';
+const PAGE_NAME=s=>P2_NAMES[s.tab]?P2_NAMES[s.tab]:s.tab==='tower'?(s.view==='bridge'?'Variance bridge':'Performance Workspace'):s.tab==='risk'?(s.view==='customer'?'Customer deep dive':'Risk Intelligence'):s.tab==='alerts'?'Alerts':s.tab==='studio'?'Forecasting Studio':s.tab==='access'?'Users & access':'Scenario Workspace';
 document.addEventListener('keydown',e=>{if(e.altKey&&e.key==='ArrowLeft'){e.preventDefault();navBack()}if(e.altKey&&e.key==='ArrowRight'){e.preventDefault();navFwd()}});
 
 function render(){
@@ -2678,7 +2679,7 @@ function doSendPlan(){
   const bad=list.filter(x=>!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(x));
   if(!list.length||bad.length){document.getElementById('spErr').textContent=list.length?'Check this address: '+bad.join(', '):'Enter at least one email address';return}
   const {rec,cost}=leverTotals(), names=planNames();
-  // a recipient who is a platform user also gets the plan in their Alerts & Exceptions inbox
+  // a recipient who is a platform user also gets the plan in their Alerts inbox
   list.forEach(em=>{const k=Object.keys(PERSONAS).find(p=>PERSONAS[p].email.toLowerCase()===em.toLowerCase());
     if(k&&k!==S.persona) APPROVALS.unshift({id:'AP-'+(312+APPROVALS.length),from:P().name+' ('+P().role+')',to:k,title:`Close ${S.hz} collections gap: ${names.join(' + ')}`,amt:rec,cost,status:'Pending',when:'Just now'})});
   closeOv();render();toast(`Plan sent to ${escH(list.join(', '))}: ${fs(rec)} cash acceleration, ${fm(cost)} P&amp;L cost`);
@@ -2694,7 +2695,7 @@ function assignModal(what){
 function doAssign(what){
   const o=document.getElementById('asOwner').value; closeOv();
   ALERTS.unshift({id:'EX-'+(20932+ALERTS.length),sev:'High',type:'Assigned investigation',entity:what,level:'Customer',bu:S.bu,exp:0,owner:o,age:'now',status:'Open',agent:'Assigned by '+P().name,isNew:true});
-  toast(`Assigned to ${o}. The task is now in Alerts & Exceptions.`); renderShell();
+  toast(`Assigned to ${o}. The task is now in Alerts.`); renderShell();
 }
 
 /* ============================ PAGE: RISK ============================ */
@@ -2706,7 +2707,7 @@ function pageRisk(){
   <div class="page-h"><div><h1>Risk Intelligence</h1><div class="meta">${asOf()}</div></div></div>
   <div class="grid g4 mb">
     ${kt({lab:'Collections vs target',val:fs(n.v),vcls:'txt-bad',cls:'alert',click:"go('tower','bridge')",chip:'<span class="dl nt">Forecast '+fmc(n.coll)+'</span>',tip:T('Collections · '+H().label,[['Forecast',fmc(n.coll)],['Target',fmc(n.target)],['Variance',fs(n.v),1]],'Same variance as the Performance Workspace · click for the bridge')})}
-    ${kt({lab:'Receivables at risk',val:fm(atRisk),click:"go('alerts')",chip:'<span class="dl dn">▲ '+fm(38*sc())+'</span>',cl:'vs last week '+fm(atRisk-38*sc()),tip:T('Probability-weighted receivables at risk',[['Open AR in watch & critical accounts',fm(atRisk/0.34)],['× average probability of late payment','34%'],['Receivables at risk',fm(atRisk),1],['Last week',fm(atRisk-38*sc())],['Change week over week',fs(38*sc())]],'Click to open Alerts & Exceptions')})}
+    ${kt({lab:'Receivables at risk',val:fm(atRisk),click:"go('alerts')",chip:'<span class="dl dn">▲ '+fm(38*sc())+'</span>',cl:'vs last week '+fm(atRisk-38*sc()),tip:T('Probability-weighted receivables at risk',[['Open AR in watch & critical accounts',fm(atRisk/0.34)],['× average probability of late payment','34%'],['Receivables at risk',fm(atRisk),1],['Last week',fm(atRisk-38*sc())],['Change week over week',fs(38*sc())]],'Click to open Alerts')})}
     ${kt({lab:'Accounts deteriorating',val:watch,chip:'<span class="dl dn">▲ 2 new</span>',cl:'vs '+(watch-2)+' last week',tip:T('Days-to-pay drift over 3 days',cs.filter(c=>c.drift>3).map(c=>[c.name,'+'+c.drift+' days']))})}
     ${kt({lab:'Days-to-pay drift',val:'+'+(cs.reduce((a,c)=>a+c.ar*c.drift,0)/cs.reduce((a,c)=>a+c.ar,0)).toFixed(1)+' days',chip:'<span class="dl dn">▲ 0.6 days</span>',cl:'vs last month +'+((cs.reduce((a,c)=>a+c.ar*c.drift,0)/cs.reduce((a,c)=>a+c.ar,0))-0.6).toFixed(1)+' days',tip:T('Open-AR-weighted drift',[['Σ (open AR × drift)',fm(cs.reduce((a,c)=>a+c.ar*c.drift,0))+'·days'],['÷ Σ open AR',fm(cs.reduce((a,c)=>a+c.ar,0))],['Weighted drift',(cs.reduce((a,c)=>a+c.ar*c.drift,0)/cs.reduce((a,c)=>a+c.ar,0)).toFixed(1)+' days',1]],cs.length+' monitored accounts')})}
   </div>
@@ -2893,7 +2894,7 @@ function alDetected(a){const m=String(a.age||'').match(/^(\d+)\s*([hd])/),d=new 
   if(m)d.setTime(d.getTime()-(+m[1])*(m[2]==='d'?864e5:36e5));
   return {d:HZ_MON[d.getMonth()]+' '+d.getDate()+', '+d.getFullYear(),t:String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0')+' ET'}}
 function pageAlerts(){
-  const F=S.alertF,k=sc();F.owner='All';   // no Owner column, so no owner filter
+  const F=S.alertF,k=sc();F.owner='All';F.bu='All';   // no Owner column and no BU dropdown (the top-bar BU still filters), so neither filter applies
   const list=ALERTS.filter(a=>(F.level==='All'||a.level===F.level)&&(F.sev==='All'||a.sev===F.sev)&&(F.bu==='All'||a.bu===F.bu||a.bu==='All')&&
     (F.owner==='All'||(F.owner==='Me'?a.owner.startsWith(P().name):F.owner==='Unassigned'?a.owner==='Unassigned':F.owner==='AI'?a.owner.includes('(AI)'):true))&&(S.bu==='All'||a.bu===S.bu||a.bu==='All'));
   const open=ALERTS.filter(a=>a.status!=='Resolved');
@@ -2901,19 +2902,19 @@ function pageAlerts(){
   const apprs=APPROVALS.filter(a=>a.to===S.persona);
   const sel=(id,opts,cur)=>`<select onchange="S.alertF.${id}=this.value;render()">${opts.map(o=>`<option value="${o[0]}" ${cur===o[0]?'selected':''}>${o[1]}</option>`).join('')}</select>`;
   return `
-  <div class="page-h"><div><h1>Alerts &amp; Exceptions</h1><div class="meta">${asOf()} · Operational, data-quality and forecast exceptions</div></div></div>
-  <div class="grid g4 mb">
+  <div class="page-h"><div><h1>Alerts</h1><div class="meta">As of Mon, Nov 16 2026 · 06:10 ET · ${BU_NAMES[S.bu]}</div></div></div>
+  ${AL_SHOW_TILES?`<div class="grid g4 mb">
     ${kt({lab:'Cash awaiting application',val:fm(alCash()),vcls:'txt-bad',chip:'<span class="dl dn">'+ALERTS.filter(AL_CASH).length+' open items</span>',cl:'not yet applied to invoices',tip:T('Cash received but not yet applied to invoices',ALERTS.filter(AL_CASH).map(a=>[a.type,fm(expOf(a))]).concat([['Total',fm(alCash()),1]]),'Applied cash reduces AR; until then the AR looks overdue')})}
     ${kt({lab:'Critical &amp; high exceptions',val:ALERTS.filter(a=>a.status!=='Resolved'&&(a.sev==='Critical'||a.sev==='High')).length,vcls:'txt-bad',cls:'alert',chip:'<span class="dl dn">'+ALERTS.filter(a=>a.status!=='Resolved'&&a.sev==='Critical').length+' critical</span>',tip:T('Open critical &amp; high exceptions',ALERTS.filter(a=>a.status!=='Resolved'&&(a.sev==='Critical'||a.sev==='High')).map(a=>[a.type,expOf(a)?fm(expOf(a)):'—']))})}
     ${kt({lab:'New exceptions (24h)',val:ALERTS.filter(a=>a.isNew).length,chip:'<span class="dl wn">▲ 2</span>',cl:'vs daily average of 1',tip:T('New in the last 24 hours',ALERTS.filter(a=>a.isNew).map(a=>[a.type,expOf(a)?fm(expOf(a)):'—']),'Auto-triaged by agents')})}
     ${kt({lab:'Avg time to resolution',val:'3.4 days',chip:'<span class="dl up">▼ 1.1 days</span>',cl:'vs Q2 average 4.5 days',tip:T('Resolution mix',[['Resolved by AI agents (monitor &amp; recommend)','62%'],['Resolved by owners','38%'],['Customer-facing actions','Human approval required']])})}
-  </div>
+  </div>`:''}
 
-  <div class="card mb"><div class="ch"><h3>Exception queue</h3><span class="sp"></span><span class="sub">${list.length} of ${ALERTS.length}</span></div>
-      <div class="filters">
+  <div class="card mb">
+      <div class="filters" style="display:flex;align-items:center;flex-wrap:wrap;gap:8px">
         ${sel('level',[['All','All levels'],['Operations','Operations'],['Data','Data quality'],['BU','Business unit']],F.level)}
-        ${sel('bu',[['All','All BUs'],['USPD','USPD'],['O&M','O&M']],F.bu)}
         ${sel('sev',[['All','All severities'],['Critical','Critical'],['High','High'],['Medium','Medium'],['Low','Low']],F.sev)}
+        <span class="sub" style="margin-left:auto">${list.length} of ${ALERTS.length}</span>
       </div>
       <table class="t exq"><thead><tr><th style="width:84px">Severity</th><th>Exception</th><th style="width:150px">Detected on</th><th style="width:76px">Level</th><th class="r" style="width:86px">Exposure</th></tr></thead><tbody>
       ${list.map(a=>`<tr class="hov" ${a.cust?`onclick="S.cust='${a.cust}';go('risk','customer')"`:a.type.includes('Forecast')?`onclick="go('tower','bridge')"`:''}><td><span class="badge ${a.sev==='Critical'?'b-crit':a.sev==='High'?'b-high':a.sev==='Medium'?'b-med':'b-mut'}">${a.sev}</span></td>
@@ -2921,7 +2922,7 @@ function pageAlerts(){
         <td class="tnum" style="font-size:12.5px">${alDetected(a).d}<div class="txt-mut" style="font-size:11px">${alDetected(a).t}</div></td>
         <td>${a.level}</td><td class="r tnum" style="font-weight:700">${expOf(a)?fm(expOf(a)):'—'}</td></tr>`).join('')}
       </tbody></table></div>
-  ${dqCard()}<div class="grid g2">
+  ${AL_SHOW_SIDE?dqCard():''}${AL_SHOW_SIDE?`<div class="grid g2">
       <div class="card"><div class="ch"><h3>Agent activity</h3></div>
         <div class="feed">
           <div class="it"><div><b>Forecast Agent</b> re-forecast 1.24M invoices and flagged a ${fs(N().v)} variance</div></div>
@@ -2935,8 +2936,10 @@ function pageAlerts(){
       <div class="card"><div class="ch"><h3>Open exceptions by type</h3></div>
         ${alGroups().map(x=>`<div class="drv"><div class="row"><span>${x[0]}</span><b class="tnum">${x[1]}%</b></div><div class="bar"><i style="width:${x[1]}%;background:var(--blue)"></i></div></div>`).join('')}
       </div>
-  </div>  </div>`;
+  </div>`:''}  </div>`;
 }
+const AL_SHOW_TILES=false;   // the four tiles at the top of Alerts: hidden for now; set true to show them again
+const AL_SHOW_SIDE=false;   // Agent activity and Open exceptions by type: hidden for now; set true to show them again
 function expOf(a){
   if(a.cust){const c=KEY_CUST.find(x=>x.id===a.cust);return Math.abs(custImpact(c))}
   if(a.id==='EX-20928')return Math.abs(N('All').v);
@@ -3477,7 +3480,7 @@ const ICONS2={
   bic:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 01-10 0z"/><path d="M17 5h3v2a3 3 0 01-3 3M7 5H4v2a3 3 0 003 3"/></svg>'
 };
 const MODNAV={
-  ar:{grp:'Accounts Receivable',items:[['tower','Performance Workspace','tower'],['studio','Forecasting Studio','studio'],['risk','Risk Intelligence','risk'],['alerts','Alerts & Exceptions','alerts'],['scen','Scenario Workspace','scen']]},
+  ar:{grp:'Accounts Receivable',items:[['tower','Performance Workspace','tower'],['studio','Forecasting Studio','studio'],['risk','Risk Intelligence','risk'],['alerts','Alerts','alerts'],['scen','Scenario Workspace','scen']]},
   ap:{grp:'Accounts Payable',items:[['ap.tower','Payables Performance Workspace','tower'],['ap.sup','Supplier Intelligence','risk'],['ap.alerts','Alerts & Exceptions','alerts'],['ap.scen','Scenario Workspace','scen']]},
   inv:{grp:'Inventory',items:[['inv.tower','Inventory Performance Workspace','tower'],['inv.net','Category & DC Intelligence','risk'],['inv.alerts','Alerts & Exceptions','alerts'],['inv.scen','Scenario Workspace','scen']]},
   e2e:{grp:'End-to-end cash flow',items:[['e2e.flow','Cash Flow A → B','flow'],['e2e.wc','Working Capital & Ratios','wc'],['e2e.opp','Cash on the Table','opp'],['e2e.lab','Ratio Lab','lab'],['e2e.lr','Long-range Outlook','lr'],['e2e.bic','Best-in-Class Benchmark','bic']]}
@@ -4608,12 +4611,14 @@ const CMP_OPTS=[
  {k:'pf',l:'Prior forecast',s:'what changed',short:'Prior',col:'#CC79A7',d:'5 weeks: last Monday\'s release (Nov 9) for the same days. Longer horizons: the November BD9 submission (Nov 12).'},
  {k:'act',l:'Actuals',s:'forecast accuracy',short:'Actual',col:'#D55E00',d:'Actuals landed so far (prior business day, by 06:10 ET) against the forecast for the same days.'},
  {k:'ly',l:'Last year',s:'seasonality',short:'LY',col:'#E69F00',d:'The same days last year (Thanksgiving falls in the same week). Revenue +12% and open AR +15% year on year.'}];
-// Compare dropdown: AOP removed; Actuals, Prior forecast and Last year stay. AOP stays in the data (bridges, "vs AOP" chips).
-const CMP_HIDE=['aop'];
+// Compare dropdown: Last year only, a single fixed choice (no multi-select). AOP, Prior forecast and Actuals are hidden
+// from the dropdown but stay in the data (bridges, "vs AOP" chips).
+const CMP_HIDE=['aop','pf','act'];
 const cmpVis=()=>CMP_OPTS.filter(o=>!CMP_HIDE.includes(o.k));
-const cmpClean=a=>{const v=(a||[]).filter(x=>!CMP_HIDE.includes(x)&&CMP_OPTS.some(o=>o.k===x));return v.length?v:['act']};
-S.cmpSel=(()=>{try{const v=JSON.parse(localStorage.getItem('mk.compare')||'null');if(Array.isArray(v)&&v.length)return cmpClean(v)}catch(e){}return ['act']})();
-function cmpToggle(k){const on=S.cmpSel.includes(k);if(on&&S.cmpSel.length===1){toast('Keep at least one comparison selected.');return}
+const cmpClean=a=>{const v=(a||[]).filter(x=>!CMP_HIDE.includes(x)&&CMP_OPTS.some(o=>o.k===x));return v.length?v.slice(0,1):['ly']};
+S.cmpSel=(()=>{try{const v=JSON.parse(localStorage.getItem('mk.compare')||'null');if(Array.isArray(v)&&v.length)return cmpClean(v)}catch(e){}return ['ly']})();
+function cmpToggle(k){if(cmpVis().length===1)return;   // a single fixed comparison: nothing to toggle
+  const on=S.cmpSel.includes(k);if(on&&S.cmpSel.length===1){toast('Keep at least one comparison selected.');return}
   S.cmpSel=CMP_OPTS.map(o=>o.k).filter(x=>x===k?!on:S.cmpSel.includes(x));try{localStorage.setItem('mk.compare',JSON.stringify(S.cmpSel))}catch(e){}const mo=!!document.querySelector('.modal.fva');render();if(mo)drawFvA()}
 const PF_FR={open:-.00225,bill:-.00023,coll:.00066,ded:-.022};   // last run vs this run: AR came in $64M above last week's forecast; collections cut $26M; billings +$9M; deductions +$7M (5 weeks, All)
 function cmpVals(n){if(n.rvC)return n.rvC;const B=n.base||n,sc=Math.min(3,Math.pow(n.h.k||1,.3)),P=S.cmpP||{aop:'FY27',pf:1,ly:1};
@@ -4818,11 +4823,13 @@ function brTalk(el,cmp,D,G){const big=[...D].sort((a,b)=>Math.abs(b[1])-Math.abs
   if(el==='ded')t.push('Ask the Deductions team which pricing disputes are valid and when credits will be issued; reflect the timing in the forecast.');
   if(el==='close')t.push('Closing AR moves with the flows above; about $1.1B of AR is one day of DSO.');
   return t}
-function openBridge(el,cmp){if(!cmp||CMP_HIDE.includes(cmp))cmp=S.cmpSel.find(x=>!CMP_HIDE.includes(x))||'act';   // no AOP in the bridge: links that asked for AOP open on the first Compare pick
+/* the bridge pop-up keeps Prior forecast, Actuals and Last year (only AOP is hidden there), separate from the Compare dropdown */
+const BR_HIDE=['aop'],brVis=()=>CMP_OPTS.filter(o=>!BR_HIDE.includes(o.k));
+function openBridge(el,cmp){if(!cmp||BR_HIDE.includes(cmp))cmp=S.cmpSel.find(x=>!BR_HIDE.includes(x))||'ly';   // no AOP in the bridge: links that asked for AOP open on the first Compare pick
   S.br={el:el==='open'?'close':el,cmp};closeInfo();ov.classList.remove('hidden');ov.onclick=e=>{if(e.target===ov)closeExplain()};drawBridge()}
-function drawBridge(){if(CMP_HIDE.includes(S.br.cmp))S.br.cmp=S.cmpSel.find(x=>!CMP_HIDE.includes(x))||'act';const {el,cmp}=S.br,G=brGap(el,cmp),o=CMP_OPTS.find(x=>x.k===cmp),elN=BR_EL.find(x=>x[0]===el)[1],good=BR_GOOD[el];
+function drawBridge(){if(BR_HIDE.includes(S.br.cmp))S.br.cmp=S.cmpSel.find(x=>!BR_HIDE.includes(x))||'ly';const {el,cmp}=S.br,G=brGap(el,cmp),o=CMP_OPTS.find(x=>x.k===cmp),elN=BR_EL.find(x=>x[0]===el)[1],good=BR_GOOD[el];
   const segE=`<div class="seg">${BR_EL.map(([k,l])=>`<button class="${el===k?'on':''}" onclick="S.br.el='${k}';drawBridge()">${l.replace(' & credits','')}</button>`).join('')}</div>`;
-  const segC=`<div class="seg">${cmpVis().map(c=>`<button class="${cmp===c.k?'on':''}" onclick="S.br.cmp='${c.k}';drawBridge()"><i class="fv-dot" style="background:${H().rv==='past'&&c.k==='act'?FC_COL:c.col}"></i>${H().rv?rvCmpName(c.k):c.l}</button>`).join('')}</div>`;
+  const segC=`<div class="seg">${brVis().map(c=>`<button class="${cmp===c.k?'on':''}" onclick="S.br.cmp='${c.k}';drawBridge()"><i class="fv-dot" style="background:${H().rv==='past'&&c.k==='act'?FC_COL:c.col}"></i>${H().rv?rvCmpName(c.k):c.l}</button>`).join('')}</div>`;
   let body='',head='';
   if(!G){body='<div class="xp-s">No actuals yet: Monday is release day. The first actuals land Tuesday by 06:10 ET.</div>'}
   else{const D=brDrv(el,cmp,G),W=brWho(el,cmp,D,G),Tk=brTalk(el,cmp,D,G);
@@ -5099,7 +5106,7 @@ function cmpPanel(){if(H().rv)return rvCmpPanel();const P=S.cmpP,T=d5T();
     act:`<select aria-label="Actuals through" onchange="pnlCmpP('act',this.value)"><option value="0" ${T===0?'selected':''}>None yet · release day</option>${D5_DAYS.map((d,i)=>`<option value="${i+1}" ${T===i+1?'selected':''}>Through ${d5Lab(d)}</option>`).join('')}</select>`,
     ly:`<select aria-label="Last year" onchange="pnlCmpP('ly',this.value)">${[1,2,3].map(y=>`<option value="${y}" ${P.ly===y?'selected':''}>FY${27-y} · ${LY_WIN[y]}</option>`).join('')}</select>`};
   return `<div class="pnl-h"><b>Compare with</b><span class="sp"></span><button class="hzm-x" onclick="pnlClose()" aria-label="Close">✕</button></div>`+
-    cmpVis().map(o=>{const on=S.cmpSel.includes(o.k);return `<div class="pnl-r${on?' on':''}" data-tip="${esc('<b>Forecast vs '+o.l+'</b><br>'+o.d)}"><label><input type="checkbox" ${on?'checked':''} onchange="pnlCmpTog('${o.k}')"><i class="pnl-d" style="background:${o.col}"></i><b>${o.l}</b></label>${sel[o.k]}</div>`}).join('')}
+    cmpVis().map(o=>{const on=S.cmpSel.includes(o.k);return `<div class="pnl-r${on?' on':''}" data-tip="${esc('<b>Forecast vs '+o.l+'</b><br>'+o.d)}"><label><span class="pnl-one" aria-hidden="true">✓</span><i class="pnl-d" style="background:${o.col}"></i><b>${o.l}</b></label>${sel[o.k]}</div>`}).join('')}
 function pnlCmpTog(k){cmpToggle(k);pnlFill()}
 function pnlCmpP(k,v){if(k==='act')S.today=+v;else{S.cmpP[k]=k==='aop'?v:+v;try{localStorage.setItem('mk.compareP',JSON.stringify(S.cmpP))}catch(e){}cmpSync()}
   if(!S.cmpSel.includes(k)){S.cmpSel=CMP_OPTS.map(o=>o.k).filter(x=>x===k||S.cmpSel.includes(x));try{localStorage.setItem('mk.compare',JSON.stringify(S.cmpSel))}catch(e){}}
@@ -6069,6 +6076,10 @@ ALERTS.push({id:'EX-20901',sev:'Medium',type:'Auto-match rate 94.1% (target 97%)
  {id:'EX-20844',sev:'Low',type:'Holiday calendar check: 2028 dates',entity:'Juneteenth and Christmas observed dates confirmed for the long-range horizons',level:'Data',bu:'All',exp:0,owner:'Model Monitor',age:'5d',status:'Resolved',agent:'Data Quality Agent',cat:'Data'});
 // customer and cohort risk lives in Risk Intelligence: Alerts & Exceptions keeps operational, data and business-unit exceptions
 ALERTS=ALERTS.filter(a=>a.level!=='Customer'&&a.level!=='Cohort');
+/* removed from the Alerts table for the review (shown on screen as: Bank payment file late, Remittance details missing,
+   Duplicate invoices in the sales data, Credit-memo backlog, Forecast run 12 minutes late, Holiday calendar check: 2028 dates) */
+const AL_REMOVED=['Lockbox file late (BAI2)','Remittance missing (EDI 820)','Duplicate invoices in FDP extract','Credit-memo backlog','Forecast run 12 minutes late','Holiday calendar check: 2028 dates'];
+ALERTS=ALERTS.filter(a=>!AL_REMOVED.includes(a.type));
 ALERTS.forEach(a=>{if(!a.cat)a.cat=a.level==='Customer'||a.level==='Cohort'?'Risk':a.type.includes('Unapplied')||a.type.includes('Remittance')?'Operations':a.type.includes('model')?'Data':'Risk'});
 ALERTS.sort((a,b)=>({Critical:0,High:1,Medium:2,Low:3}[a.sev]-{Critical:0,High:1,Medium:2,Low:3}[b.sev])||(a.status==='Resolved')-(b.status==='Resolved'));
 function expOf(a){if(a.cust){const c=KEY_CUST.find(x=>x.id===a.cust);if(c)return Math.abs(custImpact(c));return a.exp}
@@ -6684,7 +6695,7 @@ function rvCmpD(k){const h=H(),past=h.rv==='past',C=N().rvX;
     k==='act'?(past?(C.live?'The '+C.relTxt+' release, at the start of the period: the accuracy check':'The back-tested forecast at the start of the period: the accuracy check'):'Actuals landed to '+C.lastLab+' vs the forecast at the start of the period for those days'):'The same period last year ('+rvLyName(h)+')'}
 function rvCmpPanel(){const past=H().rv==='past';
   return `<div class="pnl-h"><b>Compare with</b><span class="sp"></span><button class="hzm-x" onclick="pnlClose()" aria-label="Close">✕</button></div>`+
-    cmpVis().map(o=>{const on=S.cmpSel.includes(o.k);return `<div class="pnl-r${on?' on':''}"><label><input type="checkbox" ${on?'checked':''} onchange="pnlCmpTog('${o.k}')"><i class="pnl-d" style="background:${past&&o.k==='act'?FC_COL:o.col}"></i><b>${rvCmpName(o.k)}</b></label><span class="rv-pd">${rvCmpD(o.k)}</span></div>`}).join('')}
+    cmpVis().map(o=>{const on=S.cmpSel.includes(o.k);return `<div class="pnl-r${on?' on':''}"><label><span class="pnl-one" aria-hidden="true">✓</span><i class="pnl-d" style="background:${past&&o.k==='act'?FC_COL:o.col}"></i><b>${rvCmpName(o.k)}</b></label><span class="rv-pd">${rvCmpD(o.k)}</span></div>`}).join('')}
 const RV_SH={coll:[['Payment timing',.46,'Customers paid earlier or later than the release assumed'],['Billing timing',.22,'Invoices raised earlier or later in the period'],['Calendar & month-end',.16,'Bank holidays and month-end payment runs'],['Deductions & short-pays',.16,'Short-pays held back cash']],
   bill:[['Volume',.55,'More or fewer units shipped than assumed'],['Price & mix',.30,'Specialty and GLP-1 mix'],['Billing timing',.15,'Invoices raised earlier or later in the period']],
   ded:[['Pricing deductions',.45,'Price and contract disputes'],['Returns',.25,'Product returns and credits'],['Rebates & chargebacks',.30,'Rebate and chargeback accruals']]};
@@ -6781,7 +6792,7 @@ function rvCmpPanel(){const h=H(),past=h.rv==='past',C=N().rvX;
   const ex={aop:`<span class="rv-pd">${rvChip('aop')}</span>`,pf:`<span class="rv-pd">Submitted ${C.bd9Txt}</span>`,ly:`<span class="rv-pd">${rvLyName(h)}</span>`,
     act:`<select aria-label="Forecast release" onchange="rvRelPick(this.value)">${C.rs.map(opt).join('')}</select>`};
   return `<div class="pnl-h"><b>Compare ${past?'the actual':'the landing'} with</b><span class="sp"></span><button class="hzm-x" onclick="pnlClose()" aria-label="Close">✕</button></div>`+
-    cmpVis().map(o=>{const on=S.cmpSel.includes(o.k);return `<div class="pnl-r${on?' on':''}" data-tip="${esc('<b>'+rvCmpName(o.k)+'</b><br>'+rvCmpD(o.k))}"><label><input type="checkbox" ${on?'checked':''} onchange="pnlCmpTog('${o.k}')"><i class="pnl-d" style="background:${past&&o.k==='act'?FC_COL:o.col}"></i><b>${rvCmpName(o.k)}</b></label>${ex[o.k]}</div>`}).join('')}
+    cmpVis().map(o=>{const on=S.cmpSel.includes(o.k);return `<div class="pnl-r${on?' on':''}" data-tip="${esc('<b>'+rvCmpName(o.k)+'</b><br>'+rvCmpD(o.k))}"><label><span class="pnl-one" aria-hidden="true">✓</span><i class="pnl-d" style="background:${past&&o.k==='act'?FC_COL:o.col}"></i><b>${rvCmpName(o.k)}</b></label>${ex[o.k]}</div>`}).join('')}
 function rvCmpAct(key){const n=N(),C=n.rvX,h=H(),cur=h.rv==='cur',e={bill:'b',coll:'c',ded:'x'}[key];
   if(key==='open')return {lab:cur?'Actual':'Fcst',col:cur?null:FC_COL,val:fmc(C.open),chip:`<span class="dl nt">${cur?'actual':'same start'}</span>`,tip:'Opening AR is the actual AR on '+hzLong(h.start)+'.'};
   if(cur){if(key==='close')return {lab:'Actual',val:'—',chip:'<span class="dl nt">period open</span>',tip:'Closing AR is final once the period closes on '+hzLong(h.end)+'.'};
@@ -8555,6 +8566,9 @@ botDo=(function(f0){return function(q){const x=String(q).toLowerCase();
 botSugg=(function(f0){return function(){const g=f0()||{a:[],r:[]};
   return {a:(g.a||[]).map(s=>/at risk/i.test(s)?'Who are the top customers by collections?':s).filter((s,i,A)=>A.indexOf(s)===i),
     r:(g.r||[]).filter(s=>!/risk|florida cancer|customer deep dive/i.test(s))}}})(botSugg);
+/* Compare bar above the Performance Workspace tiles: hidden for now (the tiles still compare with Last year); set true to show it */
+const PW_SHOW_CMP=false;
+ctlRow=(function(f0){return function(){return PW_SHOW_CMP||S.tab!=='tower'?f0.apply(this,arguments):''}})(ctlRow);
 /* links that opened the old tabs or the action-trigger panel now land here */
 scTrOpen=function(){if(BOT.open)botToggle(false);go('scen')};
 botSugg=(function(f0){return function(){if(S.tab==='scen')return {a:['Why are collections below target?','What is closing DSO?'],r:['Show 13-Week Rolling','Show USPD']};return f0()}})(botSugg);
