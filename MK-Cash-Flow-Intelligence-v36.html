@@ -1393,12 +1393,61 @@ table.t.v30-ctb td{padding:6px 8px;vertical-align:middle}
 .scm-ih{font-size:14.5px;line-height:1.5}.scm-ih .badge{margin-right:8px;vertical-align:1px}
 .scm-ul{margin:8px 0 0;padding-left:18px;font-size:13px;line-height:1.55}.scm-ul li{margin:3px 0}
 .scm-flow{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
-.scm-st{position:relative;border:1px solid var(--line2);border-radius:10px;padding:10px 10px 10px 22px;background:#FAFCFE}.scm-st.ch{border-color:#C5DBF2;background:#F5F9FD}
+.scm-st{position:relative;border:1px solid var(--line2);border-radius:10px;padding:10px 10px 10px 22px;background:#FAFCFE}.scm-st.scm-chg{border-color:#C5DBF2;background:#F5F9FD}
 .scm-op{position:absolute;left:8px;top:9px;font-weight:800;color:var(--muted)}
 .scm-sl{font-size:11.5px;color:var(--muted);font-weight:600}.scm-sv{font-size:17px;font-weight:700;color:var(--deep);margin:2px 0}
 .scm-sb{font-size:11px}.scm-sb .dl{font-size:10.5px;padding:1px 6px}
 .scm-lt tr.scm-cur{background:#F2F8FF}.scm-lt tr{cursor:pointer}.scm-at{font-size:12px;line-height:1.5}
 @media (max-width:1200px){.scm-flow{grid-template-columns:repeat(2,1fr)}}
+/* library on the left, scenario on the right */
+.scm-lay{display:grid;grid-template-columns:300px minmax(0,1fr);gap:16px;align-items:start}
+.scm-lib{position:sticky;top:12px;max-height:calc(100vh - 24px);overflow:auto}
+.scm-libc{padding:12px 12px 8px}.scm-libc .ch{margin-bottom:8px}
+.scm-newb{width:100%;justify-content:center;margin-bottom:4px}
+.scm-lg{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin:14px 2px 6px}.scm-lg .sp{flex:1}
+.scm-lgn{font-size:10px;letter-spacing:0;text-transform:none;font-weight:600;color:#A3ADB9}
+.scm-li{position:relative;border:1px solid var(--line2);border-radius:9px;padding:8px 26px 8px 10px;margin:0 0 6px;background:#fff;cursor:pointer}
+.scm-li:hover{border-color:#C5DBF2;background:#F7FAFD}.scm-li:focus-visible{outline:2px solid var(--blue);outline-offset:1px}
+.scm-li.on{border-color:var(--blue);box-shadow:inset 0 0 0 1px var(--blue);background:#F2F8FF}
+.scm-li .t{display:flex;gap:6px;align-items:baseline;font-size:12.5px;line-height:1.35}.scm-li .t b{color:var(--deep);flex:none}
+.scm-li .a{font-size:11.5px;color:var(--muted);margin-top:3px;line-height:1.4}
+.scm-li .m{display:flex;gap:8px;font-size:11.5px;margin-top:4px;font-weight:700}.scm-li .m .sp{flex:1}.scm-li .m .txt-mut{font-weight:500}
+.scm-li.hist{background:#F4F5F7;border-color:#E3E7EC;color:#8D99A6}.scm-li.hist .t b,.scm-li.hist .t span,.scm-li.hist .m span{color:#8D99A6}
+.scm-li.hist:hover{background:#EEF0F3}.scm-li.hist.on{background:#ECEFF3;border-color:#8D99A6;box-shadow:inset 0 0 0 1px #8D99A6}
+.scm-li .x{position:absolute;right:4px;top:5px;border:0;background:none;color:#A3ADB9;cursor:pointer;font-size:11px;padding:2px 5px;border-radius:5px}.scm-li .x:hover{background:#E3E7EC;color:#46566A}
+.scm-ro{background:#F6F7F9}.scm-ro h3,.scm-ro b,.scm-ro td,.scm-ro .scm-id b{color:#8D99A6!important}.scm-ro input,.scm-ro select{background:#EEF0F3!important;color:#8D99A6}.scm-ro .badge,.scm-ro .scm-dd{filter:grayscale(1);opacity:.7}.scm-ro tr.scm-chd{background:#EEF0F3}
+.scm-rob{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:10px 14px;border:1px solid #D5DDE6;background:#F4F6F8;border-radius:10px;margin-bottom:12px;font-size:12.5px;color:#46566A}.scm-rob .sp{flex:1}
+.scm-rob.ed{background:#F2F8FF;border-color:#C5DBF2;color:var(--deep)}
+@media (max-width:1100px){.scm-lay{grid-template-columns:1fr}.scm-lib{position:static;max-height:none}}
+/* alignment pass: results stack full width; fixed numeric columns; consistent row heights */
+.scm-stk{display:grid;grid-template-columns:minmax(0,1fr);gap:16px;margin-bottom:16px}
+.scm-main>.card,.scm-main>.scm-stk>.card{margin-left:0;margin-right:0}
+.scm-f{align-items:center}.scm-f label{flex:1 1 420px;max-width:520px}.scm-f .scm-id{min-width:110px}
+.scm-go{min-width:120px;justify-content:center}
+.scm-t{table-layout:fixed;width:100%}
+.scm-t th:nth-child(2),.scm-t td:nth-child(2){width:150px;text-align:right}
+.scm-t th:nth-child(3),.scm-t td:nth-child(3){width:140px;text-align:right}
+.scm-t th:nth-child(4),.scm-t td:nth-child(4){width:230px;padding-left:28px}
+.scm-t td:nth-child(4){white-space:nowrap}.scm-t .scm-num{width:64px;text-align:right}
+.scm-nt{display:grid;grid-template-columns:minmax(200px,260px) auto auto auto 1fr;gap:12px}
+.scm-nt>.btn{justify-self:end}.scm-ntw{min-width:44px}
+.scm-ct{table-layout:fixed;width:100%}.scm-ct td,.scm-ct th{white-space:nowrap}
+.scm-ct td:first-child b{white-space:normal}
+.scm-ctb th:first-child,.scm-ctb td:first-child{width:32%}
+.scm-ctc th:first-child,.scm-ctc td:first-child{width:28%}.scm-ctc th:nth-child(2),.scm-ctc td:nth-child(2){width:24%;white-space:normal}
+.scm-flow .scm-st{min-height:84px;text-align:left}.scm-flow .scm-st>div{text-align:left}
+.scm-tbd{display:grid;grid-template-columns:auto 1fr;gap:10px 28px}.scm-tbd>div:last-child{grid-column:1/-1}
+.scm-li .t span{flex:1;min-width:0}.scm-li:not(.hist){padding-right:10px}
+.scm-rob .badge{flex:none}
+/* the page title stays put; the library and the scenario panel scroll on their own */
+@media (min-width:1101px){
+  main:has(.scm-lay){overflow:hidden;display:flex;flex-direction:column;padding-bottom:0}
+  main:has(.scm-lay)>.fadein{flex:1;min-height:0;display:flex;flex-direction:column}
+  main:has(.scm-lay) .page-h{flex:none}
+  main:has(.scm-lay) .scm-lay{flex:1;min-height:0;grid-template-rows:minmax(0,1fr)}
+  main:has(.scm-lay) .scm-lib{position:static;top:auto;max-height:none;height:100%;overflow:auto;padding-bottom:16px}
+  main:has(.scm-lay) .scm-main{height:100%;overflow:auto;padding:0 6px 40px 0}
+}
 /* Balance by business unit: share of each column total, grey, under the value */
 .v32-but small.v32-pc{display:flex;justify-content:flex-end;align-items:center;gap:6px;font-size:11px;font-weight:600;color:var(--muted);margin-top:3px;white-space:nowrap}
 .v32-but small.v32-pc .dl{font-size:10.5px;padding:1px 6px;line-height:1.4}
@@ -8298,10 +8347,28 @@ const scmBadge=k=>`<span class="badge ${SCM_ST[k][1]} scm-b">${SCM_ST[k][0]}</sp
 function scmLoad(){try{const v=JSON.parse(localStorage.getItem('mk.scm2')||'null');if(Array.isArray(v))return v}catch(e){}return []}
 let SCM_LIST=scmLoad();
 function scmStore(){try{localStorage.setItem('mk.scm2',JSON.stringify(SCM_LIST))}catch(e){}}
-S.scm=S.scm&&S.scm.v===2?S.scm:{v:2,name:'',terms:{},notes:[],edit:null,all:false,run:null,job:null};
+S.scm=S.scm&&S.scm.v===2?S.scm:{v:2,name:'',terms:{},notes:[],edit:null,all:false,run:null,job:null,ro:false,src:null};
 const scmNextId=()=>'SC-'+String(SCM_LIST.reduce((m,s)=>Math.max(m,+String(s.id).slice(3)||0),0)+1).padStart(3,'0');
 const scmLev=s=>JSON.stringify({t:s.terms,n:s.notes});
 const scmCust=id=>CUST40.find(x=>x.id===id);
+/* ---- scenario library: static samples (read-only; copy one to start a new scenario) ---- */
+const SCM_SAMPLES=(()=>{const top=CUST40.slice().sort((a,b)=>b.ar-a.ar),U=top.filter(c=>c.bu==='USPD'),O=top.filter(c=>c.bu==='O&M'),d0=hzIso(hzAdd(ASOF_DT,14));
+  const tm=(L)=>{const o={};L.forEach(([c,d])=>{if(c)o[c.id]=Math.max(0,scmT0(c)+d)});return o},nt=(c,date,days)=>c?{cust:c.id,date,days}:null;
+  const mk=(id,name,desc,terms,notes)=>({id,name,desc,terms,notes:notes.filter(Boolean),hz:'W13',bu:'All',sample:true});
+  return [mk('SMP-01',`${U[0]?U[0].name:'Top customer'}: terms +3 days`,'Largest USPD account moves to longer payment terms',tm([[U[0],3]]),[]),
+    mk('SMP-02','Two large accounts pay 10 days late','Payment notice from the 2nd and 3rd largest USPD accounts',{},[nt(U[1],d0,10),nt(U[2],d0,10)]),
+    mk('SMP-03',`${O[0]?O[0].name:'O&M account'}: terms −5 days`,'Shorter terms on the largest O&M account',tm([[O[0],-5]]),[]),
+    mk('SMP-04','Holiday slow-pay, top 3 accounts','Top 3 USPD accounts pay 5 days late from Dec 21',{},[nt(U[0],'2026-12-21',5),nt(U[1],'2026-12-21',5),nt(U[2],'2026-12-21',5)]),
+    mk('SMP-05','Early pay on an O&M account','2nd largest O&M account pays 7 days early',{},[nt(O[1],d0,-7)])]})();
+const scmFind=id=>SCM_LIST.find(x=>x.id===id)||SCM_SAMPLES.find(x=>x.id===id);
+/* collections change for a library entry, on its own horizon and business unit (cached) */
+const SCM_EV={};
+function scmEval(s){const key=s.id+scmLev(s)+s.hz+s.bu;if(SCM_EV[key]!=null)return SCM_EV[key];const h=S.hz,b=S.bu;let d=0;
+  try{S.hz=V30[s.hz]?s.hz:'W13';S.bu=s.bu||'All';d=scmCalc(s.terms,s.notes).dC}catch(e){}finally{S.hz=h;S.bu=b}return SCM_EV[key]=d}
+/* past scenarios are read-only by default; only these roles get the Edit option. New scenarios are always editable. */
+const SCM_EDIT_ROLES=['mgr','dir','vp','adm'];
+const scmCanEditPast=()=>can('sc.edit')&&SCM_EDIT_ROLES.includes(accMe().role);
+const scmEd=()=>can('sc.edit')&&!S.scm.ro;
 /* ---- the simulation for the horizon and business unit on screen ---- */
 function scmCalc(terms,notes){const k=S.hz,R=v30Tree(k,S.bu),P=cuPer(R,k),rows=v30CustRows(k,S.bu,0,P.length-1),s=R.s,e=R.e;
   const start=s>ASOF_DT?s:ASOF_DT,days=Math.max(1,Math.round((e-s)/864e5)+1),per=P.map(p=>({p,base:p.v.c,d:0})),ch=[];
@@ -8336,9 +8403,9 @@ function scmNoteAdd(){const R=v30Tree(S.hz,S.bu),st=R.s>ASOF_DT?R.s:ASOF_DT,c=CU
 function scmNoteSet(ix,k,v,el){const n=S.scm.notes[ix];if(!n)return;n[k]=k==='days'?Math.round(+v)||0:v;
   if(k==='days'&&el){const w=el.closest('.scm-nt'),t=w&&w.querySelector('.scm-ntw');if(t)t.textContent=n.days>0?'late':n.days<0?'early':'no change'}scmHdr()}
 function scmNoteDel(i){S.scm.notes.splice(i,1);render()}
-function scmNew(){S.scm={v:2,name:'',terms:{},notes:[],edit:null,all:S.scm.all,run:null,job:null};render();const el=document.getElementById('scmNm');if(el)el.focus();toast(`New scenario ${scmNextId()}: name it, set levers, then Simulate`)}
+function scmNew(){S.scm={v:2,name:'',terms:{},notes:[],edit:null,all:S.scm.all,run:null,job:null,ro:false,src:null};render();const el=document.getElementById('scmNm');if(el)el.focus();toast(`New scenario ${scmNextId()}: name it, set levers, then Simulate`)}
 /* Simulate: submits a job (queued → running → complete); the run is recorded in the past-scenarios list */
-function scmSimulate(){const sc=S.scm;scmSync();
+function scmSimulate(){const sc=S.scm;if(sc.ro){toast('This scenario is read-only. Edit it or copy it to a new scenario first.');return}scmSync();
   if(!scmAttrs(sc).length&&!(sc.name||'').trim()){toast('Name the scenario or change a lever, then Simulate.');const el=document.getElementById('scmNm');if(el)el.focus();return}   // a named scenario with no lever changes runs as the base case
   if(sc.job&&sc.job.st!=='done')return;const id=sc.edit||scmNextId(),nm=(sc.name||'').trim()||'Scenario '+id,snap={terms:{...sc.terms},notes:sc.notes.map(n=>({...n}))};
   sc.edit=id;sc.name=nm;sc.job={id,st:'queued',t:Date.now()};render();
@@ -8346,12 +8413,20 @@ function scmSimulate(){const sc=S.scm;scmSync();
   setTimeout(()=>{if(!S.scm.job||S.scm.job.id!==id)return;const C=scmCalc(snap.terms,snap.notes),rec={id,name:nm,terms:snap.terms,notes:snap.notes,hz:S.hz,bu:S.bu,at:new Date().toISOString(),dC:C.dC,dAR:-C.dC};
     const ix=SCM_LIST.findIndex(x=>x.id===id);if(ix>=0)SCM_LIST[ix]=rec;else SCM_LIST.unshift(rec);scmStore();
     S.scm.run={id,lev:scmLev(snap),hz:S.hz,bu:S.bu};S.scm.job.st='done';if(S.tab==='scen')render();toast(`${id} · “${escH(nm)}” simulated`)},1600)}
-function scmView(id){const s=SCM_LIST.find(x=>x.id===id);if(!s)return;S.hz=V30[s.hz]?s.hz:S.hz;S.bu=s.bu||S.bu;
-  S.scm={v:2,name:s.name,terms:{...s.terms},notes:(s.notes||[]).map(n=>({...n})),edit:s.id,all:S.scm.all,run:{id:s.id,lev:scmLev(s),hz:S.hz,bu:S.bu},job:{id:s.id,st:'done'}};
-  render();const m=document.getElementById('main');if(m)m.scrollTop=0}
-function scmDel(id){SCM_LIST=SCM_LIST.filter(x=>x.id!==id);scmStore();if(S.scm.edit===id){S.scm.edit=null;S.scm.run=null;S.scm.job=null}render()}
+/* opening a library entry: samples and past scenarios open read-only */
+function scmView(id){const s=scmFind(id);if(!s)return;S.hz=V30[s.hz]?s.hz:S.hz;S.bu=s.bu||S.bu;
+  S.scm={v:2,name:s.name,terms:{...s.terms},notes:(s.notes||[]).map(n=>({...n})),edit:s.id,all:S.scm.all,run:{id:s.id,lev:scmLev(s),hz:S.hz,bu:S.bu},job:{id:s.id,st:'done'},ro:true,src:s.sample?'sample':'past'};
+  render();const m=document.querySelector('#main .scm-main')||document.getElementById('main');if(m)m.scrollTop=0}
+/* explicit edit of a past scenario (authorized personas only) */
+function scmEdit(){const sc=S.scm;if(sc.src!=='past')return;if(!scmCanEditPast()){toast('Only a Manager, Director, VP or Admin can edit a past scenario.');return}
+  sc.ro=false;render();toast(`Editing ${sc.edit}: change levers, then Simulate to update it`)}
+/* copy a sample or past scenario into a new, fully editable scenario */
+function scmCopy(){const sc=S.scm;S.scm={v:2,name:'Copy of '+sc.name,terms:{...sc.terms},notes:sc.notes.map(n=>({...n})),edit:null,all:sc.all,run:null,job:null,ro:false,src:null};
+  render();toast(`New scenario ${scmNextId()} copied from ${sc.edit}`)}
+function scmDel(id){if(!scmCanEditPast()){toast('Only a Manager, Director, VP or Admin can delete a past scenario.');return}
+  SCM_LIST=SCM_LIST.filter(x=>x.id!==id);scmStore();if(S.scm.edit===id)S.scm={v:2,name:'',terms:{},notes:[],edit:null,all:S.scm.all,run:null,job:null,ro:false,src:null};render()}
 /* ---- levers ---- */
-function scmLevers(){const sc=S.scm,ed=can('sc.edit'),R=v30Tree(S.hz,S.bu),P=cuPer(R,S.hz),rows=v30CustRows(S.hz,S.bu,0,P.length-1).sort((a,b)=>b.cu.ar-a.cu.ar),show=sc.all?rows:rows.slice(0,12);
+function scmLevers(){const sc=S.scm,ed=scmEd(),R=v30Tree(S.hz,S.bu),P=cuPer(R,S.hz),rows=v30CustRows(S.hz,S.bu,0,P.length-1).sort((a,b)=>b.cu.ar-a.cu.ar),show=sc.all?rows:rows.slice(0,12);
   const st=R.s>ASOF_DT?R.s:ASOF_DT,dis=ed?'':' disabled';
   const tr=show.map(r=>{const t0=scmT0(r.cu),t1=sc.terms[r.cu.id]!=null?sc.terms[r.cu.id]:t0,chd=t1!==t0;
     return `<tr class="${chd?'scm-chd':''}"><td><b>${escH(r.cu.name)}</b><small>${r.cu.id} · ${r.cu.bu}</small></td><td class="r tnum">${fmc(r.c)}</td><td class="r tnum">${t0} days</td>
@@ -8362,7 +8437,7 @@ function scmLevers(){const sc=S.scm,ed=can('sc.edit'),R=v30Tree(S.hz,S.bu),P=cuP
       <label><input type="number" class="scm-num" step="1" min="-60" max="60" value="${n.days}" oninput="scmNoteSet(${i},'days',this.value,this)" onchange="scmNoteSet(${i},'days',this.value,this)"${dis}> days</label>
       <span class="txt-mut scm-ntw" style="font-size:11.5px">${n.days>0?'late':n.days<0?'early':'no change'}</span><button class="btn sm ghost" onclick="scmNoteDel(${i})" aria-label="Remove notice"${dis}>Remove</button></div>`).join('');
   const hol=Object.entries(DLY_HOL).filter(([iso])=>{const d=hzParse(iso);return d>=st&&d<=R.e});
-  return `<div class="card mb"><div class="ch"><div><h3><span class="scm-n">2</span>Set levers at customer level</h3><div class="sub">Customer level, not invoice · ${V30[S.hz].lab} · ${S.bu==='All'?'both business units':S.bu}</div></div></div>
+  return `<div class="card mb${sc.ro?' scm-ro':''}"><div class="ch"><div><h3>${sc.ro?'Levers (read-only)':'Set levers at customer level'}</h3><div class="sub">Customer level, not invoice · ${V30[S.hz].lab} · ${S.bu==='All'?'both business units':S.bu}</div></div></div>
     <div class="scm-lh"><b>Payment terms change</b>${scmBadge('ok')}<span class="txt-mut">e.g. 20 → 23 days</span><span class="sp"></span><button class="btn sm ghost" onclick="S.scm.all=!S.scm.all;render()">${sc.all?'Top 12 customers':'All '+rows.length+' customers'}</button></div>
     <div class="dly-tw"><table class="t scm-t"><thead><tr><th>Customer</th><th class="r">Collections</th><th class="r">Current terms</th><th>New terms</th></tr></thead><tbody>${tr}</tbody></table></div>
     <div class="scm-lh" style="margin-top:14px"><b>Early / late payment notice</b>${scmBadge('tc')}<span class="txt-mut">by customer and date · + days late, − days early</span><span class="sp"></span><button class="btn sm" onclick="scmNoteAdd()"${dis}>＋ Add notice</button></div>
@@ -8382,7 +8457,7 @@ function scmCollChart(C){const W=1080,H=240,ml=64,mr=12,mt=16,mb=38,pw=W-ml-mr,p
       `<rect x="${(cx-gw/2).toFixed(1)}" y="${mt}" width="${gw.toFixed(1)}" height="${ph}" fill="transparent" data-tip="${esc(T(x.p.lab,[['Base collections',fmc(x.base)],['Scenario collections',fmc(sv),true],['Change',fs(x.d)]]))}"/>`});
   return `<svg viewBox="0 0 ${W} ${H}" width="100%" style="display:block" role="img" aria-label="Collections by period, base vs scenario">${g}<line x1="${ml}" x2="${W-mr}" y1="${mt+ph}" y2="${mt+ph}" stroke="#B7C2CE"/></svg>`}
 const scmPl=(C,p)=>C.k==='Y3'?p.lab:C.k==='W13'?p.lab.replace('W/E ',''):HZ_MON[p.s.getMonth()]+(p.s.getMonth()===0?" '"+String(p.s.getFullYear()).slice(2):'');
-function scmArChart(C){const W=1080,H=220,ml=64,mr=12,mt=16,mb=38,pw=W-ml-mr,ph=H-mt-mb,n=C.per.length,X=i=>ml+(n>1?i/(n-1):.5)*pw,vs=C.per.flatMap(x=>[x.ar,x.arS]).concat([C.base.open]);
+function scmArChart(C){const W=1080,H=220,ml=64,mr=30,mt=16,mb=38,pw=W-ml-mr,ph=H-mt-mb,n=C.per.length,X=i=>ml+(n>1?i/(n-1):.5)*pw,vs=C.per.flatMap(x=>[x.ar,x.arS]).concat([C.base.open]);
   let lo=Math.min(...vs),hi=Math.max(...vs);const pad=(hi-lo)*.15||hi*.01;lo-=pad;hi+=pad;const Y=v=>mt+ph-(v-lo)/(hi-lo)*ph;let g='';
   [0,.5,1].forEach(t=>{const v=lo+(hi-lo)*t,y=Y(v);g+=`<line x1="${ml}" x2="${W-mr}" y1="${y.toFixed(1)}" y2="${y.toFixed(1)}" stroke="#EEF2F6"/><text x="${ml-8}" y="${(y+4).toFixed(1)}" text-anchor="end" font-size="11" fill="var(--muted)">${fmc(v)}</text>`});
   const ln=(q,c,w,da)=>`<path d="${C.per.map((x,i)=>(i?'L':'M')+X(i).toFixed(1)+','+Y(x[q]).toFixed(1)).join('')}" fill="none" stroke="${c}" stroke-width="${w}"${da?` stroke-dasharray="${da}"`:''}/>`;
@@ -8390,7 +8465,7 @@ function scmArChart(C){const W=1080,H=220,ml=64,mr=12,mt=16,mb=38,pw=W-ml-mr,ph=
   C.per.forEach((x,i)=>{g+=`<circle cx="${X(i).toFixed(1)}" cy="${Y(x.arS).toFixed(1)}" r="3.5" fill="#fff" stroke="#2F80D1" stroke-width="2"/><text x="${X(i).toFixed(1)}" y="${H-14}" text-anchor="middle" font-size="10.5" fill="var(--muted)">${scmPl(C,x.p)}</text>
     <rect x="${(X(i)-pw/n/2).toFixed(1)}" y="${mt}" width="${(pw/n).toFixed(1)}" height="${ph}" fill="transparent" data-tip="${esc(T('AR at end of '+x.p.lab,[['Base',fmc(x.ar)],['Scenario',fmc(x.arS),true],['Change',fs(x.arS-x.ar)]]))}"/>`});
   return `<svg viewBox="0 0 ${W} ${H}" width="100%" style="display:block" role="img" aria-label="AR by period, base vs scenario">${g}<line x1="${ml}" x2="${W-mr}" y1="${mt+ph}" y2="${mt+ph}" stroke="#B7C2CE"/></svg>`}
-function scmStep(l,b,s,op,good){const d=s-b,ch=Math.abs(d)>.5;return `<div class="scm-st${ch?' ch':''}"><span class="scm-op">${op||''}</span><div class="scm-sl">${l}</div><div class="scm-sv tnum">${fmc(s)}</div>
+function scmStep(l,b,s,op,good){const d=s-b,ch=Math.abs(d)>.5;return `<div class="scm-st${ch?' scm-chg':''}"><span class="scm-op">${op||''}</span><div class="scm-sl">${l}</div><div class="scm-sv tnum">${fmc(s)}</div>
   <div class="scm-sb tnum">${ch?`<span class="dl ${(good?d>=0:d<=0)?'up':'dn'}">${arrow(d)} ${fs(d)}</span> <span class="txt-mut">vs base ${fmc(b)}</span>`:'<span class="txt-mut">no change</span>'}</div></div>`}
 function scmInsight(C,nm){const ch=C.ch.slice().sort((a,b)=>Math.abs(b.eff)-Math.abs(a.eff)),t=ch[0],tot=ch.reduce((x,c)=>x+Math.abs(c.eff),0)||1;
   const pk=C.per.reduce((m,x)=>Math.abs(x.d)>Math.abs(m.d)?x:m,C.per[0]),lv=t?(t.kind==='terms'?`payment terms ${t.t0} → ${t.t1} days`:`paying ${Math.abs(t.dd)} days ${t.dd>0?'late':'early'}`):'';
@@ -8411,30 +8486,72 @@ function scmCuts(C){const b=C.base,s=C.scen,bu={};C.ch.forEach(c=>{bu[c.r.cu.bu]
   const cuSub=chd.length?`${chd.length} with a lever changed${fill.length?', then the largest by collections':''}`:'no levers changed · largest customers by collections';
   return `<div class="card mb"><div class="ch"><h3>AR transition</h3><span class="sp"></span><span class="sub">Current AR → Future AR</span></div>
       <div class="scm-flow">${scmStep('Current AR',b.open,s.open,'')}${scmStep('Billings',b.b,s.b,'+',true)}${scmStep('Collections',b.c,s.c,'−',true)}${scmStep('Deductions',b.x,s.x,'−',false)}${scmStep('Future AR',b.close,s.close,'=',false)}</div></div>
-    <div class="grid g2 mb"><div class="card"><div class="ch"><h3>By business unit</h3></div><table class="t scm-ct"><thead><tr><th>Business unit</th><th class="r">Base collections</th><th class="r">Scenario</th><th class="r">Change</th><th class="r">Future AR</th><th class="r">AR change</th></tr></thead><tbody>${buRows}</tbody></table></div>
-      <div class="card"><div class="ch"><h3>By customer</h3><span class="sp"></span><span class="sub">${cuSub}</span></div><table class="t scm-ct"><thead><tr><th>Customer</th><th>Lever</th><th class="r">Base collections</th><th class="r">Collections change</th><th class="r">AR change</th></tr></thead><tbody>${cuRows}</tbody></table></div></div>`}
+    <div class="scm-stk"><div class="card"><div class="ch"><h3>By business unit</h3></div><table class="t scm-ct scm-ctb"><thead><tr><th>Business unit</th><th class="r">Base collections</th><th class="r">Scenario</th><th class="r">Change</th><th class="r">Future AR</th><th class="r">AR change</th></tr></thead><tbody>${buRows}</tbody></table></div>
+      <div class="card"><div class="ch"><h3>By customer</h3><span class="sp"></span><span class="sub">${cuSub}</span></div><table class="t scm-ct scm-ctc"><thead><tr><th>Customer</th><th>Lever</th><th class="r">Base collections</th><th class="r">Collections change</th><th class="r">AR change</th></tr></thead><tbody>${cuRows}</tbody></table></div></div>`}
 function scmResults(){const sc=S.scm,j=sc.job;
   if(j&&j.st!=='done')return `<div class="card mb scm-job"><span class="scm-spin"></span><div><b>Job ${j.id} ${j.st==='queued'?'submitted · queued':'running'}</b><div class="txt-mut" style="font-size:12px">Simulating ${scmAttrs(sc).length} lever change${scmAttrs(sc).length===1?'':'s'} on ${V30[S.hz].lab} · ${S.bu==='All'?'both business units':S.bu}</div></div></div>`;
-  if(!sc.run)return `<div class="card mb scm-empty"><span class="scm-n">4</span><div><b>Result</b><div class="txt-mut" style="font-size:12.5px">Set at least one lever and click <b>Simulate</b>. The insight, charts and cuts of collections and AR appear here.</div></div></div>`;
-  const rec=SCM_LIST.find(x=>x.id===sc.run.id),lev=rec?{terms:rec.terms,notes:rec.notes}:{terms:sc.terms,notes:sc.notes},C=scmCalc(lev.terms,lev.notes),stale=scmLev(sc)!==sc.run.lev||sc.run.hz!==S.hz||sc.run.bu!==S.bu;
-  return `<div class="scm-rh"><span class="scm-n">4</span><h2>Result · ${sc.run.id}</h2>${stale?`<span class="badge b-high">Levers or view changed since this run · Simulate to update</span>`:'<span class="badge b-ok">Up to date</span>'}</div>
+  if(!sc.run)return `<div class="card mb scm-empty"><div><b>Result</b><div class="txt-mut" style="font-size:12.5px">Set at least one lever and click <b>Simulate</b>. The insight, charts and cuts of collections and AR appear here.</div></div></div>`;
+  const rec=scmFind(sc.run.id),lev=rec?{terms:rec.terms,notes:rec.notes}:{terms:sc.terms,notes:sc.notes},C=scmCalc(lev.terms,lev.notes),stale=scmLev(sc)!==sc.run.lev||sc.run.hz!==S.hz||sc.run.bu!==S.bu;
+  const bd=sc.ro?`<span class="badge b-mut">${sc.src==='sample'?'Sample':'Historical'} · read-only</span>`:stale?`<span class="badge b-high">Levers or view changed since this run · Simulate to update</span>`:'<span class="badge b-ok">Up to date</span>';
+  return `<div class="scm-rh"><h2>Result · ${sc.run.id}</h2>${bd}</div>
     ${scmInsight(C,rec?rec.name:sc.name)}
-    <div class="grid g2 mb"><div class="card"><div class="ch"><h3>Collections by ${C.k==='W13'?'week':C.k==='Y3'?'fiscal year':'month'}</h3><span class="sp"></span><span class="legend"><span><i style="background:#B7C2CE"></i>Base</span><span><i style="background:#2F80D1"></i>Scenario</span></span></div>${scmCollChart(C)}</div>
+    <div class="scm-stk"><div class="card"><div class="ch"><h3>Collections by ${C.k==='W13'?'week':C.k==='Y3'?'fiscal year':'month'}</h3><span class="sp"></span><span class="legend"><span><i style="background:#B7C2CE"></i>Base</span><span><i style="background:#2F80D1"></i>Scenario</span></span></div>${scmCollChart(C)}</div>
       <div class="card"><div class="ch"><h3>AR by ${C.k==='W13'?'week':C.k==='Y3'?'fiscal year':'month'}</h3><span class="sp"></span><span class="legend"><span><i style="background:#8D99A6"></i>Base</span><span><i style="background:#2F80D1"></i>Scenario</span></span></div>${scmArChart(C)}</div></div>
     ${scmCuts(C)}`}
-function scmPast(){const rows=SCM_LIST.map(s=>`<tr class="v30-tr${S.scm.edit===s.id?' scm-cur':''}" onclick="scmView('${s.id}')" tabindex="0" onkeydown="if(event.key==='Enter')this.click()" aria-label="View ${esc(s.id)} ${esc(s.name)}">
-    <td class="tnum"><b>${s.id}</b></td><td>${escH(s.name)}<small>${new Date(s.at).toLocaleString('en-US',{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'})} · ${V30[s.hz]?V30[s.hz].lab:s.hz} · ${s.bu==='All'?'both BUs':s.bu}</small></td>
-    <td class="scm-at">${scmAttrs(s).join('<br>')||'<span class="txt-mut">none</span>'}</td><td class="r tnum"><span class="${scmCl(s.dC)}">${fs(s.dC)}</span></td><td class="r tnum"><span class="${scmCl(s.dAR,true)}">${fs(s.dAR)}</span></td>
-    <td class="r"><button class="btn sm ghost" onclick="event.stopPropagation();scmDel('${s.id}')" aria-label="Delete ${s.id}">Delete</button></td></tr>`).join('');
-  return `<div class="card"><div class="ch"><h3><span class="scm-n">5</span>Past scenarios</h3><span class="sp"></span><span class="sub">${SCM_LIST.length} · click a row to view</span></div>
-    ${SCM_LIST.length?`<div class="dly-tw"><table class="t scm-lt"><thead><tr><th>ID</th><th>Name</th><th>Levers changed</th><th class="r">Collections</th><th class="r">Future AR</th><th></th></tr></thead><tbody>${rows}</tbody></table></div>`:'<div class="txt-mut" style="font-size:13px;padding:4px 2px">No scenarios yet. Each Simulate run is listed here.</div>'}</div>`}
-pageScenario=function(){const sc=S.scm,A=scmAttrs(sc),id=sc.edit||scmNextId(),ed=can('sc.edit'),busy=sc.job&&sc.job.st!=='done';
+/* ---- scenario library (left): sample scenarios, then past scenarios (historical, greyed, read-only by default) ---- */
+function scmItem(s,hist){const A=scmAttrs(s),dC=hist?s.dC:scmEval(s),on=S.scm.edit===s.id,del=hist&&scmCanEditPast();
+  const when=hist&&s.at?new Date(s.at).toLocaleString('en-US',{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'})+' · ':'';
+  return `<div class="scm-li${hist?' hist':''}${on?' on':''}" role="button" tabindex="0" onclick="scmView('${s.id}')" onkeydown="if(event.key==='Enter')this.click()" aria-label="View ${esc(s.id)} ${esc(s.name)}">
+    <div class="t"><b class="tnum">${s.id}</b><span>${escH(s.name)}</span></div>
+    <div class="a">${A.length?A[0]+(A.length>1?` <span>+${A.length-1} more</span>`:''):(s.desc?escH(s.desc):'No levers changed')}</div>
+    <div class="m"><span class="txt-mut">${when}${V30[s.hz]?V30[s.hz].lab:s.hz}</span><span class="sp"></span><span class="tnum ${hist?'':scmCl(dC)}">${fs(dC||0)}</span></div>
+    ${del?`<button class="x" onclick="event.stopPropagation();scmDel('${s.id}')" aria-label="Delete ${s.id}">✕</button>`:''}</div>`}
+function scmLib(){return `<div class="card scm-libc"><div class="ch"><h3>Scenario library</h3></div>
+    <button class="btn pri scm-newb" onclick="scmNew()"${can('sc.edit')?'':' disabled'}>＋ New scenario</button>
+    <div class="scm-lg">Sample scenarios <span class="badge b-mut scm-b">${SCM_SAMPLES.length}</span></div>${SCM_SAMPLES.map(s=>scmItem(s,false)).join('')}
+    <div class="scm-lg">Past scenarios <span class="badge b-mut scm-b">${SCM_LIST.length}</span><span class="sp"></span><span class="scm-lgn">read-only</span></div>
+    ${SCM_LIST.length?SCM_LIST.map(s=>scmItem(s,true)).join(''):'<div class="txt-mut" style="font-size:12px;padding:2px">None yet. Each Simulate run is listed here.</div>'}</div>`}
+/* read-only notice above a sample or historical scenario, with the explicit Edit option for authorized personas */
+function scmRoBar(){const sc=S.scm;if(!sc.ro)return sc.src==='past'?`<div class="scm-rob ed"><b>Editing ${sc.edit}</b><span>Change levers, then Simulate to update this scenario.</span></div>`:'';
+  const s=scmFind(sc.edit),cp=can('sc.edit')?`<button class="btn sm" onclick="scmCopy()">Copy to new scenario</button>`:'';
+  if(sc.src==='sample')return `<div class="scm-rob"><span class="badge b-mut">Sample · read-only</span><span>${s&&s.desc?escH(s.desc)+'. ':''}Copy it to make your own version.</span><span class="sp"></span>${cp}</div>`;
+  const ok=scmCanEditPast(),when=s&&s.at?new Date(s.at).toLocaleString('en-US',{month:'short',day:'numeric',year:'numeric',hour:'2-digit',minute:'2-digit'}):'';
+  return `<div class="scm-rob"><span class="badge b-mut">Historical · read-only</span><span>Simulated ${when}. ${ok?'Use Edit to change it.':'Only a Manager, Director, VP or Admin can edit a past scenario.'}</span><span class="sp"></span>${cp}${ok?`<button class="btn sm pri" onclick="scmEdit()">Edit scenario</button>`:''}</div>`}
+pageScenario=function(){const sc=S.scm,A=scmAttrs(sc),id=sc.edit||scmNextId(),ed=scmEd(),busy=sc.job&&sc.job.st!=='done';
+  const st=sc.ro?(sc.src==='sample'?'sample · read-only':'historical · read-only'):sc.edit?'simulated · editing':'new';
   return `<div class="page-h"><div><h1>Scenario Workspace</h1><div class="meta">${asOf()} · set levers, simulate, see the result</div></div></div>
-  <div class="card mb scm-hd"><div class="scm-f"><label><span><i class="scm-n">1</i>Scenario name</span><input type="text" id="scmNm" value="${esc(sc.name)}" placeholder="e.g. CMK terms 20 → 23 days" oninput="scmName(this.value)" onkeydown="if(event.key==='Enter')scmSimulate()"${ed?'':' disabled'}></label>
-    <div class="scm-id"><span>Scenario ID</span><b class="tnum">${id}</b><small>${sc.edit?'simulated · editing':'new'}</small></div>
-    <div class="scm-id"><span>Levers changed</span><b id="scmCnt">${A.length}</b><small id="scmCntS">${A.length?'ready to simulate':'none yet'}</small></div>
-    <span class="sp"></span><button class="btn" onclick="scmNew()">New scenario</button><button class="btn pri scm-go" onclick="scmSimulate()"${ed&&!busy?'':' disabled'}><i class="scm-n">3</i>${busy?'Simulating…':'Simulate'}</button></div></div>
-  ${scmLevers()}${scmResults()}${scmPast()}`};
+  <div class="scm-lay"><aside class="scm-lib">${scmLib()}</aside><div class="scm-main">
+  ${scmRoBar()}
+  <div class="card mb scm-hd${sc.ro?' scm-ro':''}"><div class="scm-f"><label><span>Scenario name</span><input type="text" id="scmNm" value="${esc(sc.name)}" placeholder="e.g. CMK terms 20 → 23 days" oninput="scmName(this.value)" onkeydown="if(event.key==='Enter')scmSimulate()"${ed?'':' disabled'}></label>
+    <div class="scm-id"><span>Scenario ID</span><b class="tnum">${id}</b><small>${st}</small></div>
+    <div class="scm-id"><span>Levers changed</span><b id="scmCnt">${A.length}</b><small id="scmCntS">${sc.ro?'saved':A.length?'ready to simulate':'none yet'}</small></div>
+    <span class="sp"></span><button class="btn pri scm-go" onclick="scmSimulate()"${ed&&!busy?'':' disabled'}>${busy?'Simulating…':'Simulate'}</button></div></div>
+  ${scmLevers()}${scmResults()}</div></div>`};
+/* the two scenario panels are redrawn on every render: keep where each was scrolled */
+render=(function(f0){return function(){const q=s=>document.querySelector('#main '+s),a=q('.scm-main'),b=q('.scm-lib'),ta=a?a.scrollTop:0,tb=b?b.scrollTop:0,r=f0.apply(this,arguments);
+  if(S.tab==='scen'){const a2=q('.scm-main'),b2=q('.scm-lib');if(a2)a2.scrollTop=ta;if(b2)b2.scrollTop=tb}return r}})(render);
+/* ---- Cash Intelligence assistant: Risk Intelligence is hidden in this prototype ----
+   No quick answer, quick request, answer link or typed request leads to it. Customer questions are answered from the
+   Top 10 customers (Performance Workspace); naming a customer opens the invoices behind its collections. */
+function botTopCu(){const k=V30[S.hz]?S.hz:'W13',R=v30Tree(k,S.bu),P=cuPer(R,k),rows=v30CustRows(k,S.bu,0,P.length-1).sort((a,b)=>b.c-a.c).slice(0,5),tot=R.v.c||1;
+  return `<b>Top ${rows.length} customers by collections</b> over ${V30[k].lab}${S.bu==='All'?'':' · '+S.bu}:<ul>${rows.map(r=>`<li>${escH(r.cu.name)} (${r.cu.bu}): <b>${fmc(r.c)}</b> collections, ${(r.c/tot*100).toFixed(1)}% of the total · ending AR ${fmc(r.close)}</li>`).join('')}</ul>`+
+    `<div style="margin-top:6px"><button class="btn sm ghost" onclick="botToggle(false);go('tow'+'er');setTimeout(()=>{const e=document.getElementById('v30cu');if(e)e.scrollIntoView({behavior:'smooth'})},120)">Open Top 10 customers →</button></div>`}
+const botNoRisk=h=>String(h)
+  .replace(/<div[^>]*>\s*<button[^>]*go\('risk'[^>]*>[\s\S]*?<\/button>\s*<\/div>/g,'')
+  .replace(/<button[^>]*go\('risk'[^>]*>[\s\S]*?<\/button>/g,'')
+  .replace(/<a[^>]*go\('risk'[^>]*>([\s\S]*?)<\/a>/g,'$1');
+botAnswer=(function(f0){return function(q){const x=String(q).toLowerCase();
+  if(/customer|account|\bwho\b|risk/.test(x)&&!/dso|deduct|aging|past due|bill/.test(x)&&!H().rv)return botTopCu();
+  return botNoRisk(f0(q)).replace(/customers at risk/g,'top customers')}})(botAnswer);
+botDo=(function(f0){return function(q){const x=String(q).toLowerCase();
+  if(/\b(show|open|go|switch|take me|view|display|bring up|jump)\b/.test(x)){
+    const c=CUST40.find(c=>{const nm=c.name.toLowerCase();return x.includes(nm)||nm.split(' ').filter(w=>w.length>4).slice(0,2).every(w=>x.includes(w))});
+    if(c){botToggle(false);go('tow'+'er');setTimeout(()=>cuDrill(c.id),150);return `<b>Done</b>: opened the invoices behind ${escH(c.name)}'s collections.`}
+    if(/risk|customer deep dive/.test(x))return `That view is not available in this prototype. Customer detail is in <b>Top 10 customers</b> on the Performance Workspace.`+botTopCu().replace(/^[\s\S]*?(<div style)/,'$1')}
+  const r=f0(q);return r==null?r:botNoRisk(r)}})(botDo);
+botSugg=(function(f0){return function(){const g=f0()||{a:[],r:[]};
+  return {a:(g.a||[]).map(s=>/at risk/i.test(s)?'Who are the top customers by collections?':s).filter((s,i,A)=>A.indexOf(s)===i),
+    r:(g.r||[]).filter(s=>!/risk|florida cancer|customer deep dive/i.test(s))}}})(botSugg);
 /* links that opened the old tabs or the action-trigger panel now land here */
 scTrOpen=function(){if(BOT.open)botToggle(false);go('scen')};
 botSugg=(function(f0){return function(){if(S.tab==='scen')return {a:['Why are collections below target?','What is closing DSO?'],r:['Show 13-Week Rolling','Show USPD']};return f0()}})(botSugg);
