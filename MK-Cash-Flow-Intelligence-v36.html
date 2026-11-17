@@ -7666,7 +7666,8 @@ function v30Tree(k,bu){bu=bu||S.bu;return v30C('t'+k+bu,()=>{
   const open=n.open-D.days.filter(o=>o.st==='act').reduce((a,o)=>a+o.v.b-o.v.c-o.v.x,0);let ar=open,ap=open*.992*ao;
   const walk=nd=>{nd.open=ar;nd.apOpen=ap;if(nd.kids)nd.kids.forEach(walk);else{ar+=nd.v.b-nd.v.c-nd.v.x;ap+=nd.ap.b-nd.ap.c-nd.ap.x}nd.close=ar;nd.apClose=ap};walk(R);
   /* ranges: P10–P90 by month for the year, downside – upside from the Scenario Workspace for the long term */
-  let vv=0,mi=0;const mon=[];const fm=nd=>{if(/^m\d/.test(nd.key))mon.push(nd);else if(nd.kids&&!nd.day)nd.kids.forEach(fm)};fm(R);
+  /* 13-Week Rolling has no months: its weeks carry the range (otherwise the weekly AR chart has no band) */
+  let vv=0,mi=0;const mon=[];const fm=nd=>{if(/^m\d/.test(nd.key)||(k==='W13'&&/^w\d/.test(nd.key)))mon.push(nd);else if(nd.kids&&!nd.day)nd.kids.forEach(fm)};fm(R);
   if(k==='Y3'){const b=atHz('Y3',()=>scB({type:'all',id:''})),g=(x,q)=>+((x||{})[q]||0),dd=x=>g(x,'dtp')+g(x,'terms')*.7*b.kap+g(x,'disp')/100*.8-g(x,'adopt')/100*.35*20,dW=dd(S.sc3.worst),dB=dd(S.sc3.best);
     const W=atHz('Y3',()=>scI(S.sc3.worst,b)),B=atHz('Y3',()=>scI(S.sc3.best,b)),tc=mon.reduce((a,m)=>a+m.v.c,0)||1;R.dW=dW;R.dB=dB;
     mon.forEach(m=>{const i=v30Mi(m.s),pd=m.v.b/((m.e-m.s)/864e5+1),rp=Math.min(1,(Math.max(0,i)+1)/6),dn=m.close+pd*dW*rp,up=m.close+pd*dB*rp;Object.assign(m,{dn,up,lo:Math.min(dn,up),hi:Math.max(dn,up),cd:m.v.c+W.cash*m.v.c/tc,cu:m.v.c+B.cash*m.v.c/tc})})}
@@ -7874,6 +7875,7 @@ function cudChart(B,sel){const W=860,H=210,ml=58,mr=10,mt=14,mb=34,pw=W-ml-mr,ph
   return `<svg viewBox="0 0 ${W} ${H}" width="100%" style="display:block" role="img" aria-label="Expected collections by due date">${g}</svg>`}
 function cuDrill(id){S.cuD={id,sel:null,first:null};ov.classList.remove('hidden');ov.onclick=e=>{if(e.target===ov)closeExplain()};cudDraw()}
 function cudPick(q){if(!S.cuD)return;S.cuD.sel=S.cuD.sel===q?'':q;cudDraw()}
+const CUD_SHOW_TABLE=false;   // invoice table hidden for the review; set true to show it again
 function cudDraw(){const D=S.cuD,C=D&&cudCtx(D.id);if(!C){closeExplain();return}
   const cu=C.r.cu,L=cudInvoices(C),{g,B}=cudBuckets(L,C);if(D.sel&&!B.some(b=>b.q===D.sel))D.sel=null;
   if(D.sel===null){D.sel=B.reduce((m,b)=>b.exp>m.exp?b:m,B[0]).q}   // opens on the date with the most expected cash; '' = every date
@@ -7888,13 +7890,13 @@ function cudDraw(){const D=S.cuD,C=D&&cudCtx(D.id);if(!C){closeExplain();return}
     <div class="dly-sts cud-sts">${st(L.length,'Open invoices due')}${st(fmc(allA),'Amount due')}${st(fmc(C.r.c),'Expected collection')}${st((C.r.c/(allA||1)*100).toFixed(0)+'%','Weighted probability')}${st(Math.round(cu.dtp)+' d','Days to pay')}</div>
     <div class="xp-s"><div class="xp-l cud-hd">Expected collections by due ${g==='D'?'date':g==='W'?'week':'month'}<span class="sp"></span>
       <span class="legend"><span><i style="background:#DCE6F1"></i>Amount due</span><span><i style="background:#2F80D1"></i>Expected collection</span></span></div>${cudChart(B,D.sel)}
-      <div class="txt-mut" style="font-size:11.5px;margin-top:4px">Click a bar to see the invoices due then${D.sel?'; click it again for every date':''}.</div></div>
+      <div class="txt-mut" style="font-size:11.5px;margin-top:4px">Click a bar to see what drives that ${g==='D'?'date':g==='W'?'week':'month'}${D.sel?'; click it again for every date':''}.</div></div>
     <div class="cud-ins"><b>${kk} invoice${kk===1?'':'s'} drive ${(acc/(tE||1)*100).toFixed(0)}%</b> of ${escH(cu.name)}'s expected ${fmc(tE)} ${when}.</div>
-    <div class="xp-s"><div class="xp-l cud-hd">Expected collections ${when}<span class="sp"></span>${D.sel?`<button class="btn sm ghost" onclick="cudPick('${D.sel}')">All dates</button>`:''}</div>
+    ${CUD_SHOW_TABLE?`<div class="xp-s"><div class="xp-l cud-hd">Expected collections ${when}<span class="sp"></span>${D.sel?`<button class="btn sm ghost" onclick="cudPick('${D.sel}')">All dates</button>`:''}</div>
       <div class="fv-tw" style="max-height:340px"><table class="t cud-t"><thead><tr><th>Customer</th><th>Invoice</th><th>Invoice date</th><th>Terms</th><th>Due date</th><th class="r">Amount</th><th class="r">Probability to pay by due date</th><th class="r">Expected collection</th></tr></thead><tbody>
       ${shown.map(o=>`<tr><td>${escH(cu.name)}</td><td class="tnum">${o.no}</td><td class="tnum">${cudD(o.inv)}</td><td>${o.tm[0]} days</td><td class="tnum">${cudD(o.due)}</td><td class="r tnum">${fmc(o.amt)}</td><td class="r tnum"><span class="cud-p"><i style="width:${(o.p*100).toFixed(0)}%;background:${pc(o.p)}"></i></span>${(o.p*100).toFixed(0)}%</td><td class="r tnum"><b>${fmc(o.exp)}</b></td></tr>`).join('')}
       ${rest.length?`<tr class="txt-mut"><td colspan="5">Other ${rest.length} invoices</td><td class="r tnum">${fmc(ra)}</td><td class="r tnum">${(re/(ra||1)*100).toFixed(0)}%</td><td class="r tnum">${fmc(re)}</td></tr>`:''}
-      </tbody><tfoot><tr class="v30-tot"><td colspan="5"><b>Total · ${rows.length} invoice${rows.length===1?'':'s'}</b></td><td class="r tnum"><b>${fmc(tA)}</b></td><td class="r tnum"><b>${(tE/(tA||1)*100).toFixed(0)}%</b></td><td class="r tnum"><b>${fmc(tE)}</b></td></tr></tfoot></table></div></div>
+      </tbody><tfoot><tr class="v30-tot"><td colspan="5"><b>Total · ${rows.length} invoice${rows.length===1?'':'s'}</b></td><td class="r tnum"><b>${fmc(tA)}</b></td><td class="r tnum"><b>${(tE/(tA||1)*100).toFixed(0)}%</b></td><td class="r tnum"><b>${fmc(tE)}</b></td></tr></tfoot></table></div></div>`:''}
     <div class="ft"><span class="txt-mut" style="font-size:11.5px;flex:1">Expected collection = probability to pay by due date × invoice amount. Illustrative: invoice values are generated for the demo and add up to the customer's collections in the selected period; model grain (invoice vs chain) is decided after a data check.</span>
       <button class="btn pri" onclick="closeExplain()">Close</button></div></div>`}
 /* ---- accuracy ---- */
@@ -7971,6 +7973,7 @@ function gdAccDraw(){const g=S.gd.g,n=g==='M'?12:8,a=fxAccHist(S.bu,g,n).reverse
 
 /* ---- the page ---- */
 function v30Meta(k){return `As of Mon, Nov 16 2026 · 06:10 ET · ${BU_NAMES[S.bu]} · ${v30Dt(V30_S[k])} – ${v30Dt(V30_E[k])}`}
+const PW_SHOW_BANNER=false;   // headline banner with the Variance bridge button: hidden for now; set true to show it again
 function v30Banner(k,w,R){let t;
   if(k==='W13'){const fc=dlyData(S.bu).days.filter(o=>!o.act),p=Math.round(dlyKn(fc.slice(0,10),'c')*100);t=`<b>Collections ${fmc(w.coll)} over the next ${S.w5?'5':'13'} weeks.</b> ${p}% of the next 2 weeks is already known.`}
   else if(k==='YE')t=`<b>AR closes the year at ${fmc(R.close)}.</b> Collections ${fmc(w.coll)} from Nov 1.`;
@@ -7989,7 +7992,7 @@ function v32BuTable(k){const rows=['USPD','O&M','All'].map(b=>{const T=v30Tree(k
 function pageFx(){const k=S.hz,n=k==='W13'&&S.w5?atHz('5W',()=>N()):N(),w=v30Win(k,S.bu),R=v30Tree(k,S.bu);
   return `<div class="v30">
     <div class="page-h"><div><h1>Performance Workspace</h1><div class="meta">${v30Meta(k)}</div></div><span class="sp"></span>${sdChip()}${k==='W13'?w5Btn():''}${v30AccPill(k)}</div>
-    ${v30Tiles(k,w)}${v32BuTable(k)}${v30Banner(k,w,R)}${v30ChartCard(k,R)}${v30Table(k,R)}
+    ${v30Tiles(k,w)}${v32BuTable(k)}${PW_SHOW_BANNER?v30Banner(k,w,R):''}${v30ChartCard(k,R)}${v30Table(k,R)}
     <div class="mb">${v30CustCard(k,R)}</div>${k==='Y3'?`<div class="mb">${v30ScenCard()}</div>`:''}
     <div class="mb">${aiCard(n)}</div>${PW_SHOW_EXTRAS?v30Exec(n)+`
     <div class="card mb fx-pb"><div class="ch"><h3>Working-capital playbook</h3></div><div class="prac">${practices(n)}</div></div>`:''}</div>`}
