@@ -1748,6 +1748,366 @@ table.t.ns-t th{font-size:10px;white-space:normal;line-height:1.2;vertical-align
 .vb-obh{display:flex;align-items:center;gap:8px;font-size:13px}.vb-obh .txt-mut{font-size:12px}
 .vb-obs ul{margin:8px 0 0;padding-left:20px;font-size:12.5px;line-height:1.6;color:var(--ink2)}.vb-obs li{margin:3px 0}
 </style>
+<style>
+/* ---------- v41 port · Performance Workspace: Overview, Customers, Insights ---------- */
+/* ===== MK v35 · daily roll-forward and the Treasury cut ===== */
+.d35 .ch{flex-wrap:wrap;row-gap:8px}
+.d35-ml{font-size:12px;color:var(--ink2);margin-right:2px}
+.d35-nav{width:30px;height:30px;border:1px solid var(--line);background:#fff;border-radius:8px;font-size:18px;line-height:1;color:var(--ink);cursor:pointer;padding:0}
+.d35-nav:hover:not([disabled]){background:var(--sky)}
+.d35-nav[disabled]{opacity:.35;cursor:default}
+.d35 .fv-sel{margin:0 2px}
+.d35-y{font-size:13px;color:var(--ink2);background:var(--bg);border-radius:8px;padding:8px 12px;margin:2px 0 12px}
+.d35-ks{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:12px}
+.d35-k{background:var(--bg);border-radius:10px;padding:10px 14px;min-width:0}
+.d35-k.fix{box-shadow:inset 0 0 0 1.5px var(--orange)}
+.d35-k .l{font-size:12px;color:var(--ink2);font-weight:600}
+.d35-k .v{font-size:22px;font-weight:700;color:var(--navy);margin:2px 0}
+.d35-k .s{font-size:12px;color:var(--muted)}
+.d35-lg{display:flex;flex-wrap:wrap;gap:18px;font-size:12px;color:var(--ink2);margin:2px 0 2px}
+.d35-lg span{display:inline-flex;align-items:center;gap:6px}
+.d35-li{display:inline-block;width:22px;height:0;border-top:2.5px solid var(--blue)}
+.d35-li.fc{border-top-style:dashed}
+.d35-li.wk{border-top:3px solid var(--orange)}
+.d35-ch{width:100%;height:auto;display:block;margin-bottom:8px}
+.d35-ax{font-size:12px;fill:var(--muted)}
+.d35-td{fill:var(--ink2);font-weight:600}
+.d35-st{display:inline-block;font-size:11px;font-weight:600;padding:2px 8px;border-radius:999px;white-space:nowrap}
+.d35-st.a{background:var(--line2);color:var(--ink2)}
+.d35-st.t{background:var(--orange-soft);color:#9A5A00}
+.d35-st.f{background:var(--sky);color:var(--blue)}
+.d35-t td.d35-hl{background:var(--orange-soft);font-weight:600}
+.d35-t tr.d35-now td{background:#FBFCFE}
+.d35-t tr.d35-now td.d35-hl{background:var(--orange-soft)}
+.d35-t tr.d35-tot td{border-top:1.5px solid var(--line);font-weight:600}
+.d35-t td.d35-wk{white-space:nowrap}
+.d35-t td.d35-wk small{display:block;font-size:11px}
+.dly-tw table.d35-t th,.card table.d35-t th{white-space:normal;vertical-align:bottom;line-height:1.3}
+@media (max-width:1100px){.d35-ks{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* ===== MK v36 · Performance Workspace: freshness, sections, help, tour ===== */
+.page-h .meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.m36{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--ink2);background:#fff;border:1px solid var(--line);border-radius:999px;padding:2px 10px;white-space:nowrap;line-height:18px}
+.m36a i{width:7px;height:7px;border-radius:50%;background:var(--good);flex:none}
+.h36{width:32px;height:32px;flex:none;border-radius:50%;border:1px solid var(--line);background:#fff;color:var(--blue);font-weight:700;font-size:15px;margin:0 0 14px 10px;cursor:pointer;line-height:1}
+.h36:hover{background:var(--sky)}
+.h36-m{position:fixed;z-index:120;background:#fff;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow);padding:6px;display:flex;flex-direction:column;min-width:170px}
+.h36-m button{border:0;background:none;text-align:left;padding:8px 10px;border-radius:7px;font-size:13px;color:var(--ink);cursor:pointer}
+.h36-m button:hover{background:var(--sky)}
+.h36-t{position:fixed;z-index:120;background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);width:min(580px,calc(100vw - 32px));max-height:calc(100vh - 150px);overflow:auto;padding:12px 18px 16px}
+.h36-th{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.h36-th b{font-size:15px;color:var(--navy)}
+.h36-th button{border:0;background:none;font-size:14px;color:var(--ink2);cursor:pointer;padding:4px 6px}
+.h36-t dl{display:grid;grid-template-columns:160px 1fr;gap:7px 14px;margin:0;font-size:13px;line-height:1.4}
+.h36-t dt{font-weight:700;color:var(--navy)}
+.h36-t dd{margin:0;color:var(--ink2)}
+.n36{position:sticky;top:-28px;z-index:25;display:flex;gap:6px;flex-wrap:wrap;background:var(--bg);padding:8px 0;margin:0 0 4px}
+.n36.stuck{box-shadow:0 8px 12px -10px rgba(16,40,70,.35)}
+.n36 button{border:1px solid var(--line);background:#fff;border-radius:999px;padding:5px 14px;font-size:13px;color:var(--ink2);cursor:pointer;white-space:nowrap}
+.n36 button:hover{border-color:var(--sky-2);color:var(--blue)}
+.n36 button.on{background:var(--navy);border-color:var(--navy);color:#fff}
+.s36{display:flex;align-items:center;gap:10px;margin:20px 0 10px;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink2)}
+.s36::after{content:'';flex:1;height:1px;background:var(--line)}
+#s36-over{margin-top:8px}
+.b36{display:inline-block;width:56px;height:6px;border-radius:3px;background:var(--line2);margin-right:8px;vertical-align:middle;overflow:hidden}
+.b36 i{display:block;height:100%;background:var(--blue);border-radius:3px}
+#t36{position:fixed;inset:0;z-index:200}
+.t36-hole{position:fixed;border-radius:12px;box-shadow:0 0 0 9999px rgba(10,25,45,.55);pointer-events:none;transition:left .25s ease,top .25s ease,width .25s ease,height .25s ease;outline:2px solid #fff}
+.t36-pop{position:fixed;width:340px;background:#fff;border-radius:12px;box-shadow:0 12px 32px rgba(10,25,45,.3);padding:14px 16px}
+.t36-k{font-size:11px;color:var(--muted);font-weight:600;margin-bottom:4px}
+.t36-pop b{font-size:15px;color:var(--navy)}
+.t36-pop p{margin:6px 0 12px;font-size:13px;line-height:1.45;color:var(--ink)}
+.t36-b{display:flex;align-items:center;gap:8px}
+.t36-b .sp{flex:1}
+.t36-b button{border:1px solid var(--line);background:#fff;border-radius:8px;padding:6px 12px;font-size:13px;cursor:pointer;color:var(--ink)}
+.t36-b .t36-n{background:var(--blue);border-color:var(--blue);color:#fff}
+.t36-b .t36-s{border:0;background:none;color:var(--ink2);padding-left:0}
+
+/* ===== MK v37 · actual and forecast at a glance (solid = actual, hatched = forecast) ===== */
+.v30 .page-h{flex-wrap:nowrap;align-items:center}
+.v30 .page-h .h36{margin:0 0 0 10px}
+.v30 .page-h>.accp{margin-top:0;margin-bottom:0}
+.v30 .page-h>div:first-child{flex:1 1 auto;min-width:0}
+.v30 .page-h>.sp{flex:0 0 12px}
+.sw37{display:inline-block;width:12px;height:12px;border-radius:3px;flex:none;vertical-align:-2px}
+.sw37.a{background:var(--navy)}
+.sw37.f{background:repeating-linear-gradient(135deg,#5B9BD5 0 2px,#E8F1FA 2px 5px);box-shadow:inset 0 0 0 1px #5B9BD5}
+.w37{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 16px;margin:0 0 12px;flex-wrap:wrap}
+.w37-d{font-size:12px;color:var(--ink2);white-space:nowrap}
+.w37-d b{color:var(--ink);font-weight:600}
+.w37-b{position:relative;flex:1 1 220px;min-width:160px;height:12px;border-radius:6px}
+.w37-b .a{position:absolute;left:0;top:0;bottom:0;background:var(--navy);border-radius:6px 0 0 6px}
+.w37-b .f{position:absolute;top:0;bottom:0;right:0;background:repeating-linear-gradient(135deg,#5B9BD5 0 2px,#E8F1FA 2px 6px);box-shadow:inset 0 0 0 1px #9CC3EA;border-radius:0 6px 6px 0}
+.w37-b .td{position:absolute;top:-5px;bottom:-5px;width:3px;margin-left:-1px;background:var(--orange);border-radius:2px;cursor:default}
+.w37-k{display:flex;gap:18px;font-size:12px;color:var(--ink2);white-space:nowrap;flex-wrap:wrap}
+.w37-k span{display:inline-flex;align-items:center;gap:6px}
+.c37{margin:4px 0 2px;position:relative}
+.c37-bar{display:flex;height:8px;border-radius:4px;overflow:hidden;background:var(--line2);margin:4px 0 7px;gap:2px}
+.c37-bar .a{background:var(--navy);min-width:2px}
+.c37-bar .f{background:repeating-linear-gradient(135deg,#5B9BD5 0 2px,#E8F1FA 2px 5px);box-shadow:inset 0 0 0 1px #9CC3EA}
+.c37-r{display:grid;grid-template-columns:12px minmax(0,1fr) auto;align-items:center;gap:6px;font-size:12px;line-height:19px;color:var(--ink2)}
+.c37-r>span:nth-child(2){white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.c37-r b{color:var(--ink);font-weight:600;white-space:nowrap}
+.c37-d{border-top:1px dashed var(--line);margin-top:3px;padding-top:3px}
+.c37-dg{font-size:11px;font-weight:700;color:var(--ink2);text-align:center}
+.c37-spw{position:relative;height:34px;margin:2px 0 6px}
+.c37-sp{width:100%;height:34px;display:block}
+.c37-spd{position:absolute;width:8px;height:8px;margin:-4px 0 0 -4px;border-radius:50%;background:var(--orange);box-shadow:0 0 0 2px #fff}
+
+/* ===== MK v38 · Performance Workspace redesign: one bar, foldable sections, one notation ===== */
+.n36{align-items:center;flex-wrap:nowrap}
+.n38-sp{flex:1 1 8px;min-width:8px}
+.n36 #cmpBtn{margin:0;flex:none}
+.n36 button.s38-fold{color:var(--muted);border-style:dashed}
+.s38-t{width:20px;height:20px;flex:none;border:0;background:none;cursor:pointer;color:var(--ink2);padding:0;display:inline-flex;align-items:center;justify-content:center;border-radius:5px;margin-left:-4px}
+.s38-t:hover{background:#E6ECF3}
+.s38-t::before{content:'';width:6px;height:6px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:translateY(-2px) rotate(45deg);transition:transform .15s}
+.s36.s38-off .s38-t::before{transform:translateX(-1px) rotate(-45deg)}
+.s36>span:first-of-type{cursor:pointer}
+.s38-sum{font-size:12px;font-weight:600;letter-spacing:0;text-transform:none;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;max-width:70%}
+.s38-sum:empty{display:none}
+.s36.s38-off{margin-bottom:4px}
+.p38-hid{display:none!important}
+.m38{display:block;margin:12px auto 2px;border:1px solid var(--line);background:#fff;border-radius:999px;padding:5px 16px;font-size:12px;color:var(--blue);cursor:pointer}
+.m38:hover{background:var(--sky)}
+.v30-st{border-radius:2px!important;width:9px!important;height:9px!important}
+.v30-st.act{background:var(--navy)!important}
+.v30-st.fc{background:repeating-linear-gradient(135deg,#5B9BD5 0 1.5px,#E8F1FA 1.5px 3.5px)!important;box-shadow:inset 0 0 0 1px #5B9BD5}
+.v30-st.mix{background:linear-gradient(90deg,var(--navy) 50%,transparent 50%),repeating-linear-gradient(135deg,#5B9BD5 0 1.5px,#E8F1FA 1.5px 3.5px)!important;box-shadow:inset 0 0 0 1px #5B9BD5}
+.d35-li{border-top-color:var(--navy)!important}
+.d35-li.fc{border-top:2.5px dashed #5B9BD5!important}
+.d35-li.wk{border-top:3px solid #46566A!important}
+.d35-li.td{border-top:2px dashed var(--orange)!important}
+.d35-k.fix{box-shadow:inset 0 0 0 1.5px #46566A}
+.d35-t tr.d35-tot td.d35-hl{background:#EEF2F6}
+.d35-td{fill:var(--orange)}
+
+/* ===== MK v39 · This week, Heads-up for Treasury, Versions ===== */
+.d39 .ch{flex-wrap:nowrap}
+.d39-rg{font-size:12px;color:var(--muted);margin-left:8px;white-space:nowrap}
+.d39-g{display:grid;grid-template-columns:232px minmax(0,1fr);gap:18px;margin:4px 0 14px}
+.d39-cal{display:grid;grid-template-columns:26px repeat(5,30px) 26px;gap:3px;align-items:center}
+.d39-cal .h{font-size:10px;color:var(--muted);text-align:center}
+.d39-cal .m{font-size:10.5px;font-weight:600;color:var(--ink2,#465263)}
+.d39-cal .c{height:22px;border-radius:4px;font-size:11px;display:flex;align-items:center;justify-content:center;position:relative;border:1px solid var(--line);color:#8C97A5;background:#fff;cursor:default}
+.d39-cal .c.a{background:var(--navy);border-color:var(--navy);color:#fff}
+.d39-cal .c.t{background:var(--orange);border-color:var(--orange);color:#fff;font-weight:700}
+.d39-cal .c.f{background:repeating-linear-gradient(135deg,#C4DAF1 0 2px,#F3F8FD 2px 5px);border-color:#BCD4EE;color:var(--navy)}
+.d39-cal .c.hol{background:#E4E8EE;border-color:#E4E8EE;color:#9AA4B1}
+.d39-cal .c.go{cursor:pointer}
+.d39-cal .c.go:hover{box-shadow:0 0 0 2px var(--navy)}
+.d39-cal .c.bm::before{content:'';position:absolute;left:0;top:0;border-top:7px solid #46566A;border-right:7px solid transparent;border-top-left-radius:3px}
+.d39-cal .c.a.bm::before{border-top-color:#9FB0C4}
+.d39-cal .c .x{position:absolute;top:1px;right:1px;width:6px;height:6px;border-radius:50%;background:var(--orange);box-shadow:0 0 0 1.5px #fff}
+.d39-cal .w{font-size:10px;color:var(--muted);height:22px;display:flex;align-items:center;padding-left:4px;border-left:2px solid transparent}
+.d39-cal .w.tr{border-left-color:var(--orange)}
+.d39-cal .w.on{color:var(--navy);font-weight:700}
+.d39-clg{display:flex;flex-wrap:wrap;gap:4px 10px;margin-top:8px;font-size:10.5px;color:var(--muted)}
+.d39-clg i{display:inline-block;width:12px;height:9px;border-radius:2px;margin-right:4px;vertical-align:-1px;border:1px solid var(--line)}
+.d39-clg i.a{background:var(--navy);border-color:var(--navy)}
+.d39-clg i.t{background:var(--orange);border-color:var(--orange)}
+.d39-clg i.f{background:repeating-linear-gradient(135deg,#C4DAF1 0 2px,#F3F8FD 2px 5px)}
+.d39-clg i.tw{width:3px;height:11px;border:0;border-radius:0;background:var(--orange)}
+.d39-ks{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:12px}
+.d39-k{background:#F6F8FB;border-radius:8px;padding:8px 12px;min-width:0}
+.d39-k .l{font-size:11.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.d39-k .v{font-size:19px;font-weight:600;color:var(--navy);white-space:nowrap}
+.d39-k .s{font-size:11.5px;color:var(--ink2,#465263);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.d39-k.warn{background:#FDF1E2}
+.d39-bg{display:grid;grid-template-columns:minmax(0,1fr);gap:10px;align-items:start}
+.d39-bg .d39-wf{max-width:600px}
+table.d39-br td,table.d39-br th{white-space:nowrap}
+table.d39-br tr.bal td{background:#F6F8FB}
+table.d39-br tr.tot td{font-weight:600;border-top:1.5px solid var(--navy)}
+.d39-op{display:inline-block;width:14px;color:var(--muted);font-weight:700}
+.d39-wf{width:100%;height:auto;display:block}
+.d39-wv{font-size:11px;font-weight:600;fill:var(--navy)}
+.d39-wv.g{fill:#1E7B34}.d39-wv.r{fill:#C62828}
+.d39-wl{font-size:10.5px;fill:var(--muted)}
+table.d39-dt tr.go{cursor:pointer}
+table.d39-dt tr.go:hover td{background:#F4F7FB}
+.d39-ov{display:inline-block;border-radius:4px;padding:0 5px;background:#FDF1E2;box-shadow:inset 0 0 0 1.5px var(--orange)}
+.d39-b{display:inline-flex;align-items:center;border-radius:6px;padding:3px 10px;font-size:12px;font-weight:600;white-space:nowrap}
+.d39-b.need{background:#FDF1E2;color:#8A4B00;border:1px solid #F2CF9F}
+.d39-b.ok{background:#E6F3EA;color:#1E7B34;border:1px solid #BFDCC8}
+.d39-b.sent{background:#EEF4FB;color:var(--blue);border:1px solid #CFE0F3}
+.d39-trg{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:20px;align-items:start}
+.d39-sh{display:block;font-size:12px;font-weight:600;color:var(--ink2,#465263);margin:2px 0 6px}
+.d39-calls{list-style:none;margin:0;padding:0}
+.d39-calls li{display:flex;gap:8px;align-items:flex-start;padding:6px 0;border-bottom:1px solid #EEF1F5;font-size:12.5px;line-height:1.45}
+.d39-calls li i{flex:none;width:8px;height:8px;border-radius:50%;margin-top:5px;background:#AEB8C5}
+.d39-calls li.late i,.d39-calls li.lost i{background:var(--orange)}
+.d39-calls li.got i{background:#1E7B34}
+.d39-calls li.new i{background:var(--blue)}
+.d39-calls li.act i{background:var(--navy)}
+.d39-tg{display:inline-block;font-size:10.5px;font-weight:600;border-radius:4px;padding:1px 6px;margin-left:4px;white-space:nowrap}
+.d39-tg.mv{background:#FDF1E2;color:#8A4B00}
+.d39-tg.st{background:#E6F3EA;color:#1E7B34}
+.d39-tg.ls{background:#FBE9E9;color:#C62828}
+.d39-tg.ot{background:#EEF1F5;color:var(--muted)}
+.d39-tg.t{background:#FDF1E2;color:#8A4B00}
+.d39-tg.sent{background:#EEF4FB;color:var(--blue)}
+.d39-thr{display:flex;gap:16px;margin-top:12px;flex-wrap:wrap}
+.d39-thr label{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--ink2,#465263)}
+.d39-thr input{width:78px;height:28px;border:1px solid var(--line);border-radius:6px;padding:0 8px;font:inherit;font-size:12.5px}
+.d39-cb{margin-top:10px;font-size:11.5px;color:var(--muted)}
+.d39-cb .bars{display:flex;flex-wrap:wrap;gap:2px;margin-top:4px}
+.d39-cb .bars i{width:8px;height:12px;border-radius:2px;background:#DDE3EA}
+.d39-cb .bars i.y{background:var(--orange)}
+table.d39-tg5{width:100%;border-collapse:separate;border-spacing:3px;table-layout:fixed;font-size:11.5px}
+table.d39-tg5 th{font-size:10.5px;color:var(--muted);font-weight:600;text-align:center}
+table.d39-tg5 th.l,table.d39-tg5 td.l{text-align:left;width:76px;white-space:nowrap}
+table.d39-tg5 td{height:27px;border-radius:5px;text-align:center;background:#F6F8FB;color:var(--ink2,#465263);white-space:nowrap;overflow:hidden}
+table.d39-tg5 td.l{background:none}
+table.d39-tg5 td.a{background:#E9EDF3;color:#9AA4B1}
+table.d39-tg5 td.t{box-shadow:inset 0 0 0 1.5px var(--orange)}
+table.d39-tg5 td.h{background:#E4E8EE;color:#9AA4B1}
+table.d39-tg5 td.ov{background:#FDF1E2;color:#8A4B00;font-weight:700;box-shadow:inset 0 0 0 1.5px var(--orange)}
+table.d39-tg5 td.tot{background:#fff;border:1px solid var(--line);font-weight:600}
+table.d39-tg5 td.tot.ov{border-color:var(--orange)}
+.d39-later{margin-top:8px;font-size:12px;color:var(--ink2,#465263)}
+.d39-later span{color:var(--muted)}
+.d39-acts{display:flex;gap:8px;align-items:center;margin-top:10px;flex-wrap:wrap}
+.d39-pb{border:0;background:var(--orange);color:#fff;border-radius:6px;padding:6px 12px;font-size:12.5px;font-weight:600;cursor:pointer}
+.d39-sb{border:1px solid var(--line);background:#fff;color:var(--navy);border-radius:6px;padding:5px 11px;font-size:12.5px;font-weight:600;cursor:pointer}
+.d39-upd{margin-top:12px;border-top:1px solid var(--line);padding-top:12px}
+.d39-upd textarea{width:100%;border:1px solid var(--line);border-radius:6px;padding:6px 8px;font:inherit;font-size:12.5px;resize:vertical;box-sizing:border-box}
+table.d39-ut tr.ov td{background:#FFF8EE}
+table.d39-ut tr.wk td{background:#F6F8FB}
+.d39-note{font-size:12.5px;background:#F6F8FB;border-radius:8px;padding:8px 10px;margin-top:8px}
+.d39-vg{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:20px;align-items:start}
+table.d39-vm td small,table.d39-vm th small{display:block;font-size:10.5px;font-weight:600}
+table.d39-vm th small{color:var(--muted);font-weight:500}
+table.d39-vr tr.go{cursor:pointer}
+table.d39-vr tr.go:hover td{background:#F4F7FB}
+@media (max-width:1360px){.d39-k .v{font-size:17px}.d39-k{padding:8px 10px}}
+table.d39-dt td:first-child,table.d39-dt th:first-child,table.d39-vr td:first-child,table.d39-vm td:first-child{white-space:nowrap}
+table.d39-dt th,table.d39-vr th,table.d39-vm th{white-space:nowrap}
+table.d39-vr td,table.d39-vr th{padding-left:8px;padding-right:8px}
+.d39-cal .w{justify-content:flex-start}
+
+/* ===== MK v40 · 13-Week Rolling in three views ===== */
+.w37{display:none!important}
+.v30.v40>.eq,.v30.v40>.v32-bu,.v30.v40>.banner{display:none!important}
+.c40{margin-bottom:14px}
+.c40-sw{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:12px}
+.c40-sw button{display:flex;align-items:center;gap:12px;text-align:left;border:1px solid var(--line);background:#fff;border-radius:10px;padding:10px 14px;cursor:pointer;min-width:0;font:inherit;color:inherit}
+.c40-sw button:hover{border-color:#9FB3C8}
+.c40-sw button.on{border-color:var(--navy);box-shadow:0 0 0 1px var(--navy) inset;background:#F4F7FB}
+.c40-sw .n{flex:none;width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;background:#E9EEF4;color:var(--navy)}
+.c40-sw button.on .n{background:var(--navy);color:#fff}
+.c40-sw .tx{min-width:0;display:flex;flex-direction:column}
+.c40-sw b{font-size:14px;color:var(--navy);white-space:nowrap}
+.c40-sw small{font-size:11.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.c40-sw button.warn small{color:#8A4B00}
+.c40-opt{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:8px 12px;margin-bottom:12px}
+.c40-opt .sp{flex:1 1 auto}
+.c40-ol{font-size:11.5px;font-weight:600;color:var(--muted);margin-right:2px;white-space:nowrap}
+.c40-chip{border:1px solid var(--line);background:#fff;border-radius:999px;padding:3px 10px;font-size:12px;color:var(--ink2,#465263);cursor:pointer;white-space:nowrap;font:inherit;font-size:12px}
+.c40-chip:hover{border-color:#9FB3C8}
+.c40-chip.on{background:#FDF1E2;border-color:#F2CF9F;color:#8A4B00;font-weight:600}
+.c40-chip.ghost{border-style:dashed;color:var(--muted)}
+.c40-date{height:27px;border:1px solid var(--line);border-radius:6px;padding:0 6px;font:inherit;font-size:12px;color:var(--ink)}
+.c40-pill{font-size:12px;color:var(--ink2,#465263);background:#EEF2F6;border-radius:999px;padding:3px 10px;white-space:nowrap}
+.c40-tl{display:flex;align-items:center;gap:4px;font-size:12px;color:var(--ink2,#465263);white-space:nowrap}
+.c40-tl input{width:58px;height:27px;border:1px solid var(--line);border-radius:6px;padding:0 6px;font:inherit;font-size:12.5px}
+.c40-pb{border:0;background:var(--orange);color:#fff;border-radius:6px;padding:6px 12px;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap}
+.c40-pb:hover{background:#D07806}
+.c40-sb{border:1px solid var(--line);background:#fff;color:var(--navy);border-radius:6px;padding:5px 11px;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap}
+.c40-sb:hover{background:#F4F7FB}
+.c40-seg{margin:0 4px}
+.c40-s2{max-width:170px}
+.c40-t{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin-bottom:10px}
+.kpi.t40{background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px 14px;min-width:0;cursor:default;position:relative}
+.kpi.t40 .lab{font-size:11.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding-right:16px}
+.kpi.t40 .val{font-size:22px;font-weight:600;color:var(--navy);white-space:nowrap;margin:2px 0}
+.kpi.t40 .sub{font-size:11.5px;color:var(--ink2,#465263);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.kpi.t40.hl{background:#F4F7FB;border-color:#CFDCEA}
+.kpi.t40.warn{background:#FDF1E2;border-color:#F2CF9F}
+.kpi.t40.warn .val{color:#8A4B00}
+.kpi.t40.ok .val{color:#1E7B34}
+.c40-bu{display:grid;grid-template-columns:auto 90px minmax(0,1fr) 90px minmax(0,1fr);align-items:center;gap:6px 10px;font-size:12px;color:var(--ink2,#465263);margin:0 2px 12px}
+.c40-bub{display:block;height:8px;border-radius:4px;background:#E9EEF4;overflow:hidden}
+.c40-bub i{display:block;height:100%;background:#5B9BD5}
+.c40-bu b{color:var(--navy);font-weight:600}
+.c40-ch .ch{flex-wrap:nowrap}
+.c40-lg{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:11.5px;color:var(--ink2,#465263);margin:2px 0 4px}
+.c40-lg span{display:inline-flex;align-items:center;gap:5px;white-space:nowrap}
+.c40-lg i{display:inline-block;width:14px;height:10px;border-radius:2px}
+.c40-lg i.ar{height:0;border-top:2.5px dashed #2F80D1;border-radius:0}
+.c40-lg i.rg{background:#5B9BD5;opacity:.25}
+.c40-lg i.mb{height:0;border-top:2px dashed #46566A;border-radius:0}
+.c40-lg i.hb,.c40-lg i.mbb{background:#fff;border:1.3px solid #46566A}
+.c40-lg i.hb{border-color:#8C99AA}
+.c40-lg i.hc{background:repeating-linear-gradient(135deg,#5B9BD5 0 1.6px,#E7F0FA 1.6px 4px);border:1px solid #9CC3EA}
+.c40-lg i.cp{width:3px;height:12px;background:var(--orange);border-radius:0}
+.c40-lg i.ac{background:var(--navy)}
+.c40-lg i.pa{background:#7F93AD}
+.c40-lg i.tol{background:#E6F3EA;border:1px solid #BFDCC8}
+.c40-lg i.out{background:#fff;border:2px solid var(--orange)}
+.c40-lg i.m2{height:0;border-top:3px solid var(--orange);border-radius:0}
+.c40-svg{width:100%;height:auto;display:block}
+.c40-ax{font-size:11px;fill:var(--muted)}
+.c40-ax.b{font-weight:600;fill:var(--ink2,#465263)}
+.c40-ax.o{fill:#C46A00;font-weight:600}
+.c40-vl{font-size:10.5px;fill:var(--navy);font-weight:600}
+.c40-cp{font-size:11px;font-weight:700;fill:#8A4B00}
+.c40-dv{font-size:10.5px;fill:var(--ink2,#465263)}
+.c40-dv.o{fill:#C46A00;font-weight:700}
+.c40-acc{font-size:10.5px;font-weight:700;fill:#1E7B34}
+.c40-acc.o{fill:#C46A00}
+.c40-hit{cursor:pointer}
+.c40-hit:hover{fill:rgba(0,38,77,.04)}
+table.c40-cpt th{white-space:nowrap}
+table.c40-cpt td:first-child{white-space:nowrap}
+table.c40-cpt tr.bal td{background:#F6F8FB}
+table.c40-cpt tr.tot td{font-weight:600;border-top:1.5px solid var(--navy)}
+.c40-why{font-size:11.5px;color:var(--ink2,#465263);white-space:nowrap}
+.c40-x{border:0;background:none;color:var(--muted);cursor:pointer;font-size:14px;line-height:1;margin-left:6px;padding:0 2px}
+.c40-x:hover{color:var(--navy)}
+.c40-wg{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(260px,1fr);gap:18px;align-items:center}
+.c40-wf{width:100%;height:auto;display:block;max-width:760px}
+.c40-ul{list-style:none;margin:0;padding:0}
+.c40-ul li{padding:6px 0;border-bottom:1px solid #EEF1F5;font-size:12.5px;color:var(--ink2,#465263)}
+.c40-ul li b{color:var(--navy)}
+.c40-lbg{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(320px,1fr);gap:20px;align-items:start}
+.c40-tw{display:inline-block;font-size:9.5px;font-weight:700;color:#8A4B00;background:#FDF1E2;border-radius:3px;padding:0 4px;margin-left:4px;vertical-align:1px}
+table.c40-at tbody tr{cursor:pointer}
+table.c40-at tbody tr:hover td{background:#F4F7FB}
+table.c40-at td:first-child,table.c40-at th{white-space:nowrap}
+table.c40-at td small{display:block;font-size:10.5px}
+.c40-o{color:#C46A00;font-weight:600}
+.c40-wh{margin-bottom:14px}
+.c40-kv{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 14px;font-size:12.5px;color:var(--ink2,#465263);margin-bottom:6px}
+.c40-kv b{text-align:right;white-space:nowrap}
+.c40-lag{margin-top:6px}
+.c40-lsv{width:100%;max-width:420px;height:auto;display:block}
+@media (max-width:1360px){.kpi.t40 .val{font-size:19px}.kpi.t40{padding:9px 11px}.c40-sw b{font-size:13px}.c40-wg{grid-template-columns:minmax(0,1fr)}.c40-lbg{grid-template-columns:minmax(0,1fr)}}
+
+/* ===== MK v41 · range on each view; variance on hover; weekly AR roll-forward; header chips removed ===== */
+.page-h .meta:empty{display:none}
+.c40-sw{align-items:stretch}
+.c41-tb{display:flex;flex-direction:column;gap:8px;border:1px solid var(--line);background:#fff;border-radius:10px;padding:10px 14px;min-width:0}
+.c41-tb:hover{border-color:#9FB3C8}
+.c41-tb.on{border-color:var(--navy);box-shadow:0 0 0 1px var(--navy) inset;background:#F4F7FB}
+.c40-sw .c41-tb>button[role=tab],.c40-sw .c41-tb>button[role=tab].on,.c40-sw .c41-tb>button[role=tab]:hover{border:0;background:none;box-shadow:none;padding:0;border-radius:0;width:100%}
+.c41-rg{display:flex;flex-wrap:wrap;gap:4px;padding-left:38px}
+.c40-sw .c41-rg button{display:inline-flex;align-items:center;gap:0;border:1px solid var(--line);background:#fff;border-radius:999px;padding:2px 9px;font-size:11.5px;line-height:16px;color:var(--ink2,#465263);cursor:pointer;white-space:nowrap;box-shadow:none;min-width:0;font-weight:500}
+.c40-sw .c41-rg button:hover{border-color:#9FB3C8;background:#fff}
+.c40-sw .c41-rg button.on,.c40-sw .c41-rg button.on:hover{background:var(--navy);border-color:var(--navy);color:#fff;font-weight:600}
+.c41-cu{display:flex;align-items:center;gap:6px;padding-left:38px;font-size:12px;color:var(--muted)}
+.c41-cu .c40-date{flex:1 1 0;min-width:0;width:auto}
+.kpi.t40 .sub{white-space:normal;overflow:visible;text-overflow:clip;line-height:1.35}
+.c41-v{cursor:help;border-bottom:1px dotted #9FB3C8}
+.c41-nc{cursor:default}
+table.c41-rft th{white-space:normal;vertical-align:bottom;line-height:1.3}
+table.c41-rft td:first-child{white-space:nowrap}
+.c41-d{display:block;font-size:11px;color:var(--muted);font-weight:400}
+table.c41-rft tr.tot td{font-weight:600;border-top:1.5px solid var(--navy);background:#F6F8FB}
+@media (max-width:1360px){.c41-rg,.c41-cu{padding-left:0}}
+/* v41 port: the help button and tour are not brought over */
+.h36{display:none!important}
+</style>
 </head>
 <body>
 
@@ -2400,7 +2760,7 @@ function pageTower(){
       ${kt({lab:'If DSO holds at target (12M)',val:fs(m.close-m.closeT),vcls:'txt-good',chip:`<span class="dl nt">offsets ${Math.round((m.close-m.closeT)/ab*100)}%</span>`,click:"S.scTab='scen';S.scn='growth';go('scen')",tip:T('Holding DSO at target, next 12 months',[['Closing AR forecast',fmc(m.close)],['Closing AR at target',fmc(m.closeT)],['Cash released',fs(m.close-m.closeT),1],['DSO cut to self-fund growth',(ab/m.perDay).toFixed(1)+' days']],'Click to model it')})}
     </div></div>`;}
   return `
-  <div class="page-h"><div><h1>Performance Workspace</h1><div class="meta">${asOf()}</div></div><span class="sp"></span>${sdChip()}${accPill()}</div>
+  <div class="page-h"><div><h1>Performance Workspace</h1><div class="meta">${asOf()}</div></div><span class="sp"></span>${accPill()}</div>
   <div class="banner"><div class="ai">${AI_ICON}</div><div class="t">${b.t}</div><div class="sp"></div><button onclick="${b.a}">${b.b} →</button></div>
   ${eqRow(n)}
   ${PW_SHOW_EXTRAS?sit:''}
@@ -7657,7 +8017,7 @@ function pageFx(){const k=S.hz,n=N(),bu=S.bu,F=FX[k],els=[['ar','AR balance'],['
       lg=el==='ar'?fxLg([[DLY_COL.act,'Actual'],[DLY_COL.k2,'Base'],['','Downside – upside','bd'],['','Plan','fxpl']]):fxLg([[DLY_COL.k2,'Base']].concat(el==='c'?[['','Downside – upside','wk']]:[]).concat(el!=='x'?[['','Plan','fxpt']]:[]));
       acc=fxAccM3Card();right=fxScenCard();tbl=fxTable(all,{total:'Nov 2026 – Mar 2030',rng:'Downside – upside',sub:'By fiscal year · FY27 is the rest of the current year'})}
     mid=`<div class="card mb"><div class="ch"><div><h3>${ttl}</h3><div class="sub">${F.name} · predicted at ${F.pred.toLowerCase()} · reported ${F.rep.toLowerCase()}</div></div><span class="sp"></span>${seg}</div>${lg}${chart}</div><div class="grid g2 mb">${acc}${right}</div>${tbl}`}
-  return `<div class="page-h"><div><h1>Performance Workspace</h1><div class="meta">${asOf()}</div></div><span class="sp"></span>${sdChip()}${fxAccPill(k)}</div>
+  return `<div class="page-h"><div><h1>Performance Workspace</h1><div class="meta">${asOf()}</div></div><span class="sp"></span>${fxAccPill(k)}</div>
     ${fxRail()}${fxBanner(k,n)}${eqRow(n)}${mid}
     ${typeof towerSit==='function'?towerSit(n):''}${S.persona==='vp'?scorecard(n):''}<div class="mb">${aiCard(n)}</div>
     <div class="card mb fx-pb"><div class="ch"><h3>Working-capital playbook</h3><span class="sp"></span><span class="sub">${P().role} · actions within your role</span></div><div class="prac">${practices(n)}</div></div>`}
@@ -8089,7 +8449,7 @@ function v32BuTable(k){const rows=['USPD','O&M','All'].map(b=>{const T=v30Tree(k
     <th class="r">Forecasted collections</th><th class="r">Forecasted deductions</th><th class="r">Forecasted closing AR</th></tr></thead><tbody>${rows.map(tr).join('')}</tbody></table></div></div>`}
 function pageFx(){const k=S.hz,n=k==='W13'&&S.w5?atHz('5W',()=>N()):N(),w=v30Win(k,S.bu),R=v30Tree(k,S.bu);
   return `<div class="v30">
-    <div class="page-h"><div><h1>Performance Workspace</h1><div class="meta">${v30Meta(k)}</div></div><span class="sp"></span>${sdChip()}${k==='W13'?w5Btn():''}${v30AccPill(k)}</div>
+    <div class="page-h"><div><h1>Performance Workspace</h1><div class="meta">${v30Meta(k)}</div></div><span class="sp"></span>${v30AccPill(k)}</div>
     ${v30Tiles(k,w)}${v32BuTable(k)}${PW_SHOW_BANNER?v30Banner(k,w,R):''}${v30ChartCard(k,R)}${v30Table(k,R)}
     <div class="mb">${v30CustCard(k,R)}</div>${k==='Y3'?`<div class="mb">${v30ScenCard()}</div>`:''}
     <div class="mb">${aiCard(n)}</div>${PW_SHOW_EXTRAS?v30Exec(n)+`
@@ -9023,6 +9383,997 @@ try{INFO32['tower/bridge']=[["Card","Comparison window","^Comparison window$","W
   ["Card","Measure chart",": (actual|current vs)","The chosen measure by day or week: actual, the prior release and the current forecast, with the variance and the running total below.","Over time"],
   ["Card","All components","^All components$","Billings, collections, deductions and AR compared on the same windows.","Drivers"],
   ["Card","Release track record","^Release track record$","How each of the last eight weekly releases compared with actuals.","Quality and data"]]}catch(e){}
+
+/* ============================ v41 PORT · PERFORMANCE WORKSPACE SECTIONS ============================
+   Brought from MK-Cash-Flow-Intelligence-v41.html: the section bar with Overview, Customers and Insights (fold and one-line
+   summaries), the Overview content (13-Week Rolling cockpit: current forecast, variance to baseline, prior forecast; actual
+   and forecast split on the tiles for the other horizons), the "Top customers by collections" card and the AI observations
+   & discussion points card. The other v41 sections (This week, Over time, Leadership, Actions), the help button and the tour
+   are not part of the bar. */
+function v30CustCard(k,R){const el='c',C=v30Cust(k,'root',el,S.bu),top=C.rows.slice(0,8),tot=R.v.c,mx=top[0]?top[0].v:1,ok=can('ri.cust');
+  return `<div class="card v30-cu"><div class="ch"><h3>Top customers by collections</h3><span class="sp"></span><button class="btn sm ghost" onclick="gdOpen('c','root');S.gd.tab='p';gdDraw()">All customers</button></div>
+    <table class="t v30-ctb"><tbody>${top.map((r,i)=>`<tr${ok?` class="v30-tr" onclick="S.cust='${r.c.id}';go('risk','customer')"`:''}><td class="txt-mut tnum">${i+1}</td><td><b>${r.c.name}</b><small>${r.c.id} · ${r.c.bu}</small></td><td class="v30-bc"><span class="v30-bar"><i style="width:${(r.v/mx*100).toFixed(1)}%"></i></span></td><td class="r tnum"><b>${fmc(r.v)}</b><small>${(r.v/tot*100).toFixed(1)}%</small></td><td class="r tnum">${Math.round(r.c.dtp)} d<small class="${r.c.drift>0?'txt-bad':'txt-good'}">${r.c.drift>0?'+':'−'}${Math.abs(r.c.drift).toFixed(0)} d</small></td></tr>`).join('')}</tbody></table></div>`}
+
+/* v41 AI card not brought over: the v36 "AI observations" card (observations only) is kept */
+
+/* ============================ MK v35 · DAILY ROLL-FORWARD AND THE TREASURY CUT (13-Week Rolling) ============================
+   Every morning the forecast re-runs from yesterday's actual close: the days gone carry actuals, the days ahead are
+   re-forecast (cash that was due and did not land is expected over the next two business days, then counts as lost), and the result is set against
+   the Monday baseline. The week's opening AR holds from Monday and resets the next Monday. Write-offs post at month-end
+   close and are carved out of that day's deductions, so every total ties to the 13-week tiles and the drawer.
+   Weeks 1 to 5 of the Monday baseline are the cut Treasury loads. The morning is the same demo day as the rest of the tool. */
+ACC_FN.splice(ACC_FN.findIndex(f=>f[0]==='pw.bridge')+1,0,['pw.daily','Performance Workspace','Daily roll-forward and Treasury cut']);
+ACC_ALL.push('pw.daily');ACC_NM['pw.daily']='Daily roll-forward and Treasury cut';
+// v41 port: always grant (access saved by v41 in the same browser carries d35=1 but this file rebuilds everyone's functions on load)
+(function(){try{if(ACC){ACC.users.forEach(u=>{if(!u.fns.includes('pw.daily'))u.fns.push('pw.daily')});ACC.d35=1;accSave()}}catch(e){}})();
+
+const D35_HOL=new Set(['2026-11-26','2026-12-25','2027-01-01','2027-01-18']);
+const d35Wk=d=>Math.floor(Math.round((d-ASOF_DT)/864e5)/7);
+const d35Md=d=>HZ_MON[d.getMonth()]+' '+d.getDate();
+function d35Base(bu){return v30C('d35b'+bu,()=>{const D=v30Days('W13',bu).days,R=v30Tree('W13',bu);
+  const days=D.map(o=>({d:o.d,iso:o.iso,w:d35Wk(o.d),h:D35_HOL.has(o.iso),f:{b:o.v.b,c:o.v.c,x:o.v.x},a:o.a?{b:o.a.b,c:o.a.c,x:o.a.x}:null,wo:0}));
+  const seen={};days.forEach(o=>{if(o.h)return;const m=o.d.getFullYear()*12+o.d.getMonth();seen[m]=(seen[m]||0)+1;if(seen[m]===3&&o.d.getDate()<=7)o.wo=1});
+  return {open:R.open,days}})}
+/* the view as of the morning of day t: actuals before t, forecast from t. Cash that was due and did not land is late for
+   two business days (expected 60% / 40% over the next two), then it is treated as lost; early cash first settles late cash. */
+function d35Ser(bu,t){return v30C('d35s'+bu+'|'+t,()=>{const B=d35Base(bu),n=B.days.length,L={b:[],c:[],x:[],wo:[],open:[],close:[],st:[],due:0,nx:[]};
+  const q=[];B.days.forEach((o,p)=>{if(p>=t||!o.a||o.h)return;let dv=o.a.c-o.f.c;
+    for(const it of q){if(dv<=0)break;const u=Math.min(it.amt,dv);it.amt-=u;dv-=u}
+    if(dv<0)q.push({amt:-dv,age:0});q.forEach(it=>it.age++);for(let i=q.length-1;i>=0;i--)if(q[i].age>2||q[i].amt<.01)q.splice(i,1)});
+  const bd=[];for(let d=t;d<n&&bd.length<2;d++)if(!B.days[d].h)bd.push(d);
+  const rec=new Map();q.forEach(it=>{const sh=it.age===1?[.6,.4]:[1];sh.forEach((f,k)=>{const d=bd[k];if(d!=null)rec.set(d,(rec.get(d)||0)+it.amt*f)})});
+  L.due=q.reduce((a,it)=>a+it.amt,0);L.nx=[...rec.keys()].sort((a,b)=>a-b);let o0=B.open;
+  B.days.forEach((o,d)=>{const act=d<t&&!!o.a;let b,c,x;
+    if(act){b=o.a.b;c=o.a.c;x=o.a.x}else{b=o.f.b;c=o.f.c+(rec.get(d)||0);x=o.f.x}
+    const wf=o.wo?o.f.x*.3:0,wo=act?Math.min(x,wf*1.2):wf;
+    L.b[d]=b;L.c[d]=c;L.x[d]=x-wo;L.wo[d]=wo;L.open[d]=o0;o0+=b-c-x;L.close[d]=o0;L.st[d]=act?'a':d===t?'t':'f'});
+  return L})}
+function d35Now(bu){const B=d35Base(bu),T=d5T(),M=T<25?D5_DAYS[T]:new Date(2026,11,21),t=Math.max(0,B.days.findIndex(o=>+o.d>=+M)),w=B.days[t].w,
+  s0=B.days.findIndex(o=>o.w===w),wk=B.days.map((o,i)=>i).filter(i=>B.days[i].w===w);return {B,t,w,s0,wk,e0:wk[wk.length-1],L:d35Ser(bu,t),Bl:d35Ser(bu,s0)}}
+function d35Go(k){S.today=Math.max(0,Math.min(25,d5T()+k));render()}
+const d35Sg=(v,good)=>{const z=Math.abs(v)<.5,ok=good===false?v<=0:v>=0;return z?'<span class="txt-mut">$0M</span>':`<span class="${ok?'txt-good':'txt-bad'}">${fs(v)}</span>`};
+const d35St={a:'<span class="d35-st a">Actual</span>',t:'<span class="d35-st t">Today</span>',f:'<span class="d35-st f">Forecast</span>'};
+
+function d35Chart(Z){const {B,t,w,L}=Z,n=B.days.length,w0=Math.max(0,w-1),ix=B.days.map((o,i)=>i).filter(i=>B.days[i].w>=w0&&B.days[i].w<w0+5);
+  const W=1120,H=230,ml=72,mr=16,mt=22,mb=34,pw=W-ml-mr,ph=H-mt-mb,N=ix.length,X=j=>ml+pw*(N>1?j/(N-1):.5);
+  const vals=ix.map(i=>L.open[i]);let lo=Math.min(...vals),hi=Math.max(...vals);const pd=(hi-lo)*.15+20;lo-=pd;hi+=pd;const Y=v=>mt+ph*(1-(v-lo)/(hi-lo));
+  let s='';for(let k=0;k<4;k++){const v=lo+(hi-lo)*k/3;s+=`<line x1="${ml}" x2="${W-mr}" y1="${Y(v)}" y2="${Y(v)}" stroke="var(--grid)"/><text x="${ml-8}" y="${Y(v)+4}" text-anchor="end" class="d35-ax">${fmc(v)}</text>`}
+  const wks=[...new Set(ix.map(i=>B.days[i].w))];
+  wks.forEach(k=>{const js=ix.map((i,j)=>B.days[i].w===k?j:-1).filter(j=>j>=0),j0=js[0],j1=Math.min(N-1,js[js.length-1]+1),v=L.open[ix[j0]],fut=k>w;
+    s+=`<line x1="${X(j0)}" x2="${X(j1)}" y1="${Y(v)}" y2="${Y(v)}" stroke="var(--orange)" stroke-width="3"${fut?' stroke-dasharray="7 5" stroke-opacity=".7"':''}/>`;
+    s+=`<text x="${X(j0)}" y="${H-12}" class="d35-ax">${d35Md(B.days[ix[j0]].d)}</text>`});
+  const tj=ix.indexOf(t);let pa='',pf='';ix.forEach((i,j)=>{const p=X(j)+','+Y(L.open[i]);if(i<=t)pa+=(pa?' L':'M')+p;if(i>=t)pf+=(pf?' L':'M')+p});
+  s+=`<path d="${pa}" fill="none" stroke="var(--blue)" stroke-width="2.4" stroke-linejoin="round"/><path d="${pf}" fill="none" stroke="var(--blue)" stroke-width="2.2" stroke-dasharray="6 5"/>`;
+  ix.forEach((i,j)=>{const on=i===t;s+=`<circle cx="${X(j)}" cy="${Y(L.open[i])}" r="${on?6:3}" fill="var(--blue)" stroke="#fff" stroke-width="${on?2:0}" data-tip="${esc('<b>'+d5Lab(B.days[i].d)+'</b><br>Opening AR <b>'+fmc(L.open[i])+'</b>'+(i<t?' · actual':' · forecast'))}"/>`});
+  if(tj>=0)s+=`<line x1="${X(tj)}" x2="${X(tj)}" y1="${mt}" y2="${mt+ph}" stroke="var(--ink2)" stroke-opacity=".45" stroke-dasharray="3 4"/><text x="${X(tj)}" y="${mt-6}" text-anchor="middle" class="d35-ax d35-td">Today</text>`;
+  return `<div class="d35-lg"><span><i class="d35-li"></i>Day opening AR · actual</span><span><i class="d35-li fc"></i>Day opening AR · forecast</span><span><i class="d35-li wk"></i>Week opening AR</span></div>
+    <svg class="d35-ch" viewBox="0 0 ${W} ${H}" role="img" aria-label="Opening AR by day and by week">${s}</svg>`}
+
+function d35Card(){const bu=S.bu,Z=d35Now(bu),{B,t,s0,wk,e0,L,Bl}=Z,sum=(S2,k,a,b)=>{let x=0;for(let i=a;i<=b;i++)x+=S2[k][i];return x};
+  const today=B.days[t],wtd=t>s0?sum(L,'c',s0,t-1):0,wtdB=t>s0?sum(Bl,'c',s0,t-1):0;
+  const k=(lab,val,sub,cls)=>`<div class="d35-k${cls?' '+cls:''}"><div class="l">${lab}</div><div class="v tnum">${val}</div><div class="s">${sub}</div></div>`;
+  let y='';if(t>0&&B.days[t-1].a){const p=B.days[t-1],dv=p.a.c-p.f.c;y=`<b>${d5Lab(p.d)}:</b> collections ${fmc(p.a.c)} against ${fmc(p.f.c)} forecast, ${d35Sg(dv,true)}`;
+    if(L.due>=.5)y+=` · ${fmc(L.due)} late, expected ${L.nx.map(i=>D5_DOW[B.days[i].d.getDay()]).join(' and ')}`}
+  else y=`<b>${d5Lab(B.days[s0].d)}:</b> Monday baseline locked at 06:10 ET`;
+  const rows=wk.map(i=>{const o=B.days[i],dv=L.close[i]-Bl.close[i];
+    return `<tr${i===t?' class="d35-now"':''}><td><b>${d5Lab(o.d)}</b>${o.h?' <small class="txt-mut">holiday</small>':''}</td><td>${d35St[L.st[i]]}</td><td class="r tnum${i===t?' d35-hl':''}">${fmc(L.open[i])}</td><td class="r tnum">${fmc(L.b[i])}</td><td class="r tnum">${fmc(L.c[i])}</td>
+      <td class="r tnum">${fmc(L.x[i])}</td><td class="r tnum">${L.wo[i]>.5?fmc(L.wo[i]):'<span class="txt-mut">–</span>'}</td><td class="r tnum"><b>${fmc(L.close[i])}</b></td><td class="r tnum">${d35Sg(dv,false)}</td></tr>`}).join('');
+  const tot=`<tr class="d35-tot"><td><b>Week</b></td><td></td><td class="r tnum d35-hl">${fmc(L.open[s0])}</td><td class="r tnum">${fmc(sum(L,'b',s0,e0))}</td><td class="r tnum">${fmc(sum(L,'c',s0,e0))}</td><td class="r tnum">${fmc(sum(L,'x',s0,e0))}</td>
+    <td class="r tnum">${sum(L,'wo',s0,e0)>.5?fmc(sum(L,'wo',s0,e0)):'<span class="txt-mut">–</span>'}</td><td class="r tnum"><b>${fmc(L.close[e0])}</b></td><td class="r tnum">${d35Sg(L.close[e0]-Bl.close[e0],false)}</td></tr>`;
+  return `<div class="card mb d35"><div class="ch"><h3>Daily roll-forward</h3><span class="sp"></span><span class="d35-ml">Morning of</span>
+      <button class="d35-nav" onclick="d35Go(-1)" aria-label="Previous morning"${d5T()<=0?' disabled':''}>‹</button>${fvTodaySel()}<button class="d35-nav" onclick="d35Go(1)" aria-label="Next morning"${d5T()>=25?' disabled':''}>›</button></div>
+    <div class="d35-y">${y}</div>
+    <div class="d35-ks">${k("Today's opening AR",fmc(L.open[t]),t===s0?'Same as the week today':'Yesterday\'s actual close · '+d35Sg(L.open[t]-Bl.open[t],false)+' vs Monday')}
+      ${k("Week's opening AR",fmc(L.open[s0]),'Held since '+d5Lab(B.days[s0].d),'fix')}
+      ${k('Week landing · closing AR',fmc(L.close[e0]),d35Sg(L.close[e0]-Bl.close[e0],false)+' vs Monday baseline')}
+      ${k('Collections week to date',t>s0?fmc(wtd):'$0M',t>s0?d35Sg(wtd-wtdB,true)+' vs Monday baseline':'No actuals yet this week')}</div>
+    ${d35Chart(Z)}
+    <div class="dly-tw"><table class="t d35-t"><thead><tr><th>Day</th><th>Status</th><th class="r">Opening AR</th><th class="r">Billings</th><th class="r">Collections</th><th class="r">Deductions</th><th class="r">Write-offs</th><th class="r">Closing AR</th><th class="r">vs Monday baseline</th></tr></thead>
+      <tbody>${rows}${tot}</tbody></table></div></div>`}
+
+function d35Treas(){const bu=S.bu,{B,w,s0,L,Bl}=d35Now(bu),wks=[];for(let k=w;k<w+5;k++){const ix=B.days.map((o,i)=>i).filter(i=>B.days[i].w===k);if(ix.length)wks.push(ix)}
+  const sum=(S2,k,ix)=>ix.reduce((a,i)=>a+S2[k][i],0);
+  const rows=wks.map((ix,j)=>{const a=ix[0],b=ix[ix.length-1],c=sum(Bl,'c',ix),cl=sum(L,'c',ix);
+    const da=hzAdd(B.days[a].d,1-(B.days[a].d.getDay()||7)),db=hzAdd(da,4),hol=[0,1,2,3,4].some(k=>D35_HOL.has(hzIso(hzAdd(da,k)))),
+      rg=d35Md(da)+' – '+(da.getMonth()===db.getMonth()?db.getDate():d35Md(db)),tg=[j===0?'this week':'',hol?'bank holiday':''].filter(Boolean).join(' · ');
+    return `<tr><td class="d35-wk"><b>${rg}</b>${tg?`<small class="txt-mut">${tg}</small>`:''}</td>
+      <td class="r tnum">${fmc(Bl.open[a])}</td><td class="r tnum">${fmc(sum(Bl,'b',ix))}</td><td class="r tnum"><b>${fmc(c)}</b></td><td class="r tnum">${fmc(sum(Bl,'x',ix)+sum(Bl,'wo',ix))}</td><td class="r tnum">${fmc(Bl.close[b])}</td>
+      <td class="r tnum">${fmc(cl)}</td><td class="r tnum">${d35Sg(cl-c,true)}</td></tr>`}).join('');
+  const all=wks.flat();
+  return `<div class="card mb d35-tr"><div class="ch"><h3>Five weeks for Treasury</h3><span class="sp"></span><span class="dl nt">Monday baseline · ${d5Lab(B.days[s0].d)} 06:10 ET</span></div>
+    <div class="dly-tw"><table class="t d35-t"><thead><tr><th>Week</th><th class="r">Opening AR</th><th class="r">Forecasted billings</th><th class="r">Forecasted collections</th><th class="r">Deductions and write-offs</th><th class="r">Forecasted closing AR</th><th class="r">Latest collections</th><th class="r">Change</th></tr></thead>
+      <tbody>${rows}<tr class="d35-tot"><td><b>Five weeks</b></td><td class="r tnum">${fmc(Bl.open[all[0]])}</td><td class="r tnum">${fmc(sum(Bl,'b',all))}</td><td class="r tnum"><b>${fmc(sum(Bl,'c',all))}</b></td><td class="r tnum">${fmc(sum(Bl,'x',all)+sum(Bl,'wo',all))}</td>
+      <td class="r tnum">${fmc(Bl.close[all[all.length-1]])}</td><td class="r tnum">${fmc(sum(L,'c',all))}</td><td class="r tnum">${d35Sg(sum(L,'c',all)-sum(Bl,'c',all),true)}</td></tr></tbody></table></div></div>`}
+
+/* on the Performance Workspace, 13-Week Rolling: after the headline, before the chart */
+pageFx=(function(f0){return function(){const h=f0.apply(this,arguments);if(S.hz!=='W13'||!can('pw.daily'))return h;
+  const i=h.indexOf('<div class="card mb v30-cc">');if(i<0)return h;let add='';try{add=d35Card()+d35Treas()}catch(e){console.error(e)}return h.slice(0,i)+add+h.slice(i)}})(pageFx);
+
+/* ============================ MK v36 · PERFORMANCE WORKSPACE: EASIER FOR A NEW USER ============================
+   1. Freshness in the header: the window, the business unit, when the forecast ran and how far actuals reach (they move with the demo day).
+   2. A sticky section bar (Overview · This week · Over time · Customers · Insights · Leadership · Actions) with a light label on each
+      section; it follows the scroll and jumps on click. Sections a person can't see (access, horizon) drop out.
+   3. A "?" in the page header: a short guided tour (runs once per person on their first visit; reset brings it back) and the terms.
+   4. Business units: share of collections shows as a bar. */
+const P36_SEC=[['over','Overview',['.eq']],['week','This week',['.d35']],['time','Over time',['.v30-cc','h3:AR roll-forward']],
+  ['cust','Customers',['h3:Top customers by collections','h3:Scenario range']],['ins','Insights',['h3:AI observations']],
+  ['lead','Leadership',['h3:Situation room','h3:Does growth sustain itself?','h3:Phase 1 pilot value scorecard']],['act','Actions',['.fx-pb']]];
+const P36_TERMS=[['Opening AR','What customers owe at the start of the period, from the AR ledger.'],
+  ['Forecasted billings','Invoices expected from net sales, before they turn into cash.'],
+  ['Forecasted collections','Cash expected from customers over the period.'],
+  ['Deductions','Credits, short-pays and pricing deductions that reduce what customers owe without cash.'],
+  ['Write-offs','Balances written off at month-end close.'],
+  ['Forecasted closing AR','What customers will owe at the end of the period.'],
+  ['AOP','The annual operating plan the forecast is measured against.'],
+  ['Monday baseline','The forecast as it stood on Monday morning. The week is measured against it, and Treasury gets its first five weeks.'],
+  ['Known','Cash already in the system: remittances, scheduled debits and open invoices.'],
+  ['Predicted','The part the Forecast Agent estimates: what is not yet billed or announced.'],
+  ['Late cash','Cash that was due and did not arrive. It is expected over the next two business days, then treated as lost.'],
+  ['Days to pay','Average days from invoice to cash.'],
+  ['BD9','The ninth business day of the month, when the full-year forecast is submitted.']];
+const p36Act=()=>{const T=d5T();return T?D5_DAYS[T-1]:null};
+/* 1 · header: freshness, not a sentence */
+function v30Meta(k){const a=p36Act(),T=d5T(),mor=T<25?D5_DAYS[T]:new Date(2026,11,21);
+  return `<span class="m36">${v30Dt(V30_S[k])} – ${v30Dt(V30_E[k])}</span><span class="m36">${BU_NAMES[S.bu]}</span>`+
+    `<span class="m36" data-tip="${esc('<b>Forecast</b><br>Run Mon Nov 16 at 06:10 ET; the tiles show this forecast')}">Forecast · Mon Nov 16, 06:10 ET</span>`+
+    `<span class="m36 m36a" data-tip="${esc('<b>Actuals</b><br>'+(a?'In through '+d5Lab(a)+'; the next day lands '+d5Lab(mor)+' at 06:10 ET':'None yet; the first day lands Tue Nov 17 at 06:10 ET'))}"><i></i>${a?'Actuals through '+d5Lab(a):'No actuals yet'}</span>`}
+
+/* 2 · sections */
+function p36Find(root,q){if(q.startsWith('h3:')){const t=q.slice(3);const h=[...root.querySelectorAll('.card > .ch h3')].find(x=>v32Txt(x).startsWith(t));if(!h)return null;let b=h.closest('.card');while(b&&b.parentElement!==root)b=b.parentElement;return b}
+  const e=root.querySelector(q);if(!e)return null;let b=e;while(b&&b.parentElement!==root)b=b.parentElement;return b}
+function p36Apply(){if(S.tab!=='tower'||S.view==='bridge')return;const root=document.querySelector('#main .v30');if(!root||root.querySelector(':scope > .n36'))return;
+  const ctl=root.querySelector(':scope > .ctlr')||root.querySelector(':scope > .page-h');if(!ctl)return;const found=[];
+  P36_SEC.forEach(([id,lab,qs])=>{for(const q of qs){const b=p36Find(root,q);if(b){found.push({id,lab,b});break}}});
+  if(found.length<2)return;
+  found.forEach(f=>f.b.insertAdjacentHTML('beforebegin',`<div class="s36" id="s36-${f.id}"><span>${f.lab}</span></div>`));
+  ctl.insertAdjacentHTML('afterend',`<nav class="n36" aria-label="Sections">${found.map((f,i)=>`<button type="button" class="${i?'':'on'}" data-s="${f.id}" onclick="p36Go('${f.id}')">${f.lab}</button>`).join('')}</nav>`);
+  const ph=root.querySelector(':scope > .page-h');if(ph&&!ph.querySelector('.h36'))ph.insertAdjacentHTML('beforeend',`<button type="button" class="h36" aria-label="Help" aria-haspopup="menu" onclick="p36Help(event)">?</button>`);
+  p36Spy();p36Bars();if(P36.auto)setTimeout(p36Auto,700)}
+const P36={auto:true,on:null};
+function p36Sc(){return document.getElementById('main')}
+function p36Go(id){const s=document.getElementById('s36-'+id),sc=p36Sc(),nv=document.querySelector('.n36');if(!s||!sc)return;
+  const y=Math.max(0,Math.min(sc.scrollHeight-sc.clientHeight,sc.scrollTop+s.getBoundingClientRect().top-sc.getBoundingClientRect().top-(nv?nv.offsetHeight:0)-6));
+  if(document.hidden||matchMedia('(prefers-reduced-motion: reduce)').matches){sc.scrollTop=y;p36Spy();return}
+  sc.scrollTo({top:y,behavior:'smooth'});setTimeout(()=>{if(Math.abs(sc.scrollTop-y)>2)sc.scrollTop=y;p36Spy()},700)}
+function p36Spy(){const sc=p36Sc(),nv=document.querySelector('.n36');if(!sc||!nv)return;const top=sc.getBoundingClientRect().top+nv.offsetHeight+24;let cur=null;
+  document.querySelectorAll('#main .s36').forEach(s=>{if(s.getBoundingClientRect().top<=top)cur=s.id.slice(4)});
+  if(sc.scrollTop+sc.clientHeight>=sc.scrollHeight-4){const all=document.querySelectorAll('#main .s36');if(all.length)cur=all[all.length-1].id.slice(4)}
+  cur=cur||(nv.querySelector('button')||{}).dataset?.s;nv.querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.s===cur));
+  nv.classList.toggle('stuck',nv.getBoundingClientRect().top<=sc.getBoundingClientRect().top+1&&sc.scrollTop>0)}
+(function(){const sc=p36Sc();if(sc)sc.addEventListener('scroll',()=>{if(document.querySelector('.n36'))p36Spy();if(P36.on!=null)p36Place()},{passive:true})})();
+
+/* 4 · business units: share of collections as a bar */
+function p36Bars(){document.querySelectorAll('#main .v32-bu tbody tr').forEach(tr=>{const td=tr.lastElementChild;if(!td||td.querySelector('.b36'))return;const v=parseFloat(td.textContent);if(!isFinite(v))return;
+  td.insertAdjacentHTML('afterbegin',`<span class="b36" aria-hidden="true"><i style="width:${Math.max(0,Math.min(100,v))}%"></i></span>`)})}
+
+/* 3 · help: tour and terms */
+function p36Close(){document.querySelectorAll('.h36-m,.h36-t').forEach(e=>e.remove())}
+function p36Help(ev){ev.stopPropagation();const open=document.querySelector('.h36-m');p36Close();if(open)return;const b=ev.currentTarget.getBoundingClientRect();
+  document.body.insertAdjacentHTML('beforeend',`<div class="h36-m" role="menu" style="top:${b.bottom+8}px;right:${innerWidth-b.right}px"><button role="menuitem" onclick="p36Close();p36Tour(0)">Take the tour</button><button role="menuitem" onclick="p36Terms()">Terms</button></div>`)}
+function p36Terms(){const b=document.querySelector('.h36');p36Close();if(!b)return;const r=b.getBoundingClientRect();
+  document.body.insertAdjacentHTML('beforeend',`<div class="h36-t" role="dialog" aria-label="Terms" style="top:${r.bottom+8}px;right:${innerWidth-r.right}px"><div class="h36-th"><b>Terms</b><button aria-label="Close" onclick="p36Close()">✕</button></div>
+    <dl>${P36_TERMS.map(([t,d])=>`<dt>${t}</dt><dd>${d}</dd>`).join('')}</dl></div>`)}
+document.addEventListener('click',e=>{if(!e.target.closest('.h36-m,.h36-t,.h36'))p36Close()});
+document.addEventListener('keydown',e=>{if(e.key!=='Escape')return;if(P36.on!=null)p36End();else p36Close()});
+
+function p36Steps(){const s=[['#hzSeg','Time frame','Switch between 13 weeks by day, month or quarter to fiscal year-end, and the long-range plan.'],
+    ['#buSeg','Business unit','See all business units together or one at a time. Every number on the page follows.'],
+    ['#main .eq','The forecast in one line','Opening AR plus billings, less collections and deductions, gives closing AR. Click any tile to go down to weeks, days, business units and customers.'],
+    ['#cmpBtn','Compare','Choose what each number is measured against: AOP, a prior forecast, actuals to date or last year.'],
+    ['#main .n36','Sections','Jump straight to this week, the forecast over time, customers, insights or leadership.'],
+    ['#main .d35','Morning by morning','Step through the mornings: actuals land each day and the rest of the week is re-forecast against the Monday baseline.'],
+    ['.askbtn','Ask AI','Ask about any number on screen. The i on every tile and card says what it shows, and the ? brings back this tour and the terms.']];
+  return s.filter(x=>{const e=document.querySelector(x[0]);return e&&e.offsetParent!==null})}
+function p36Auto(){if(P36.on!=null||!S.user||S.tab!=='tower'||S.view==='bridge')return;const lg=document.getElementById('login');if(lg&&lg.offsetParent!==null)return;
+  let seen=[];try{seen=JSON.parse(localStorage.getItem('mk.tour36')||'[]')}catch(e){}if(seen.includes(S.user))return;P36.auto=false;p36Tour(0)}
+function p36Seen(){let seen=[];try{seen=JSON.parse(localStorage.getItem('mk.tour36')||'[]')}catch(e){}if(!seen.includes(S.user)){seen.push(S.user);try{localStorage.setItem('mk.tour36',JSON.stringify(seen))}catch(e){}}}
+function p36Tour(i){const st=p36Steps();if(!st.length)return;P36.st=st;P36.on=Math.max(0,Math.min(i,st.length-1));
+  if(!document.getElementById('t36'))document.body.insertAdjacentHTML('beforeend',`<div id="t36" role="dialog" aria-modal="true" aria-label="Tour"><div class="t36-hole"></div><div class="t36-pop"></div></div>`);
+  const e=document.querySelector(st[P36.on][0]),sc=p36Sc();if(e&&sc&&sc.contains(e)){const r=e.getBoundingClientRect(),sr=sc.getBoundingClientRect(),nv=document.querySelector('.n36'),pad=(nv&&!e.classList.contains('n36')?nv.offsetHeight:0)+16;
+    if(r.top<sr.top+pad||r.top>sr.top+sr.height*.45)sc.scrollTop+=r.top-sr.top-pad-(e.classList.contains('n36')?0:8)}
+  const [sel,h,d]=st[P36.on],n=st.length,last=P36.on===n-1;
+  document.querySelector('#t36 .t36-pop').innerHTML=`<div class="t36-k">${P36.on+1} of ${n}</div><b>${h}</b><p>${d}</p><div class="t36-b"><button class="t36-s" onclick="p36End()">${last?'Close':'Skip tour'}</button><span class="sp"></span>${P36.on?'<button onclick="p36Tour(P36.on-1)">Back</button>':''}<button class="t36-n" onclick="${last?'p36End()':'p36Tour(P36.on+1)'}">${last?'Done':'Next'}</button></div>`;
+  requestAnimationFrame(p36Place);setTimeout(p36Place,60);const nb=document.querySelector('#t36 .t36-n');if(nb)nb.focus()}
+function p36Place(){if(P36.on==null)return;const st=P36.st[P36.on],e=document.querySelector(st[0]),hole=document.querySelector('#t36 .t36-hole'),pop=document.querySelector('#t36 .t36-pop');if(!e||!hole||!pop)return;
+  const r=e.getBoundingClientRect(),pd=6,vh=innerHeight,vw=innerWidth,H=Math.min(r.height+pd*2,vh*.55);
+  Object.assign(hole.style,{left:(r.left-pd)+'px',top:(r.top-pd)+'px',width:(r.width+pd*2)+'px',height:H+'px'});
+  const pw=pop.offsetWidth,ph=pop.offsetHeight;let top=r.top-pd+H+12;if(top+ph>vh-12)top=Math.max(12,r.top-pd-ph-12);
+  let left=Math.min(Math.max(12,r.left),vw-pw-12);pop.style.left=left+'px';pop.style.top=top+'px'}
+function p36End(){P36.on=null;const t=document.getElementById('t36');if(t)t.remove();p36Seen()}
+addEventListener('resize',()=>{if(P36.on!=null)p36Place()});
+
+render=(function(f0){return function(){const r=f0.apply(this,arguments);try{p36Apply()}catch(e){console.error(e)}return r}})(render);
+(function(){let q=false;const m=document.getElementById('main');if(m)new MutationObserver(()=>{if(q)return;q=true;setTimeout(()=>{q=false;try{p36Apply()}catch(e){}},40)}).observe(m,{childList:true,subtree:true})})();
+
+/* ============================ MK v37 · ACTUAL AND FORECAST, READ AT A GLANCE (IBCS notation) ============================
+   Solid = actual, hatched = forecast (International Business Communication Standards; plan stays an outlined reference).
+   - A window strip above the tiles: the horizon in time, the days already in (actual) and the days still to come (forecast), today.
+   - Every flow tile splits its number: Actual so far + Forecast still to come, as a bar and two rows, plus "vs forecast":
+     how far the latest view (actuals to date + the forecast re-run for the rest) has moved from the forecast in the headline.
+   - Opening AR is all actual; closing AR gets a balance line (solid to this morning, dashed after).
+   - The headline numbers do not change: they are still the forecast the whole page ties to. The "Actual" compare row leaves
+     the tiles, because its value covered only the days in and read like the tile's actual. */
+function p37Data(){const k=S.hz,bu=S.bu;return v30C('p37'+k+bu,()=>{const R=v30Tree(k,bu),lv=[];(function f(n){if(n.kids&&n.kids.length)n.kids.forEach(f);else lv.push(n)})(R);
+  const o={R,lv,H:{b:R.v.b,c:R.v.c,x:R.v.x},A:{b:0,c:0,x:0},F:{b:0,c:0,x:0},nA:0,nF:0,s:V30_S[k],e:V30_E[k],lastA:null,firstF:null};
+  if(k==='W13'){const Z=d35Now(bu),{B,t,L}=Z;B.days.forEach((d,i)=>{const a=i<t,T=a?o.A:o.F;T.b+=L.b[i];T.c+=L.c[i];T.x+=L.x[i]+L.wo[i];if(a){o.nA+=d.h?0:1;o.lastA=d.d}else{o.nF+=d.h?0:1;if(!o.firstF)o.firstF=d.d}});
+    o.now=L.open[t];o.nowF=null;o.closeL=L.close[L.close.length-1];
+    const fp=[],ap=[];B.days.forEach((d,i)=>{const lf=lv[i];fp.push([d.d,lf?lf.close:L.close[i]]);if(i<t)ap.push([d.d,L.close[i]])});ap.unshift([B.days[0].d,B.open]);o.fp=[[B.days[0].d,R.open]].concat(fp);o.ap=ap;
+    let f0=R.open;for(let i=0;i<t;i++){const v=lv[i].v;f0+=v.b-v.c-v.x}o.nowF=f0}
+  else{let ar=R.open,fa=R.open;const ap=[[o.s,R.open]],fp=[[o.s,R.open]];
+    lv.forEach(n=>{const a=n.st==='act'?n.v:n.st==='land'&&n.a?n.a:null;if(a){o.A.b+=a.b;o.A.c+=a.c;o.A.x+=a.x;ar+=a.b-a.c-a.x;fa+=n.v.b-n.v.c-n.v.x;if(n.day){o.nA++;ap.push([n.e,ar])};o.lastA=n.e}
+      else{o.F.b+=n.v.b;o.F.c+=n.v.c;o.F.x+=n.v.x;if(n.day)o.nF++;if(!o.firstF)o.firstF=n.s}fp.push([n.e,n.close])});
+    o.now=ar;o.nowF=fa;o.closeL=R.close+(ar-fa);o.ap=ap;o.fp=fp}
+  return o})}
+const p37Hatch='<span class="sw37 f"></span>',p37Solid='<span class="sw37 a"></span>';
+const p37Md=d=>HZ_MON[d.getMonth()]+' '+d.getDate()+(d.getFullYear()!==2026&&d.getFullYear()!==2027?', '+d.getFullYear():'');
+function p37Strip(o){const s=+o.s,e=+o.e,now=o.firstF?+o.firstF:e,pct=Math.max(0,Math.min(100,(now-s)/(e-s||1)*100)),T=d5T(),mor=T<25?D5_DAYS[T]:new Date(2026,11,21);
+  const ta=o.lastA?`Actual · ${o.nA} business day${o.nA===1?'':'s'} to ${p37Md(o.lastA)}`:'Actual · none yet';
+  const tf=`Forecast · ${o.nF} business day${o.nF===1?'':'s'}${o.firstF?' from '+p37Md(o.firstF):''}`;
+  return `<div class="w37" role="img" aria-label="${esc(ta+'; '+tf)}"><div class="w37-d"><b>${p37Md(o.s)}</b></div>
+    <div class="w37-b"><span class="a" style="width:${pct}%"></span><span class="f" style="left:${pct}%"></span><span class="td" style="left:${pct}%" data-tip="${esc('<b>Today</b><br>Morning of '+d5Lab(mor))}"></span></div>
+    <div class="w37-d"><b>${p37Md(o.e)}</b></div><div class="w37-k"><span>${p37Solid}${ta}</span><span>${p37Hatch}${tf}</span></div></div>`}
+function p37Row(sw,lab,val,tip,cls){return `<div class="c37-r${cls?' '+cls:''}"${tip?` data-tip="${esc(tip)}"`:''}>${sw}<span>${lab}</span><b class="tnum">${val}</b></div>`}
+function p37Delta(v,good,tip){const z=Math.abs(v)<.05,ok=good?v>=0:v<=0;return `<div class="c37-r c37-d"${tip?` data-tip="${esc(tip)}"`:''}><span class="c37-dg">Δ</span><span>vs forecast</span><b class="tnum ${z?'':ok?'txt-good':'txt-bad'}">${z?'$0M':fs(v)}</b></div>`}
+function p37Flow(o,e,good){const A=o.A[e],F=o.F[e],H=o.H[e],tot=Math.max(1e-9,A+F),pa=A/tot*100,nm={b:'Billings',c:'Collections',x:'Deductions'}[e];
+  const ra=o.lastA?`${p37Md(o.s)} – ${p37Md(o.lastA)}`:'none yet',rf=o.firstF?`${p37Md(o.firstF)} – ${p37Md(o.e)}`:'';
+  return `<div class="c37"><div class="c37-bar" aria-hidden="true"><span class="a" style="width:${pa}%"></span><span class="f" style="width:${100-pa}%"></span></div>
+    ${p37Row(p37Solid,'Actual',fmc(A),`<b>${nm} · actual</b><br>${ra}: <b>${fmc(A)}</b>`)}${p37Row(p37Hatch,'Forecast',fmc(F),`<b>${nm} · forecast still to come</b><br>${rf}: <b>${fmc(F)}</b>`)}
+    ${p37Delta(A+F-H,good,`<b>${nm}</b><br>Actual + forecast: <b>${fmc(A+F)}</b><br>Forecast in the headline: ${fmc(H)}<br>Difference: <b>${fs(A+F-H)}</b>`)}</div>`}
+function p37Spark(o){const s=+o.s,e=+o.e,W=200,Hh=34,all=o.fp.concat(o.ap).map(p=>p[1]);let lo=Math.min(...all),hi=Math.max(...all);const pd=(hi-lo)*.12||1;lo-=pd;hi+=pd;
+  const X=d=>((+d-s)/(e-s||1))*W,Y=v=>Hh-2-(v-lo)/(hi-lo)*(Hh-4),pts=a=>a.map(p=>X(p[0]).toFixed(1)+','+Y(p[1]).toFixed(1)).join(' ');
+  const last=o.ap[o.ap.length-1];
+  return `<svg class="c37-sp" viewBox="0 0 ${W} ${Hh}" preserveAspectRatio="none" aria-hidden="true"><polyline points="${pts(o.fp)}" fill="none" stroke="#5B9BD5" stroke-width="1.6" stroke-dasharray="4 3" vector-effect="non-scaling-stroke"/>
+    <polyline points="${pts(o.ap)}" fill="none" stroke="var(--navy)" stroke-width="2.2" vector-effect="non-scaling-stroke"/></svg>
+    <div class="c37-spd" style="left:${(X(last[0])/W*100).toFixed(1)}%;top:${(Y(last[1])/Hh*100).toFixed(1)}%"></div>`}
+function p37Apply(){if(S.tab!=='tower'||S.view==='bridge'||!fxIs())return;const eq=document.querySelector('#main .v30 .eq');if(!eq||eq.dataset.p37)return;eq.dataset.p37='1';
+  let o;try{o=p37Data()}catch(err){console.error(err);return}
+  const tiles=[...eq.querySelectorAll('.kpi')],kind=t=>((t.getAttribute('onclick')||'').match(/gdOpen\('([a-z]+)'/)||[])[1];
+  tiles.forEach((t,i)=>{const k=kind(t),val=t.querySelector('.val');if(!val)return;
+    t.querySelectorAll('.cr').forEach(r=>{const l=r.querySelector('.crl');if(l&&/^Actual\b/.test(l.textContent.trim()))r.remove()});
+    let h='';if(k==='b')h=p37Flow(o,'b',true);else if(k==='c')h=p37Flow(o,'c',true);else if(k==='x')h=p37Flow(o,'x',false);
+    else if(k==='ar'&&i===0)h=`<div class="c37"><div class="c37-bar" aria-hidden="true"><span class="a" style="width:100%"></span></div>${p37Row(p37Solid,'Actual','100%','<b>Opening AR</b><br>From the AR ledger at the start of the window')}${p37Row(p37Solid,'This morning',fmc(o.now),'<b>AR this morning</b><br>Actual, after the days already in')}${p37Delta(o.now-o.nowF,false,'<b>AR this morning</b><br>Actual: <b>'+fmc(o.now)+'</b><br>Forecast for this morning: '+fmc(o.nowF)+'<br>Difference: <b>'+fs(o.now-o.nowF)+'</b>')}</div>`;
+    else if(k==='ar')h=`<div class="c37 c37-cl"><div class="c37-spw">${p37Spark(o)}</div>${p37Row(p37Solid,'This morning',fmc(o.now),'<b>AR this morning</b><br>Actual')}${p37Delta(o.closeL-o.R.close,false,'<b>Closing AR</b><br>Actual to date + forecast: <b>'+fmc(o.closeL)+'</b><br>Forecast in the headline: '+fmc(o.R.close)+'<br>Difference: <b>'+fs(o.closeL-o.R.close)+'</b>')}</div>`;
+    if(!h)return;const crs=t.querySelector(':scope > .crs');if(crs)crs.insertAdjacentHTML('beforebegin',h);else t.insertAdjacentHTML('beforeend',h)});
+  const lab=document.getElementById('s36-over');eq.insertAdjacentHTML('beforebegin',p37Strip(o));const w=eq.previousElementSibling;if(lab&&w&&(w.compareDocumentPosition(lab)&Node.DOCUMENT_POSITION_FOLLOWING))lab.after(w)}
+render=(function(f0){return function(){const r=f0.apply(this,arguments);try{p37Apply()}catch(e){console.error(e)}return r}})(render);
+(function(){let q=false;const m=document.getElementById('main');if(m)new MutationObserver(()=>{if(q)return;q=true;setTimeout(()=>{q=false;try{p37Apply()}catch(e){}},45)}).observe(m,{childList:true,subtree:true})})();
+/* the tour reads the new tiles; the terms gain the notation */
+P36_TERMS.splice(0,0,['Solid and hatched','Solid is actual (already happened); hatched is forecast (still to come).']);
+P36_TERMS.push(['vs forecast','How far actuals to date plus the updated forecast have moved from the forecast shown in the headline.']);
+function p36Steps(){const s=[['#hzSeg','Time frame','Switch between 13 weeks by day, month or quarter to fiscal year-end, and the long-range plan.'],
+    ['#buSeg','Business unit','See all business units together or one at a time. Every number on the page follows.'],
+    ['#main .w37','Actual and forecast','Solid is actual, hatched is forecast. The strip shows how much of the window is already in and where today is.'],
+    ['#main .eq','The forecast in one line','Opening AR plus billings, less collections and deductions, gives closing AR. Each tile splits into actual so far and forecast still to come. Click a tile to go down to weeks, days, business units and customers.'],
+    ['#cmpBtn','Compare','Choose what each number is measured against: AOP, a prior forecast or last year.'],
+    ['#main .n36','Sections','Jump straight to this week, the forecast over time, customers, insights or leadership.'],
+    ['#main .d35','Morning by morning','Step through the mornings: actuals land each day and the rest of the week is re-forecast against the Monday baseline.'],
+    ['.askbtn','Ask AI','Ask about any number on screen. The i on every tile and card says what it shows, and the ? brings back this tour and the terms.']];
+  return s.filter(x=>{const e=document.querySelector(x[0]);return e&&e.offsetParent!==null})}
+
+/* ============================ MK v38 · PERFORMANCE WORKSPACE, REDESIGNED AS ONE PAGE ============================
+   Principles: answer first, detail on demand, one notation, controls that stay in reach.
+   1. One control bar: the section bar now carries Compare on its right and stays at the top while scrolling (the separate Compare row goes).
+   2. Fold any section: a folded section shows a one-line summary. Defaults follow the role (role first): leaders (Director, VP)
+      start with "This week" folded; everyone else with Leadership and Actions folded. Each person's choice is remembered.
+   3. One notation everywhere (IBCS): actual = dark solid, forecast = blue (hatched where it is a share), plan = outlined, today = orange,
+      a held anchor (the week's opening AR) = slate. Charts, roll-forward markers and the daily card follow it.
+   4. Long lists open short: insights show 6 notes and the roll-forward 6 periods, each with "Show all". */
+const P38={s:{},aiAll:false,rfAll:false};
+V30_COL.act='#00264D';
+function p38Lead(){const u=typeof accMe==='function'?accMe():null,r=u&&u.role;return r==='dir'||r==='vp'}
+function p38State(){const u=S.user||'_';if(!P38.s[u]){let st=null;try{st=(JSON.parse(localStorage.getItem('mk.pw38')||'{}'))[u]}catch(e){}
+  if(!st)st=p38Lead()?{week:1}:{lead:1,act:1};P38.s[u]=st}return P38.s[u]}
+function p38Save(){try{const all=JSON.parse(localStorage.getItem('mk.pw38')||'{}');all[S.user||'_']=p38State();localStorage.setItem('mk.pw38',JSON.stringify(all))}catch(e){}}
+function p38Tog(id){const st=p38State();if(st[id])delete st[id];else st[id]=1;p38Save();p38Fold();if(typeof p36Spy==='function')p36Spy()}
+p36Go=(function(f0){return function(id){const st=p38State();if(st[id]){delete st[id];p38Save();p38Fold()}return f0(id)}})(p36Go);
+const p38T=el=>el?el.textContent.replace(/\s+/g,' ').trim():'';
+function p38Sum(id,root){try{
+  if(id==='over'){const v=[...root.querySelectorAll('.eq .kpi .val')].map(p38T);return v.length===5?`Collections ${v[2]} · Closing AR ${v[4]}`:''}
+  if(id==='week'){const v=[...root.querySelectorAll('.d35-k .v')].map(p38T);return v.length>=4?`Week landing ${v[2]} · Collections to date ${v[3]}`:''}
+  if(id==='time'){const R=v30Tree(S.hz,S.bu),k=R.kids;return k&&k.length?`${k.length} ${{W13:'weeks',YE:'months',QE:'quarters',Y3:'fiscal years'}[S.hz]||'periods'} · ${k[0].lab} – ${k[k.length-1].lab}`:''}
+  if(id==='cust'){const r=root.querySelector('.v30-ctb tbody tr');if(!r)return '';const n=r.querySelector('td:nth-child(2) b'),v=r.querySelector('td.r b');return n&&v?`Largest: ${p38T(n)} ${p38T(v)}`:''}
+  if(id==='ins'){const n=root.querySelectorAll('.ain > .ai-it').length;return n?`${n} note${n===1?'':'s'}`:''}
+  if(id==='lead'){const s=document.getElementById('s36-lead');const t=[];let el=s&&s.nextElementSibling;
+    while(el&&!el.classList.contains('s36')){el.querySelectorAll('.card > .ch h3').forEach(h=>{const c=h.closest('.card'),n=v32Txt(h);
+      if(/^Situation room/.test(n)){const k=c.querySelectorAll('.pc').length;t.push(k?`${k} situation${k===1?'':'s'}`:n)}
+      else if(/^Does growth/.test(n)){const kp=[...c.querySelectorAll('.kpi')].find(x=>/Cash absorbed/.test(p38T(x.querySelector('.lab'))));t.push(kp?`Cash absorbed by AR build ${p38T(kp.querySelector('.val'))}`:n)}
+      else if(/pilot value scorecard/.test(n)){const b=c.querySelector('.ch .badge');t.push(b?`Pilot ${p38T(b).charAt(0).toLowerCase()+p38T(b).slice(1)}`:n)}
+      else t.push(n)});el=el.nextElementSibling}return t.join(' · ')}
+  if(id==='act'){const it=[...root.querySelectorAll('.fx-pb .prac > *')],n=it.length;if(!n)return '';const f=it[0],k=p38T(f.querySelector('.k')),v=p38T(f.querySelector('.n'));
+    return `${n} levers`+(k&&v?` · ${k.charAt(0)+k.slice(1).toLowerCase()} ${v}`:'')}}catch(e){}return ''}
+function p38Fold(){const root=document.querySelector('#main .v30');if(!root)return;const st=p38State();
+  root.querySelectorAll(':scope > .s36').forEach(lab=>{const id=lab.id.slice(4),c=!!st[id];lab.classList.toggle('s38-off',c);const b=lab.querySelector('.s38-t');if(b)b.setAttribute('aria-expanded',String(!c));
+    let el=lab.nextElementSibling;while(el&&!el.classList.contains('s36')){el.classList.toggle('p38-hid',c);el=el.nextElementSibling}
+    const sm=lab.querySelector('.s38-sum');if(sm)sm.textContent=c?p38Sum(id,root):''});
+  const nv=root.querySelector(':scope > .n36');if(nv)nv.querySelectorAll('button[data-s]').forEach(b=>b.classList.toggle('s38-fold',!!st[b.dataset.s]))}
+/* long lists open short */
+function p38Short(root){
+  const ai=root.querySelector('.ain');if(ai){const it=[...ai.children].filter(e=>e.classList.contains('ai-it')),n=it.length,old=ai.parentElement.querySelector('.m38');if(old)old.remove();
+    if(n>6){it.forEach((e,i)=>e.classList.toggle('p38-hid',!P38.aiAll&&i>=6));ai.insertAdjacentHTML('afterend',`<button type="button" class="m38" onclick="P38.aiAll=!P38.aiAll;p38Short(document.querySelector('#main .v30'))">${P38.aiAll?'Show fewer':'Show all '+n}</button>`)}}
+  const h=[...root.querySelectorAll('.card > .ch h3')].find(x=>v32Txt(x).startsWith('AR roll-forward'));if(!h)return;const card=h.closest('.card'),rows=[...card.querySelectorAll('tbody tr')],top=rows.filter(r=>r.classList.contains('d0'));
+  const old=card.querySelector('.m38');if(old)old.remove();if(top.length<=8){rows.forEach(r=>r.classList.remove('p38-hid'));return}
+  let k=-1;rows.forEach(r=>{if(r.classList.contains('d0'))k++;r.classList.toggle('p38-hid',!P38.rfAll&&k>=6)});
+  const tw=card.querySelector('table');(tw.closest('.dly-tw')||tw).insertAdjacentHTML('afterend',`<button type="button" class="m38" onclick="P38.rfAll=!P38.rfAll;p38Short(document.querySelector('#main .v30'))">${P38.rfAll?'Show fewer':'Show all '+top.length}</button>`)}
+function p38Apply(){if(S.tab!=='tower'||S.view==='bridge')return;const root=document.querySelector('#main .v30');if(!root||root.dataset.p38)return;
+  const nv=root.querySelector(':scope > .n36');if(!nv)return;root.dataset.p38='1';
+  const cb=document.getElementById('cmpBtn'),row=root.querySelector(':scope > .ctlr');
+  if(cb&&!nv.contains(cb)){nv.insertAdjacentHTML('beforeend','<span class="n38-sp"></span>');nv.appendChild(cb);if(row&&!row.children.length)row.remove();else if(row)row.classList.add('p38-hid')}
+  root.querySelectorAll(':scope > .s36').forEach(lab=>{if(lab.querySelector('.s38-t'))return;const id=lab.id.slice(4),t=p38T(lab);
+    lab.insertAdjacentHTML('afterbegin',`<button type="button" class="s38-t" aria-expanded="true" aria-label="Fold or unfold ${esc(t)}" onclick="p38Tog('${id}')"></button>`);
+    lab.insertAdjacentHTML('beforeend','<span class="s38-sum"></span>');lab.querySelector('span').setAttribute('onclick',`p38Tog('${id}')`)});
+  p38Short(root);p38Fold()}
+render=(function(f0){return function(){const r=f0.apply(this,arguments);try{p38Apply()}catch(e){console.error(e)}return r}})(render);
+(function(){let q=false;const m=document.getElementById('main');if(m)new MutationObserver(()=>{if(q)return;q=true;setTimeout(()=>{q=false;try{p38Apply()}catch(e){}},55)}).observe(m,{childList:true,subtree:true})})();
+
+/* the daily card in the same notation: actual dark, forecast dashed blue, the week's opening AR slate, today orange */
+function d35Chart(Z){const {B,t,w,L}=Z,w0=Math.max(0,w-1),ix=B.days.map((o,i)=>i).filter(i=>B.days[i].w>=w0&&B.days[i].w<w0+5);
+  const W=1120,H=230,ml=72,mr=16,mt=22,mb=34,pw=W-ml-mr,ph=H-mt-mb,N=ix.length,X=j=>ml+pw*(N>1?j/(N-1):.5);
+  const vals=ix.map(i=>L.open[i]);let lo=Math.min(...vals),hi=Math.max(...vals);const pd=(hi-lo)*.15+20;lo-=pd;hi+=pd;const Y=v=>mt+ph*(1-(v-lo)/(hi-lo));
+  let s='';for(let k=0;k<4;k++){const v=lo+(hi-lo)*k/3;s+=`<line x1="${ml}" x2="${W-mr}" y1="${Y(v)}" y2="${Y(v)}" stroke="var(--grid)"/><text x="${ml-8}" y="${Y(v)+4}" text-anchor="end" class="d35-ax">${fmc(v)}</text>`}
+  const wks=[...new Set(ix.map(i=>B.days[i].w))];
+  wks.forEach(k=>{const js=ix.map((i,j)=>B.days[i].w===k?j:-1).filter(j=>j>=0),j0=js[0],j1=Math.min(N-1,js[js.length-1]+1),v=L.open[ix[j0]],fut=k>w;
+    s+=`<line x1="${X(j0)}" x2="${X(j1)}" y1="${Y(v)}" y2="${Y(v)}" stroke="#46566A" stroke-width="2.6"${fut?' stroke-dasharray="7 5" stroke-opacity=".55"':''}/>`;
+    s+=`<text x="${X(j0)}" y="${H-12}" class="d35-ax">${d35Md(B.days[ix[j0]].d)}</text>`});
+  const tj=ix.indexOf(t);let pa='',pf='';ix.forEach((i,j)=>{const p=X(j)+','+Y(L.open[i]);if(i<=t)pa+=(pa?' L':'M')+p;if(i>=t)pf+=(pf?' L':'M')+p});
+  if(tj>=0)s+=`<line x1="${X(tj)}" x2="${X(tj)}" y1="${mt}" y2="${mt+ph}" stroke="var(--orange)" stroke-width="2" stroke-dasharray="3 4"/><text x="${X(tj)}" y="${mt-6}" text-anchor="middle" class="d35-ax d35-td">Today</text>`;
+  s+=`<path d="${pf}" fill="none" stroke="#5B9BD5" stroke-width="2.2" stroke-dasharray="6 5"/><path d="${pa}" fill="none" stroke="var(--navy)" stroke-width="2.6" stroke-linejoin="round"/>`;
+  ix.forEach((i,j)=>{const on=i===t;s+=`<circle cx="${X(j)}" cy="${Y(L.open[i])}" r="${on?6:3}" fill="${on?'var(--orange)':i<t?'var(--navy)':'#5B9BD5'}" stroke="#fff" stroke-width="${on?2:0}" data-tip="${esc('<b>'+d5Lab(B.days[i].d)+'</b><br>Opening AR <b>'+fmc(L.open[i])+'</b>'+(i<t?' · actual':' · forecast'))}"/>`});
+  return `<div class="d35-lg"><span><i class="d35-li"></i>Day opening AR · actual</span><span><i class="d35-li fc"></i>Day opening AR · forecast</span><span><i class="d35-li wk"></i>Week opening AR</span><span><i class="d35-li td"></i>Today</span></div>
+    <svg class="d35-ch" viewBox="0 0 ${W} ${H}" role="img" aria-label="Opening AR by day and by week">${s}</svg>`}
+
+/* the tour and the terms follow the new layout */
+function p36Steps(){const s=[['#hzSeg','Time frame','Switch between 13 weeks by day, month or quarter to fiscal year-end, and the long-range plan.'],
+    ['#buSeg','Business unit','See all business units together or one at a time. Every number on the page follows.'],
+    ['#main .w37','Actual and forecast','Solid is actual, hatched is forecast. The strip shows how much of the window is already in and where today is.'],
+    ['#main .eq','The forecast in one line','Opening AR plus billings, less collections and deductions, gives closing AR. Each tile splits into actual so far and forecast still to come. Click a tile to go down to weeks, days, business units and customers.'],
+    ['#main .n36','Sections and Compare','Jump to any part of the page; fold a section to see it as one line. Compare sets what the numbers are measured against: AOP, a prior forecast or last year.'],
+    ['#main .d35','Morning by morning','Step through the mornings: actuals land each day and the rest of the week is re-forecast against the Monday baseline.'],
+    ['.askbtn','Ask AI','Ask about any number on screen. The i on every tile and card says what it shows, and the ? brings back this tour and the terms.']];
+  return s.filter(x=>{const e=document.querySelector(x[0]);return e&&e.offsetParent!==null})}
+P36_TERMS.splice(1,0,['Today','Marked in orange on every strip, line and chart.']);
+
+/* ============================ MK v39 · THIS WEEK, BUILT AROUND THE MONDAY BASELINE ============================
+   The Monday baseline (weeks 1–5 shared with Treasury) is the version the team acts on. The daily run re-forecasts all 13 weeks
+   every morning, is saved as a secondary version, and raises a heads-up when it moves away from what Treasury has.
+   1. This week: a calendar of the window, the AR bridge for the week (opening AR + billings − collections − deductions − write-offs
+      = closing AR) for the Monday baseline, actual to date, the rest of the week from today's run and the change, and the days.
+   2. Heads-up for Treasury: today's run against what Treasury has (the Monday baseline, or the last update sent), day and week
+      thresholds, call-outs (late cash, cash moving to next week, cash treated as lost, new items) and the update itself.
+   3. Versions: each Monday baseline for the weeks ahead, week on week; this week's daily runs.
+   Demo story (actuals at the source, so every page ties): Tue Nov 17 a chain payment run slips and lands Wednesday;
+   Thu Nov 19 an oncology payment run slips to Monday, so Friday's run moves part of it into next week. */
+const D39_SLIP={USPD:{'2026-11-17':-180,'2026-11-18':220},'O&M':{'2026-11-19':-150,'2026-11-23':150}};
+const D39_WHO={'2026-11-17':{USPD:'Kroger Health'},'2026-11-19':{'O&M':'Florida Cancer Specialists'}};
+d5BU=(function(f0){return function(bu){const o=f0(bu);if(o&&o.a&&o.a.coll&&!o.a._v39){const m=D39_SLIP[bu];if(m)D5_DAYS.forEach((d,i)=>{const v=m[hzIso(d)];if(v)o.a.coll[i]+=v});o.a._v39=1}return o}})(d5BU);
+/* items the collectors learn about, by the morning they become known (all fall after the demo's last actual day) */
+const D39_KNOWN=[{bu:'USPD',k:'hold',who:'Health Mart Midwest',amt:45,due:'2027-01-07',known:'2026-11-18'},
+  {bu:'USPD',k:'promise',who:'HCA Healthcare',amt:85,due:'2026-12-22',known:'2026-11-20'},
+  {bu:'O&M',k:'dispute',who:'Texas Oncology',amt:60,due:'2027-01-04',known:'2026-11-30'}];
+const D39_KL={hold:'Credit hold',promise:'Promise to pay',dispute:'Dispute'};
+const D39={thr:{day:75,week:150,move:25},sent:{},note:'',upd:false};
+try{Object.assign(D39.thr,JSON.parse(localStorage.getItem('mk.thr39')||'{}'))}catch(e){}
+try{D39.sent=JSON.parse(localStorage.getItem('mk.sent39')||'{}')}catch(e){}
+function d39Save(){try{localStorage.setItem('mk.thr39',JSON.stringify(D39.thr));localStorage.setItem('mk.sent39',JSON.stringify(D39.sent))}catch(e){}}
+
+/* late cash ledger for the morning of day t: the same rule as the daily run, with where each amount came from */
+function d39Q(bu,t){return v30C('d39q'+bu+'|'+t,()=>{const B=d35Base(bu),q=[],lost=[],got=[];
+  B.days.forEach((o,p)=>{if(p>=t||!o.a||o.h)return;let dv=o.a.c-o.f.c;
+    for(const it of q){if(dv<=0)break;const u=Math.min(it.amt,dv);it.amt-=u;dv-=u;if(u>.5)got.push({from:it.from,amt:u,at:p})}
+    if(dv<0)q.push({amt:-dv,age:0,from:p});q.forEach(it=>it.age++);
+    for(let i=q.length-1;i>=0;i--)if(q[i].age>2||q[i].amt<.01){if(q[i].amt>=.5)lost.push({from:q[i].from,amt:q[i].amt,at:p});q.splice(i,1)}});
+  const bd=[];for(let d=t;d<B.days.length&&bd.length<2;d++)if(!B.days[d].h)bd.push(d);
+  return {q:q.map(it=>{const sh=it.age===1?[.6,.4]:[1];return Object.assign({},it,{parts:sh.map((f,k)=>({d:bd[k],v:it.amt*f})).filter(p=>p.d!=null)})}),lost,got,bd}})}
+/* the run of the morning of day t: actuals before t, the 13 weeks re-forecast from t (late cash plus known items) */
+function d39Ser(bu,t){return v30C('d39s'+bu+'|'+t,()=>{const B=d35Base(bu),L0=d35Ser(bu,t),n=B.days.length,md=B.days[t].d;
+  const L={b:L0.b.slice(),c:L0.c.slice(),x:L0.x.slice(),wo:L0.wo.slice(),open:[],close:[],st:L0.st,due:L0.due,nx:L0.nx,kn:{},late:{}};
+  for(let d=t;d<n;d++){const lv=L0.c[d]-B.days[d].f.c;if(Math.abs(lv)>.01)L.late[d]=lv}
+  D39_KNOWN.forEach(e=>{if(bu!=='All'&&e.bu!==bu)return;if(hzParse(e.known)>md)return;const d=B.days.findIndex(o=>o.iso===e.due);if(d<t||d<0)return;
+    const v=e.k==='promise'?e.amt:-e.amt;L.c[d]+=v;if(e.k==='dispute')L.x[d]+=e.amt;(L.kn[d]=L.kn[d]||[]).push(Object.assign({v},e))});
+  let o0=B.open;for(let d=0;d<n;d++){L.open[d]=o0;o0+=L.b[d]-L.c[d]-L.x[d]-L.wo[d];L.close[d]=o0}
+  return L})}
+function d39Now(bu){const Z=d35Now(bu);Z.L=d39Ser(bu,Z.t);Z.Bl=d39Ser(bu,Z.s0);Z.bu=bu;return Z}
+function d39At(bu,t){const B=d35Base(bu),w=B.days[t].w,s0=B.days.findIndex(o=>o.w===w),wk=B.days.map((o,i)=>i).filter(i=>B.days[i].w===w);
+  return {B,t,w,s0,wk,e0:wk[wk.length-1],L:d39Ser(bu,t),Bl:d39Ser(bu,s0),bu}}
+const d39T=iso=>iso==='2026-12-21'?25:D5_DAYS.findIndex(d=>hzIso(d)===iso);
+const d39Ix=(B,k)=>B.days.map((o,i)=>i).filter(i=>B.days[i].w===k);
+const d39Wd=(B,ix)=>{const m={};ix.forEach(i=>m[B.days[i].d.getDay()]=i);return [1,2,3,4,5].map(k=>m[k]==null?null:m[k])};
+const d39Mon=(B,k)=>{const d=hzAdd(ASOF_DT,7*k);return d};
+const d39Sum=(S2,f,ix)=>ix.reduce((a,i)=>a+S2[f][i],0);
+const d39Who=(bu,i)=>{const B=d35Base(bu),m=D39_WHO[B.days[i].iso];if(!m)return '';return bu==='All'?Object.values(m)[0]:(m[bu]||'')};
+const d39Sg=(v,good)=>typeof d35Sg==='function'?d35Sg(v,good):fs(v);
+const d39Md=d=>HZ_MON[d.getMonth()]+' '+d.getDate();
+function d39Ref(Z){let r=Z.s0;for(let i=Z.s0;i<=Z.t;i++)if(D39.sent[Z.B.days[i].iso])r=i;return r}
+
+/* what Treasury needs to hear: today's run against what Treasury has, weeks 1–5 */
+function d39Tr(Z,plain){const {B,t,w,L,bu}=Z,r=plain?Z.s0:d39Ref(Z),R=d39Ser(bu,r),weeks=[];
+  for(let k=w;k<w+5;k++){const ix=d39Ix(B,k);if(!ix.length)continue;let tot=0,live=false;
+    const cells=d39Wd(B,ix).map((i,j)=>{if(i==null)return {i:null,hol:true};const o=B.days[i];let dv=null;
+      if(i>=t&&!o.h){dv=L.c[i]-R.c[i];tot+=dv;live=true}return {i,dv,st:i<t?'a':i===t?'t':'f',hol:o.h,over:dv!=null&&Math.abs(dv)>=D39.thr.day}});
+    weeks.push({k,ix,cells,tot,live,over:live&&Math.abs(tot)>=D39.thr.week,dayOver:cells.some(c=>c.over)})}
+  const nD=weeks.reduce((a,x)=>a+x.cells.filter(c=>c.over).length,0),nW=weeks.filter(x=>x.over).length;
+  const Q=d39Q(bu,t),mv=Q.q.reduce((a,it)=>a+it.parts.filter(p=>B.days[p.d].w>w).reduce((s2,p)=>s2+p.v,0),0),Rq=r>Z.s0||r<t?d39Q(bu,r):null;
+  const mvR=Rq?Rq.q.reduce((a,it)=>a+it.parts.filter(p=>B.days[p.d].w>w).reduce((s2,p)=>s2+p.v,0),0):0,mvNew=Math.max(0,mv-mvR),nM=mvNew>=.5&&mvNew>=D39.thr.move?1:0;
+  return {r,R,weeks,nD,nW,mv:mvNew,nM,need:nD+nW+nM>0}}
+function d39Calib(bu,t){const B=d35Base(bu),out=[];for(let i=0;i<t;i++){if(B.days[i].h||d39T(B.days[i].iso)<0)continue;out.push({i,need:d39Tr(d39At(bu,i),true).need})}return out}
+/* reasons for a day's change between two runs */
+function d39Why(Z,R,i){const {L,B,bu}=Z,out=[],lt=(L.late[i]||0)-(R.late[i]||0);
+  if(Math.abs(lt)>=.5){const Q=d39Q(bu,Z.t),src=Q.q.filter(it=>it.parts.some(p=>p.d===i)).map(it=>d5Lab(B.days[it.from].d)+(d39Who(bu,it.from)?' · '+d39Who(bu,it.from):''));
+    out.push({lab:'Late cash',v:lt,det:src.length?'from '+src.join(', '):''})}
+  const kv=(S2,i)=>(S2.kn[i]||[]).map(e=>e);const a=kv(L,i),b=kv(R,i);
+  a.forEach(e=>{if(!b.some(x=>x.who===e.who&&x.k===e.k))out.push({lab:D39_KL[e.k],v:e.v,det:e.who})});
+  return out}
+
+/* call-outs for the morning, in plain words */
+function d39Calls(Z,T){const {B,t,w,L,bu}=Z,Q=d39Q(bu,t),out=[],lastA=(()=>{for(let p=t-1;p>=0;p--)if(B.days[p].a&&!B.days[p].h)return p;return -1})();
+  if(lastA>=0){const o=B.days[lastA],own=lastA>=Z.s0,m0=own?Z.s0:B.days.findIndex(x=>x.w===o.w),fc=(own?Z.Bl:d39Ser(bu,m0)).c[lastA],dv=o.a.c-fc;
+    out.push({k:'act',v:dv,html:`<b>${d5Lab(o.d)}</b>: collections ${fmc(o.a.c)} against ${fmc(fc)} in the ${own?'Monday baseline':d5Lab(B.days[m0].d)+' baseline'} · ${d39Sg(dv,true)}`})}
+  Q.got.filter(g=>g.at===lastA&&g.from!==lastA).forEach(g=>out.push({k:'got',v:g.amt,html:`${fmc(g.amt)} of the late cash from ${d5Lab(B.days[g.from].d)}${d39Who(bu,g.from)?' ('+esc(d39Who(bu,g.from))+')':''} received`}));
+  Q.q.filter(it=>it.amt>=5).forEach(it=>{const nx=it.parts.filter(p=>B.days[p.d].w>w),stay=it.parts.filter(p=>B.days[p.d].w===w),who=d39Who(bu,it.from);
+    const exp=it.parts.map(p=>`${d5Lab(B.days[p.d].d)} ${fmc(p.v)}`).join(', ');
+    const tag=nx.length?`<span class="d39-tg mv">Moves to next week · ${fmc(nx.reduce((a,p)=>a+p.v,0))}</span>`:'<span class="d39-tg st">Stays in this week</span>';
+    out.push({k:'late',v:-it.amt,next:nx.reduce((a,p)=>a+p.v,0),html:`${fmc(it.amt)} late from ${d5Lab(B.days[it.from].d)}${who?' ('+esc(who)+')':''}: expected ${exp} ${tag}`})});
+  Q.lost.filter(l=>l.at===lastA).forEach(l=>out.push({k:'lost',v:-l.amt,html:`${fmc(l.amt)} from ${d5Lab(B.days[l.from].d)} not received after two business days: treated as lost <span class="d39-tg ls">Friday review</span>`}));
+  const md=B.days[t].d,prev=lastA>=0?B.days[lastA].d:hzAdd(md,-1);
+  D39_KNOWN.forEach(e=>{if(bu!=='All'&&e.bu!==bu)return;const kd=hzParse(e.known);if(kd>md||kd<=prev)return;const di=B.days.findIndex(o=>o.iso===e.due);if(di<0)return;
+    const wk=B.days[di].w-w+1,v=e.k==='promise'?e.amt:-e.amt;
+    out.push({k:'new',v,html:`New: ${esc(D39_KL[e.k].toLowerCase())}, ${esc(e.who)}, ${fmc(e.amt)} on ${d5Lab(B.days[di].d)} <span class="d39-tg ${wk<=5?'mv':'ot'}">Week ${wk}${wk<=5?'':' · beyond the Treasury weeks'}</span>`})});
+  return out}
+
+/* ---------------- 1 · THIS WEEK ---------------- */
+function d39Cal(Z){const {B,t,w,s0}=Z,n=B.days.length,maxW=B.days[n-1].w,TT=d5T();let h='<div class="d39-cal" role="grid" aria-label="Calendar"><span></span>'+['Mo','Tu','We','Th','Fr'].map(x=>`<span class="h">${x}</span>`).join('')+'<span class="h">Wk</span>';
+  let lastM=-1;
+  for(let k=0;k<=maxW;k++){const ix=d39Ix(B,k),cols=d39Wd(B,ix),mon=d39Mon(B,k),mo=hzAdd(mon,3).getMonth();
+    h+=`<span class="m">${mo!==lastM?HZ_MON[mo]:''}</span>`;lastM=mo;
+    cols.forEach((i,j)=>{const dd=hzAdd(mon,j);if(i==null||B.days[i].h){h+=`<span class="c hol" data-tip="${esc('<b>'+d5Lab(dd)+'</b><br>Bank holiday')}">${dd.getDate()}</span>`;return}
+      const o=B.days[i],cl=['c',i<t?'a':i===t?'t':'f'],T2=d39T(o.iso),bl=Z.Bl.c[i],lv=Z.L.c[i],dv=lv-bl;
+      if(j===0&&i<=t)cl.push('bm');if(k>=w&&k<w+5)cl.push('tw');if(T2>=0&&T2!==TT)cl.push('go');
+      const tip='<b>'+d5Lab(o.d)+'</b><br>'+(i<t?'Collections <b>'+fmc(lv)+'</b> · actual':'Collections <b>'+fmc(lv)+'</b> · current forecast')+(k>=w?'<br>Baseline '+fmc(bl)+' · '+(Math.abs(dv)<.5?'no variance':'variance '+fs(dv)):'');
+      const mk=k>=w&&i>=t&&Math.abs(dv)>=D39.thr.day?'<i class="x"></i>':'';
+      h+=`<span class="${cl.join(' ')}" data-tip="${esc(tip)}"${T2>=0&&T2!==TT?` onclick="S.today=${T2};render()" role="button" tabindex="0"`:''}>${o.d.getDate()}${mk}</span>`});
+    h+=`<span class="w${k>=w&&k<w+5?' tr':''}${k===w?' on':''}">${k>=w?String(k-w+1):''}</span>`}
+  return h+'</div><div class="d39-clg"><span><i class="a"></i>Actual</span><span><i class="t"></i>Today</span><span><i class="f"></i>Forecast</span><span><i class="tw"></i>Treasury cut</span></div>'}
+function d39Fall(Z){const {B,s0,e0,wk,L,Bl}=Z,f=k=>d39Sum(L,k,wk)-d39Sum(Bl,k,wk),b0=Bl.close[e0],b1=L.close[e0];
+  const st=[{l:'Baseline',tot:b0,cl:'base'},{l:'Billings',d:f('b')},{l:'Collections',d:-f('c')},{l:'Deductions',d:-f('x')},{l:'Write-offs',d:-f('wo')},{l:'Current forecast',tot:b1,cl:'now'}];
+  let run=b0;const pts=st.map(s=>{if(s.tot!=null)return Object.assign({a:s.tot,b:s.tot},s);const a=run;run+=s.d;return Object.assign({a,b:run},s)});
+  const mxd=Math.max(5,...pts.filter(p=>p.d!=null).map(p=>Math.abs(p.d)));const vs=pts.flatMap(p=>[p.a,p.b]);let lo=Math.min(...vs),hi=Math.max(...vs);const pd=Math.max(mxd*1.4,40);lo-=pd;hi+=pd*.6;
+  const W=520,H=196,ml=10,mr=10,mt=24,mb=34,N=pts.length,bw=(W-ml-mr)/N,Y=v=>mt+(H-mt-mb)*(1-(v-lo)/(hi-lo)),Yb=H-mb;
+  let s=`<line x1="${ml}" x2="${W-mr}" y1="${Yb}" y2="${Yb}" stroke="var(--line)"/>`;
+  pts.forEach((p,j)=>{const x=ml+j*bw+bw*.2,w2=bw*.6,cx=ml+j*bw+bw/2;
+    if(p.tot!=null){s+=`<rect x="${x}" y="${Y(p.tot)}" width="${w2}" height="${Yb-Y(p.tot)}" fill="${p.cl==='now'?'var(--navy)':'#fff'}" stroke="${p.cl==='now'?'var(--navy)':'#46566A'}" stroke-width="1.4"/>`;
+      s+=`<text x="${cx}" y="${Y(p.tot)-6}" text-anchor="middle" class="d39-wv">${fmc(p.tot)}</text>`}
+    else{const y0=Y(Math.max(p.a,p.b)),y1=Y(Math.min(p.a,p.b)),z=Math.abs(p.d)<.5,good=p.d<0;
+      s+=`<rect x="${x}" y="${y0}" width="${w2}" height="${Math.max(1.5,y1-y0)}" fill="${z?'#C9D3DF':good?'#1E7B34':'#C62828'}" fill-opacity="${z?1:.85}"/>`;
+      s+=`<text x="${cx}" y="${y0-6}" text-anchor="middle" class="d39-wv ${z?'':good?'g':'r'}">${z?'$0M':fs(p.d)}</text>`}
+    if(j<N-1){const nx=pts[j+1];s+=`<line x1="${x+w2}" x2="${ml+(j+1)*bw+bw*.2}" y1="${Y(p.b)}" y2="${Y(p.b)}" stroke="#AEB8C5" stroke-dasharray="2 2"/>`}
+    s+=`<text x="${cx}" y="${H-16}" text-anchor="middle" class="d39-wl">${p.l}</text>`});
+  s+=`<path d="M${ml} ${Yb-4} l6 -4 l6 4 l6 -4" fill="none" stroke="#AEB8C5"/>`;
+  return `<svg class="d39-wf" viewBox="0 0 ${W} ${H}" role="img" aria-label="Weekly closing AR: baseline to current forecast">${s}</svg>`}
+function d35Card(){const bu=S.bu,Z=d39Now(bu),{B,t,w,s0,wk,e0,L,Bl}=Z,done=wk.filter(i=>i<t),rest=wk.filter(i=>i>=t),T=d5T();
+  const S1=(S2,f,ix)=>d39Sum(S2,f,ix),aTo=f=>S1(L,f,done),rTo=f=>S1(L,f,rest),bW=f=>S1(Bl,f,wk),lW=f=>S1(L,f,wk);
+  const wkLab=d39Md(B.days[s0].d)+' – '+d39Md(B.days[e0].d);
+  const k=(lab,val,sub,cls)=>`<div class="d39-k${cls?' '+cls:''}"><div class="l">${lab}</div><div class="v tnum">${val}</div><div class="s">${sub}</div></div>`;
+  const ctd=done.length?aTo('c')-S1(Bl,'c',done):0;
+  const dn=i=>B.days[i].w===w?D5_DOW[B.days[i].d.getDay()]:d5Lab(B.days[i].d);
+  const ks=k('Collections · week to date',done.length?fmc(aTo('c')):'$0M',done.length?d39Sg(ctd,true)+' vs baseline':'No actuals yet this week')+
+    k('Collections · week forecast',fmc(lW('c')),d39Sg(lW('c')-bW('c'),true)+' vs baseline')+
+    k('Closing AR · week forecast',fmc(L.close[e0]),d39Sg(L.close[e0]-Bl.close[e0],false)+' vs baseline')+
+    k('Late cash',L.due>=.5?fmc(L.due):'$0M',L.due>=.5?'Re-forecast '+L.nx.map(dn).join(', then '):'None outstanding',L.due>=.5?'warn':'');
+  const row=(lab,op,mb,ad,rw,lt,good,cls)=>`<tr class="${cls||''}"><td><span class="d39-op">${op}</span>${lab}</td><td class="r tnum">${mb}</td><td class="r tnum">${ad}</td><td class="r tnum">${rw}</td><td class="r tnum"><b>${lt}</b></td><td class="r tnum">${good===null?'':good}</td></tr>`;
+  const fl=(lab,op,f,g)=>row(lab,op,fmc(bW(f)),done.length?fmc(aTo(f)):'–',rest.length?fmc(rTo(f)):'–',fmc(lW(f)),d39Sg(lW(f)-bW(f),g));
+  const br=`<table class="t d39-br"><thead><tr><th></th><th class="r">Baseline</th><th class="r">Actual to date</th><th class="r">Remaining forecast</th><th class="r">Current forecast</th><th class="r">Variance</th></tr></thead><tbody>
+    ${row('Opening AR','',fmc(Bl.open[s0]),fmc(L.open[s0]),'–',fmc(L.open[s0]),d39Sg(L.open[s0]-Bl.open[s0],false),'bal')}
+    ${fl('Billings','+','b',null)}${fl('Collections','−','c',true)}${fl('Deductions','−','x',false)}${fl('Write-offs','−','wo',false)}
+    ${row('Closing AR','=',fmc(Bl.close[e0]),done.length?fmc(L.open[t]):'–',' ',fmc(L.close[e0]),d39Sg(L.close[e0]-Bl.close[e0],false),'bal tot')}</tbody></table>`;
+  const days=wk.map(i=>{const o=B.days[i],dv=L.c[i]-Bl.c[i],dc=L.close[i]-Bl.close[i],ov=i>=t&&Math.abs(dv)>=D39.thr.day,T2=d39T(o.iso);
+    return `<tr class="${i===t?'d35-now':''}${T2>=0&&T2!==T?' go':''}"${T2>=0&&T2!==T?` onclick="S.today=${T2};render()"`:''}><td><b>${d5Lab(o.d)}</b>${o.h?' <small class="txt-mut">holiday</small>':''}</td><td>${d35St[L.st[i]]}</td><td class="r tnum">${fmc(L.open[i])}</td><td class="r tnum">${fmc(L.b[i])}</td><td class="r tnum">${fmc(L.c[i])}</td><td class="r tnum">${ov?'<span class="d39-ov">':''}${d39Sg(dv,true)}${ov?'</span>':''}</td><td class="r tnum">${fmc(L.x[i])}</td><td class="r tnum">${L.wo[i]>.5?fmc(L.wo[i]):'<span class="txt-mut">–</span>'}</td><td class="r tnum"><b>${fmc(L.close[i])}</b></td><td class="r tnum">${d39Sg(dc,false)}</td></tr>`}).join('');
+  return `<div class="card mb d35 d39"><div class="ch"><h3>Weekly AR bridge</h3><span class="d39-rg">${wkLab}</span><span class="sp"></span><span class="d35-ml">Forecast run</span>
+      <button class="d35-nav" onclick="d35Go(-1)" aria-label="Previous run"${T<=0?' disabled':''}>‹</button>${fvTodaySel()}<button class="d35-nav" onclick="d35Go(1)" aria-label="Next run"${T>=25?' disabled':''}>›</button></div>
+    ${''/* calendar, week tiles, bridge table and waterfall removed: ${d39Cal(Z)} ${ks} ${br} ${d39Fall(Z)} */}
+    <div class="dly-tw"><table class="t d35-t d39-dt"><thead><tr><th>Day</th><th>Status</th><th class="r">Opening AR</th><th class="r">Billings</th><th class="r">Collections</th><th class="r">Variance</th><th class="r">Deductions</th><th class="r">Write-offs</th><th class="r">Closing AR</th><th class="r">Variance</th></tr></thead>
+      <tbody>${days}<tr class="d35-tot"><td><b>Week</b></td><td></td><td class="r tnum">${fmc(L.open[s0])}</td><td class="r tnum">${fmc(lW('b'))}</td><td class="r tnum">${fmc(lW('c'))}</td><td class="r tnum">${d39Sg(lW('c')-bW('c'),true)}</td><td class="r tnum">${fmc(lW('x'))}</td><td class="r tnum">${lW('wo')>.5?fmc(lW('wo')):'<span class="txt-mut">–</span>'}</td><td class="r tnum"><b>${fmc(L.close[e0])}</b></td><td class="r tnum">${d39Sg(L.close[e0]-Bl.close[e0],false)}</td></tr></tbody></table></div></div>`}
+
+/* ---------------- 2 · HEADS-UP FOR TREASURY ---------------- */
+function d39TrCard(){const bu=S.bu,Z=d39Now(bu),{B,t,w,s0,L}=Z,TR=d39Tr(Z),calls=d39Calls(Z),sent=D39.sent[B.days[t].iso],TT=d5T();
+  const refLab=TR.r===s0?'baseline '+d5Lab(B.days[s0].d):'Treasury update of '+d5Lab(B.days[TR.r].d);
+  const parts=[TR.nD?TR.nD+(TR.nD===1?' day':' days'):'',TR.nW?TR.nW+(TR.nW===1?' week':' weeks'):''].filter(Boolean).join(' and ');
+  const badge=TR.need?`<span class="d39-b need">Treasury update required · ${parts?parts+' over threshold':''}${parts&&TR.nM?' · ':''}${TR.nM?fmc(TR.mv)+' moved to next week':''}</span>`
+    :sent?`<span class="d39-b sent">Treasury update sent · ${esc(sent.t)}</span>`:t===s0?'<span class="d39-b sent">Baseline submitted to Treasury</span>':'<span class="d39-b ok">No update required</span>';
+  let g='<table class="d39-tg5"><thead><tr><th class="l">Week</th>'+['Mon','Tue','Wed','Thu','Fri'].map(d=>`<th>${d}</th>`).join('')+'<th>Remaining days</th></tr></thead><tbody>';
+  TR.weeks.forEach((x,j)=>{g+=`<tr><td class="l"><b>Wk ${j+1}</b> ${d39Md(d39Mon(B,x.k))}</td>`;
+    x.cells.forEach(c=>{if(c.i==null||c.hol){g+='<td class="h">Holiday</td>';return}
+      const cl=[c.st==='a'?'a':'',c.st==='t'?'t':'',c.over?'ov':''].filter(Boolean).join(' '),wy=c.dv!=null?d39Why(Z,TR.R,c.i):[];
+      const tip='<b>'+d5Lab(B.days[c.i].d)+'</b><br>'+(c.dv==null?'Actual':'Treasury cut '+fmc(TR.R.c[c.i])+'<br>Current forecast '+fmc(L.c[c.i])+wy.map(r=>'<br>'+esc(r.lab)+' '+fs(r.v)+(r.det?' · '+esc(r.det):'')).join(''));
+      g+=`<td class="${cl}" data-tip="${esc(tip)}">${c.dv==null?'Actual':Math.abs(c.dv)<.5?'0':fs(c.dv)}</td>`});
+    g+=`<td class="tot${x.over?' ov':''}">${x.live?(Math.abs(x.tot)<.5?'0':fs(x.tot)):'Closed'}</td></tr>`});
+  g+='</tbody></table>';
+  const cl=calls.length?'<ul class="d39-calls">'+calls.map(c=>`<li class="${c.k}"><i></i><span>${c.html}</span></li>`).join('')+'</ul>':'<div class="txt-mut">No alerts in this run.</div>';
+  const cb=d39Calib(bu,t),nc=cb.filter(x=>x.need).length;
+  const later=[];for(let k=w+5;k<w+13;k++){const ix=d39Ix(B,k);if(!ix.length)continue;const dv=d39Sum(L,'c',ix)-d39Sum(Z.Bl,'c',ix);if(Math.abs(dv)>=.5)later.push(`Wk ${k-w+1} ${d39Md(d39Mon(B,k))} <b class="${dv>0?'txt-good':'txt-bad'}">${fs(dv)}</b>`)}
+  let h=`<div class="card mb d39-tr"><div class="ch"><h3>Treasury alerts</h3><span class="sp"></span>${badge}</div>
+    <div class="d39-trg"><div><div class="d39-sh">Alerts · ${d5Lab(B.days[t].d)} run</div>${cl}
+      <div class="d39-thr"><label>Day threshold ($M)<input type="number" min="0" step="5" value="${D39.thr.day}" onchange="d39Thr('day',this.value)"></label><label>Week threshold ($M)<input type="number" min="0" step="5" value="${D39.thr.week}" onchange="d39Thr('week',this.value)"></label><label>Next-week shift ($M)<input type="number" min="0" step="5" value="${D39.thr.move}" onchange="d39Thr('move',this.value)"></label></div>
+      <div class="d39-cb"><span>Alert rate · <b>${nc} of ${cb.length}</b> runs</span><span class="bars">${cb.map(x=>`<i class="${x.need?'y':''}" data-tip="${esc(d5Lab(B.days[x.i].d)+(x.need?' · update required':' · no update'))}"></i>`).join('')}</span></div></div>
+    <div><div class="d39-sh">Collections variance · current forecast vs Treasury cut <span class="txt-mut">(${esc(refLab)})</span></div>${g}
+      ${later.length?`<div class="d39-later"><span>Outside the Treasury cut · weeks 6–13:</span> ${later.join(' · ')}</div>`:''}
+      <div class="d39-acts"><button class="${TR.need?'d39-pb':'d39-sb'}" onclick="D39.upd=!D39.upd;render()">${D39.upd?'Hide update':TR.need?'Prepare Treasury update':'View variance'}</button></div></div></div>`;
+  if(D39.upd){let rows='';TR.weeks.forEach((x,j)=>{if(!x.live)return;let a=0,b=0,body='';
+      x.cells.forEach(c=>{if(c.dv==null)return;const hv=TR.R.c[c.i],nw=L.c[c.i];a+=hv;b+=nw;if(Math.abs(nw-hv)<1)return;const wy=d39Why(Z,TR.R,c.i);
+        body+=`<tr class="${c.over?'ov':''}"><td>${d5Lab(B.days[c.i].d)}</td><td class="r tnum">${fmc(hv)}</td><td class="r tnum">${fmc(nw)}</td><td class="r tnum"><b>${d39Sg(nw-hv,true)}</b></td><td>${wy.map(r=>esc(r.lab)+(r.det?' · '+esc(r.det):'')).join('; ')}</td></tr>`});
+      rows+=body+`<tr class="wk${x.over?' ov':''}"><td><b>Wk ${j+1} · remaining days</b></td><td class="r tnum">${fmc(a)}</td><td class="r tnum">${fmc(b)}</td><td class="r tnum"><b>${d39Sg(b-a,true)}</b></td><td>${x.over?'Outside week tolerance':''}</td></tr>`});
+    h+=`<div class="d39-upd"><table class="t d39-ut"><thead><tr><th>Day</th><th class="r">Treasury cut</th><th class="r">Current forecast</th><th class="r">Variance</th><th>Driver</th></tr></thead><tbody>${rows}</tbody></table>
+      ${sent?(sent.note?`<div class="d39-note"><b>Note sent:</b> ${esc(sent.note)}</div>`:''):`<label class="d39-sh" for="d39n">Note to Treasury</label><textarea id="d39n" rows="2" oninput="D39.note=this.value" placeholder="Kroger Health confirmed Tuesday's payment run for Wednesday.">${esc(D39.note)}</textarea>`}
+      <div class="d39-acts">${sent?`<span class="d39-b sent">Sent · ${esc(sent.t)}${sent.by?' · '+esc(sent.by):''}</span>`:'<button class="d39-pb" onclick="d39Send()">Mark as sent to Treasury</button>'}<button class="d39-sb" onclick="d39Copy()">Copy summary</button><span class="txt-mut" id="d39c"></span></div></div>`}
+  return h+'</div>'}
+function d39Thr(k,v){D39.thr[k]=Math.max(0,Math.round(+v||0));d39Save();render()}
+function d39Send(){const bu=S.bu,Z=d39Now(bu),iso=Z.B.days[Z.t].iso,n=new Date();let by='';try{const u=accMe();by=u&&u.name||''}catch(e){}
+  D39.sent[iso]={t:String(n.getHours()).padStart(2,'0')+':'+String(n.getMinutes()).padStart(2,'0'),note:(D39.note||'').trim(),by};D39.note='';d39Save();render()}
+function d39Copy(){const bu=S.bu,Z=d39Now(bu),TR=d39Tr(Z),{B,t,L}=Z,ln=['Treasury update · collections · run '+d5Lab(B.days[t].d)+' 06:10 ET · '+BU_NAMES[bu],'Variance to '+(TR.r===Z.s0?'the baseline':'the Treasury update of '+d5Lab(B.days[TR.r].d))+'.',''];
+  TR.weeks.forEach((x,j)=>{if(!x.live)return;ln.push('Week '+(j+1)+' ('+d39Md(d39Mon(B,x.k))+'), remaining days: '+fs(x.tot).replace(/⁠/g,'')+(x.over?' (outside week tolerance)':''));
+    x.cells.forEach(c=>{if(c.dv==null||Math.abs(c.dv)<1)return;const wy=d39Why(Z,TR.R,c.i);ln.push('  '+d5Lab(B.days[c.i].d)+': '+fmc(TR.R.c[c.i])+' → '+fmc(L.c[c.i])+' ('+fs(c.dv)+')'+(wy.length?' · '+wy.map(r=>r.lab+(r.det?' '+r.det:'')).join('; '):'')+(c.over?' (over the day threshold)':''))})});
+  const nt=(D39.note||(D39.sent[B.days[t].iso]||{}).note||'').trim();if(nt)ln.push('','Note: '+nt);
+  const txt=ln.join('\n').replace(/⁠/g,''),done=ok=>{const e=document.getElementById('d39c');if(e)e.textContent=ok?'Copied':'Copy is not available here'};
+  try{navigator.clipboard.writeText(txt).then(()=>done(true),()=>done(false))}catch(e){done(false)}}
+
+/* ---------------- 3 · VERSIONS ---------------- */
+function d39VerCard(){const bu=S.bu,Z=d39Now(bu),{B,t,w,s0,L}=Z,TT=d5T();
+  const mons=[];for(let k=0;k<=w;k++){const i=B.days.findIndex(o=>o.w===k);if(i>=0&&i<=t)mons.push({k,i})}
+  const cols=mons.slice(-4),rows=[];for(let j=Math.max(0,w-1);j<=w+4;j++){const ix=d39Ix(B,j);if(!ix.length)continue;
+    rows.push({j,ix,cells:cols.map(c=>j<c.k?null:d39Sum(d39Ser(bu,c.i),'c',ix)),today:d39Sum(L,'c',ix),done:ix[ix.length-1]<t})}
+  let m=`<table class="t d39-vm"><thead><tr><th>Week</th>${cols.map(c=>`<th class="r">Mon ${d39Md(B.days[c.i].d)}${c.k===w?'<small>current</small>':''}</th>`).join('')}<th class="r">Current forecast</th><th class="r">Actual</th></tr></thead><tbody>`;
+  rows.forEach(r=>{let prev=null;m+=`<tr class="${r.j===w?'d35-now':''}"><td><b>${d39Md(d39Mon(B,r.j))}</b>${r.j===w?' <small class="txt-mut">current</small>':''}</td>`;
+    r.cells.forEach(v=>{if(v==null){m+='<td class="r txt-mut">–</td>';return}const d=prev==null?null:v-prev;prev=v;
+      m+=`<td class="r tnum">${fmc(v)}${d!=null&&Math.abs(d)>=.5?`<small class="${d>0?'txt-good':'txt-bad'}">${fs(d)}</small>`:''}</td>`});
+    const d=prev==null?null:r.today-prev;
+    m+=`<td class="r tnum"><b>${fmc(r.today)}</b>${d!=null&&Math.abs(d)>=.5?`<small class="${d>0?'txt-good':'txt-bad'}">${fs(d)}</small>`:''}</td><td class="r tnum">${r.done?fmc(r.today):'<span class="txt-mut">–</span>'}</td></tr>`});
+  m+='</tbody></table>';
+  const runs=[];for(let i=s0;i<=t;i++){if(B.days[i].h)continue;const Zi=d39At(bu,i),S2=Zi.L,cut=[];for(let k=w;k<w+5;k++)cut.push(...d39Ix(B,k));
+    const c5=d39Sum(S2,'c',cut),b5=d39Sum(Z.Bl,'c',cut),TRi=d39Tr(Zi),T2=d39T(B.days[i].iso),sn=D39.sent[B.days[i].iso];
+    runs.push(`<tr class="${i===t?'d35-now':''}${T2>=0&&T2!==TT?' go':''}"${T2>=0&&T2!==TT?` onclick="S.today=${T2};render()"`:''}><td><b>${d5Lab(B.days[i].d)}</b></td><td>${i===s0?'<span class="d39-tg st">Baseline</span>':i===t?'<span class="d39-tg t">Current</span>':'<span class="d39-tg ot">Saved</span>'}</td><td class="r tnum">${fmc(c5)}</td><td class="r tnum">${i===s0?'<span class="txt-mut">–</span>':d39Sg(c5-b5,true)}</td><td>${sn?'<span class="d39-tg sent">Sent '+esc(sn.t)+'</span>':TRi.need?'<span class="d39-tg mv">Update</span>':'<span class="txt-mut">No update</span>'}</td></tr>`)}
+  return `<div class="card mb d39-v"><div class="ch"><h3>Forecast versions</h3><span class="sp"></span><span class="dl nt">Collections · ${BU_NAMES[bu]}</span></div>
+    <div class="d39-vg"><div><div class="d39-sh">Baselines · week on week</div><div class="dly-tw">${m}</div></div>
+      <div><div class="d39-sh">Daily runs · Treasury cut, weeks 1–5</div><div class="dly-tw"><table class="t d39-vr"><thead><tr><th>Run · 06:10 ET</th><th></th><th class="r">Weeks 1–5</th><th class="r">Variance</th><th>Treasury</th></tr></thead><tbody>${runs.join('')}</tbody></table></div></div></div></div>`}
+function d35Treas(){let h='';try{h=d39TrCard()}catch(e){console.error(e)}return h}   // Forecast versions card (d39VerCard) removed
+
+/* the section summary and the tour follow the new layout */
+p38Sum=(function(f0){return function(id,root){if(id!=='week')return f0(id,root);try{const v=[...root.querySelectorAll('.d39-k .v')].map(p38T),b=root.querySelector('.d39-tr .ch .d39-b');
+  return (v.length>=2?`Collections · week forecast ${v[1]}`:'')+(b?' · '+p38T(b):'')}catch(e){return ''}}})(p38Sum);
+function p36Steps(){const s=[['#hzSeg','Time frame','Switch between 13 weeks by day, month or quarter to fiscal year-end, and the long-range plan.'],
+    ['#buSeg','Business unit','See all business units together or one at a time. Every number on the page follows.'],
+    ['#main .w37','Actual and forecast','Solid is actual, hatched is forecast. The strip shows how much of the window is already in and where today is.'],
+    ['#main .eq','The forecast in one line','Opening AR plus billings, less collections and deductions, gives closing AR. Each tile splits into actual so far and forecast still to come.'],
+    ['#main .n36','Sections and Compare','Jump to any part of the page; fold a section to see it as one line. Compare sets what the numbers are measured against.'],
+    ['#main .d39','This week','The week against its Monday baseline: the AR bridge, actual to date, the rest of the week from today\'s run, and the days. The calendar opens any morning.'],
+    ['#main .d39-tr','Heads-up for Treasury','Today\'s run against what Treasury has. Days and weeks over the thresholds are flagged, with the reason and the update to send.'],
+    ['#main .d39-v','Versions','Each Monday baseline week on week, and this week\'s daily runs.'],
+    ['.askbtn','Ask AI','Ask about any number on screen. The i on every tile and card says what it shows, and the ? brings back this tour and the terms.']];
+  return s.filter(x=>{const e=document.querySelector(x[0]);return e&&e.offsetParent!==null})}
+P36_TERMS.splice(P36_TERMS.findIndex(x=>x[0]==='Monday baseline')+1,0,['Current forecast','The forecast run each morning for all 13 weeks: actuals to date and a re-forecast of the days ahead. Each run is saved as a daily version; the baseline stays the version of record.'],
+  ['Alert thresholds','The day amount, the week tolerance and the next-week shift that trigger a Treasury update for weeks 1–5.']);
+(function(){const f=ACC_FN.find(x=>x[0]==='pw.daily'),n='Weekly AR bridge, Treasury alerts and forecast versions';if(f)f[2]=n;ACC_NM['pw.daily']=n})();
+
+/* ============================ MK v40 · 13-WEEK ROLLING IN THREE VIEWS ============================
+   One switch at the top of 13-Week Rolling, three ways to read the same daily forecast:
+   1. Next 13 weeks (default): today's opening AR and every day forecast to the end of week 13; checkpoints on any dates
+      (AR and cash to that date), and the forecast downloads from today.
+   2. This week vs Monday: the Monday baseline (what Treasury received) against today's forecast for all 13 weeks, a tolerance
+      (5% by default) that flags the weeks that moved, why the forecast changed, and the Treasury 5-week cut.
+   3. Look back: any Monday in the last 15 weeks: what was forecast, what landed, the accuracy, why actual differed, and any
+      other Monday laid on top (forecast against forecast). Each Monday's 5-week cut can be extracted.
+   The window strip goes; the old tiles, business-unit card and headline give way to the view's own tiles on 13-Week Rolling.
+   Demo: on Wed Nov 18 the collectors learn that CVS Health moves a payment run from Thu Dec 31 to Mon Jan 4. */
+D39_KL.shift='Payment run moved';
+D39_KNOWN.push({bu:'USPD',k:'shift',who:'CVS Health',amt:560,due:'2026-12-31',to:'2027-01-04',known:'2026-11-18'});
+function d39Ser(bu,t){return v30C('d39s'+bu+'|'+t,()=>{const B=d35Base(bu),L0=d35Ser(bu,t),n=B.days.length,md=B.days[t].d;
+  const L={b:L0.b.slice(),c:L0.c.slice(),x:L0.x.slice(),wo:L0.wo.slice(),open:[],close:[],st:L0.st,due:L0.due,nx:L0.nx,kn:{},late:{}};
+  for(let d=t;d<n;d++){const lv=L0.c[d]-B.days[d].f.c;if(Math.abs(lv)>.01)L.late[d]=lv}
+  const put=(d,v,e)=>{L.c[d]+=v;(L.kn[d]=L.kn[d]||[]).push(Object.assign({},e,{v}))};
+  D39_KNOWN.forEach(e=>{if(bu!=='All'&&e.bu!==bu)return;if(hzParse(e.known)>md)return;const d=B.days.findIndex(o=>o.iso===e.due);if(d<t||d<0)return;
+    if(e.k==='shift'){const d2=B.days.findIndex(o=>o.iso===e.to);put(d,-e.amt,e);if(d2>=0)put(d2,e.amt,e);return}
+    put(d,e.k==='promise'?e.amt:-e.amt,e);if(e.k==='dispute')L.x[d]+=e.amt});
+  let o0=B.open;for(let d=0;d<n;d++){L.open[d]=o0;o0+=L.b[d]-L.c[d]-L.x[d]-L.wo[d];L.close[d]=o0}
+  return L})}
+function d39Calls(Z,T){const {B,t,w,L,bu}=Z,Q=d39Q(bu,t),out=[],lastA=(()=>{for(let p=t-1;p>=0;p--)if(B.days[p].a&&!B.days[p].h)return p;return -1})();
+  if(lastA>=0){const o=B.days[lastA],own=lastA>=Z.s0,m0=own?Z.s0:B.days.findIndex(x=>x.w===o.w),fc=(own?Z.Bl:d39Ser(bu,m0)).c[lastA],dv=o.a.c-fc;
+    out.push({k:'act',v:dv,html:`<b>${d5Lab(o.d)}</b> · collections ${fmc(o.a.c)} vs ${own?'baseline':d5Lab(B.days[m0].d)+' baseline'} ${fmc(fc)} · variance ${d39Sg(dv,true)}`})}
+  Q.got.filter(g=>g.at===lastA&&g.from!==lastA).forEach(g=>out.push({k:'got',v:g.amt,html:`Late cash received · ${fmc(g.amt)} from ${d5Lab(B.days[g.from].d)}${d39Who(bu,g.from)?' · '+esc(d39Who(bu,g.from)):''}`}));
+  Q.q.filter(it=>it.amt>=5).forEach(it=>{const nx=it.parts.filter(p=>B.days[p.d].w>w),who=d39Who(bu,it.from);
+    const exp=it.parts.map(p=>`${d5Lab(B.days[p.d].d)} ${fmc(p.v)}`).join(', ');
+    const tag=nx.length?`<span class="d39-tg mv">Moved to next week ${fmc(nx.reduce((a,p)=>a+p.v,0))}</span>`:'<span class="d39-tg st">Within week</span>';
+    out.push({k:'late',v:-it.amt,next:nx.reduce((a,p)=>a+p.v,0),html:`Late cash · ${fmc(it.amt)} from ${d5Lab(B.days[it.from].d)}${who?' · '+esc(who):''} · re-forecast ${exp} ${tag}`})});
+  Q.lost.filter(l=>l.at===lastA).forEach(l=>out.push({k:'lost',v:-l.amt,html:`Late cash · ${fmc(l.amt)} from ${d5Lab(B.days[l.from].d)} · treated as lost after two business days <span class="d39-tg ls">Friday review</span>`}));
+  const md=B.days[t].d,prev=lastA>=0?B.days[lastA].d:hzAdd(md,-1);
+  D39_KNOWN.forEach(e=>{if(bu!=='All'&&e.bu!==bu)return;const kd=hzParse(e.known);if(kd>md||kd<=prev)return;const di=B.days.findIndex(o=>o.iso===e.due);if(di<0)return;
+    const wk=B.days[di].w-w+1;
+    if(e.k==='shift'){const d2=B.days.findIndex(o=>o.iso===e.to),wk2=d2>=0?B.days[d2].w-w+1:wk;
+      out.push({k:'new',v:0,html:`New item · payment run moved · ${esc(e.who)} · ${fmc(e.amt)} · ${d5Lab(B.days[di].d)} → ${d2>=0?d5Lab(B.days[d2].d):esc(e.to)} <span class="d39-tg ${wk<=5?'mv':'ot'}">Wk ${wk} → Wk ${wk2}${wk>5?' · outside Treasury cut':''}</span>`});return}
+    out.push({k:'new',v:e.k==='promise'?e.amt:-e.amt,html:`New item · ${esc(D39_KL[e.k].toLowerCase())} · ${esc(e.who)} · ${fmc(e.amt)} on ${d5Lab(B.days[di].d)} <span class="d39-tg ${wk<=5?'mv':'ot'}">Wk ${wk}${wk<=5?'':' · outside Treasury cut'}</span>`})});
+  return out}
+
+/* ---------------- settings ---------------- */
+const D40={view:'fc',cp:[],tol:5,mon:null,mon2:'',lay:{act:true,fc:true,today:true},m3:'c',wk:null,wk3:null,last:null};
+try{const v=JSON.parse(localStorage.getItem('mk.v40')||'{}');if(v.tol>0)D40.tol=v.tol}catch(e){}
+function d40Save(){try{localStorage.setItem('mk.v40',JSON.stringify({tol:D40.tol}))}catch(e){}}
+function d40Go(v){D40.view=v;D40.wk=null;render();const c=document.querySelector('#main .c40');if(c&&c.getBoundingClientRect().top<60){const sc=document.getElementById('main');if(sc)sc.scrollTop+=c.getBoundingClientRect().top-sc.getBoundingClientRect().top-70}}
+function d40Tol(v){const n=Math.round((+v||0)*10)/10;if(n>0){D40.tol=n;d40Save()}render()}
+/* the week tolerance also drives the Treasury heads-up for weeks 1–5 */
+function d39Tr(Z,plain){const {B,t,w,L,bu}=Z,r=plain?Z.s0:d39Ref(Z),R=d39Ser(bu,r),weeks=[];
+  for(let k=w;k<w+5;k++){const ix=d39Ix(B,k);if(!ix.length)continue;let tot=0,live=false;const base=ix.reduce((a,i)=>a+R.c[i],0);
+    const cells=d39Wd(B,ix).map(i=>{if(i==null)return {i:null,hol:true};const o=B.days[i];let dv=null;
+      if(i>=t&&!o.h){dv=L.c[i]-R.c[i];tot+=dv;live=true}return {i,dv,st:i<t?'a':i===t?'t':'f',hol:o.h,over:dv!=null&&Math.abs(dv)>=D39.thr.day}});
+    weeks.push({k,ix,cells,tot,base,live,over:live&&base>0&&Math.abs(tot)/base*100>=D40.tol,dayOver:cells.some(c=>c.over)})}
+  const nD=weeks.reduce((a,x)=>a+x.cells.filter(c=>c.over).length,0),nW=weeks.filter(x=>x.over).length;
+  const Q=d39Q(bu,t),mvOf=Qx=>Qx.q.reduce((a,it)=>a+it.parts.filter(p=>B.days[p.d].w>w).reduce((s2,p)=>s2+p.v,0),0),mv=mvOf(Q),mvR=r>Z.s0||r<t?mvOf(d39Q(bu,r)):0,mvNew=Math.max(0,mv-mvR),nM=mvNew>=.5&&mvNew>=D39.thr.move?1:0;
+  return {r,R,weeks,nD,nW,mv:mvNew,nM,need:nD+nW+nM>0}}
+d39TrCard=(function(f0){return function(){return f0().replace(/<label>Week threshold \(\$M\)<input[^>]*><\/label>/,`<label>Week tolerance (%)<input type="number" min="0.5" step="0.5" value="${D40.tol}" onchange="d40Tol(this.value)"></label>`).replace(/(\d+ weeks?) over threshold/,'$1 outside tolerance').replace(/(^|[^\w-])W(\d{1,2})(?=[ <])/g,'$1Wk $2')}})(d39TrCard);
+
+/* ---------------- data: the days beyond the release window, each morning's run, history ---------------- */
+function d40E(bu){return v30C('d40e'+bu,()=>{const B=d35Base(bu),last=B.days[B.days.length-1].iso,days=B.days.slice(),seen={};
+  v30Days('YE',bu).days.filter(o=>o.iso>last&&o.v).forEach(o=>{const h=D35_HOL.has(o.iso),m=o.d.getFullYear()*12+o.d.getMonth();let wo=0;if(!h){seen[m]=(seen[m]||0)+1;if(seen[m]===3&&o.d.getDate()<=7)wo=1}
+    days.push({d:o.d,iso:o.iso,w:d35Wk(o.d),h,f:{b:o.v.b,c:o.v.c,x:o.v.x},a:null,wo})});
+  const idx={};days.forEach((o,i)=>idx[o.iso]=i);return {open:B.open,days,nW:B.days.length,idx}})}
+function d40Run(bu,t){return v30C('d40r'+bu+'|'+t,()=>{const E=d40E(bu),L=d39Ser(bu,t),n=E.days.length,R={b:[],c:[],x:[],wo:[],open:[],close:[],st:[]};let o0=0;
+  for(let i=0;i<n;i++){if(i<E.nW){['b','c','x','wo','open','close','st'].forEach(k=>R[k][i]=L[k][i]);o0=L.close[i];continue}
+    const o=E.days[i],wf=o.wo?o.f.x*.3:0;R.b[i]=o.f.b;R.c[i]=o.f.c;R.wo[i]=wf;R.x[i]=o.f.x-wf;R.open[i]=o0;o0+=R.b[i]-R.c[i]-R.x[i]-R.wo[i];R.close[i]=o0;R.st[i]='f'}
+  return R})}
+function d40Ctx(bu){bu=bu||S.bu;const Z=d39Now(bu),E=d40E(bu),R=d40Run(bu,Z.t),Rm=d40Run(bu,Z.s0);return {bu,Z,E,R,Rm,t:Z.t,w:Z.w,s0:Z.s0,B:Z.B,md:Z.B.days[Z.t].d}}
+const d40Ix=(E,k,from)=>E.days.map((o,i)=>i).filter(i=>E.days[i].w===k&&(from==null||i>=from));
+const d40Sum=(R,f,ix)=>ix.reduce((a,i)=>a+(f==='xw'?R.x[i]+R.wo[i]:R[f][i]),0);
+const d40Pct=v=>Math.abs(v)<.05?'0.0%':(v>0?'+':'−')+Math.abs(v).toFixed(1)+'%';
+const d40Md=d=>HZ_MON[d.getMonth()]+' '+d.getDate();
+const d40Wd=d=>D5_DOW[d.getDay()]+' '+d40Md(d);
+/* actual for a business day (null when it is not in yet) */
+function d40Act(c,iso){if(iso<'2026-11-16'){const r=rvHist().map.get(iso);if(!r)return null;const z=c.bu==='All'?{b:r.U.b+r.O.b,c:r.U.c+r.O.c,x:r.U.x+r.O.x}:c.bu==='USPD'?r.U:r.O;return {b:z.b,c:z.c,x:z.x}}
+  const i=c.E.idx[iso];if(i==null||i>=c.t)return null;return {b:c.R.b[i],c:c.R.c[i],x:c.R.x[i]+c.R.wo[i]}}
+function d40Rng(seed){let s=seed>>>0;return ()=>{s=s+0x6D2B79F5|0;let t=Math.imul(s^s>>>15,1|s);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+const d40G=r=>{let u=0;while(!u)u=r();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*r())};
+/* the 13-week forecast made on Monday M: weeks with forecast, actual (when in) and the AR path */
+function d40Mon(c,M){const iso0=hzIso(M);return v30C('d40m'+c.bu+'|'+iso0+'|'+c.t,()=>{const weeks=[],run=iso0>='2026-11-16'&&c.E.idx[iso0]!=null;let open,R0=null,i0=null;
+  if(run){i0=c.E.idx[iso0];R0=d40Run(c.bu,i0);open=R0.open[i0]}else open=rvAR(c.bu,M);
+  const rg=d40Rng(Math.round(+M/864e5)*7919+17),bias=d40G(rg)*.005;let arF=open;
+  for(let k=0;k<13;k++){const mon=hzAdd(M,7*k),fri=hzAdd(mon,4),days=[0,1,2,3,4].map(j=>hzIso(hzAdd(mon,j))),F={b:0,c:0,x:0},A={b:0,c:0,x:0},dF=[],dA=[];
+    let nA=0,nD=0;const ec=bias+d40G(rg)*(.0035+.0032*k),eb=bias*.6+d40G(rg)*(.003+.0018*k),ex=d40G(rg)*(.02+.004*k);
+    const base=days.map(d=>{if(run){const i=c.E.idx[d];return i==null?null:{b:R0.b[i],c:R0.c[i],x:R0.x[i]+R0.wo[i]}}
+      if(d<'2026-11-16')return d40Act(c,d);const i=c.E.idx[d];if(i==null)return null;const o=c.E.days[i];return o.h?{b:0,c:0,x:0}:{b:o.f.b,c:o.f.c,x:o.f.x}});
+    const zs=days.map(()=>d40G(rg)),sb={b:0,c:0,x:0};base.forEach(v=>{if(v){sb.b+=v.b;sb.c+=v.c;sb.x+=v.x}});
+    base.forEach((v,j)=>{if(!v){dF.push(null);return}let f;if(run)f={b:v.b,c:v.c,x:v.x};else{const raw=1+.03*zs[j];f={b:v.b*(1+eb),c:v.c*(1+ec)*raw,x:v.x*(1+ex)}}dF.push(f)});
+    if(!run){const rc=dF.reduce((a,f)=>a+(f?f.c:0),0)||1,tc=sb.c*(1+ec);dF.forEach(f=>{if(f)f.c*=tc/rc})}
+    dF.forEach(f=>{if(f){F.b+=f.b;F.c+=f.c;F.x+=f.x}});
+    days.forEach(d=>{const a=d40Act(c,d);if(a){A.b+=a.b;A.c+=a.c;A.x+=a.x;nA++}dA.push(a);if(c.E.idx[d]!=null||d<'2026-11-16')nD++});
+    const done=hzIso(fri)<hzIso(c.md)&&nA>0;arF+=F.b-F.c-F.x;
+    let arA=null;if(done){if(hzIso(hzAdd(mon,7))<='2026-11-16')arA=rvAR(c.bu,hzAdd(mon,7));else{const li=days.map(d=>c.E.idx[d]).filter(i=>i!=null).pop();if(li!=null&&li<c.t)arA=c.R.close[li]}}
+    weeks.push({k,mon,fri,days,F,A:nA?A:null,dF,dA,done,part:!done&&nA>0,arF,arA})}
+  return {M,open,weeks,run,i0}})}
+function d40Mondays(c){const M0=d39Mon(c.B,c.w),out=[];for(let k=15;k>=0;k--)out.push(hzAdd(M0,-7*k));return out}
+function d40Acc(F,A){return A?1-Math.abs(A-F)/Math.abs(A):null}
+/* average accuracy by weeks ahead over the last 15 Mondays (collections) */
+function d40Lag(c,m){m=m||'c';return v30C('d40lag'+c.bu+'|'+c.t+'|'+m,()=>{const s=Array(13).fill(0),n=Array(13).fill(0);
+  d40Mondays(c).forEach(M=>{const H=d40Mon(c,M);H.weeks.forEach(x=>{const F=m==='ar'?x.arF:x.F[m],A=m==='ar'?x.arA:(x.A?x.A[m]:null);if(x.done&&A!=null){s[x.k]+=d40Acc(F,A);n[x.k]++}})});return s.map((v,k)=>n[k]?{acc:v/n[k],n:n[k]}:null)})}
+/* why a forecast changed between two runs (from Nov 16 on): exact */
+function d40Drv(bu,r1,r2,ix){const A=d40Run(bu,r1),Bq=d40Run(bu,r2),S1=d39Ser(bu,r1),S2=d39Ser(bu,r2),nW=d40E(bu).nW,kn={},top=[];let miss=0,extra=0,late=0,tot=0;
+  ix.forEach(i=>{const dv=Bq.c[i]-A.c[i];tot+=dv;if(Math.abs(dv)<1e-9||i<r1)return;
+    if(i<r2){if(dv<0)miss+=dv;else extra+=dv;top.push({i,dv});return}
+    if(i>=nW)return;late+=(S2.late[i]||0)-(S1.late[i]||0);
+    const k2=S2.kn[i]||[],k1=S1.kn[i]||[],add=(e,s)=>{const l=D39_KL[e.k];kn[l]=kn[l]||{v:0,who:new Set()};kn[l].v+=s*e.v;kn[l].who.add(e.who)};
+    k2.forEach(e=>{if(!k1.some(x=>x.who===e.who&&x.k===e.k&&x.v===e.v))add(e,1)});k1.forEach(e=>{if(!k2.some(x=>x.who===e.who&&x.k===e.k&&x.v===e.v))add(e,-1)})});
+  const kv=Object.values(kn).reduce((a,o)=>a+o.v,0);return {miss,extra,late,kn,other:tot-miss-extra-late-kv,tot,top:top.sort((a,b)=>a.dv-b.dv)}}
+
+/* ---------------- shared pieces ---------------- */
+function d40Csv(name,head,rows){const q=v=>{const s=String(v==null?'':v);return /[",\n]/.test(s)?'"'+s.replace(/"/g,'""')+'"':s};
+  const txt=head.map(q).join('\n')+'\n'+rows.map(r=>r.map(q).join(',')).join('\n'),b=new Blob(['﻿'+txt],{type:'text/csv;charset=utf-8'}),a=document.createElement('a');
+  a.href=URL.createObjectURL(b);a.download=name;document.body.appendChild(a);try{a.click()}catch(e){}setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},800);D40.last={name,rows:rows.length,txt}}
+const d40N=v=>v==null?'':(Math.round(v*10)/10).toFixed(1);
+function d40Tile(lab,val,sub,cls){return `<div class="kpi t40${cls?' '+cls:''}"><div class="lab">${lab}</div><div class="val tnum">${val}</div><div class="sub">${sub}</div></div>`}
+function d40Fall(steps,lab){const pts=[];let run=0;steps.forEach(s=>{if(s.tot!=null){run=s.tot;pts.push(Object.assign({a:s.tot,b:s.tot},s))}else{const a=run;run+=s.d;pts.push(Object.assign({a,b:run},s))}});
+  const mxd=Math.max(5,...pts.filter(p=>p.d!=null).map(p=>Math.abs(p.d))),vs=pts.flatMap(p=>[p.a,p.b]);let lo=Math.min(...vs),hi=Math.max(...vs);const pd=Math.max(mxd*1.4,40);lo-=pd;hi+=pd*.6;
+  const N=pts.length,W=Math.max(360,N*104),H=210,ml=8,mr=8,mt=24,mb=40,bw=(W-ml-mr)/N,Y=v=>mt+(H-mt-mb)*(1-(v-lo)/(hi-lo)),Yb=H-mb;
+  let s=`<line x1="${ml}" x2="${W-mr}" y1="${Yb}" y2="${Yb}" stroke="var(--line)"/>`;
+  pts.forEach((p,j)=>{const x=ml+j*bw+bw*.2,w2=bw*.6,cx=ml+j*bw+bw/2,good=p.good==null?p.d>=0:p.good;
+    if(p.tot!=null){s+=`<rect x="${x}" y="${Y(p.tot)}" width="${w2}" height="${Yb-Y(p.tot)}" fill="${p.cl==='now'?'var(--navy)':'#fff'}" stroke="${p.cl==='now'?'var(--navy)':'#46566A'}" stroke-width="1.4"/><text x="${cx}" y="${Y(p.tot)-6}" text-anchor="middle" class="d39-wv">${fmc(p.tot)}</text>`}
+    else{const y0=Y(Math.max(p.a,p.b)),y1=Y(Math.min(p.a,p.b)),z=Math.abs(p.d)<.5,ok=p.good==null?p.d>=0:(p.good?p.d>=0:p.d<0);
+      s+=`<rect x="${x}" y="${y0}" width="${w2}" height="${Math.max(1.5,y1-y0)}" fill="${z?'#C9D3DF':ok?'#1E7B34':'#C62828'}" fill-opacity="${z?1:.85}"${p.tip?` data-tip="${esc(p.tip)}"`:''}/><text x="${cx}" y="${y0-6}" text-anchor="middle" class="d39-wv ${z?'':ok?'g':'r'}">${z?'$0M':fs(p.d)}</text>`}
+    if(j<N-1)s+=`<line x1="${x+w2}" x2="${ml+(j+1)*bw+bw*.2}" y1="${Y(p.b)}" y2="${Y(p.b)}" stroke="#AEB8C5" stroke-dasharray="2 2"/>`;
+    const ws=String(p.l).split('\n');ws.forEach((wd,q)=>s+=`<text x="${cx}" y="${H-24+q*12}" text-anchor="middle" class="d39-wl">${esc(wd)}</text>`)});
+  s+=`<path d="M${ml} ${Yb-4} l6 -4 l6 4 l6 -4" fill="none" stroke="#AEB8C5"/>`;
+  return `<svg class="c40-wf" viewBox="0 0 ${W} ${H}" style="max-width:${Math.min(760,W)}px" role="img" aria-label="${esc(lab)}">${s}</svg>`}
+const d40Hatch='<defs><pattern id="h40" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="5" height="5" fill="#E7F0FA"/><rect width="2" height="5" fill="#5B9BD5"/></pattern></defs>';
+function d40Dev(s,X,gw,vals,yT,yB,W,ml,mr,lab){/* deviation strip: % against the reference with the tolerance band */
+  const mx=Math.max(D40.tol*1.6,...vals.filter(v=>v!=null).map(v=>Math.abs(v)*1.2)),Y=v=>yT+(yB-yT)*(.5-v/(2*mx));
+  s.push(`<rect x="${ml}" y="${Y(D40.tol)}" width="${W-ml-mr}" height="${Y(-D40.tol)-Y(D40.tol)}" fill="#E6F3EA"/><line x1="${ml}" x2="${W-mr}" y1="${Y(0)}" y2="${Y(0)}" stroke="#AEB8C5"/>`);
+  s.push(`<text x="${ml-6}" y="${Y(D40.tol)+4}" text-anchor="end" class="c40-ax">+${D40.tol}%</text><text x="${ml-6}" y="${Y(-D40.tol)+4}" text-anchor="end" class="c40-ax">−${D40.tol}%</text><text x="${ml}" y="${yT-6}" class="c40-ax b">${esc(lab)}</text>`);
+  vals.forEach((v,k)=>{if(v==null||Math.abs(v)<.05)return;const out=Math.abs(v)>=D40.tol,cx=X(k)+gw/2,y0=Y(0),y1=Y(v);
+    s.push(`<rect x="${cx-gw*.18}" y="${Math.min(y0,y1)}" width="${gw*.36}" height="${Math.max(1.5,Math.abs(y1-y0))}" fill="${out?'#E8870E':'#9CB8D6'}"/>`);
+    s.push(`<text x="${cx}" y="${v>=0?Math.min(y0,y1)-4:Math.max(y0,y1)+12}" text-anchor="middle" class="c40-dv${out?' o':''}">${d40Pct(v)}</text>`)})}
+
+/* ---------------- 1 · NEXT 13 WEEKS ---------------- */
+function d40Range(c){const end=hzAdd(d39Mon(c.B,c.w+12),4);return c.E.days.map((o,i)=>i).filter(i=>i>=c.t&&c.E.days[i].d<=end)}
+function d40Cp(iso){const i=D40.cp.indexOf(iso);if(i>=0)D40.cp.splice(i,1);else{D40.cp.push(iso);D40.cp.sort();if(D40.cp.length>4)D40.cp.shift()}render()}
+function d40CpPick(v){if(!v)return;const c=d40Ctx(),ix=d40Range(c);let best=null;ix.forEach(i=>{if(c.E.days[i].iso<=v)best=c.E.days[i].iso});if(!best&&ix.length)best=c.E.days[ix[0]].iso;if(best&&!D40.cp.includes(best))d40Cp(best)}
+function d40CpQuick(c){const ix=d40Range(c),E=c.E,out=[],near=d=>{let b=null;ix.forEach(i=>{if(E.days[i].d<=d)b=E.days[i].iso});return b};
+  const add=(lab,iso)=>{if(iso&&!out.some(x=>x.iso===iso))out.push({lab,iso})};
+  add('Week end',near(hzAdd(d39Mon(c.B,c.w),4)));
+  [[2026,10,30],[2026,11,31],[2027,0,15],[2027,0,29],[2027,1,26]].forEach(([y,m,d])=>{const dt=new Date(y,m,d);if(dt>c.md)add(d40Md(dt),near(dt))});
+  add('Wk 5 end',near(hzAdd(d39Mon(c.B,c.w+4),4)));add('Wk 13 end',near(hzAdd(d39Mon(c.B,c.w+12),4)));return out.slice(0,7)}
+function d40Fc(c){const {E,R,Rm,t,w,md}=c,ix=d40Range(c),end=ix[ix.length-1],N=ix.length,i0=ix[0],o0=R.open[i0],RL=d41RL('fc',N);
+  const sum=(f,a)=>a.reduce((s,i)=>s+(f==='xw'?R.x[i]+R.wo[i]:R[f][i]),0),c5=ix.filter(i=>E.days[i].w<w+5);
+  const tiles=d40Tile('Opening AR',fmc(o0),i0>t?'Forecast · '+d40Wd(E.days[i0].d):'Actual · close of '+(t>0?d40Wd(E.days[t-1].d):'Fri Nov 13'))+
+    d40Tile('Forecasted billings',fmc(sum('b',ix)),RL+' to '+d40Wd(E.days[end].d))+
+    d40Tile('Forecasted collections',fmc(sum('c',ix)),RL+(i0===t&&E.days[end].w>w+4?' · Treasury cut '+fmc(sum('c',c5)):''))+
+    d40Tile('Forecasted deductions',fmc(sum('xw',ix)),RL+' · including write-offs')+
+    d40Tile('Forecasted closing AR',fmc(R.close[end]),d40Wd(E.days[end].d)+' · '+d39Sg(R.close[end]-o0,false)+' vs opening','hl');
+  /* chart: AR path by day on top, cash in and billings by week below */
+  const W=1100,H=388,ml=66,mr=18,pw=W-ml-mr,XL=j=>ml+pw*j/N,X=j=>ml+pw*(j+.5)/N,top=50,bot=208;
+  const ar=ix.map(i=>R.close[i]),arB=ix.map(i=>Rm.close[i]),rg=ix.map((i,j)=>Math.abs(R.close[i])*.0011*Math.sqrt(j+1));
+  let lo=Math.min(o0,...ar.map((v,j)=>v-rg[j]),...arB),hi=Math.max(o0,...ar.map((v,j)=>v+rg[j]),...arB);const pd=(hi-lo)*.08;lo-=pd;hi+=pd;const Y=v=>top+(bot-top)*(1-(v-lo)/(hi-lo));
+  const s=[d40Hatch];for(let q=0;q<4;q++){const v=lo+(hi-lo)*q/3;s.push(`<line x1="${ml}" x2="${W-mr}" y1="${Y(v)}" y2="${Y(v)}" stroke="var(--grid)"/><text x="${ml-8}" y="${Y(v)+4}" text-anchor="end" class="c40-ax">${fmc(v)}</text>`)}
+  const wks=[];for(let k=w;k<w+13;k++){const js=ix.map((i,j)=>E.days[i].w===k?j:-1).filter(j=>j>=0);if(js.length)wks.push({k,j0:js[0],j1:js[js.length-1],ix:js.map(j=>ix[j])})}
+  wks.forEach((x,q)=>{if(q%2)s.push(`<rect x="${XL(x.j0)}" y="${top-28}" width="${XL(x.j1+1)-XL(x.j0)}" height="${H-30-(top-28)}" fill="#F6F8FB"/>`);
+    s.push(`<text x="${(XL(x.j0)+XL(x.j1+1))/2}" y="${top-16}" text-anchor="middle" class="c40-ax b">${x.k===w?(XL(x.j1+1)-XL(x.j0)<44?'':XL(x.j1+1)-XL(x.j0)<88?'Current':'Current week'):'Wk '+(x.k-w+1)}</text>`)});
+  s.push(`<text x="${ml}" y="14" class="c40-ax b">Daily AR balance</text>`);
+  let band='';ix.forEach((i,j)=>band+=(j?' L':'M')+X(j)+','+Y(ar[j]+rg[j]));for(let j=N-1;j>=0;j--)band+=' L'+X(j)+','+Y(ar[j]-rg[j]);
+  s.push(`<path d="${band} Z" fill="#5B9BD5" fill-opacity=".13"/>`);
+  s.push(`<path d="M${XL(0)},${Y(o0)} ${ix.map((i,j)=>'L'+X(j)+','+Y(arB[j])).join(' ')}" fill="none" stroke="#46566A" stroke-width="1.4" stroke-dasharray="3 3"/>`);
+  s.push(`<path d="M${XL(0)},${Y(o0)} ${ix.map((i,j)=>'L'+X(j)+','+Y(ar[j])).join(' ')}" fill="none" stroke="#2F80D1" stroke-width="2.4" stroke-dasharray="7 4"/>`);
+  s.push(`<circle cx="${XL(0)}" cy="${Y(o0)}" r="6" fill="var(--orange)" stroke="#fff" stroke-width="2" data-tip="${esc('<b>Opening AR</b><br>'+fmc(o0)+(i0>t?' · forecast':' · actual'))}"/>`);
+  s.push(`<text x="${X(N-1)+2}" y="${Y(ar[N-1])-10}" text-anchor="end" class="c40-ax b">${fmc(ar[N-1])}</text>`);
+  /* weekly flows */
+  const t2=246,b2=H-34,mxw=Math.max(...wks.map(x=>Math.max(d40Sum(R,'c',x.ix),d40Sum(R,'b',x.ix))))*1.18,Y2=v=>b2-(b2-t2)*v/mxw;
+  s.push(`<text x="${ml}" y="${t2-12}" class="c40-ax b">Weekly billings and collections</text><line x1="${ml}" x2="${W-mr}" y1="${b2}" y2="${b2}" stroke="#AEB8C5"/>`);
+  wks.forEach(x=>{const a=XL(x.j0),b=XL(x.j1+1),gw=b-a,cb=d40Sum(R,'b',x.ix),cc=d40Sum(R,'c',x.ix),bw=Math.min(26,gw*.32);
+    s.push(`<rect x="${a+gw/2-bw-1}" y="${Y2(cb)}" width="${bw}" height="${b2-Y2(cb)}" fill="#fff" stroke="#8C99AA" data-tip="${esc('<b>'+(x.k===w?'Current week':'Wk '+(x.k-w+1))+'</b><br>Billings '+fmc(cb))}"/>`);
+    s.push(`<rect x="${a+gw/2+1}" y="${Y2(cc)}" width="${bw}" height="${b2-Y2(cc)}" fill="url(#h40)" stroke="#5B9BD5" data-tip="${esc('<b>'+(x.k===w?'Current week':'Wk '+(x.k-w+1))+'</b><br>Collections '+fmc(cc))}"/>`);
+    s.push(`<text x="${a+gw/2+1+bw/2}" y="${Y2(cc)-5}" text-anchor="middle" class="c40-vl">${fmc(cc).replace('$','')}</text>`);
+    s.push(`<text x="${a+gw/2}" y="${b2+15}" text-anchor="middle" class="c40-ax">${d40Md(d39Mon(c.B,x.k))}</text>`)});
+  /* checkpoints */
+  const cpOk=D40.cp.filter(iso=>ix.some(i=>E.days[i].iso===iso));
+  cpOk.forEach((iso,q)=>{const j=ix.findIndex(i=>E.days[i].iso===iso),x0=X(j),lab=d40Md(E.days[ix[j]].d)+' · '+fmc(ar[j]);
+    s.push(`<line x1="${x0}" x2="${x0}" y1="${top-6}" y2="${b2}" stroke="var(--orange)" stroke-width="1.6" stroke-dasharray="4 3"/><circle cx="${x0}" cy="${Y(ar[j])}" r="4.5" fill="var(--orange)"/>`);
+    const tw=lab.length*6.4+12,tx=Math.min(W-mr-tw,Math.max(ml,x0-tw/2)),ty=top+4+q*20;
+    s.push(`<rect x="${tx}" y="${ty}" width="${tw}" height="17" rx="4" fill="#FDF1E2" stroke="#F2CF9F"/><text x="${tx+tw/2}" y="${ty+12.5}" text-anchor="middle" class="c40-cp">${esc(lab)}</text>`)});
+  ix.forEach((i,j)=>{const o=E.days[i],cum=sum('c',ix.slice(0,j+1));s.push(`<rect class="c40-hit" x="${XL(j)}" y="${top-6}" width="${XL(j+1)-XL(j)}" height="${bot-top+12}" fill="transparent" onclick="d40Cp('${o.iso}')" data-tip="${esc('<b>'+d40Wd(o.d)+'</b><br>AR <b>'+fmc(ar[j])+'</b> · baseline '+fmc(arB[j])+'<br>Cumulative collections '+fmc(cum))}"/>`)});
+  const chart=`<div class="c40-lg"><span><i class="ar"></i>AR · current forecast</span><span><i class="rg"></i>Forecast range</span><span><i class="mb"></i>AR · baseline</span><span><i class="hb"></i>Billings</span><span><i class="hc"></i>Collections</span><span><i class="cp"></i>Checkpoint</span></div>
+    <svg class="c40-svg" viewBox="0 0 ${W} ${H}" role="img" aria-label="AR forecast">${s.join('')}</svg>`;
+  /* checkpoints table */
+  let tb='';if(cpOk.length){const col=cpOk.map(iso=>{const j=ix.findIndex(i=>E.days[i].iso===iso),a=ix.slice(0,j+1);const dB=Rm.close[ix[j]],dCm=a.reduce((s2,i)=>s2+Rm.c[i],0);
+      return {iso,j,d:E.days[ix[j]].d,b:sum('b',a),c:sum('c',a),x:sum('xw',a),ar:ar[j],dar:ar[j]-dB,dc:sum('c',a)-dCm,dop:o0-Rm.open[i0],drv:d40Drv(c.bu,c.s0,t,a)}});
+    const row=(lab,f,cls)=>`<tr class="${cls||''}"><td>${lab}</td>${col.map(f).join('')}</tr>`;
+    const why=x=>{const p=[];if(Math.abs(x.dop)>=.5)p.push('Opening AR '+fs(x.dop));if(Math.abs(x.drv.late)>=.5)p.push('Late cash re-forecast '+fs(-x.drv.late));Object.entries(x.drv.kn).forEach(([k,o])=>{if(Math.abs(o.v)>=.5)p.push(k+' '+fs(-o.v))});return p.join('<br>')||'<span class="txt-mut">–</span>'};
+    tb=`<div class="card mb c40-cpc"><div class="ch"><h3>Checkpoints</h3><span class="sp"></span><button class="c40-sb" onclick="d40DlFc(true)">Export to ${d40Md(col[col.length-1].d)}</button></div><div class="dly-tw"><table class="t c40-cpt"><thead><tr><th></th>${col.map(x=>`<th class="r">${d40Wd(x.d)}<button class="c40-x" aria-label="Remove ${esc(d40Md(x.d))}" onclick="d40Cp('${x.iso}')">×</button></th>`).join('')}</tr></thead><tbody>
+      ${row('Business days out',x=>`<td class="r tnum">${x.j+1}</td>`)}${row('<span class="d39-op"></span>Opening AR',()=>`<td class="r tnum">${fmc(o0)}</td>`,'bal')}
+      ${row('<span class="d39-op">+</span>Billings',x=>`<td class="r tnum">${fmc(x.b)}</td>`)}${row('<span class="d39-op">−</span>Collections',x=>`<td class="r tnum">${fmc(x.c)}</td>`)}
+      ${row('<span class="d39-op">−</span>Deductions and write-offs',x=>`<td class="r tnum">${fmc(x.x)}</td>`)}${row('<span class="d39-op">=</span>Closing AR at checkpoint',x=>`<td class="r tnum"><b>${fmc(x.ar)}</b></td>`,'bal tot')}
+      ${row('Opening AR variance',x=>`<td class="r tnum">${d39Sg(x.dop,false)}</td>`)}${row('Collections variance',x=>`<td class="r tnum">${d39Sg(x.dc,true)}</td>`)}${row('Closing AR variance',x=>`<td class="r tnum">${d39Sg(x.dar,false)}</td>`)}
+      ${row('Variance drivers',x=>`<td class="r c40-why">${why(x)}</td>`)}</tbody></table></div></div>`}
+  const q=d40CpQuick(c);
+  const opts=`<div class="c40-opt"><span class="c40-ol">Checkpoints</span>${q.map(x=>`<button class="c40-chip${D40.cp.includes(x.iso)?' on':''}" onclick="d40Cp('${x.iso}')">${esc(x.lab)}</button>`).join('')}
+    <input type="date" class="c40-date" aria-label="Add a checkpoint date" min="${E.days[ix[0]].iso}" max="${E.days[end].iso}" onchange="d40CpPick(this.value)">${D40.cp.length?'<button class="c40-chip ghost" onclick="D40.cp=[];render()">Clear</button>':''}
+    <span class="sp"></span><button class="c40-sb" onclick="d40DlFc(false)">Export · ${RL}</button><button class="c40-sb" onclick="d40DlCut('today')">Export · weeks 1–5</button></div>`;
+  return {tiles,opts,body:`<div class="card mb c40-ch"><div class="ch"><h3>AR forecast</h3><span class="d39-rg">${d40Wd(E.days[i0].d)} – ${d40Wd(E.days[end].d)} · ${N} business days</span></div>${chart}</div>${tb}${d41Roll(c,ix)}`,
+    sum:`Run ${d40Wd(E.days[t].d)} · closing AR ${d40Md(E.days[end].d)} ${fmc(R.close[end])}`}}
+
+/* ---------------- 2 · THIS WEEK VS MONDAY ---------------- */
+function d40MonView(c){const {E,R,Rm,t,w,s0}=c,wks=[];for(const q of d41Ks('mon',d39Mon(c.B,w))){const k=w+q,ix=d40Ix(E,k);if(!ix.length)continue;const bs=d40Sum(Rm,'c',ix),td=d40Sum(R,'c',ix),ac=ix.filter(i=>i<t).reduce((a,i)=>a+R.c[i],0);
+    wks.push({k,ix,bs,td,ac,dv:td-bs,pc:bs?(td-bs)/bs*100:0,out:bs&&Math.abs((td-bs)/bs*100)>=D40.tol})}
+  const all=wks.flatMap(x=>x.ix),bs=d40Sum(Rm,'c',all),td=d40Sum(R,'c',all),t5=wks.filter(x=>x.k<w+5),b5=t5.reduce((a,x)=>a+x.bs,0),d5=t5.reduce((a,x)=>a+x.td,0),nOut=wks.filter(x=>x.out).length,RL=d41RL('mon',wks.length),has5=t5.length===5,lw=wks[wks.length-1].k;
+  const wkd=d40Ix(E,w),done=wkd.filter(i=>i<t),wtd=done.reduce((a,i)=>a+R.c[i],0),wtdB=done.reduce((a,i)=>a+Rm.c[i],0),last=all[all.length-1];
+  const tiles=d40Tile('Baseline collections',fmc(bs),RL+(has5?' · Treasury cut '+fmc(b5):''))+
+    d40Tile('Current forecast collections',fmc(td),d41Tv(d41Why(c,all,'Collections variance'),d39Sg(td-bs,true)+' · '+d40Pct(bs?(td-bs)/bs*100:0))+(has5?' · '+d41Tv(d41Why(c,t5.flatMap(x=>x.ix),'Treasury cut variance'),'Treasury cut '+d39Sg(d5-b5,true)):''))+
+    d40Tile('Week-to-date collections',done.length?fmc(wtd):'$0M',done.length?d41Tv(d41Why(c,done,'Week-to-date variance'),d39Sg(wtd-wtdB,true)+' vs baseline'):'No actuals yet this week')+
+    d40Tile('Forecasted closing AR',fmc(R.close[last]),(lw===w?'Current week':'Wk '+(lw-w+1))+' end · '+d41Tv(d41WhyAR(c,last),d39Sg(R.close[last]-Rm.close[last],false)+' vs baseline'))+
+    d40Tile('Weeks outside tolerance',String(nOut),d41Tv(d41Out(c,wks),`Tolerance ±${D40.tol}% · weekly collections`),nOut?'warn':'ok');
+  /* chart: baseline vs today by week, with the deviation strip */
+  const W=1100,H=372,ml=66,mr=18,gw=(W-ml-mr)/wks.length,X=k=>ml+k*gw,top=40,bot=214,mx=Math.max(...wks.map(x=>Math.max(x.bs,x.td)))*1.12,Y=v=>bot-(bot-top)*v/mx,s=[d40Hatch];
+  for(let q=0;q<=3;q++){const v=mx*q/3;s.push(`<line x1="${ml}" x2="${W-mr}" y1="${Y(v)}" y2="${Y(v)}" stroke="var(--grid)"/><text x="${ml-8}" y="${Y(v)+4}" text-anchor="end" class="c40-ax">${fmc(v)}</text>`)}
+  const x5=X(t5.length);if(t5.length)s.push(`<path d="M${X(0)+4} ${top-14} V${top-18} H${x5-4} V${top-14}" fill="none" stroke="var(--orange)" stroke-width="1.5"/><text x="${(X(0)+x5)/2}" y="${top-22}" text-anchor="middle" class="c40-ax o">${has5?'Treasury cut · weeks 1–5':'Treasury cut'}</text>`);
+  wks.forEach((x,q)=>{const cx=X(q)+gw/2,bw=Math.min(gw*.56,70),iw=Math.min(gw*.3,36),sel=D40.wk===x.k;if(sel)s.push(`<rect x="${X(q)}" y="${top-8}" width="${gw}" height="${H-26-(top-8)}" fill="#DCE9F7"/>`);
+    s.push(`<rect x="${cx-bw/2}" y="${Y(x.bs)}" width="${bw}" height="${bot-Y(x.bs)}" fill="#fff" stroke="${x.out?'var(--orange)':'#46566A'}" stroke-width="${x.out?2:1.3}"/>`);
+    if(x.ac>0)s.push(`<rect x="${cx-iw/2}" y="${Y(x.ac)}" width="${iw}" height="${bot-Y(x.ac)}" fill="var(--navy)"/>`);
+    if(x.td-x.ac>0)s.push(`<rect x="${cx-iw/2}" y="${Y(x.td)}" width="${iw}" height="${Y(x.ac)-Y(x.td)}" fill="url(#h40)" stroke="#5B9BD5" stroke-width=".8"/>`);
+    s.push(`<text x="${cx}" y="${Math.min(Y(x.bs),Y(x.td))-5}" text-anchor="middle" class="c40-vl">${fmc(x.td).replace('$','')}</text>`);
+    s.push(`<text x="${cx}" y="${H-19}" text-anchor="middle" class="c40-ax b${x.k===w?' o':''}">${x.k===w?'Current week':'Wk '+(x.k-w+1)}</text><text x="${cx}" y="${H-7}" text-anchor="middle" class="c40-ax">${d40Md(d39Mon(c.B,x.k))}</text>`)});
+  d40Dev(s,X,gw,wks.map(x=>x.pc),244,H-36,W,ml,mr,'Variance to baseline (%)');
+  wks.forEach((x,q)=>{const L=d41Ln(c,x.ix).L;s.push(`<rect class="c40-hit c41-nc" x="${X(q)}" y="${top-8}" width="${gw}" height="${H-26-(top-8)}" fill="transparent" data-tip="${esc('<b>'+(x.k===w?'Current week':'Wk '+(x.k-w+1)+' · '+d40Md(d39Mon(c.B,x.k)))+'</b><br>Baseline '+fmc(x.bs)+'<br>Current forecast '+fmc(x.td)+'<br>Variance <b>'+fs(x.dv)+' · '+d40Pct(x.pc)+'</b>'+(L.length?'<br>'+L.join('<br>'):''))}"/>`)});
+  const chart=`<div class="c40-lg"><span><i class="mbb"></i>Baseline</span><span><i class="ac"></i>Actual</span><span><i class="hc"></i>Current forecast</span><span><i class="tol"></i>Tolerance ±${D40.tol}%</span><span><i class="out"></i>Outside tolerance</span></div>
+    <svg class="c40-svg" viewBox="0 0 ${W} ${H}" role="img" aria-label="Variance to baseline by week">${s.join('')}</svg>`;
+  const opts=`<div class="c40-opt"><span class="c40-ol">Baseline</span><span class="c40-pill">${d40Wd(E.days[s0].d)} · 06:10 ET · submitted to Treasury</span>
+    <label class="c40-tl">Tolerance ±<input type="number" min="0.5" step="0.5" value="${D40.tol}" onchange="d40Tol(this.value)">%</label>
+    <span class="sp"></span><button class="c40-pb" onclick="d40DlCut('mon')">Export · Treasury cut</button><button class="c40-sb" onclick="d40DlCut('corr')">Export · Treasury update</button></div>`;
+  return {tiles,opts,body:`<div class="card mb c40-ch"><div class="ch"><h3>Variance to baseline by week</h3><span class="d39-rg">${d40Wd(wks[0].k===w?E.days[s0].d:E.days[wks[0].ix[0]].d)} – ${d40Wd(c.E.days[last].d)}</span></div>${chart}</div>`,
+    sum:`Baseline ${d40Wd(E.days[s0].d)} · `+(nOut?`${nOut} week${nOut===1?'':'s'} outside ±${D40.tol}%`:`all weeks within ±${D40.tol}%`),warn:nOut>0}}
+
+/* ---------------- 3 · LOOK BACK ---------------- */
+function d40Back(c){const Ms=d40Mondays(c),isos=Ms.map(hzIso);if(!D40.mon||!isos.includes(D40.mon))D40.mon=isos[Math.max(0,isos.length-6)];
+  const M=Ms[isos.indexOf(D40.mon)],H=d40Mon(c,M),m3=D41_ML[D40.m3]?D40.m3:'c',v=x=>m3==='ar'?x.arF:x.F[m3],va=x=>m3==='ar'?x.arA:(x.A?x.A[m3]:null),KS=d41Ks('back',M),WK=H.weeks.filter(x=>KS.includes(x.k)),RL=d41RL('back',WK.length),ML=D41_ML[m3],k3=m3==='ar'?'c':m3;if(D40.wk3!=null&&!KS.includes(D40.wk3))D40.wk3=null;
+  const H2=D40.mon2&&isos.includes(D40.mon2)&&D40.mon2!==D40.mon?d40Mon(c,Ms[isos.indexOf(D40.mon2)]):null;
+  const dn=WK.filter(x=>x.done&&va(x)!=null),sF=dn.reduce((a,x)=>a+v(x),0),sA=dn.reduce((a,x)=>a+va(x),0),abs=dn.reduce((a,x)=>a+Math.abs(va(x)-v(x)),0);
+  const acc=dn.length?(m3==='ar'?1-abs/sA:1-abs/sA):null,b5=H.weeks.slice(0,5).filter(x=>x.done&&va(x)!=null),acc5=b5.length===5?1-b5.reduce((a,x)=>a+Math.abs(va(x)-v(x)),0)/b5.reduce((a,x)=>a+va(x),0):null;
+  const bias=dn.length&&m3!=='ar'?(sF-sA)/sA*100:null,tot13=WK.reduce((a,x)=>a+(m3==='ar'?0:x.F[m3]),0);
+  const mlab='Mon '+d40Md(M),pct=a=>a==null?'–':(a*100).toFixed(1)+'%';
+  const tiles=(m3==='ar'?d40Tile('Prior forecast · closing AR',fmc(WK[WK.length-1].arF),'Forecast of '+mlab+' · Wk '+(WK[WK.length-1].k+1)+' end'):d40Tile('Prior forecast · '+ML[0],fmc(tot13),'Forecast of '+mlab+' · '+RL))+
+    d40Tile('Actual · closed weeks',dn.length?(m3==='ar'?fmc(va(dn[dn.length-1])):fmc(sA)):'–',dn.length+' of '+WK.length+' weeks closed'+(m3==='ar'?' · AR at Wk '+dn.length:' · forecast '+fmc(sF)))+
+    d40Tile('Prior forecast accuracy',pct(acc),ML[1]+' · closed weeks',acc!=null&&acc*100<100-D40.tol?'warn':'ok')+
+    d40Tile('Treasury cut accuracy',pct(acc5),acc5==null?'Weeks 1–5 not yet closed':'Weeks 1–5 as submitted',acc5!=null&&acc5*100<100-D40.tol?'warn':'')+
+    d40Tile('Prior forecast bias',bias==null?'–':d40Pct(bias),bias==null?(m3==='ar'?'Not for closing AR':'No closed weeks'):bias>0?'Forecast above actual':'Forecast below actual');
+  /* chart */
+  const W=1100,Hh=372,ml=66,mr=18,gw=(W-ml-mr)/WK.length,X=k=>ml+k*gw,top=40,bot=214,s=[d40Hatch];
+  const today=k=>{const x=H.weeks[k];if(m3==='ar'){const li=x.days.map(d=>c.E.idx[d]).filter(i=>i!=null).pop();return li!=null?c.R.close[li]:null}return x.days.reduce((a,d)=>{const i=c.E.idx[d];if(i!=null)return a+(m3==='x'?c.R.x[i]+c.R.wo[i]:c.R[m3][i]);const q=d40Act(c,d);return a+(q?q[m3]:0)},0)};
+  const vals=[];WK.forEach(x=>{vals.push(v(x));if(va(x)!=null)vals.push(va(x));if(H2){const y=H2.weeks.find(z=>hzIso(z.mon)===hzIso(x.mon));if(y)vals.push(v(y))}});
+  let lo=m3==='ar'?Math.min(...vals)*.985:0,hi=Math.max(...vals)*(m3==='ar'?1.012:1.14);const Y=q=>bot-(bot-top)*(q-lo)/(hi-lo);
+  for(let q=0;q<=3;q++){const y=lo+(hi-lo)*q/3;s.push(`<line x1="${ml}" x2="${W-mr}" y1="${Y(y)}" y2="${Y(y)}" stroke="var(--grid)"/><text x="${ml-8}" y="${Y(y)+4}" text-anchor="end" class="c40-ax">${fmc(y)}</text>`)}
+  {const n5=WK.filter(x=>x.k<5).length;if(n5)s.push(`<path d="M${X(0)+4} ${top-14} V${top-18} H${X(n5)-4} V${top-14}" fill="none" stroke="var(--orange)" stroke-width="1.5"/><text x="${(X(0)+X(n5))/2}" y="${top-22}" text-anchor="middle" class="c40-ax o">${n5===5?'Treasury cut · weeks 1–5':'Treasury cut'}</text>`)}
+  const devs=[];
+  WK.forEach((x,q)=>{const k=x.k,cx=X(q)+gw/2,bw=Math.min(gw*.56,70),iw=Math.min(gw*.3,36),f=v(x),a=va(x),sel=D40.wk3===k;if(sel)s.push(`<rect x="${X(q)}" y="${top-8}" width="${gw}" height="${Hh-26-(top-8)}" fill="#DCE9F7"/>`);
+    if(D40.lay.fc)s.push(`<rect x="${cx-bw/2}" y="${Y(f)}" width="${bw}" height="${bot-Y(f)}" fill="#fff" stroke="#46566A" stroke-width="1.3"/>`);
+    if(D40.lay.act&&a!=null&&x.done)s.push(`<rect x="${cx-iw/2}" y="${Y(a)}" width="${iw}" height="${bot-Y(a)}" fill="var(--navy)"/>`);
+    if(!x.done&&D40.lay.today){const tv=today(k);if(tv!=null){const ap=m3==='ar'?null:(x.A?x.A[m3]:0);if(ap)s.push(`<rect x="${cx-iw/2}" y="${Y(ap)}" width="${iw}" height="${bot-Y(ap)}" fill="#7F93AD"/>`);
+      s.push(`<rect x="${cx-iw/2}" y="${Y(tv)}" width="${iw}" height="${Math.max(0,(ap?Y(ap):bot)-Y(tv))}" fill="url(#h40)" stroke="#5B9BD5" stroke-width=".8"/>`)}}
+    if(H2){const y=H2.weeks.find(z=>hzIso(z.mon)===hzIso(x.mon));if(y){const yv=v(y);s.push(`<line x1="${cx-bw/2-3}" x2="${cx+bw/2+3}" y1="${Y(yv)}" y2="${Y(yv)}" stroke="var(--orange)" stroke-width="3"/>`)}}
+    const ac=x.done&&a!=null?1-Math.abs(a-f)/Math.abs(a):null;devs.push(x.done&&a!=null?(a-f)/f*100:null);
+    if(ac!=null&&D40.lay.act)s.push(`<rect x="${cx-23}" y="${Math.min(Y(f),Y(a))-21}" width="46" height="15" rx="3" fill="${ac*100>=100-D40.tol?'#E6F3EA':'#FDF1E2'}"/><text x="${cx}" y="${Math.min(Y(f),Y(a))-10}" text-anchor="middle" class="c40-acc${ac*100>=100-D40.tol?'':' o'}">${(ac*100).toFixed(1)}%</text>`);
+    s.push(`<text x="${cx}" y="${Hh-19}" text-anchor="middle" class="c40-ax b">Wk ${k+1}</text><text x="${cx}" y="${Hh-7}" text-anchor="middle" class="c40-ax">${d40Md(x.mon)}</text>`)});
+  d40Dev(s,X,gw,devs,244,Hh-36,W,ml,mr,'Actual vs prior forecast (%)');
+  WK.forEach((x,q)=>{const k=x.k,a=va(x),f=v(x);s.push(`<rect class="c40-hit" x="${X(q)}" y="${top-8}" width="${gw}" height="${Hh-26-(top-8)}" fill="transparent" onclick="D40.wk3=D40.wk3===${k}?null:${k};render()" data-tip="${esc('<b>Week '+(k+1)+' · '+d40Md(x.mon)+'</b><br>Prior forecast '+fmc(f)+(a!=null?'<br>Actual '+fmc(a)+(x.done?'':' to date'):'')+(x.done&&a!=null?'<br>Accuracy '+(100-Math.abs(a-f)/Math.abs(a)*100).toFixed(1)+'%':''))}"/>`)});
+  const chart=`<div class="c40-lg">${D40.lay.fc?`<span><i class="mbb"></i>Prior forecast · ${mlab}</span>`:''}${D40.lay.act?'<span><i class="ac"></i>Actual</span>':''}${D40.lay.today?'<span><i class="pa"></i>Actual to date</span><span><i class="hc"></i>Current forecast</span>':''}${H2?`<span><i class="m2"></i>Comparison · Mon ${d40Md(H2.M)}</span>`:''}<span><i class="tol"></i>Tolerance ±${D40.tol}%</span></div>
+    <svg class="c40-svg" viewBox="0 0 ${W} ${Hh}" role="img" aria-label="Prior forecast">${s.join('')}</svg>`;
+  /* the weeks, and why actual differed */
+  const rows=WK.map(x=>{const k=x.k,f=v(x),a=va(x),dv=a!=null&&x.done?a-f:null,ac=dv!=null?1-Math.abs(dv)/Math.abs(a):null,y=H2?H2.weeks.find(z=>hzIso(z.mon)===hzIso(x.mon)):null,yv=y?v(y):null;
+    return `<tr class="${D40.wk3===k?'d35-now':''}" onclick="D40.wk3=D40.wk3===${k}?null:${k};render()"><td><b>Wk ${k+1}</b> ${d40Md(x.mon)}${k<5?' <span class="c40-tw">Treasury</span>':''}</td><td class="r tnum">${fmc(f)}</td>${H2?`<td class="r tnum">${yv!=null?fmc(yv)+`<small class="${yv-f>=0?'txt-good':'txt-bad'}">${fs(yv-f)}</small>`:'<span class="txt-mut">–</span>'}</td>`:''}
+      <td class="r tnum">${a!=null?fmc(a)+(x.done?'':' <small class="txt-mut">to date</small>'):'<span class="txt-mut">–</span>'}</td><td class="r tnum">${dv!=null?d41Tv(d41WkTip(c,x,k,m3,dv),d39Sg(dv,m3==='b'||m3==='c')):''}</td>
+      <td class="r tnum">${ac!=null?`<span class="${ac*100>=100-D40.tol?'txt-good':'c40-o'}">${(ac*100).toFixed(1)}%</span>`:''}</td></tr>`}).join('');
+  const tbl=`<div class="dly-tw"><table class="t c40-at"><thead><tr><th>Week</th><th class="r">Forecast ${d40Md(M)}</th>${H2?`<th class="r">Forecast ${d40Md(H2.M)}</th>`:''}<th class="r">Actual</th><th class="r">Variance</th><th class="r">Accuracy</th></tr></thead><tbody>${rows}</tbody></table></div>`;
+  /* why: forecast vs actual (days that missed), forecast vs forecast (the layered Monday) */
+  const scope=D40.wk3!=null?[H.weeks[D40.wk3]]:WK,sc=scope.filter(x=>x.done&&x.A);let below=0,above=0;const miss=[];
+  sc.forEach(x=>x.days.forEach((d,j)=>{const f=x.dF[j],a=x.dA[j];if(!f||!a)return;const dv=a[k3]-f[k3];if(dv<0)below+=dv;else above+=dv;miss.push({d,dv})}));
+  const net=below+above,wv=sc.map(x=>x.A[k3]-x.F[k3]),timing=wv.reduce((a,q)=>a+Math.abs(q),0)-Math.abs(wv.reduce((a,q)=>a+q,0));
+  miss.sort((p,q)=>p.dv-q.dv);const reason=d=>{const i=c.E.idx[d];if(i==null)return '';const w0=D39_WHO[d];return w0?Object.values(w0)[0]:''};
+  const fa=m3==='ar'?'':`<div class="c40-wh"><div class="d39-sh">Variance drivers · actual vs prior forecast${D40.wk3!=null?' · Wk '+(D40.wk3+1):' · closed weeks'}</div>
+    ${sc.length?`<div class="c40-kv"><span>${D41_BA[k3][0]}</span><b class="${k3==='x'?'txt-good':'txt-bad'}">${fs(below)}</b><span>${D41_BA[k3][1]}</span><b class="${k3==='x'?'txt-bad':'txt-good'}">${fs(above)}</b><span>Net variance</span><b>${fs(net)}</b>${D40.wk3==null&&sc.length>1?`<span>Timing variance between weeks</span><b>${fmc(timing/2)}</b>`:''}</div>
+    <ul class="c40-ul">${(k3==='x'?miss.slice().reverse().filter(o=>o.dv>.5):miss.filter(o=>o.dv<-.5)).slice(0,3).map(o=>`<li><b>${d40Wd(hzParse(o.d))}</b> ${fs(o.dv)}${k3==='c'&&reason(o.d)?' · '+esc(reason(o.d)):''}</li>`).join('')}</ul>`:'<div class="txt-mut">No closed weeks.</div>'}</div>`;
+  let ff='';if(H2){const ov=WK.map(x=>({x,y:H2.weeks.find(z=>hzIso(z.mon)===hzIso(x.mon))})).filter(o=>o.y),dt=ov.reduce((a,o)=>a+(v(o.y)-v(o.x)),0);
+    let drv='';if(m3==='c'&&H.run&&H2.run){const lo2=Math.min(H.i0,H2.i0),hi2=Math.max(H.i0,H2.i0),ix=ov.flatMap(o=>o.x.days.map(d=>c.E.idx[d]).filter(i=>i!=null&&i>=hi2)),D=d40Drv(c.bu,lo2,hi2,ix),sg=H2.i0>H.i0?1:-1;
+      const it=[];if(Math.abs(D.late)>=.5)it.push(['Late cash re-forecast',D.late*sg]);Object.entries(D.kn).forEach(([k,o])=>it.push([k+' · '+[...o.who].join(', '),o.v*sg]));
+      const done2=ov.filter(o=>o.x.days.some(d=>{const i=c.E.idx[d];return i!=null&&i<hi2})).reduce((a,o)=>a+(v(o.y)-v(o.x)),0)-(D.tot*sg);
+      if(Math.abs(done2)>=.5)it.push(['Actuals landed between the two versions',done2]);drv=it.map(([k,q])=>`<span>${esc(k)}</span><b class="${q>=0?'txt-good':'txt-bad'}">${fs(q)}</b>`).join('')}
+    else drv=`<span>${m3==='c'?'Re-forecast · payment patterns and new information':'Re-forecast'}</span><b>${fs(dt)}</b>`;
+    ff=`<div class="c40-wh"><div class="d39-sh">Forecast vs forecast · Mon ${d40Md(H2.M)} vs ${mlab} · ${ov.length} overlapping weeks</div><div class="c40-kv">${drv}<span>Total variance</span><b>${fs(dt)}</b></div></div>`}
+  const lag=d40Lag(c,m3),lw=360,lh=150,lgw=(lw-40)/13,lmin=Math.min(100-D40.tol*1.6,...lag.filter(Boolean).map(o=>o.acc*100))-0.5,LY=q=>lh-22-(lh-40)*(q-lmin)/(100-lmin);
+  let ls=`<line x1="34" x2="${lw-4}" y1="${LY(100-D40.tol)}" y2="${LY(100-D40.tol)}" stroke="var(--orange)" stroke-dasharray="4 3"/><text x="30" y="${LY(100-D40.tol)+4}" text-anchor="end" class="c40-ax">${100-D40.tol}%</text><text x="30" y="${LY(100)+4}" text-anchor="end" class="c40-ax">100%</text>`;
+  lag.forEach((o,k)=>{if(!o)return;const x=36+k*lgw,y=LY(o.acc*100);ls+=`<rect x="${x+2}" y="${y}" width="${lgw-4}" height="${lh-22-y}" fill="${o.acc*100>=100-D40.tol?'#9CB8D6':'#E8870E'}" data-tip="${esc((k+1)+(k?' weeks':' week')+' lag · '+(o.acc*100).toFixed(1)+'% · '+o.n+' forecasts')}"/>`;if(k%2===0)ls+=`<text x="${x+lgw/2}" y="${lh-8}" text-anchor="middle" class="c40-ax">${k+1}</text>`});
+  const lagC=`<div class="c40-lag"><div class="d39-sh">Accuracy by forecast lag · last 15 forecasts</div><svg viewBox="0 0 ${lw} ${lh}" class="c40-lsv" role="img" aria-label="Accuracy by forecast lag">${ls}</svg></div>`;
+  const opts=`<div class="c40-opt"><span class="c40-ol">Forecast of</span><select class="fv-sel" onchange="D40.mon=this.value;D40.wk3=null;render()">${Ms.map((m,i)=>`<option value="${hzIso(m)}"${hzIso(m)===D40.mon?' selected':''}>Mon ${d40Md(m)}${i===Ms.length-1?' · current':' · '+(Ms.length-1-i)+(Ms.length-1-i===1?' week ago':' weeks ago')}</option>`).join('')}</select>
+    <div class="seg c40-seg">${[['b','Billings'],['c','Collections'],['x','Deductions and write-offs'],['ar','Closing AR']].map(([k,l])=>`<button class="${m3===k?'on':''}" onclick="D40.m3='${k}';render()">${l}</button>`).join('')}</div>
+    <span class="c40-ol">Layers</span>${[['fc','Prior forecast'],['act','Actual'],['today','Current forecast']].map(([k,l])=>`<button class="c40-chip${D40.lay[k]?' on':''}" aria-pressed="${D40.lay[k]}" onclick="D40.lay.${k}=!D40.lay.${k};render()">${l}</button>`).join('')}
+    <select class="fv-sel c40-s2" aria-label="Compare with another forecast" onchange="D40.mon2=this.value;render()"><option value="">Compare with…</option>${Ms.filter(m=>hzIso(m)!==D40.mon).map(m=>`<option value="${hzIso(m)}"${hzIso(m)===D40.mon2?' selected':''}>Mon ${d40Md(m)}</option>`).join('')}</select>
+    <span class="sp"></span><button class="c40-pb" onclick="d40DlCut('back')">Export · Treasury cut as submitted</button><button class="c40-sb" onclick="d40DlBack()">Export · ${RL}</button></div>`;
+  return {tiles,opts,body:`<div class="card mb c40-ch"><div class="ch"><h3>Prior forecast · ${mlab}</h3><span class="d39-rg">${d40Md(WK[0].mon)} – ${d40Md(WK[WK.length-1].fri)}</span></div>${chart}</div>
+    <div class="card mb c40-lb"><div class="ch"><h3>Forecast vs actual</h3><span class="sp"></span>${D40.wk3!=null?'<button class="c40-chip ghost" onclick="D40.wk3=null;render()">All weeks</button>':''}</div><div class="c40-lbg"><div>${tbl}</div><div>${fa}${ff}${lagC}</div></div></div>`,
+    sum:`${mlab} · ${acc==null?'no closed weeks':'forecast accuracy '+(acc*100).toFixed(1)+'%'}`}}
+
+/* ---------------- downloads ---------------- */
+function d40DlFc(toCp){const c=d40Ctx(),{E,R,t,w}=c;let ix=d40Range(c);if(toCp&&D40.cp.length){const last=D40.cp[D40.cp.length-1];ix=ix.filter(i=>E.days[i].iso<=last)}
+  const head=[`McKesson · Accounts Receivable · current forecast · run ${d40Wd(E.days[t].d)}, 2026, 06:10 ET · ${BU_NAMES[c.bu]} · $M`];
+  const rows=[['Date','Week','Status','Opening AR','Billings','Collections','Deductions','Write-offs','Closing AR']].concat(ix.map(i=>{const o=E.days[i];return [o.iso,o.w-w+1,i===t?'Today':'Forecast',d40N(R.open[i]),d40N(R.b[i]),d40N(R.c[i]),d40N(R.x[i]),d40N(R.wo[i]),d40N(R.close[i])]}));
+  d40Csv(`AR-forecast-${c.bu.replace('&','and')}-${E.days[t].iso}${toCp&&D40.cp.length?'-to-'+D40.cp[D40.cp.length-1]:''}.csv`,head,rows)}
+function d40DlCut(kind){const c=d40Ctx(),{E,R,Rm,t,w,s0}=c;let src=Rm,lab='Baseline · '+d40Wd(E.days[s0].d),M=d39Mon(c.B,w),cmp=null,H=null;
+  if(kind==='today'){src=R;lab='Current forecast · '+d40Wd(E.days[t].d)}if(kind==='corr'){src=R;cmp=Rm;lab='Treasury update · current forecast '+d40Wd(E.days[t].d)+' vs baseline '+d40Wd(E.days[s0].d)}
+  if(kind==='back'){const Ms=d40Mondays(c);M=Ms.find(m=>hzIso(m)===D40.mon)||Ms[0];H=d40Mon(c,M);lab='Treasury cut as submitted · Mon '+d40Md(M)}
+  const head=[`McKesson · Treasury cut · weeks 1–5 · ${lab} · ${BU_NAMES[c.bu]} · $M`],rows=[['Date','Week','Billings','Collections','Deductions and write-offs'].concat(cmp?['Baseline collections','Variance']:H?['Actual collections','Variance']:[])];
+  for(let k=0;k<5;k++){let sb=0,sc=0,sx=0,sm=0,sa=0;
+    if(H){const x=H.weeks[k];x.days.forEach((d,j)=>{const f=x.dF[j];if(!f)return;const a=x.dA[j];rows.push([d,k+1,d40N(f.b),d40N(f.c),d40N(f.x),a?d40N(a.c):'',a?d40N(a.c-f.c):'']);sb+=f.b;sc+=f.c;sx+=f.x;if(a)sa+=a.c});rows.push(['Week '+(k+1)+' total','',d40N(sb),d40N(sc),d40N(sx),x.A?d40N(x.A.c):'',x.done&&x.A?d40N(x.A.c-x.F.c):''])}
+    else{const ix=d40Ix(E,w+k).filter(i=>kind==='today'||kind==='corr'?i>=t:true);ix.forEach(i=>{const r=[E.days[i].iso,k+1,d40N(src.b[i]),d40N(src.c[i]),d40N(src.x[i]+src.wo[i])];if(cmp)r.push(d40N(cmp.c[i]),d40N(src.c[i]-cmp.c[i]));rows.push(r);sb+=src.b[i];sc+=src.c[i];sx+=src.x[i]+src.wo[i];if(cmp)sm+=cmp.c[i]});
+      const r=['Week '+(k+1)+' total','',d40N(sb),d40N(sc),d40N(sx)];if(cmp)r.push(d40N(sm),d40N(sc-sm));rows.push(r)}}
+  d40Csv(`Treasury-cut-weeks-1-5-${kind==='back'?'as-sent-'+hzIso(M):kind==='mon'?'baseline-'+E.days[s0].iso:kind==='corr'?'treasury-update-'+E.days[t].iso:'current-'+E.days[t].iso}-${c.bu.replace('&','and')}.csv`,head,rows)}
+function d40DlBack(){const c=d40Ctx(),Ms=d40Mondays(c),M=Ms.find(m=>hzIso(m)===D40.mon)||Ms[0],H=d40Mon(c,M),head=[`McKesson · 13-week forecast of Mon ${d40Md(M)} · ${BU_NAMES[c.bu]} · $M`],rows=[['Week','Week of','Forecast billings','Forecast collections','Forecast deductions','Forecast closing AR','Actual collections','Actual closing AR','Accuracy (collections)']];
+  H.weeks.filter(x=>d41Ks('back',M).includes(x.k)).forEach(x=>rows.push([x.k+1,hzIso(x.mon),d40N(x.F.b),d40N(x.F.c),d40N(x.F.x),d40N(x.arF),x.done&&x.A?d40N(x.A.c):'',x.arA!=null?d40N(x.arA):'',x.done&&x.A?((1-Math.abs(x.A.c-x.F.c)/x.A.c)*100).toFixed(1)+'%':'']));
+  d40Csv(`AR-13-week-forecast-of-${hzIso(M)}-${c.bu.replace('&','and')}.csv`,head,rows)}
+
+/* ---------------- the switch and the page ---------------- */
+function d40Cockpit(){const c=d40Ctx(),V={fc:d40Fc,mon:d40MonView,back:d40Back},cur=V[D40.view](c),sums={};
+  ['fc','mon','back'].forEach(k=>{try{sums[k]=k===D40.view?cur:V[k](c)}catch(e){sums[k]={sum:''}}});
+  const tab=(k,n,t2)=>`<div class="c41-tb${D40.view===k?' on':''}"><button role="tab" aria-selected="${D40.view===k}" class="${D40.view===k?'on':''}${sums[k].warn?' warn':''}" onclick="d40Go('${k}')"><span class="n">${n}</span><span class="tx"><b>${t2}</b><small>${esc(sums[k].sum||'')}</small></span></button>${d41Ctl(k,c,t2)}</div>`;
+  return `<div class="c40" data-view="${D40.view}"><div class="c40-sw" role="tablist" aria-label="View">${tab('fc',1,'Current forecast')}${tab('mon',2,'Variance to baseline')}${tab('back',3,'Prior forecast')}</div>
+    ${cur.opts}<div class="c40-t">${cur.tiles}</div>${cur.body}</div>`}
+/* 13-Week Rolling: the switch, tiles and chart replace the window strip, the old tiles, the business-unit card and the headline */
+pageFx=(function(f0){return function(){const h=f0.apply(this,arguments);if(S.hz!=='W13'||!can('pw.daily'))return h;
+  const i=h.indexOf('<div class="eq');if(i<0)return h;let add='';try{add=d40Cockpit()}catch(e){console.error(e);return h}return h.slice(0,i)+add+h.slice(i)}})(pageFx);
+const d35Card0=d35Card,d35Treas0=d35Treas;
+d35Card=function(){return S.hz==='W13'&&D40.view!=='mon'?'':d35Card0()};
+d35Treas=function(){return S.hz==='W13'&&D40.view!=='mon'?'':d35Treas0()};
+render=(function(f0){return function(){const r=f0.apply(this,arguments);try{const root=document.querySelector('#main .v30');if(root)root.classList.toggle('v40',!!root.querySelector(':scope > .c40'))}catch(e){}return r}})(render);
+P36_SEC[0][2]=['.c40','.eq'];
+p38Sum=(function(f0){return function(id,root){if(id==='over'&&root.querySelector('.c40')){const v=[...root.querySelectorAll('.c40 .t40 .val')].map(p38T),l=[...root.querySelectorAll('.c40 .t40 .lab')].map(p38T);return v.length>=5?`${l[2]} ${v[2]} · ${l[4]} ${v[4]}`:''}return f0(id,root)}})(p38Sum);
+v30Meta=(function(f0){return function(k){if(k!=='W13')return f0(k);try{const c=d40Ctx(),a=c.t>0?c.E.days[c.t-1].d:null,ix=d40Range(c),end=c.E.days[ix[ix.length-1]].d;
+  const rg=D40.view==='fc'?d40Md(c.md)+' – '+d40Md(end)+', '+end.getFullYear():D40.view==='mon'?d40Md(c.E.days[c.s0].d)+' – '+d40Md(hzAdd(d39Mon(c.B,c.w+12),4))+', '+hzAdd(d39Mon(c.B,c.w+12),4).getFullYear():(D40.mon?(()=>{const m=hzParse(D40.mon),e=hzAdd(m,88);return d40Md(m)+' – '+d40Md(e)+', '+e.getFullYear()})():'');
+  return `<span class="m36">${rg}</span><span class="m36">${BU_NAMES[S.bu]}</span><span class="m36">Run · ${d40Wd(c.md)}, 06:10 ET</span><span class="m36 m36a"><i></i>${a?'Actuals through '+d40Wd(a):'No actuals yet'}</span>`}catch(e){return f0(k)}}})(v30Meta);
+function p36Steps(){const s=[['#hzSeg','Time frame','Switch between 13 weeks by day, month or quarter to fiscal year-end, and the long-range plan.'],
+    ['#buSeg','Business unit','See all business units together or one at a time. Every number on the page follows.'],
+    ['#main .c40-sw','Views','Current forecast, variance to the baseline submitted to Treasury, and prior forecasts with their accuracy, each over 5, 10 or 13 weeks or custom dates.'],
+    ['#main .c40-opt','Options','Checkpoints, tolerance, forecast selection, layers and exports, including the Treasury cut for weeks 1–5.'],
+    ['#main .c40-t','Tiles','The tiles follow the selected view.'],
+    ['#main .c40-why2','Variance drivers','Baseline to current forecast: missed receipts, late cash re-forecast and new items such as a moved payment run.'],
+    ['#main .n36','Sections and Compare','Jump to any part of the page; fold a section to see it as one line.'],
+    ['.askbtn','Ask AI','Ask about any number on screen. The i on every tile and card says what it shows, and the ? brings back this tour and the terms.']];
+  return s.filter(x=>{const e=document.querySelector(x[0]);return e&&e.offsetParent!==null})}
+P36_TERMS.push(['Checkpoint','A date within the 13 weeks: closing AR and cumulative flows to that date, with variance to the baseline.'],['Tolerance','The ± band for weekly variance to the baseline (5% by default).'],['Prior forecast','The 13-week forecast of an earlier Monday, kept for accuracy and comparison.'],['Treasury cut','Weeks 1–5 of the baseline, submitted to Treasury each Monday.'],['Variance drivers','What explains a variance: missed receipts, receipts above forecast, late cash re-forecast and new items.'],
+  ['Forecast accuracy','1 − |actual − forecast| / actual over closed weeks.'],['Forecast bias','Whether the forecast ran above or below actual over closed weeks.'],['Forecast lag','Weeks between the forecast date and the week forecast.']);
+
+P36_SEC[1][1]='Current week';
+(function(){const t=P36_TERMS.find(x=>x[0]==='Monday baseline');if(t){t[0]='Baseline';t[1]='The forecast run on Monday at 06:10 ET and submitted to Treasury (weeks 1–5): the version of record for the week. Variance is measured against it.'}})();
+
+
+/* ===== MK v41 · a range on each view (5, 10 or 13 weeks, or custom dates); variance drivers on hover; every AR component in Prior forecast;
+   weekly AR roll-forward on the current forecast; the header chips and the repeated Over time cards removed on 13-Week Rolling ===== */
+const D41={fc:{n:13,a:'',b:''},mon:{n:13,a:'',b:''},back:{n:13,a:'',b:''}};
+const D41_ML={b:['billings','Billings'],c:['collections','Collections'],x:['deductions','Deductions'],ar:['closing AR','Closing AR']};
+const D41_BA={b:['Billings below forecast','Billings above forecast'],c:['Receipts below forecast','Receipts above forecast'],x:['Deductions below forecast','Deductions above forecast'],ar:['','']};
+function d41BackM(c){const Ms=d40Mondays(c),isos=Ms.map(hzIso),i=isos.indexOf(D40.mon);return Ms[i>=0?i:Math.max(0,Ms.length-6)]}
+function d41M0(v,c){return v==='back'?d41BackM(c):d39Mon(c.B,c.w)}
+function d41Hz(v,c){const M0=d41M0(v,c);return [v==='fc'?c.md:M0,v==='back'?hzAdd(M0,88):hzAdd(d39Mon(c.B,c.w+12),4)]}
+/* the weeks of a view's 13 that fall in its range (week offsets 0–12) */
+function d41Ks(v,M0){const r=D41[v];if(r.n)return [...Array(r.n).keys()];const out=[];
+  for(let q=0;q<13;q++){const m=hzIso(hzAdd(M0,7*q)),f=hzIso(hzAdd(M0,7*q+4));if(f>=r.a&&m<=r.b)out.push(q)}
+  return out.length?out:[...Array(13).keys()]}
+function d41RL(v,n){const r=D41[v];return r.n?r.n+' weeks':v==='fc'?n+' business days':n+(n===1?' week':' weeks')}
+/* current forecast: the business days from the run to the end of the range */
+function d40Range(c){const r=D41.fc,e13=hzIso(hzAdd(d39Mon(c.B,c.w+12),4)),a=r.n?'':r.a,b=r.n?hzIso(hzAdd(d39Mon(c.B,c.w+r.n-1),4)):(r.b<e13?r.b:e13),all=c.E.days.map((o,i)=>i);
+  const ix=all.filter(i=>i>=c.t&&c.E.days[i].iso>=a&&c.E.days[i].iso<=b);return ix.length?ix:all.filter(i=>i>=c.t&&c.E.days[i].iso<=e13)}
+function d41Ctl(v,c,t2){const r=D41[v],[h0,h1]=d41Hz(v,c),lo=hzIso(h0),hi=hzIso(h1),cl=x=>!x||x<lo?lo:x>hi?hi:x;
+  let h=`<div class="c41-rg" role="group" aria-label="${esc(t2)} · range">`+[5,10,13].map(n=>`<button type="button" class="${r.n===n?'on':''}" aria-pressed="${r.n===n}" onclick="d41Set('${v}',${n})">${n} weeks</button>`).join('')+
+    `<button type="button" class="${r.n?'':'on'}" aria-pressed="${!r.n}" onclick="d41Set('${v}',0)">Custom</button></div>`;
+  if(!r.n)h+=`<div class="c41-cu"><input type="date" class="c40-date" aria-label="${esc(t2)} · start date" min="${lo}" max="${hi}" value="${cl(r.a)}" onchange="d41Dt('${v}','a',this.value)"><span>–</span><input type="date" class="c40-date" aria-label="${esc(t2)} · end date" min="${lo}" max="${hi}" value="${r.b&&r.b<hi?(r.b<lo?lo:r.b):hi}" onchange="d41Dt('${v}','b',this.value)"></div>`;
+  return h}
+function d41Set(v,n){const r=D41[v];if(!n&&r.n){const c=d40Ctx(),M0=d41M0(v,c);r.a=hzIso(v==='fc'?c.md:M0);r.b=hzIso(hzAdd(M0,7*(r.n-1)+4))}r.n=n;D40.view=v;D40.wk=null;D40.wk3=null;render()}
+function d41Dt(v,k,val){if(!val)return;const r=D41[v];r[k]=val;if(r.a&&r.b&&r.a>r.b){const x=r.a;r.a=r.b;r.b=x}D40.view=v;D40.wk=null;D40.wk3=null;render()}
+
+/* ---------------- variance on hover: baseline to current forecast ---------------- */
+const d41Tv=(tip,html)=>`<span class="c41-v" data-tip="${esc(tip)}">${html}</span>`;
+function d41Ln(c,ix){const D=d40Drv(c.bu,c.s0,c.t,ix),E=c.E,L=[],ks=D39_KL.shift,set=new Set(ix),who=s=>esc([...s].join(', '));
+  if(Math.abs(D.miss)>=.5){L.push('Missed receipts <b>'+fs(D.miss)+'</b>');D.top.filter(o=>o.dv<-.5).slice(0,3).forEach(o=>{const w0=d39Who(c.bu,o.i);L.push('&nbsp;&nbsp;'+d40Wd(E.days[o.i].d)+' '+fs(o.dv)+(w0?' · '+esc(w0):''))})}
+  if(Math.abs(D.extra)>=.5)L.push('Receipts above forecast <b>'+fs(D.extra)+'</b>');
+  if(Math.abs(D.late)>=.5)L.push('Late cash re-forecast <b>'+fs(D.late)+'</b>');
+  Object.entries(D.kn).forEach(([k,o])=>{if(k!==ks&&Math.abs(o.v)>=.5)L.push(esc(k)+' <b>'+fs(o.v)+'</b> · '+who(o.who))});
+  D39_KNOWN.filter(e=>e.k==='shift'&&(c.bu==='All'||e.bu===c.bu)&&hzParse(e.known)<=c.md&&hzParse(e.known)>E.days[c.s0].d).forEach(e=>{const i1=E.idx[e.due],i2=E.idx[e.to];
+    if(i1==null||i2==null||!(set.has(i1)||set.has(i2)))return;const v=(set.has(i2)?e.amt:0)-(set.has(i1)?e.amt:0);
+    L.push(ks+' '+(Math.abs(v)>=.5?'<b>'+fs(v)+'</b>':'· nets to zero')+' · '+esc(e.who)+' '+fmc(e.amt)+' · '+d40Wd(E.days[i1].d)+' → '+d40Wd(E.days[i2].d))});
+  if(Math.abs(D.other)>=.5)L.push('Other <b>'+fs(D.other)+'</b>');
+  return {D,L}}
+function d41Why(c,ix,head){const {D,L}=d41Ln(c,ix);return '<b>'+head+' '+fs(D.tot)+'</b><br>'+(L.join('<br>')||'No variance to baseline')}
+function d41WhyAR(c,last){const {R,Rm,s0}=c,ix=[];let db=0,dc=0,dx=0;for(let i=s0;i<=last;i++){db+=R.b[i]-Rm.b[i];dc+=R.c[i]-Rm.c[i];dx+=R.x[i]+R.wo[i]-Rm.x[i]-Rm.wo[i];ix.push(i)}
+  const L=['Billings '+fs(db)+' · AR <b>'+fs(db)+'</b>','Collections '+fs(dc)+' · AR <b>'+fs(-dc)+'</b>','Deductions and write-offs '+fs(dx)+' · AR <b>'+fs(-dx)+'</b>'],L2=d41Ln(c,ix).L;
+  return '<b>Closing AR variance '+fs(R.close[last]-Rm.close[last])+'</b><br>'+L.join('<br>')+(L2.length?'<br><br><b>Collections variance '+fs(dc)+'</b><br>'+L2.join('<br>'):'')}
+function d41Out(c,wks){const o=wks.filter(x=>x.out),w=c.w;if(!o.length)return `<b>All weeks within ±${D40.tol}%</b>`;
+  return `<b>Weeks outside ±${D40.tol}%</b>`+o.map(x=>{const L=d41Ln(c,x.ix).L;return '<br><b>'+(x.k===w?'Current week':'Wk '+(x.k-w+1))+' · '+d40Md(d39Mon(c.B,x.k))+'</b> '+fs(x.dv)+' · '+d40Pct(x.pc)+(L.length?'<br>'+L.slice(0,3).join('<br>'):'')}).join('')}
+/* prior forecast: a week's variance to actual */
+function d41WkTip(c,x,k,m,dv){const L=[];
+  if(m==='ar'){if(x.A)L.push('Billings '+fs(x.A.b-x.F.b),'Collections '+fs(x.A.c-x.F.c),'Deductions and write-offs '+fs(x.A.x-x.F.x))}
+  else x.days.map((d,j)=>{const f=x.dF[j],a=x.dA[j];return f&&a?{d,dv:a[m]-f[m]}:null}).filter(Boolean).sort((p,q)=>Math.abs(q.dv)-Math.abs(p.dv)).slice(0,3)
+    .forEach(o=>{const w0=m==='c'&&D39_WHO[o.d]?Object.values(D39_WHO[o.d])[0]:'';if(Math.abs(o.dv)>=.05)L.push(d40Wd(hzParse(o.d))+' <b>'+fs(o.dv)+'</b>'+(w0?' · '+esc(w0):''))});
+  return '<b>Wk '+(k+1)+' · '+d40Md(x.mon)+' · '+(m==='ar'?'closing AR':D41_ML[m][0])+' variance '+fs(dv)+'</b>'+(L.length?'<br>'+(m==='ar'?'Flows in the week vs prior forecast<br>':'')+L.join('<br>'):'')}
+
+/* ---------------- current forecast: weekly AR roll-forward over the range ---------------- */
+function d41Roll(c,ix){const {E,R,Rm,w}=c,ks=[...new Set(ix.map(i=>E.days[i].w))];let tb=0,tc=0,tx=0,tv=0;
+  const rows=ks.map(k=>{const d=ix.filter(i=>E.days[i].w===k),b=d40Sum(R,'b',d),cc=d40Sum(R,'c',d),x=d40Sum(R,'xw',d),dv=cc-d40Sum(Rm,'c',d),lab=k===w?'Current week':'Wk '+(k-w+1);tb+=b;tc+=cc;tx+=x;tv+=dv;
+    return `<tr><td><b>${lab}</b><small class="c41-d">${d40Md(E.days[d[0]].d)} – ${d40Md(E.days[d[d.length-1]].d)}</small></td><td class="r tnum">${fmc(R.open[d[0]])}</td><td class="r tnum">${fmc(b)}</td><td class="r tnum">${fmc(cc)}</td><td class="r tnum">${fmc(x)}</td><td class="r tnum"><b>${fmc(R.close[d[d.length-1]])}</b></td><td class="r tnum">${Math.abs(dv)>=.5?d41Tv(d41Why(c,d,lab+' · collections variance'),d39Sg(dv,true)):'<span class="txt-mut">$0M</span>'}</td></tr>`});
+  const L=ix[ix.length-1];
+  return `<div class="card mb c41-rf"><div class="ch"><h3>Weekly AR roll-forward</h3><span class="d39-rg">${d40Wd(E.days[ix[0]].d)} – ${d40Wd(E.days[L].d)}</span></div><div class="dly-tw"><table class="t c41-rft"><thead><tr><th>Week</th><th class="r">Opening AR</th><th class="r">+ Billings</th><th class="r">− Collections</th><th class="r">− Deductions and write-offs</th><th class="r">= Closing AR</th><th class="r">Collections vs baseline</th></tr></thead><tbody>${rows.join('')}
+    <tr class="tot"><td>Total<small class="c41-d">${d41RL('fc',ix.length)}</small></td><td class="r tnum">${fmc(R.open[ix[0]])}</td><td class="r tnum">${fmc(tb)}</td><td class="r tnum">${fmc(tc)}</td><td class="r tnum">${fmc(tx)}</td><td class="r tnum">${fmc(R.close[L])}</td><td class="r tnum">${Math.abs(tv)>=.5?d41Tv(d41Why(c,ix,'Collections variance'),d39Sg(tv,true)):'<span class="txt-mut">$0M</span>'}</td></tr></tbody></table></div></div>`}
+
+/* 13-Week Rolling: the cockpit carries the weekly charts and the roll-forward, so the Over time cards (baseline numbers) go */
+pageFx=(function(f0){return function(){const h=f0.apply(this,arguments);if(S.hz!=='W13'||h.indexOf('class="c40"')<0)return h;
+  try{const T=document.createElement('template');T.innerHTML=h;let n=0;
+    T.content.querySelectorAll('.v30-cc').forEach(e=>{if(!e.closest('.c40')){e.remove();n++}});
+    [...T.content.querySelectorAll('.card > .ch h3')].forEach(x=>{if(x.textContent.trim().startsWith('AR roll-forward')&&!x.closest('.c40')){x.closest('.card').remove();n++}});
+    return n?T.innerHTML:h}catch(e){return h}}})(pageFx);
+/* the page header carries the title only */
+v30Meta=function(){return ''};
+
+/* v41 port: only Overview, Customers and Insights in the section bar; no tour */
+P36_SEC.splice(0,P36_SEC.length,...P36_SEC.filter(s=>['over','cust','ins'].includes(s[0])));
+P36.auto=false;
+/* Performance Workspace header: the 5-Week Rolling button and the Studio chip are hidden, so the page always opens on 13 weeks */
+if(S.w5)w5Set(false);
+/* v41 port: info buttons for the cockpit tiles and cards */
+try{const add=[["Tile", "Baseline collections", "^Baseline collections$", "Variance to baseline view: collections over the selected range in the baseline submitted to Treasury on Monday, with the Treasury cut (weeks 1–5) when the range covers it.", "Overall balance"], ["Tile", "Current forecast collections", "^Current forecast collections$", "The same range in the current forecast (actuals to date, re-forecast for the remaining days), with the variance to the baseline and its drivers.", "Overall balance"], ["Tile", "Week-to-date collections", "^Week\\-to\\-date collections$", "Collections landed in the current week against the baseline for the same days.", "Overall balance"], ["Tile", "Weeks outside tolerance", "^Weeks outside tolerance$", "Weeks whose collections variance to the baseline is outside the tolerance (±5% by default).", "Overall balance"], ["Tile", "Prior forecast", "^Prior forecast · (billings|collections|deductions|closing AR)$", "Prior forecast view: what the selected Monday forecast expected over the selected range, for billings, collections, deductions and write-offs, or closing AR.", "Overall balance"], ["Tile", "Actual · closed weeks", "^Actual · closed weeks$", "Actuals for the closed weeks of the prior forecast, against what it forecast for them.", "Overall balance"], ["Tile", "Prior forecast accuracy", "^Prior forecast accuracy$", "Accuracy of the prior forecast over its closed weeks.", "Overall balance"], ["Tile", "Treasury cut accuracy", "^Treasury cut accuracy$", "Accuracy of weeks 1–5 as submitted to Treasury, once all five weeks are closed.", "Overall balance"], ["Tile", "Prior forecast bias", "^Prior forecast bias$", "Whether the prior forecast ran above or below actual over its closed weeks.", "Overall balance"], ["Card", "AR forecast", "^AR forecast$", "Current forecast view: daily AR balance over the selected range, with its forecast range and the baseline; weekly billings and collections below. Selecting a day adds a checkpoint.", "Over time"], ["Card", "Weekly AR roll-forward", "^Weekly AR roll\\-forward$", "Current forecast view: opening AR, billings, collections, deductions and write-offs and closing AR for each week of the selected range, with the collections variance to the baseline and its drivers.", "Period detail"], ["Card", "Checkpoints", "^Checkpoints$", "For each checkpoint: opening AR, billings, collections, deductions and write-offs to that date, closing AR, and the variance to the baseline with its drivers.", "Period detail"], ["Card", "Variance to baseline by week", "^Variance to baseline by week$", "Collections by week over the selected range, baseline against current forecast; variance in percent against the tolerance band, with each week's variance drivers.", "Over time"], ["Card", "Prior forecast", "^Prior forecast · Mon ", "The selected prior forecast against actual by week, with accuracy and a variance strip; the current forecast and a comparison forecast can be layered on top.", "Over time"], ["Card", "Forecast vs actual", "^Forecast vs actual$", "Prior forecast by week for the selected component (billings, collections, deductions and write-offs, or closing AR) with actual, variance and accuracy; variance drivers (below and above forecast, timing variance); forecast vs forecast for the comparison; accuracy by forecast lag over the last 15 forecasts.", "Period detail"], ["Card", "Weekly AR bridge", "^Weekly AR bridge$", "Variance to baseline view: the week's AR bridge (opening AR plus billings, less collections, deductions and write-offs, equals closing AR) for the baseline, actual to date, remaining forecast and current forecast, with the variance; the calendar opens any forecast run; daily detail below.", "Over time"], ["Card", "Treasury alerts", "^Treasury alerts$", "Current forecast against the Treasury cut for weeks 1–5 (the baseline, or the last Treasury update). Days, weeks and next-week shifts beyond the alert thresholds are flagged with their drivers (late cash, cash moved to next week, cash treated as lost, new items); the Treasury update is prepared and recorded here.", "Period detail"], ["Card", "Forecast versions", "^Forecast versions$", "Baselines week on week: each Monday baseline's collections for the weeks ahead, the variance to the version before, the current forecast and the actual. Daily runs of the current week, saved, with variance to the baseline and whether a Treasury update was required.", "Period detail"]];const n=INFO32.tower.length;INFO32.tower.push(...add);INFO32_RX.tower.push(...add.map((r,i)=>({kind:r[0],h:r[1],re:new RegExp(r[2]),d:r[3],i:n+i})))}catch(e){}
+
 
 </script>
 </body>
