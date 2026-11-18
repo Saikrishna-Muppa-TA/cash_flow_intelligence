@@ -1749,6 +1749,50 @@ table.t.ns-t th{font-size:10px;white-space:normal;line-height:1.2;vertical-align
 .vb-obs ul{margin:8px 0 0;padding-left:20px;font-size:12.5px;line-height:1.6;color:var(--ink2)}.vb-obs li{margin:3px 0}
 </style>
 <style>
+/* ---------- v38 · customer payment alerts ---------- */
+.a38-cats{display:flex;gap:6px;flex-wrap:wrap}
+.a38-cats button{border:1px solid var(--line);background:#fff;border-radius:999px;padding:7px 14px;font:inherit;font-size:12.5px;font-weight:600;color:var(--ink2);cursor:pointer;display:flex;gap:7px;align-items:center}
+.a38-cats button span{font-size:11px;background:#EEF2F7;border-radius:999px;padding:1px 7px;color:var(--ink2)}
+.a38-cats button.on{background:var(--deep,#0B2A4A);color:#fff;border-color:transparent}.a38-cats button.on span{background:rgba(255,255,255,.18);color:#fff}
+.a38-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:0;background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.a38-strip>div{padding:12px 16px;border-right:1px solid var(--line2,#EEF1F5)}.a38-strip>div:last-child{border-right:0}
+.a38-strip small{display:block;font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.a38-strip b{display:block;font-size:22px;margin:3px 0 1px}.a38-strip span{font-size:11.5px;color:var(--muted)}
+.overlay .a38-dr{position:fixed;top:0;right:0;bottom:0;width:min(720px,94vw);background:#fff;box-shadow:-20px 0 60px rgba(0,0,0,.2);overflow:auto;padding:22px 26px 30px;animation:a38in .22s ease-out}
+@keyframes a38in{from{transform:translateX(40px);opacity:0}to{transform:none;opacity:1}}
+.a38-h{display:flex;align-items:flex-start;gap:10px;margin-bottom:14px}.a38-h h3{margin:3px 0 7px;font-size:20px}
+.a38-k{font-size:10.5px;font-weight:700;letter-spacing:.08em;color:var(--muted)}
+.a38-tags{display:flex;gap:6px;flex-wrap:wrap;align-items:center}.a38-t{font-size:11px;font-weight:600;border-radius:5px;padding:2px 8px;background:#EEF2F7;color:var(--ink2)}
+.a38-t.bh{background:#FDECEC;color:var(--bad)}.a38-t.tm{background:#E3EFFB;color:var(--blue)}
+.a38-ctl{display:flex;gap:12px;margin-bottom:6px}.a38-ctl label{display:flex;flex-direction:column;gap:4px;font-size:10.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
+.a38-ctl select{font:inherit;font-size:12.5px;padding:6px 10px;border:1px solid var(--line);border-radius:8px;text-transform:none;letter-spacing:0;font-weight:500;color:var(--ink)}
+.a38-s{border-top:1px solid var(--line);padding:14px 0 4px}.a38-s p{margin:0;font-size:13px;line-height:1.6;color:var(--ink2)}
+.a38-l{font-size:10.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.a38-sig td{font-size:12.5px;padding:6px 8px}
+.a38-ax{font-size:10.5px;fill:var(--muted)}
+.a38-lg{display:flex;gap:14px;font-size:11.5px;color:var(--muted);margin-top:2px}.a38-lg i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px}.a38-lg i.ds{border:1px dashed #9AA7B5;background:none}
+.a38-ag{display:grid;grid-template-columns:62px 1fr 66px;gap:8px;align-items:center;font-size:12px;margin:5px 0}.a38-ag>div{height:9px;background:#F1F4F8;border-radius:5px;overflow:hidden}.a38-ag i{display:block;height:100%;border-radius:5px}.a38-ag b{text-align:right}
+.a38-big{font-size:26px;font-weight:800}
+.a38-imp{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}.a38-iw{background:#F7F9FC;border-radius:7px;padding:6px 7px}.a38-iw small{display:block;font-size:10px;color:var(--muted)}.a38-iw b{font-size:12.5px}
+.a38-act{display:flex;gap:8px;flex-wrap:wrap;align-items:center;border-top:1px solid var(--line);padding-top:14px;margin-top:10px}
+.a38-sw{display:flex;gap:10px;align-items:flex-start;padding:7px 0;border-bottom:1px solid var(--line2,#EEF1F5);cursor:pointer}.a38-sw input{margin-top:3px;accent-color:var(--blue);width:15px;height:15px}
+.a38-sw b{display:block;font-size:13px}.a38-sw small{font-size:11.5px;color:var(--muted)}
+.a38-fs{display:grid;grid-template-columns:1fr 1fr;gap:10px 16px}.a38-f label{display:block;font-size:12px;color:var(--ink2);margin-bottom:4px}
+.a38-f>div{display:flex;align-items:center;gap:6px}.a38-f input{width:90px;font:inherit;font-size:13px;padding:6px 8px;border:1px solid var(--line);border-radius:8px}.a38-f span{font-size:12px;color:var(--muted)}
+.a38-bn{display:inline;cursor:pointer;text-decoration:underline;text-decoration-color:rgba(255,255,255,.5);text-underline-offset:3px;font-weight:600}
+.a38-iw b{white-space:nowrap}
+.scp-new td{background:#F1F7FD}.scp-card .t td{vertical-align:top}
+.scp-in{font:inherit;font-size:12.5px;padding:5px 8px;border:1px solid var(--line);border-radius:7px;background:#fff;color:var(--ink)}.scp-why{width:100%;min-width:150px;box-sizing:border-box}
+.scp-t td{vertical-align:middle}.scp-addr td{background:#F7FAFD}.scp-sel{min-width:340px}.scp-addb{margin-top:8px}
+.scp-list{display:flex;flex-direction:column;gap:8px;margin-top:6px}
+.scp-r{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:#fff}.scp-r.chd{border-color:#B8D4F0;background:#F7FBFF}
+.scp-g{display:grid;grid-template-columns:minmax(150px,1.3fr) 100px 170px 160px 76px;gap:12px;align-items:end}
+.scp-g label,.scp-w label{display:block;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.scp-c b{display:block;font-size:13.5px}.scp-c small{display:block;font-size:11px;color:var(--muted);margin-top:2px}
+.scp-x{text-align:right}.scp-w{margin-top:8px}.scp-w .scp-in{width:100%;box-sizing:border-box}
+.scp-addr{padding:8px 10px;border:1px dashed #B9C6D6;border-radius:10px;background:#F7FAFD}
+</style>
+<style>
 /* ---------- v41 port · Performance Workspace: Overview, Customers, Insights ---------- */
 /* ===== MK v35 · daily roll-forward and the Treasury cut ===== */
 .d35 .ch{flex-wrap:wrap;row-gap:8px}
@@ -1988,7 +2032,7 @@ table.d39-vr td,table.d39-vr th{padding-left:8px;padding-right:8px}
 
 /* ===== MK v40 · 13-Week Rolling in three views ===== */
 .w37{display:none!important}
-.v30.v40>.eq,.v30.v40>.v32-bu,.v30.v40>.banner{display:none!important}
+.v30.v40>.eq,.v30.v40>.v32-bu{display:none!important}   /* banner kept: it carries the Variance bridge button */
 .c40{margin-bottom:14px}
 .c40-sw{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:12px}
 .c40-sw button{display:flex;align-items:center;gap:12px;text-align:left;border:1px solid var(--line);background:#fff;border-radius:10px;padding:10px 14px;cursor:pointer;min-width:0;font:inherit;color:inherit}
@@ -2107,6 +2151,141 @@ table.c41-rft tr.tot td{font-weight:600;border-top:1.5px solid var(--navy);backg
 @media (max-width:1360px){.c41-rg,.c41-cu{padding-left:0}}
 /* v41 port: the help button and tour are not brought over */
 .h36{display:none!important}
+</style>
+<style>
+/* ---------- Forecast accuracy: sidebar tile and drill view ---------- */
+.fa-side{margin-top:auto;display:block;width:100%;text-align:left;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:12px 12px 10px;color:#C9DAEC;cursor:pointer;font:inherit;transition:background .15s,border-color .15s}
+.fa-side:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.24)}
+.fa-side:focus-visible{outline:2px solid #8EC5FF;outline-offset:2px}
+.fa-side + .agentbox{margin-top:10px}
+.fa-sk{font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;color:#9DB8D3;font-weight:700}
+.fa-sv{display:flex;align-items:baseline;gap:8px;margin-top:6px}
+.fa-sv b{font-size:24px;color:#fff;letter-spacing:-.01em;font-variant-numeric:tabular-nums}
+.fa-sd{font-size:11.5px;font-weight:700;font-variant-numeric:tabular-nums}
+.fa-sd.up{color:#7EE2A8}.fa-sd.dn{color:#FFB8A8}
+.fa-ss{font-size:11.5px;color:#9DB8D3;margin-top:2px}
+.fa-sp{display:block;width:100%;height:38px;margin-top:8px}
+.fa-sg{font-size:11.5px;color:#8EC5FF;font-weight:600;margin-top:4px}
+.modal.fa-mod{width:min(1180px,calc(100vw - 40px));max-height:calc(100vh - 40px);overflow:auto;padding:20px 24px}
+.fa-h{display:flex;align-items:flex-start;gap:12px}
+.fa-h .sp{flex:1}
+.fa-kick{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.fa-bc{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-top:4px;font-size:18px;font-weight:700}
+.fa-bc a{color:var(--blue);cursor:pointer;text-decoration:none}
+.fa-bc a:hover{text-decoration:underline}
+.fa-bc i{font-style:normal;color:var(--muted);font-weight:400}
+.fa-x{border:0;background:#EEF2F7;border-radius:8px;width:32px;height:32px;font-size:15px;color:var(--ink2);cursor:pointer;flex:none}
+.fa-x:hover{background:#E1E7EE}
+.fa-ctl{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;margin:14px 0 14px}
+.fa-ctl label{display:flex;align-items:center;gap:8px;font-size:11.5px;font-weight:600;color:var(--ink2)}
+.fa-ctl .sp{flex:1}
+.fa-ks{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:14px}
+@media (max-width:900px){.fa-ks{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.fa-k{border:1px solid var(--line);border-radius:10px;padding:11px 14px;background:#fff}
+.fa-k .l{font-size:12px;color:var(--ink2);font-weight:600}
+.fa-k .v{font-size:22px;font-weight:700;margin:5px 0 3px;font-variant-numeric:tabular-nums}
+.fa-k .s{font-size:11.5px;color:var(--muted)}
+.fa-k.click{cursor:pointer}.fa-k.click:hover{border-color:var(--sky-2)}
+.fa-lo{color:#8A5200;font-weight:700}
+.fa-ok{color:var(--good);font-weight:700}
+.fa-card{border:1px solid var(--line);border-radius:12px;padding:12px 14px 6px;margin-bottom:14px}
+.fa-card .ch{display:flex;align-items:center;gap:10px;margin-bottom:4px;flex-wrap:wrap}
+.fa-card h3{margin:0;font-size:14px;font-weight:700}
+.fa-card .ch .sp{flex:1}
+.fa-card .sub{font-size:12px;color:var(--muted)}
+.fa-lg{display:flex;gap:16px;flex-wrap:wrap;font-size:11.5px;color:var(--ink2);margin:2px 0 4px}
+.fa-lg span{display:inline-flex;align-items:center;gap:6px}
+.fa-lg i{display:inline-block;width:16px;height:0;border-top:2px solid #2F80D1}
+.fa-lg i.t{border-top:2px dashed #46566A}
+.fa-lg i.b{width:12px;height:10px;border:0;background:#E8F1FA;border-radius:2px}
+.fa-lg i.lo{width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-top:8px solid #B7791F}
+.fa-svg{display:block;width:100%;height:auto}
+.fa-hit{cursor:pointer}
+table.t.fa-t td,table.t.fa-t th{padding:7px 10px}
+table.t.fa-t tr.on td{background:#EEF5FC}
+table.t.fa-t td small{display:block;color:var(--muted);font-size:11px}
+.fa-note{font-size:11.5px;color:var(--muted);margin:2px 0 2px}
+</style>
+<style>
+/* ---------- v38 · Forecast Override ---------- */
+.fo-n{display:inline-grid;place-items:center;min-width:18px;height:18px;padding:0 5px;border-radius:9px;background:var(--orange);color:#fff;font-size:10.5px;font-weight:700;margin-left:4px}
+.fo-info{background:linear-gradient(180deg,#F1F7FD,#fff);border-color:var(--sky-2)}
+.fo-info ul{margin:0;padding-left:18px;columns:2;column-gap:36px;font-size:12.8px;line-height:1.55;color:var(--ink2)}
+.fo-info li{break-inside:avoid;margin:0 0 6px}
+@media (max-width:1100px){.fo-info ul{columns:1}}
+table.t.fo-g th{padding:8px 6px}
+table.t.fo-g td{padding:6px 6px;vertical-align:middle}
+.fo-in{width:100%;padding:7px 9px;border:1px solid var(--line);border-radius:7px;font:inherit;font-size:12.8px;background:#fff;color:var(--ink)}
+.fo-in:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(0,96,175,.12)}
+.fo-in.fo-bad,.fo-dec textarea.fo-bad{border-color:var(--bad);background:#FFF7F7}
+select.fo-cu{min-width:210px}
+.fo-g input[type=date]{min-width:140px}
+.fo-v{width:96px;text-align:right}
+.fo-cm{min-width:230px}
+.seg.fo-md button{padding:5px 10px;font-size:12px}
+.fo-del{border:0;background:transparent;color:var(--muted);padding:6px;border-radius:7px;display:grid;place-items:center;cursor:pointer}
+.fo-del:hover{background:var(--bad-soft);color:var(--bad)}
+.fo-act{display:flex;align-items:center;gap:10px;margin-top:12px;flex-wrap:wrap}
+.fo-act .sp{flex:1}
+#foErr{font-size:12px}
+.fo-act .btn:disabled{opacity:.5;cursor:not-allowed}
+.fo-ok{padding:11px 14px;border-radius:10px;background:var(--good-soft);color:#17692F;font-weight:600;font-size:13px;border:1px solid #BFE3C8}
+.fo-stale{padding:12px 14px;border:1px dashed #C9D3DE;border-radius:10px;color:var(--ink2);font-size:12.8px;background:#fff;margin-bottom:16px}
+.fo-pvh{margin:-4px 0 10px}
+.fo-pvtag{display:inline-flex;align-items:center;gap:7px;background:var(--warn-soft);color:#8A5200;font-weight:700;font-size:12px;padding:5px 11px;border-radius:999px}
+.fo-pvtag:before{content:"";width:7px;height:7px;border-radius:50%;background:var(--orange)}
+.fo-chs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:6px 0 14px}
+@media (max-width:1100px){.fo-chs{grid-template-columns:1fr}}
+.fo-ch{border:1px solid var(--line2);border-radius:10px;padding:10px 10px 4px}
+.fo-cht{font-size:12.5px;font-weight:700;color:var(--ink2);margin:0 0 4px 4px}
+.fo-lgd{margin-bottom:6px}
+.fo-lgd i.fo-sw{width:14px;height:10px;border-radius:2px}
+table.t.fo-sum{max-width:760px}
+table.t.fo-sum td,table.t.fo-sum th{padding:7px 10px}
+.fo-foot{font-size:11.5px;margin-top:10px}
+table.t.fo-rt td small,table.t.fo-q td small{display:block;color:var(--muted);font-size:11px}
+table.t.fo-rt td,table.t.fo-rt th{padding:7px 8px}
+.fo-cmc{white-space:normal;min-width:180px;color:var(--ink2)}
+.fo-id{color:var(--blue)}
+.fo-ni{white-space:nowrap;font-size:12px}
+.fo-dg{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:18px}
+@media (max-width:1100px){.fo-dg{grid-template-columns:1fr}}
+.fo-trk{border-left:1px solid var(--line2);padding-left:18px}
+.fo-trh{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:700;margin-bottom:10px}
+.fo-step{display:flex;gap:10px;position:relative;padding-bottom:14px}
+.fo-step.fo-ln:before{content:"";position:absolute;left:12px;top:28px;bottom:2px;width:2px;background:var(--line)}
+.fo-dot{flex:none;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-size:12px;font-weight:700;background:#EEF2F7;color:var(--ink2);box-shadow:0 0 0 1px var(--line)}
+.fo-step.ok .fo-dot{background:var(--good);color:#fff;box-shadow:none}
+.fo-step.bad .fo-dot{background:var(--bad);color:#fff;box-shadow:none}
+.fo-step.cur .fo-dot{background:var(--blue);color:#fff;box-shadow:0 0 0 4px rgba(0,96,175,.15)}
+.fo-step b{display:block;font-size:13px}
+.fo-step small{display:block;color:var(--muted);font-size:11.5px}
+.fo-sl{font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:700}
+.fo-sd{font-size:12px;color:var(--ink2);margin-top:3px}
+.fo-scm{font-size:12px;color:var(--ink2);margin-top:4px;font-style:italic}
+.fo-dec{margin-top:2px;border-top:1px solid var(--line2);padding-top:12px}
+.fo-dec label{font-size:12px;font-weight:600;color:var(--ink2);display:block;margin-bottom:5px}
+.fo-dec textarea{width:100%;min-height:62px;border:1px solid var(--line);border-radius:8px;padding:8px 10px;font:inherit;font-size:12.8px}
+.fo-decb{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.fo-decb .sp{flex:1}
+.btn.fo-rej:hover{border-color:var(--bad);color:var(--bad)}
+.fo-note{padding:9px 12px;border-radius:9px;font-size:12.5px;margin-bottom:12px;background:#F3F5F8;color:var(--ink2)}
+.fo-note.approved{background:var(--good-soft);color:#17692F}
+.fo-note.rejected{background:var(--bad-soft);color:var(--bad)}
+.fo-flt{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:flex-end;margin-bottom:12px}
+.fo-flt label{display:flex;flex-direction:column;gap:4px;font-size:11.5px;font-weight:600;color:var(--ink2);min-width:150px}
+table.t.fo-log th{padding:8px}
+table.t.fo-log td{padding:7px 8px;white-space:nowrap}
+table.t.fo-log td.fo-cmc{white-space:normal}
+.fo-lnk{color:var(--blue);font-weight:700;cursor:pointer}
+.fo-mk{display:inline-flex;align-items:center;gap:5px;margin-left:6px;padding:1px 7px;border-radius:999px;background:var(--orange-soft);color:#B36205;font-size:10.5px;font-weight:700;white-space:nowrap;vertical-align:1px;cursor:default}
+.fo-mk:before{content:"";width:6px;height:6px;border-radius:1px;background:var(--orange);transform:rotate(45deg)}
+.fo-smk{cursor:default}
+.modal.fo-mod{width:780px;max-width:calc(100vw - 32px);max-height:calc(100vh - 40px);overflow:auto}
+.fo-net{margin-top:10px;font-size:13px}
+.fo-tdot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#E8870E;margin-left:6px;vertical-align:1px}
+.dly-lg i.fo-lb{width:18px;height:0;border-radius:0;border-top:2px dashed #8D99A6;background:none}
+.dly-lg i.fo-lu{width:18px;height:0;border-radius:0;border-top:2.4px solid #2F80D1;background:none}
 </style>
 </head>
 <body>
@@ -9384,15 +9563,216 @@ try{INFO32['tower/bridge']=[["Card","Comparison window","^Comparison window$","W
   ["Card","All components","^All components$","Billings, collections, deductions and AR compared on the same windows.","Drivers"],
   ["Card","Release track record","^Release track record$","How each of the last eight weekly releases compared with actuals.","Quality and data"]]}catch(e){}
 
+/* ============================ v38 · CUSTOMER PAYMENT ALERTS ============================
+   Client ask (FP&A design review, 11/17/2026, Kristen Ray 22:35 / 23:03): show customers who are late in paying on Alerts.
+   Refined in the internal prototype review (11/18/2026):
+   · Customer payment alerts kept to four thresholds: late payment (with a smallest amount), past due growing week on week,
+     short-pay rate per month, dispute frequency per month (dispute data source to be confirmed).
+   · Removed: on-time rate, days-to-pay trend, segment slowing, payment pattern change, paying earlier.
+   · Alerts stay high level: no click-through, no detail panel, no owner or status. Each row shows the threshold breached,
+     when and in which run it was identified, open AR and exposure.
+   · Scenario Workspace: a payment-terms change can be persisted in the forecast from an effective date.
+   Illustrative data generated from the customer table with fixed seeds. */
+const AL38_DEF={late:2,amt:1,pd:20,sp:2,dsp:2,on:{late:true,pd:true,sp:true,dsp:true}};
+S.al38=Object.assign({cat:'All',thr:null,st:{}},S.al38||{});
+const alT=()=>S.al38.thr||AL38_DEF;
+const AL38_TYPES=[['late','Late payment','An expected payment has not arrived by the threshold'],['pd','Past due growing','A customer\'s past-due balance grew faster than the threshold in one week'],['sp','Short-pay rate','A customer short-paid more than the threshold share of invoice value in a month'],['dsp','Dispute frequency','A customer opened more disputes in a month than the threshold (data source to be confirmed)']];
+/* short-pay and dispute signals (illustrative) */
+const A38_SP={'HCA Healthcare':{r:.034,r0:.011,why:'mostly pricing differences on generics'},'Kroger Health':{r:.023,r0:.012,why:'promotional pricing not applied on invoices'},'Health Mart Southeast':{r:.018,r0:.009,why:'damaged-goods credits taken at payment'}};
+const A38_DS={'Retina Consultants of America':{n:5,n0:1,amt:4.3,why:'mostly quantity and pricing disputes'},'Texas Oncology':{n:3,n0:1,amt:2.1,why:'rebate timing disputes'}};
+const AL38_BASE=ALERTS.slice();           // the operational, data and business-unit alerts from v36
+const AL38_ASOF=ASOF_DT;                  // Mon, Nov 16 2026
+const a38c=n=>CUST40.find(c=>c.name===n);
+const a38m=v=>Math.abs(v)<100?fm(v):fmc(v);
+const a38md=d=>HZ_MON[d.getMonth()]+' '+d.getDate();
+const a38day=d=>['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][d.getDay()]+', '+a38md(d);
+const a38iso=s=>{const [y,m,d]=s.split('-').map(Number);return new Date(y,m-1,d)};
+function a38bdBetween(a,b){let n=0;for(let d=hzAdd(a,1);d<=b;d=hzAdd(d,1))if(rvBD(d))n++;return n}
+const a38H=(c,k)=>sdHash(c.id+'|a38|'+k);
+
+/* scripted facts that make the story (everything else is derived from the customer table) */
+const A38_MISS={'Florida Cancer Specialists':{exp:'2026-11-10',amt:10.2,note:'its usual Tuesday payment run'},
+  'New York Oncology Hematology':{exp:'2026-11-12',amt:3.1,note:'its usual Thursday payment run'}};
+const A38_PAT={'CVS Health':{cls:'Terms change',was:'every Wednesday',now:'every other Wednesday since Nov 4',why:'CVS Health moved from net 30 to net 45 days on Nov 1. The change is loaded as a dated assumption, so the forecast already expects the longer gap between payments and this is not a late payment.'},
+  'Optum Rx':{cls:'Behavior shift',was:'full payment of each remittance',now:'part-payments on 3 of the last 4 runs',why:'Optum Rx has started paying part of each remittance and holding the rest, which is new behavior rather than a terms change.'}};
+const A38_PD={'Northwell Health':{g:.26,mv:11.4,b:'31–60'},'Trinity Health':{g:.22,mv:6.8,b:'31–60'}};
+const A38_EARLY={'Option Care Health':-4.6};
+
+/* payment profile for one customer: days to pay, on-time rate, payment runs, aging, forecast impact */
+function a38prof(c){const k='a38|'+c.id;if(VBC[k])return VBC[k];
+  const kc=KEY_CUST.find(x=>x.id===c.id),early=A38_EARLY[c.name];
+  const drift=early!=null?early:c.drift,now=c.dtp,avg=+(now-drift).toFixed(1);
+  const ot0=kc?kc.ot0:Math.round(93-(avg-24)*.5-a38H(c,'ot')*3),ot1=kc?kc.ot1:Math.round(ot0-Math.max(0,drift)*2.1+(drift<0?-drift*1.5:0)-a38H(c,'ot1')*2);
+  const wk=[];for(let i=0;i<13;i++){const r=Math.max(0,(i-6)/6);wk.push(+(avg+drift*Math.pow(r,1.2)*(i===12?1:1)+(a38H(c,'w'+i)-.5)*1.2*(i<12?1:0)).toFixed(1))}wk[12]=now;
+  const seg=c.seg||'',cad=/Retail|Alternate/.test(seg)?7:/Community|Specialty/.test(seg)?7:7,wd=/Retail/.test(seg)?3:/Health Systems/.test(seg)?4:/Community|Specialty/.test(seg)?2:5;
+  const wkColl=c.ar/Math.max(18,now)*7;
+  const miss=A38_MISS[c.name],pat=A38_PAT[c.name];
+  let last=hzAdd(AL38_ASOF,-((AL38_ASOF.getDay()-wd+7)%7||7));   // most recent usual payment day before today
+  if(miss)last=a38iso(miss.exp);
+  const runs=[];for(let i=7;i>=0;i--){let e=hzAdd(last,-7*i*(pat&&pat.cls==='Terms change'&&i<2?1:1));while(!rvBD(e))e=hzAdd(e,1);
+    const lateD=Math.max(0,Math.round((drift>0?drift*(1-i/7)*.6:drift*.5)+(a38H(c,'r'+i)-.5)*2));
+    let act=hzAdd(e,lateD);while(!rvBD(act))act=hzAdd(act,1);
+    let amt=+(wkColl*(.9+.2*a38H(c,'a'+i))).toFixed(1),paid=amt;
+    if(pat&&pat.cls==='Behavior shift'&&i<4&&i!==2)paid=+(amt*(.7+.1*a38H(c,'p'+i))).toFixed(1);
+    const r={exp:e,act:act>AL38_ASOF?null:act,amt,paid,late:lateD};
+    if(i===0&&miss){r.amt=miss.amt;r.paid=0;r.act=null;r.late=a38bdBetween(e,AL38_ASOF)}
+    if(pat&&pat.cls==='Terms change'&&i===0){r.skip=true;r.act=null}
+    runs.push(r)}
+  const pdS=Math.min(.42,.06+Math.max(0,drift)*.028+a38H(c,'pd')*.03),pd=c.ar*pdS,P=A38_PD[c.name];
+  const aging=[['Current',c.ar-pd],['1–30',pd*.58],['31–60',pd*.26],['61–90',pd*.11],['90+',pd*.05]];
+  const pdg=P?P.g:Math.max(0,drift*.02+a38H(c,'pdg')*.06);
+  const risk13=kc?Math.abs(custImpact(kc)):Math.abs(c.ar*drift/600);
+  const ramp=[.12,.17,.21,.24,.26];const r5=ramp.map(x=>+(risk13*x*.62).toFixed(2));
+  const pdMv=P?P.mv:+(aging[2][1]*.35).toFixed(1),pdB=P?P.b:'31–60';
+  return VBC[k]={c,drift,now,avg,ot0,ot1,wk,runs,aging,pd,pdg,P,pdMv,pdB,miss,pat,risk13:drift<0?-risk13:risk13,r5,wkColl,early:early!=null}}
+
+/* evaluate thresholds → one alert per customer (strongest signal), plus segment alerts */
+function a38eval(){const t=alT(),out=[],top10=CUST40.slice().sort((a,b)=>b.ar-a.ar).slice(0,10).map(c=>c.id);
+  CUST40.forEach(c=>{const p=a38prof(c),sp=A38_SP[c.name],ds=A38_DS[c.name],sig=[];
+    if(p.miss){const r=p.runs[p.runs.length-1];if(r.late>=t.late&&p.miss.amt>=t.amt)sig.push({k:'late',sev:p.miss.amt>=25||top10.includes(c.id)||p.miss.amt>=8?'Critical':'High',
+      msg:`Expected ${fm(p.miss.amt)} on ${a38day(r.exp)} from ${p.miss.note}; it has not arrived after ${r.late} business days.`,sigv:r.late+' business days late',exp:p.miss.amt,ref:'Missed payment run of '+a38day(r.exp)})}
+    if(p.pdg*100>=t.pd)sig.push({k:'pd',sev:p.pdB==='61–90'?'High':'Medium',msg:`Past-due balance grew ${Math.round(p.pdg*100)}% this week and ${a38m(p.pdMv)} moved into the ${p.pdB} day bucket.`,sigv:'+'+Math.round(p.pdg*100)+'% past due, week on week',exp:p.pd,ref:'Week to Fri, Nov 13'});
+    if(sp&&sp.r*100>=t.sp){const amt=+(c.ar/Math.max(18,c.dtp)*30*sp.r).toFixed(1);sig.push({k:'sp',sev:sp.r>=.03||c.ar>=250?'High':'Medium',msg:`Short-paid ${(sp.r*100).toFixed(1)}% of invoice value in the last month (${a38m(amt)}), up from ${(sp.r0*100).toFixed(1)}%; ${sp.why}.`,sigv:(sp.r*100).toFixed(1)+'% short-paid in a month',exp:amt,ref:'Invoices paid Oct 16 – Nov 13'})}
+    if(ds&&ds.n>t.dsp)sig.push({k:'dsp',sev:ds.n>=4?'High':'Medium',msg:`Opened ${ds.n} disputes in the last month (${a38m(ds.amt)}), against ${ds.n0} the month before; ${ds.why}.`,sigv:ds.n+' disputes in a month',exp:ds.amt,ref:'Disputes opened Oct 16 – Nov 13'});
+    const on=sig.filter(s=>t.on[s.k]);if(!on.length)return;
+    const rk={Critical:0,High:1,Medium:2,Low:3},pr=['late','pd','sp','dsp'];on.sort((a,b)=>rk[a.sev]-rk[b.sev]||pr.indexOf(a.k)-pr.indexOf(b.k));const s=on[0];
+    out.push({id:'CP-'+c.id,cid:c.id,cat:'Customer payments',k:s.k,sev:s.sev,type:AL38_TYPES.find(x=>x[0]===s.k)[1],entity:c.name+' · '+c.bu,cust38:c.name,seg:c.seg,level:'Customer',bu:c.bu,
+      exp:s.exp,msg:s.msg+(on.length>1?` Also breached: ${on.slice(1).map(x=>AL38_TYPES.find(y=>y[0]===x.k)[1].toLowerCase()).join(', ')}.`:''),sigv:s.sigv,ref:s.ref,status:'Open',age:s.k==='late'?'4h':'1d',isNew:s.k==='late',det:s.k==='late'||s.k==='pd'?'2026-11-16':'2026-11-15'})});
+  return out}
+let AL38_GEN=[];
+function a38sync(){AL38_GEN=a38eval();const rk={Critical:0,High:1,Medium:2,Low:3};
+  ALERTS=AL38_BASE.concat(AL38_GEN).sort((a,b)=>rk[a.sev]-rk[b.sev]||(a.status==='Resolved')-(b.status==='Resolved')||(b.exp||0)-(a.exp||0))}
+a38sync();
+(function(){const r0=render;render=function(){a38sync();return r0.apply(this,arguments)}})();
+function a38idf(a){return {d:a38day(a38iso(a.det||'2026-11-16'))+', 2026',run:'06:10 ET daily run',ref:a.ref||''}}
+/* forecast alerts: say which forecast run and which horizon */
+function a38fdesc(a){if(a.id==='EX-20928')return `${H().label.replace(/^(\d+)-Week Rolling$/,'$1-week rolling')} collections forecast from the run of Mon, Nov 16 at 03:10 ET is ${fm(expOf(a))} below plan, above the $50M threshold.`;
+  if(a.id==='EX-20838')return `O&M 13-week rolling forecast from the weekly run of Mon, Nov 2, checked against actuals for Nov 2 – Nov 6: 98.1% accurate against the 97% target.`;return null}
+const a38cat=a=>a.cat==='Customer payments'?'Customer payments':/Forecast/i.test(a.type)?'Forecast':(typeof AL_CASH==='function'&&AL_CASH(a))||/unapplied|suspense|auto-match|remittance/i.test(a.type)?'Cash application':a.level==='Data'?'Data':'Operations';
+const a38sev=s=>s==='Critical'?'b-crit':s==='High'?'b-high':s==='Medium'?'b-med':'b-mut';
+
+/* ---- the Alerts page: one high-level view, no click-through ---- */
+pageAlerts=function(){const S8=S.al38,cats=['All','Customer payments','Forecast','Cash application','Data','Operations'],cnt=c=>ALERTS.filter(a=>a.status!=='Resolved'&&(c==='All'||a38cat(a)===c)&&(S.bu==='All'||a.bu===S.bu||a.bu==='All')).length;
+  const list=ALERTS.filter(a=>(S8.cat==='All'||a38cat(a)===S8.cat)&&(S.bu==='All'||a.bu===S.bu||a.bu==='All'));
+  const cp=AL38_GEN.filter(a=>S.bu==='All'||a.bu===S.bu),by=k=>cp.filter(a=>a.k===k);
+  const strip=S8.cat==='Customer payments'?`<div class="a38-strip mb">
+      <div><small>Late payments</small><b class="tnum txt-bad">${by('late').length}</b><span>${by('late').length?a38m(by('late').reduce((x,a)=>x+a.exp,0))+' expected and not received':'none past the threshold'}</span></div>
+      <div><small>Past due growing</small><b class="tnum">${by('pd').length}</b><span>past due up ${alT().pd}%+ in a week</span></div>
+      <div><small>Short-pays &amp; disputes</small><b class="tnum">${by('sp').length+by('dsp').length}</b><span>${a38m(by('sp').concat(by('dsp')).reduce((x,a)=>x+a.exp,0))} short-paid or in dispute</span></div>
+      <div><small>Exposure on this list</small><b class="tnum txt-bad">${a38m(cp.reduce((x,a)=>x+a.exp,0))}</b><span>amounts behind the alerts</span></div></div>`:'';
+  const row=a=>{const isC=a.cat==='Customer payments';return `<tr>
+      <td><span class="badge ${a38sev(a.sev)}">${a.sev}</span></td>
+      <td><div style="font-weight:600">${a.type} ${a.isNew&&a.status!=='Resolved'?'<span class="badge b-med" style="font-size:9.5px;padding:1px 6px;vertical-align:1px">NEW</span>':''}</div><div class="txt-mut" style="font-size:11.5px">${isC?`<b style="color:var(--ink2)">${a.entity}</b> · ${a.msg}`:a38fdesc(a)||a.entity.replace('5-week',H().label)}</div></td>
+      <td class="tnum" style="font-size:12.5px">${isC?a38md(a38iso(a.det))+', 2026<div class="txt-mut" style="font-size:11px">06:10 ET run</div>':alDetected(a).d+'<div class="txt-mut" style="font-size:11px">'+alDetected(a).t+'</div>'}</td>
+      <td>${a38cat(a)}</td><td class="r tnum" style="font-weight:700">${(isC?a.exp:expOf(a))?a38m(isC?a.exp:expOf(a)):'—'}</td></tr>`};
+  const cpRow=a=>{const c=CUST_BY[a.cid];return `<tr>
+      <td><span class="badge ${a38sev(a.sev)}">${a.sev}</span></td>
+      <td><div style="font-weight:600">${a.type} ${a.isNew?'<span class="badge b-med" style="font-size:9.5px;padding:1px 6px;vertical-align:1px">NEW</span>':''}</div><div class="txt-mut" style="font-size:11.5px">${a.msg}</div></td>
+      <td><b>${a.cust38}</b><div class="txt-mut" style="font-size:11px">${a.bu} · ${a.seg}</div></td>
+      <td class="tnum" style="font-size:12.5px">${a.sigv}</td>
+      <td style="font-size:12px">${(f=>`<b style="font-weight:600">${f.d}</b><div class="txt-mut" style="font-size:11px">${f.run}</div><div class="txt-mut" style="font-size:11px">${f.ref}</div>`)(a38idf(a))}</td>
+      <td class="r tnum">${fmc(c.ar)}</td><td class="r tnum" style="font-weight:700">${a38m(a.exp)}</td></tr>`};
+  return `
+  <div class="page-h"><div><h1>Alerts</h1><div class="meta">As of Mon, Nov 16 2026 · 06:10 ET · ${BU_NAMES[S.bu]}</div></div><div class="sp"></div>
+    <span class="txt-mut" style="font-size:12px;margin-right:8px">${S8.thr?'Custom thresholds':'Using default thresholds'}</span><button class="btn" onclick="a38set()">⚙ Alert settings</button></div>
+  <div class="a38-cats mb">${cats.map(c=>`<button class="${S8.cat===c?'on':''}" onclick="S.al38.cat='${c}';render()">${c}<span>${cnt(c)}</span></button>`).join('')}</div>
+  ${strip}
+  <div class="card mb">
+    <div class="filters" style="display:flex;align-items:center;gap:8px"><b style="font-size:13.5px">${S8.cat==='All'?'All alerts':S8.cat}</b>${S8.cat==='Customer payments'?'<span class="txt-mut" style="font-size:12px">· one row per customer, showing the threshold it breached</span>':''}<span class="sub" style="margin-left:auto">${list.filter(a=>a.status!=='Resolved').length} open · ${list.length} total</span></div>
+    ${S8.cat==='Customer payments'?`<table class="t exq"><thead><tr><th style="width:84px">Severity</th><th>Alert</th><th style="width:220px">Customer</th><th style="width:150px">Signal</th><th style="width:200px">Identified</th><th class="r" style="width:90px">Open AR</th><th class="r" style="width:100px">Exposure</th></tr></thead><tbody>${list.map(cpRow).join('')||'<tr><td colspan="7" class="txt-mut">No customer passes the current thresholds.</td></tr>'}</tbody></table>`
+    :`<table class="t exq"><thead><tr><th style="width:84px">Severity</th><th>Exception</th><th style="width:150px">Detected on</th><th style="width:170px">Category</th><th class="r" style="width:86px">Exposure</th></tr></thead><tbody>${list.map(row).join('')}</tbody></table>`}
+  </div>`};
+
+/* ---- side panel (alert settings only) ---- */
+function a38panel(html){ov.classList.remove('hidden');ov.onclick=e=>{if(e.target===ov)a38close()};ov.innerHTML=`<div class="a38-dr">${html}</div>`}
+function a38close(){ov.onclick=null;closeOv()}
+
+/* ---- alert settings ---- */
+let A38_DRAFT=null;
+function a38set(){A38_DRAFT=JSON.parse(JSON.stringify(alT()));a38setDraw()}
+function a38setDraw(){const d=A38_DRAFT,f=(k,lab,u,step,min,max)=>`<div class="a38-f"><label>${lab}</label><div><input type="number" value="${d[k]}" step="${step}" min="${min}" max="${max}" onchange="A38_DRAFT.${k}=+this.value;a38setDraw()"><span>${u}</span></div></div>`;
+  const preview=(()=>{const keep=S.al38.thr;S.al38.thr=d;const n=a38eval().length;S.al38.thr=keep;return n})();
+  a38panel(`<div class="a38-h"><div><div class="a38-k">ALERTS · CUSTOMER PAYMENTS</div><h3>Alert settings</h3><div class="txt-mut" style="font-size:12.5px">Thresholds apply to every customer. Changes re-check the alerts immediately.</div></div><span class="sp"></span><button class="xp-x" onclick="a38close()">✕</button></div>
+    <div class="a38-s"><div class="a38-l">Alert types</div>${AL38_TYPES.map(([k,l,dsc])=>`<label class="a38-sw"><input type="checkbox" ${d.on[k]?'checked':''} onchange="A38_DRAFT.on.${k}=this.checked;a38setDraw()"><span><b>${l}</b><small>${dsc}</small></span></label>`).join('')}</div>
+    <div class="a38-s"><div class="a38-l">Thresholds</div><div class="a38-fs">
+      ${f('late','Late payment: business days after the expected date','days',1,1,10)}
+      ${f('amt','Late payment: smallest amount','$M',.5,0,50)}
+      ${f('pd','Past due: growth in one week, by customer','%',1,1,100)}
+      ${f('sp','Short-pay: share of invoice value short-paid in a month','%',.5,.5,20)}
+      ${f('dsp','Disputes: more than this many new disputes in a month','disputes',1,1,20)}</div></div>
+    <div class="a38-act"><span class="txt-mut" style="font-size:12.5px;flex:1">${preview} customer payment alerts with these settings</span><button class="btn" onclick="A38_DRAFT=JSON.parse(JSON.stringify(AL38_DEF));a38setDraw()">Reset to defaults</button><button class="btn pri" onclick="S.al38.thr=JSON.stringify(A38_DRAFT)===JSON.stringify(AL38_DEF)?null:JSON.parse(JSON.stringify(A38_DRAFT));a38close();S.al38.cat='Customer payments';render();toast('Alert settings applied')">Apply</button></div>`)}
+
+/* ---- Performance Workspace: name an open late payment in the collections banner ---- */
+v30Banner=(function(f0){return function(k,w,R){const h=f0(k,w,R),L=AL38_GEN.filter(a=>a.k==='late'&&a.sev==='Critical'&&(S.bu==='All'||a.bu===S.bu));if(!L.length)return h;
+  const a=L[0],p=a38prof(CUST_BY[a.cid]),x=` <span class="a38-bn" onclick="event.stopPropagation();S.al38.cat='Customer payments';go('alerts')">${a.cust38} has not paid the ${a38m(p.miss.amt)} expected on ${a38md(p.runs[7].exp)}${L.length>1?` (${L.length-1} more late)`:''}. ›</span>`;
+  const i=h.indexOf('</div><div class="sp"></div>');return i>-1?h.slice(0,i)+x+h.slice(i):h}})(v30Banner);
+
+/* ============================ v38 · SCENARIO WORKSPACE: PERSIST A TERMS CHANGE IN THE FORECAST ============================
+   From the 11/18 prototype review: a terms change set in the Scenario Workspace can be persisted, with the date it takes
+   effect, so every forecast run from then on uses it instead of the terms in the source data. Nothing is written back
+   to source systems. */
+S.scP=S.scP||null;
+const scpList=()=>S.scP||(S.scP=(()=>{const w=CUST40.find(c=>c.name==='Walmart');return w?[{id:w.id,name:w.name,bu:w.bu,t0:scmT0(w),t1:scmT0(w)+10,from:'2027-02-01',note:'Renewal terms confirmed by email on Nov 12; not yet in the contract system.',by:'R. McFarland',on:'Nov 17'}]:[]})());
+const scpCust=id=>CUST_BY[id]||ALL_CUST().find(x=>x.id===id)||{id,name:id,bu:''};
+function scpOpen(){const sc=S.scm,ch=Object.entries(sc.terms||{}).map(([id,t1])=>{const cu=scpCust(id);return {id,cu,t0:scmT0(cu),t1:+t1}}).filter(r=>r.t1!==r.t0);
+  if(!ch.length){toast('Change at least one customer\'s payment terms first');return}
+  const def=hzIso(hzAdd(ASOF_DT,7));
+  a38panel(`<div class="a38-h"><div><div class="a38-k">SCENARIO WORKSPACE · PERSIST IN FORECAST</div><h3>Use these terms in every forecast run</h3><div class="txt-mut" style="font-size:12.5px">From the effective date, the forecast uses these terms instead of the terms in the source data. Nothing is written back to source systems.</div></div><span class="sp"></span><button class="xp-x" onclick="a38close()">✕</button></div>
+    <div class="a38-s"><table class="t"><thead><tr><th>Customer</th><th class="r">Terms in source data</th><th class="r">New terms</th><th>Effective from</th></tr></thead><tbody>
+      ${ch.map((r,i)=>`<tr><td><b>${escH(r.cu.name)}</b><div class="txt-mut" style="font-size:11px">${r.cu.bu||''}</div></td><td class="r tnum">${r.t0} days</td><td class="r tnum"><b>${r.t1} days</b></td><td><input type="date" id="scpD${i}" class="vb-s" value="${def}" min="${hzIso(ASOF_DT)}"></td></tr>`).join('')}</tbody></table></div>
+    <div class="a38-s"><div class="a38-l">Why (kept with the change)</div><textarea id="scpN" rows="3" class="vb-s" style="width:100%;max-width:none;box-sizing:border-box" placeholder="e.g. New contract signed; terms move to net 45 from Feb 1"></textarea></div>
+    <div class="a38-act"><span class="txt-mut" style="font-size:12px;flex:1">Invoices due on or after the effective date use the new terms. Earlier invoices keep their original terms.</span><button class="btn" onclick="a38close()">Cancel</button><button class="btn pri" onclick="scpSave(${JSON.stringify(ch.map(r=>[r.id,r.t0,r.t1])).replace(/"/g,'&quot;')})">Persist in forecast</button></div>`)}
+function scpSave(rows){const note=document.getElementById('scpN').value.trim(),L=scpList();
+  rows.forEach(([id,t0,t1],i)=>{const cu=scpCust(id),from=document.getElementById('scpD'+i).value;const j=L.findIndex(x=>x.id===id);const o={id,name:cu.name,bu:cu.bu,t0,t1,from,note:note||'—',by:'J. Hayes',on:'Nov 18',isNew:true};if(j>-1)L[j]=o;else L.unshift(o)});
+  a38close();render();toast((rows.length>1?rows.length+' terms changes':'Terms change')+' persisted in the forecast')}
+function scpDel(id){S.scP=scpList().filter(x=>x.id!==id);render();toast('Persisted change removed; the forecast goes back to the source terms')}
+function scpCard(){const L=scpList();
+  return `<div class="card mb scp-card"><div class="ch"><div><h3>Persisted in the forecast</h3><div class="sub">Terms changes that every forecast run uses from their effective date, instead of the terms in the source data</div></div></div>
+    ${L.length?`<table class="t"><thead><tr><th>Customer</th><th class="r">Source terms</th><th class="r">Used in forecast</th><th>Effective from</th><th>Why</th><th style="width:90px"></th></tr></thead><tbody>
+      ${L.map(o=>`<tr class="${o.isNew?'scp-new':''}"><td><b>${escH(o.name)}</b><div class="txt-mut" style="font-size:11px">${o.bu} · by ${o.by}, ${o.on}</div></td><td class="r tnum">${o.t0} days</td><td class="r tnum"><b>${o.t1} days</b> <span class="scm-dd ${o.t1>o.t0?'up':'dn'}">${o.t1>o.t0?'+':'−'}${Math.abs(o.t1-o.t0)} d</span></td><td>${a38day(a38iso(o.from))}, ${o.from.slice(0,4)}</td><td style="font-size:12px;color:var(--ink2)">${escH(o.note)}</td><td><button class="btn sm ghost" onclick="scpDel('${o.id}')">Remove</button></td></tr>`).join('')}</tbody></table>`
+    :'<div class="txt-mut" style="font-size:12.5px">Nothing persisted. Change payment terms below and choose <b>Persist in forecast</b>.</div>'}</div>`}
+scmLevers=(function(f0){return function(){let h=f0.apply(this,arguments);
+  const k='<span class="sp"></span><button class="btn sm ghost" onclick="S.scm.all=!S.scm.all;render()">';
+  if(h.includes(k))h=h.replace(k,`<span class="sp"></span><button class="btn sm pri" onclick="scpOpen()" data-tip="Use the new terms in every forecast run from a date you choose">⤓ Persist in forecast</button> <button class="btn sm ghost" onclick="S.scm.all=!S.scm.all;render()">`);
+  return scpCard()+h}})(scmLevers);
+
+/* ---- v38 · payment terms lever: add customers one at a time, with effective date and reason per row ----
+   From the 11/18 review: no list of every customer. The user adds a customer, sets its new terms, the date they
+   take effect and why, adds more customers in new rows, and persists the changes in the forecast from here. */
+function scpRows(){const sc=S.scm;if(!sc.tord)sc.tord=Object.keys(sc.terms||{});if(!sc.tx)sc.tx={};Object.keys(sc.terms||{}).forEach(id=>{if(!sc.tord.includes(id))sc.tord.push(id)});return sc.tord}
+function scpAdd(id){if(!id)return;const sc=S.scm,L=scpRows();if(L.includes(id))return;L.push(id);sc.tx[id]=Object.assign({from:hzIso(hzAdd(ASOF_DT,7)),why:''},sc.tx[id]);sc.tadd=false;render()}
+function scpRm(id){const sc=S.scm;sc.tord=scpRows().filter(x=>x!==id);delete sc.terms[id];delete sc.tx[id];render();if(typeof scmHdr==='function')scmHdr()}
+function scpTx(id,k,v){const sc=S.scm;scpRows();sc.tx[id]=Object.assign({from:hzIso(hzAdd(ASOF_DT,7)),why:''},sc.tx[id],{[k]:v})}
+function scpPersistRows(){const sc=S.scm,L=scpRows().map(id=>{const cu=scmCust(id),t0=scmT0(cu),t1=sc.terms[id]!=null?+sc.terms[id]:t0,x=sc.tx[id]||{};return {id,cu,t0,t1,from:x.from,why:(x.why||'').trim()}}).filter(r=>r.t1!==r.t0);
+  if(!L.length){toast('Add a customer and change its terms first');return}
+  const miss=L.find(r=>!r.from);if(miss){toast('Choose an effective-from date for '+miss.cu.name);return}
+  const P=scpList();L.forEach(r=>{const o={id:r.id,name:r.cu.name,bu:r.cu.bu,t0:r.t0,t1:r.t1,from:r.from,note:r.why||'—',by:'J. Hayes',on:'Nov 18',isNew:true};const j=P.findIndex(x=>x.id===r.id);if(j>-1)P[j]=o;else P.unshift(o)});
+  render();toast((L.length>1?L.length+' terms changes':'Terms change')+' persisted in the forecast')}
+function scpTermsBlock(){const sc=S.scm,ed=scmEd(),dis=ed?'':' disabled',R=v30Tree(S.hz,S.bu),P=cuPer(R,S.hz),all=v30CustRows(S.hz,S.bu,0,P.length-1).sort((a,b)=>b.cu.ar-a.cu.ar),coll={};all.forEach(r=>coll[r.cu.id]=r.c);
+  const L=scpRows(),avail=all.filter(r=>!L.includes(r.cu.id)),pers=id=>scpList().find(x=>x.id===id);
+  const tr=L.map(id=>{const cu=scmCust(id);if(!cu)return '';const t0=scmT0(cu),t1=sc.terms[id]!=null?+sc.terms[id]:t0,chd=t1!==t0,x=sc.tx[id]||{from:hzIso(hzAdd(ASOF_DT,7)),why:''},p=pers(id);
+    return `<div class="scp-r${chd?' chd':''}"><div class="scp-g">
+      <div class="scp-c"><b>${escH(cu.name)}</b><small>${cu.bu} · collections ${coll[id]!=null?fmc(coll[id]):'—'}${p?` · persisted: ${p.t1} days from ${a38md(a38iso(p.from))}`:''}</small></div>
+      <div><label>Current terms</label><span class="tnum">${t0} days</span></div>
+      <div><label>New terms</label><span style="white-space:nowrap"><input type="number" class="scm-num" min="0" max="180" step="1" value="${t1}" aria-label="New payment terms in days for ${esc(cu.name)}" oninput="scmTerm('${id}',this.value,this)" onchange="scmTerm('${id}',this.value,this);render()"${dis}> days${chd?`<span class="scm-dd ${t1>t0?'up':'dn'}">${t1>t0?'+':'−'}${Math.abs(t1-t0)} d</span>`:''}</span></div>
+      <div><label>Effective from</label><input type="date" class="scp-in" value="${x.from||''}" min="${hzIso(ASOF_DT)}" aria-label="Effective from" onchange="scpTx('${id}','from',this.value)"${dis}></div>
+      <div class="scp-x"><button class="btn sm ghost" onclick="scpRm('${id}')" aria-label="Remove ${esc(cu.name)}"${dis}>Remove</button></div></div>
+      <div class="scp-w"><label>Reason</label><input type="text" class="scp-in" value="${esc(x.why||'')}" placeholder="Why the terms change, e.g. new contract signed Oct 14" aria-label="Reason" oninput="scpTx('${id}','why',this.value)"${dis}></div></div>`}).join('');
+  const addRow=sc.tadd?`<div class="scp-addr"><select class="vb-s scp-sel" onchange="scpAdd(this.value)"><option value="">Select a customer…</option>${avail.map(r=>`<option value="${r.cu.id}">${escH(r.cu.name)} · ${r.cu.bu} · ${scmT0(r.cu)} days</option>`).join('')}</select> <button class="btn sm ghost" onclick="S.scm.tadd=false;render()">Cancel</button></div>`:'';
+  return `<div class="scm-lh"><b>Payment terms change</b>${scmBadge('ok')}<span class="txt-mut">add a customer, set new terms, the date they start and why</span><span class="sp"></span><button class="btn sm pri" onclick="scpPersistRows()" data-tip="Use the new terms in every forecast run from each effective date"${dis}>⤓ Persist in forecast</button></div>
+    <div class="scp-list">${tr}${addRow}${!L.length&&!sc.tadd?'<div class="txt-mut" style="font-size:12.5px;padding:8px 2px">No customers yet. Add one to change its payment terms.</div>':''}</div>
+    ${sc.tadd?'':`<button class="btn sm scp-addb" onclick="S.scm.tadd=true;render()"${dis}>＋ Add customer</button>`}`}
+scmLevers=(function(f0){return function(){let h=f0.apply(this,arguments);
+  const a=h.indexOf('<div class="scm-lh"><b>Payment terms change</b>');if(a<0)return h;const b=h.indexOf('</table></div>',a)+'</table></div>'.length;
+  return h.slice(0,a)+scpTermsBlock()+h.slice(b)}})(scmLevers);
+
 /* ============================ v41 PORT · PERFORMANCE WORKSPACE SECTIONS ============================
    Brought from MK-Cash-Flow-Intelligence-v41.html: the section bar with Overview, Customers and Insights (fold and one-line
    summaries), the Overview content (13-Week Rolling cockpit: current forecast, variance to baseline, prior forecast; actual
    and forecast split on the tiles for the other horizons), the "Top customers by collections" card and the AI observations
    & discussion points card. The other v41 sections (This week, Over time, Leadership, Actions), the help button and the tour
    are not part of the bar. */
-function v30CustCard(k,R){const el='c',C=v30Cust(k,'root',el,S.bu),top=C.rows.slice(0,8),tot=R.v.c,mx=top[0]?top[0].v:1,ok=can('ri.cust');
-  return `<div class="card v30-cu"><div class="ch"><h3>Top customers by collections</h3><span class="sp"></span><button class="btn sm ghost" onclick="gdOpen('c','root');S.gd.tab='p';gdDraw()">All customers</button></div>
-    <table class="t v30-ctb"><tbody>${top.map((r,i)=>`<tr${ok?` class="v30-tr" onclick="S.cust='${r.c.id}';go('risk','customer')"`:''}><td class="txt-mut tnum">${i+1}</td><td><b>${r.c.name}</b><small>${r.c.id} · ${r.c.bu}</small></td><td class="v30-bc"><span class="v30-bar"><i style="width:${(r.v/mx*100).toFixed(1)}%"></i></span></td><td class="r tnum"><b>${fmc(r.v)}</b><small>${(r.v/tot*100).toFixed(1)}%</small></td><td class="r tnum">${Math.round(r.c.dtp)} d<small class="${r.c.drift>0?'txt-bad':'txt-good'}">${r.c.drift>0?'+':'−'}${Math.abs(r.c.drift).toFixed(0)} d</small></td></tr>`).join('')}</tbody></table></div>`}
+/* v41 customers card not used: the v36 "Top 10 customers" card (sortable columns, invoice drill-down) is kept */
 
 /* v41 AI card not brought over: the v36 "AI observations" card (observations only) is kept */
 
@@ -10368,12 +10748,408 @@ v30Meta=function(){return ''};
 
 /* v41 port: only Overview, Customers and Insights in the section bar; no tour */
 P36_SEC.splice(0,P36_SEC.length,...P36_SEC.filter(s=>['over','cust','ins'].includes(s[0])));
+P36_SEC.forEach(s=>{if(s[0]==='cust')s[2].unshift('h3:Top 10 customers')});   // the Customers section finds the v36 card
 P36.auto=false;
 /* Performance Workspace header: the 5-Week Rolling button and the Studio chip are hidden, so the page always opens on 13 weeks */
 if(S.w5)w5Set(false);
 /* v41 port: info buttons for the cockpit tiles and cards */
 try{const add=[["Tile", "Baseline collections", "^Baseline collections$", "Variance to baseline view: collections over the selected range in the baseline submitted to Treasury on Monday, with the Treasury cut (weeks 1–5) when the range covers it.", "Overall balance"], ["Tile", "Current forecast collections", "^Current forecast collections$", "The same range in the current forecast (actuals to date, re-forecast for the remaining days), with the variance to the baseline and its drivers.", "Overall balance"], ["Tile", "Week-to-date collections", "^Week\\-to\\-date collections$", "Collections landed in the current week against the baseline for the same days.", "Overall balance"], ["Tile", "Weeks outside tolerance", "^Weeks outside tolerance$", "Weeks whose collections variance to the baseline is outside the tolerance (±5% by default).", "Overall balance"], ["Tile", "Prior forecast", "^Prior forecast · (billings|collections|deductions|closing AR)$", "Prior forecast view: what the selected Monday forecast expected over the selected range, for billings, collections, deductions and write-offs, or closing AR.", "Overall balance"], ["Tile", "Actual · closed weeks", "^Actual · closed weeks$", "Actuals for the closed weeks of the prior forecast, against what it forecast for them.", "Overall balance"], ["Tile", "Prior forecast accuracy", "^Prior forecast accuracy$", "Accuracy of the prior forecast over its closed weeks.", "Overall balance"], ["Tile", "Treasury cut accuracy", "^Treasury cut accuracy$", "Accuracy of weeks 1–5 as submitted to Treasury, once all five weeks are closed.", "Overall balance"], ["Tile", "Prior forecast bias", "^Prior forecast bias$", "Whether the prior forecast ran above or below actual over its closed weeks.", "Overall balance"], ["Card", "AR forecast", "^AR forecast$", "Current forecast view: daily AR balance over the selected range, with its forecast range and the baseline; weekly billings and collections below. Selecting a day adds a checkpoint.", "Over time"], ["Card", "Weekly AR roll-forward", "^Weekly AR roll\\-forward$", "Current forecast view: opening AR, billings, collections, deductions and write-offs and closing AR for each week of the selected range, with the collections variance to the baseline and its drivers.", "Period detail"], ["Card", "Checkpoints", "^Checkpoints$", "For each checkpoint: opening AR, billings, collections, deductions and write-offs to that date, closing AR, and the variance to the baseline with its drivers.", "Period detail"], ["Card", "Variance to baseline by week", "^Variance to baseline by week$", "Collections by week over the selected range, baseline against current forecast; variance in percent against the tolerance band, with each week's variance drivers.", "Over time"], ["Card", "Prior forecast", "^Prior forecast · Mon ", "The selected prior forecast against actual by week, with accuracy and a variance strip; the current forecast and a comparison forecast can be layered on top.", "Over time"], ["Card", "Forecast vs actual", "^Forecast vs actual$", "Prior forecast by week for the selected component (billings, collections, deductions and write-offs, or closing AR) with actual, variance and accuracy; variance drivers (below and above forecast, timing variance); forecast vs forecast for the comparison; accuracy by forecast lag over the last 15 forecasts.", "Period detail"], ["Card", "Weekly AR bridge", "^Weekly AR bridge$", "Variance to baseline view: the week's AR bridge (opening AR plus billings, less collections, deductions and write-offs, equals closing AR) for the baseline, actual to date, remaining forecast and current forecast, with the variance; the calendar opens any forecast run; daily detail below.", "Over time"], ["Card", "Treasury alerts", "^Treasury alerts$", "Current forecast against the Treasury cut for weeks 1–5 (the baseline, or the last Treasury update). Days, weeks and next-week shifts beyond the alert thresholds are flagged with their drivers (late cash, cash moved to next week, cash treated as lost, new items); the Treasury update is prepared and recorded here.", "Period detail"], ["Card", "Forecast versions", "^Forecast versions$", "Baselines week on week: each Monday baseline's collections for the weeks ahead, the variance to the version before, the current forecast and the actual. Daily runs of the current week, saved, with variance to the baseline and whether a Treasury update was required.", "Period detail"]];const n=INFO32.tower.length;INFO32.tower.push(...add);INFO32_RX.tower.push(...add.map((r,i)=>({kind:r[0],h:r[1],re:new RegExp(r[2]),d:r[3],i:n+i})))}catch(e){}
 
+
+/* ============================ FORECAST ACCURACY · SIDEBAR TILE AND DRILL VIEW ============================
+   The sidebar shows last month's forecast accuracy; a click opens the umbrella view: a two-year trend and a drill-down
+   year → quarter → month → week.
+   Calculated weekly: each closed week (Mon–Fri) compares the forecast released that Monday with the week's actuals.
+     week accuracy  = 1 − |forecast − actual| ÷ actual
+     period accuracy = 1 − Σ|weekly forecast − actual| ÷ Σ actual  (weekly misses never net off inside a month or a year)
+     bias = Σ(forecast − actual) ÷ Σ actual  (+ = forecast above actual)
+   Target 98%. Two years: 2025 and 2026 (calendar) or FY26 and FY27 (fiscal, Apr – Mar), up to the last closed week.
+   Actuals come from the history used across the prototype; the weekly forecasts are illustrative (seeded, so they do not
+   change between visits). Measured on the model forecast, before any overrides. */
+const FA_TGT=.98,FA_M={c:'Collections',b:'Billings'},FA_LAST=new Date(2026,10,13);
+const FA_C={ln:'#2F80D1',lo:'#B7791F',tg:'#46566A',band:'#E8F1FA',grid:'#E9EEF3'};
+const FA={key:'root',basis:'cal',m:'c',bu:'All',g:'M'};
+const faPct=v=>(v*100).toFixed(1)+'%';
+const faPts=v=>(v>=0?'+':'−')+Math.abs(v*100).toFixed(1)+' pts';
+const faMd=d=>HZ_MON[d.getMonth()]+' '+d.getDate();
+let FAW=null;const FAT={};
+
+/* the closed weeks with actuals and the forecast made for them, per business unit */
+function faWeeks(){if(FAW)return FAW;const H0=rvHist(),W=[],t0=new Date(2025,0,1);
+  for(let mon=new Date(2024,11,30);;mon=hzAdd(mon,7)){const fri=hzAdd(mon,4);if(fri>FA_LAST)break;
+    const A={U:{c:0,b:0},O:{c:0,b:0}};let n=0,hol=false;
+    for(let i=0;i<5;i++){const iso=hzIso(hzAdd(mon,i)),r=H0.map.get(iso);if(!r){if(RV_HOL.has(iso))hol=true;continue}
+      n++;A.U.c+=r.U.c;A.U.b+=r.U.b;A.O.c+=r.O.c;A.O.b+=r.O.b}
+    if(!n)continue;
+    const me=mon.getMonth()!==fri.getMonth()||fri.getMonth()!==hzAdd(fri,3).getMonth(),qe=me&&[2,5,8,11].includes(mon.getMonth()),
+      t=Math.max(0,Math.min(1,(mon-t0)/(700*864e5))),F={U:{},O:{}};
+    /* error: wider in holiday, quarter-end and month-end weeks, for O&M, and early on; the model improves over the two years */
+    ['U','O'].forEach(u=>['c','b'].forEach(m=>{const k='fa'+hzIso(mon)+u+m,amp=(m==='c'?.05-.016*t:.028-.008*t)*(u==='O'?1.3:1)*(hol?2:qe?1.5:me?1.15:1),
+      z=sdHash(k+'a')+sdHash(k+'b')-1,bias=m==='c'?.005*(1-t)-.001:.0015;F[u][m]=A[u][m]*(1+bias+amp*z)}));
+    W.push({mon,fri,iso:hzIso(mon),A,F,hol,me})}
+  return FAW=W}
+const faAF=(w,bu,m)=>bu==='All'?{a:w.A.U[m]+w.A.O[m],f:w.F.U[m]+w.F.O[m]}:(u=>({a:w.A[u][m],f:w.F[u][m]}))(bu==='USPD'?'U':'O');
+function faStatX(ws,bu,m){let a=0,f=0,ae=0,lo=0,worst=null,best=null;
+  ws.forEach(w=>{const v=faAF(w,bu,m),e=Math.abs(v.f-v.a),acc=1-e/v.a;a+=v.a;f+=v.f;ae+=e;if(acc<FA_TGT)lo++;if(!worst||acc<worst.acc)worst={w,acc};if(!best||acc>best.acc)best={w,acc}});
+  return {a,f,ae,acc:a?1-ae/a:0,bias:a?(f-a)/a:0,n:ws.length,lo,worst,best}}
+const faStat=ws=>faStatX(ws,FA.bu,FA.m);
+
+/* year → quarter → month → week (a week belongs to the month of its Friday) */
+function faTree(){const b=FA.basis;if(FAT[b])return FAT[b];const fis=b==='fis',ys=fis?[2026,2027]:[2025,2026];
+  const yl=y=>fis?'FY'+String(y).slice(2):String(y),root={key:'root',lvl:'R',lab:fis?'FY26 – FY27':'2025 – 2026',kids:[],weeks:[]},ix={root};
+  const get=(k,par,mk)=>{if(!ix[k]){ix[k]=Object.assign({key:k,kids:[],weeks:[],par:par.key},mk());par.kids.push(ix[k])}return ix[k]};
+  faWeeks().forEach(w=>{const d=w.fri,y0=d.getFullYear(),mo=d.getMonth(),y=fis?(mo>=3?y0+1:y0):y0;if(!ys.includes(y))return;const q=fis?Math.floor(((mo+9)%12)/3)+1:Math.floor(mo/3)+1;
+    const Y=get('Y'+y,root,()=>({lvl:'Y',lab:yl(y)})),Q=get(Y.key+'Q'+q,Y,()=>({lvl:'Q',lab:'Q'+q+' '+yl(y),short:'Q'+q})),
+      M=get(Q.key+'M'+y0+'-'+mo,Q,()=>({lvl:'M',lab:HZ_FULLM[mo]+' '+y0,short:HZ_MON[mo]+(mo===0||(fis&&mo===3)?" '"+String(y0).slice(2):'')})),
+      Wk=get('W'+w.iso,M,()=>({lvl:'W',lab:'W/E '+faMd(d),short:faMd(d),w,sub:faMd(w.mon)+' – '+faMd(d)+(w.hol?' · holiday week':'')}));
+    [root,Y,Q,M,Wk].forEach(nd=>nd.weeks.push(w))});
+  return FAT[b]={root,ix}}
+const faNodes=(TR,lv)=>{const o=[];(function f(n){if(n.lvl===lv)o.push(n);else n.kids.forEach(f)})(TR.root);return o};
+function faLastMonth(TR){const ms=faNodes(TR,'M');return ms.filter(m=>{const f=m.weeks[m.weeks.length-1].fri;return f.getFullYear()*12+f.getMonth()<ASOF_DT.getFullYear()*12+ASOF_DT.getMonth()}).pop()}
+
+/* ---- sidebar tile: last month, its change on the month before, a 12-month line ---- */
+function faSide(){try{const sv=FA.basis;FA.basis='cal';const TR=faTree(),L=faLastMonth(TR),ms=faNodes(TR,'M');FA.basis=sv;if(!L)return '';
+  const i=ms.indexOf(L),st=faStatX(L.weeks,S.bu,'c'),pv=i>0?faStatX(ms[i-1].weeks,S.bu,'c'):null,d=pv?st.acc-pv.acc:0,last=ms.slice(Math.max(0,i-11),i+1).map(m=>faStatX(m.weeks,S.bu,'c').acc);
+  const W=200,H=38,lo=Math.min(FA_TGT,...last)-.002,hi=Math.max(FA_TGT,...last)+.002,X=j=>4+j*(W-8)/Math.max(1,last.length-1),Y=v=>H-4-(v-lo)/(hi-lo)*(H-8);
+  const sp=`<svg class="fa-sp" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" aria-hidden="true"><line x1="0" x2="${W}" y1="${Y(FA_TGT).toFixed(1)}" y2="${Y(FA_TGT).toFixed(1)}" stroke="#7FA3C8" stroke-dasharray="3 3" stroke-width="1" vector-effect="non-scaling-stroke"/>
+    <polyline points="${last.map((v,j)=>X(j).toFixed(1)+','+Y(v).toFixed(1)).join(' ')}" fill="none" stroke="#8EC5FF" stroke-width="2" vector-effect="non-scaling-stroke"/></svg>`;
+  return `<button class="fa-side" onclick="faOpen()" aria-label="Forecast accuracy ${L.lab}: ${faPct(st.acc)}. Open the trend and drill-down" data-tip="${esc(T2fa(L,st,pv))}">
+    <div class="fa-sk">Forecast accuracy</div><div class="fa-sv"><b>${faPct(st.acc)}</b>${pv?`<span class="fa-sd ${d>=0?'up':'dn'}">${d>=0?'▲':'▼'} ${Math.abs(d*100).toFixed(1)} pts</span>`:''}</div>
+    <div class="fa-ss">${L.lab} · collections · weekly</div>${sp}<div class="fa-sg">Trend and drill-down ›</div></button>`}catch(e){console.error(e);return ''}}
+function T2fa(L,st,pv){return T('Forecast accuracy · '+L.lab,[['Accuracy',faPct(st.acc),true],['Target',faPct(FA_TGT)],['Weeks below target',st.lo+' of '+st.n],['Bias',faPts(st.bias)]].concat(pv?[['Month before',faPct(pv.acc)]]:[]),
+  'Weekly: 1 − Σ|forecast − actual| ÷ Σ actual · '+(S.bu==='All'?'all business units':S.bu)+' · last 12 months on the line')}
+sideHTML=(function(f0){return function(a){const h=f0.apply(this,arguments);if(modOf(S.tab)!=='ar')return h;const t=faSide();return t?h.replace('<div class="agentbox">',t+'<div class="agentbox">'):h}})(sideHTML);
+
+/* ---- the drill view ---- */
+function faOpen(key){FA.bu=S.bu;FA.key=key||'root';ov.classList.remove('hidden');ov.onclick=e=>{if(e.target===ov)closeExplain()};faDraw()}
+function faGo(key){FA.key=key;faDraw()}
+function faSet(k,v){FA[k]=v;if(k==='basis'){const TR=faTree();if(!TR.ix[FA.key])FA.key='root'}faDraw()}
+const faSeg=(k,opts)=>`<div class="seg">${opts.map(([v,l])=>`<button class="${FA[k]===v?'on':''}" onclick="faSet('${k}','${v}')">${l}</button>`).join('')}</div>`;
+const FA_KID={R:'year',Y:'quarter',Q:'month',M:'week',W:'week'};
+function faChain(TR,nd){const c=[nd];while(nd.par){nd=TR.ix[nd.par];c.unshift(nd)}return c}
+function faDraw(){const TR=faTree(),cur=TR.ix[FA.key]||TR.root,chain=faChain(TR,cur),st=faStat(cur.weeks),isW=cur.lvl==='W',par=isW?TR.ix[cur.par]:cur,kids=par.kids,L=faLastMonth(TR);
+  const bc=chain.map((n,i)=>i<chain.length-1?`<a onclick="faGo('${n.key}')">${n.lab}</a><i>›</i>`:`<span>${n.lab}</span>`).join('');
+  const k=(l,v,s,cls,click)=>`<div class="fa-k${click?' click':''}"${click?` onclick="${click}"`:''}><div class="l">${l}</div><div class="v ${cls||''}">${v}</div><div class="s">${s}</div></div>`;
+  const vsT=a=>a>=FA_TGT?`<span class="fa-ok">✓ ${faPts(a-FA_TGT)}</span> vs ${faPct(FA_TGT)} target`:`<span class="fa-lo">▼ ${faPts(a-FA_TGT)}</span> vs ${faPct(FA_TGT)} target`;
+  const bias=b=>`${faPts(b)}`+'',biasS=b=>Math.abs(b)<.0005?'forecast on actual':b>0?'forecast above actual':'forecast below actual';
+  const ks=isW?k('Accuracy · '+cur.lab,faPct(st.acc),vsT(st.acc))+k('Bias',bias(st.bias),biasS(st.bias))+k('Actual '+FA_M[FA.m].toLowerCase(),fmc(st.a),cur.sub)+k('Forecast',fmc(st.f),'released Mon '+faMd(cur.w.mon)+' · miss '+fmc(Math.abs(st.f-st.a)))
+    :k('Accuracy · '+cur.lab,faPct(st.acc),vsT(st.acc))+k('Bias',bias(st.bias),biasS(st.bias))+k('Weeks on target',(st.n-st.lo)+' of '+st.n,st.lo?st.lo+' below '+faPct(FA_TGT):'every week at or above target')
+      +k('Weakest week',st.worst?faPct(st.worst.acc):'–',st.worst?'W/E '+faMd(st.worst.w.fri)+(st.worst.w.hol?' · holiday week':'')+' · open ›':'','',st.worst?`faGo('W${st.worst.w.iso}')`:'');
+  const ttl=isW?`Weeks of ${par.lab}`:`${cur.lab} by ${FA_KID[cur.lvl]}`;
+  ov.innerHTML=`<div class="modal fa-mod" role="dialog" aria-label="Forecast accuracy">
+    <div class="fa-h"><div><div class="fa-kick">Forecast accuracy · ${FA.bu==='All'?'all business units':BU_NAMES[FA.bu]} · ${FA_M[FA.m].toLowerCase()} · calculated weekly</div><div class="fa-bc">${bc}</div></div><span class="sp"></span><button class="fa-x" onclick="closeExplain()" aria-label="Close">✕</button></div>
+    <div class="fa-ctl"><label>Metric ${faSeg('m',Object.entries(FA_M))}</label><label>Business unit ${faSeg('bu',[['All','All'],['USPD','USPD'],['O&M','O&amp;M']])}</label><label>Years ${faSeg('basis',[['cal','Calendar'],['fis','Fiscal']])}</label>
+      <span class="sp"></span>${L?`<button class="btn sm ghost" onclick="faGo('${L.key}')">Last month · ${L.lab}</button>`:''}${cur.key!=='root'?`<button class="btn sm ghost" onclick="faGo('root')">All ${TR.root.lab}</button>`:''}</div>
+    <div class="fa-ks">${ks}</div>
+    <div class="fa-card"><div class="ch"><h3>Trend · ${TR.root.lab} by ${{W:'week',M:'month',Q:'quarter'}[FA.g]}</h3><span class="sub">${cur.key==='root'?'click a point to open that period':'shaded: '+cur.lab+' · click a point to open that period'}</span><span class="sp"></span>${faSeg('g',[['W','Week'],['M','Month'],['Q','Quarter']])}</div>
+      <div class="fa-lg"><span><i></i>Accuracy</span><span><i class="t"></i>Target ${faPct(FA_TGT)}</span><span><i class="lo"></i>Below target</span>${cur.key!=='root'?'<span><i class="b"></i>Selected period</span>':''}</div>${faTrend(TR,cur)}</div>
+    <div class="fa-card"><div class="ch"><h3>${ttl}</h3><span class="sub">${isW?'selected week highlighted':'click to go down a level'}${cur.lvl==='M'||isW?' · weeks end on Friday':''}</span></div>${faBreak(kids,isW?cur.key:null)}
+      ${faTable(kids,isW?cur.key:null)}</div>
+    <div class="fa-note">Accuracy = 1 − Σ|weekly forecast − actual| ÷ Σ actual, so weekly misses never net off inside a month or a year. Each week is measured against the forecast released that Monday, on the model forecast (before overrides). Illustrative data.</div></div>`}
+
+/* trend over the two years at the chosen grain */
+function faScale(vals){let lo=Math.min(FA_TGT,...vals),hi=Math.max(FA_TGT,...vals);const r=Math.max(.01,hi-lo);lo=Math.floor((lo-r*.15)*200)/200;hi=Math.min(1.0001,Math.ceil((hi+r*.12)*200)/200);
+  const st=(hi-lo)>.04?.01:.005,tk=[];for(let v=Math.ceil(lo/st-1e-9)*st;v<=hi+1e-9;v+=st)tk.push(+v.toFixed(4));return {lo,hi,tk}}
+function faTrend(TR,cur){const ns=faNodes(TR,FA.g),S2=ns.map(n=>faStat(n.weeks)),v=S2.map(s=>s.acc),{lo,hi,tk}=faScale(v);
+  const W=1120,H=250,ml=56,mr=74,mt=14,mb=36,pw=W-ml-mr,ph=H-mt-mb,n=ns.length,dx=pw/n,X=i=>ml+(i+.5)*dx,Y=x=>mt+ph-(x-lo)/(hi-lo)*ph,inC=new Set(cur.weeks);
+  let g='';const on=ns.map(nd=>cur.key!=='root'&&nd.weeks.every(w=>inC.has(w)));
+  for(let i=0;i<n;){if(!on[i]){i++;continue}let j=i;while(j+1<n&&on[j+1])j++;g+=`<rect x="${(ml+i*dx).toFixed(1)}" y="${mt}" width="${((j-i+1)*dx).toFixed(1)}" height="${ph}" fill="${FA_C.band}" rx="4"/>`;i=j+1}
+  tk.forEach(t=>g+=`<line x1="${ml}" x2="${W-mr}" y1="${Y(t).toFixed(1)}" y2="${Y(t).toFixed(1)}" stroke="${FA_C.grid}"/><text x="${ml-8}" y="${(Y(t)+4).toFixed(1)}" text-anchor="end" font-size="11" fill="var(--muted)">${(t*100).toFixed(Math.round(t*200)%2?1:0)}%</text>`);
+  /* year dividers and labels */
+  let py=null;ns.forEach((nd,i)=>{const y=nd.weeks[0]&&faChain(TR,nd)[1];if(y&&y!==py){if(py)g+=`<line x1="${(ml+i*dx).toFixed(1)}" x2="${(ml+i*dx).toFixed(1)}" y1="${mt}" y2="${mt+ph}" stroke="#C9D3DE" stroke-dasharray="3 3"/>`;
+    g+=`<text x="${(ml+i*dx+4).toFixed(1)}" y="${mt+11}" font-size="11" font-weight="700" fill="var(--ink2)">${y.lab}</text>`;py=y}});
+  const ty=Y(FA_TGT);g+=`<line x1="${ml}" x2="${W-mr}" y1="${ty.toFixed(1)}" y2="${ty.toFixed(1)}" stroke="${FA_C.tg}" stroke-width="1.5" stroke-dasharray="6 4"/><text x="${W-mr+6}" y="${(ty+4).toFixed(1)}" font-size="11" font-weight="700" fill="var(--ink2)">Target ${faPct(FA_TGT)}</text>`;
+  g+=`<path d="${v.map((x,i)=>(i?'L':'M')+X(i).toFixed(1)+','+Y(x).toFixed(1)).join('')}" fill="none" stroke="${FA_C.ln}" stroke-width="2" stroke-linejoin="round"/>`;
+  v.forEach((x,i)=>{const px=X(i),py2=Y(x);if(x<FA_TGT)g+=`<path d="M${(px-5).toFixed(1)},${(py2-4).toFixed(1)} L${(px+5).toFixed(1)},${(py2-4).toFixed(1)} L${px.toFixed(1)},${(py2+5).toFixed(1)} Z" fill="${FA_C.lo}" stroke="#fff" stroke-width="2" paint-order="stroke"/>`;
+    else if(n<=30)g+=`<circle cx="${px.toFixed(1)}" cy="${py2.toFixed(1)}" r="4" fill="${FA_C.ln}" stroke="#fff" stroke-width="2"/>`});
+  /* the last point gets its value */
+  if(n){const i=n-1;g+=`<text x="${(X(i)+8).toFixed(1)}" y="${(Y(v[i])-8).toFixed(1)}" font-size="11.5" font-weight="700" fill="var(--ink)">${faPct(v[i])}</text>`}
+  const every=FA.g==='W'?0:1;ns.forEach((nd,i)=>{let lab='';if(FA.g==='W'){const f=nd.w.fri,p=i?ns[i-1].w.fri:null;if(!p||p.getMonth()!==f.getMonth())lab=HZ_MON[f.getMonth()]}else lab=nd.short;
+    if(lab&&(FA.g!=='W'||(i===0||HZ_MON.indexOf(lab)%2===0)))g+=`<text x="${X(i).toFixed(1)}" y="${mt+ph+18}" text-anchor="middle" font-size="11" fill="var(--muted)">${lab}</text>`;
+    const s=S2[i];g+=`<rect class="fa-hit" x="${(ml+i*dx).toFixed(1)}" y="${mt}" width="${dx.toFixed(1)}" height="${ph}" fill="transparent" onclick="faGo('${nd.key}')" data-tip="${esc(T(nd.lab+(nd.w&&nd.w.hol?' · holiday week':''),[['Accuracy',faPct(s.acc),true],['vs target',faPts(s.acc-FA_TGT)],['Bias',faPts(s.bias)],['Actual',fmc(s.a)],['Forecast',fmc(s.f)]].concat(s.n>1?[['Weeks below target',s.lo+' of '+s.n]]:[]),'Click to open'))}"/>`});
+  g+=`<line x1="${ml}" x2="${W-mr}" y1="${mt+ph}" y2="${mt+ph}" stroke="#B7C2CE"/>`;
+  return `<svg class="fa-svg" viewBox="0 0 ${W} ${H}" role="img" aria-label="Forecast accuracy trend by ${FA.g==='W'?'week':FA.g==='M'?'month':'quarter'}">${g}</svg>`}
+
+/* the level below: a dot per period on a stem from the target line (above = on target, below = missed) */
+function faBreak(ns,sel){const S2=ns.map(n=>faStat(n.weeks)),v=S2.map(s=>s.acc),{lo,hi,tk}=faScale(v),W=1120,H=210,ml=56,mr=74,mt=22,mb=34,pw=W-ml-mr,ph=H-mt-mb,n=ns.length,dx=pw/Math.max(n,1),X=i=>ml+(i+.5)*dx,Y=x=>mt+ph-(x-lo)/(hi-lo)*ph,ty=Y(FA_TGT);
+  let g='';tk.forEach(t=>g+=`<line x1="${ml}" x2="${W-mr}" y1="${Y(t).toFixed(1)}" y2="${Y(t).toFixed(1)}" stroke="${FA_C.grid}"/><text x="${ml-8}" y="${(Y(t)+4).toFixed(1)}" text-anchor="end" font-size="11" fill="var(--muted)">${(t*100).toFixed(Math.round(t*200)%2?1:0)}%</text>`);
+  g+=`<line x1="${ml}" x2="${W-mr}" y1="${ty.toFixed(1)}" y2="${ty.toFixed(1)}" stroke="${FA_C.tg}" stroke-width="1.5" stroke-dasharray="6 4"/><text x="${W-mr+6}" y="${(ty+4).toFixed(1)}" font-size="11" font-weight="700" fill="var(--ink2)">Target</text>`;
+  ns.forEach((nd,i)=>{const x=X(i),y=Y(v[i]),low=v[i]<FA_TGT,c=low?FA_C.lo:FA_C.ln,on=sel===nd.key;
+    if(on)g+=`<rect x="${(x-dx/2+3).toFixed(1)}" y="${mt-16}" width="${(dx-6).toFixed(1)}" height="${ph+16}" fill="${FA_C.band}" rx="6"/>`;
+    g+=`<line x1="${x.toFixed(1)}" x2="${x.toFixed(1)}" y1="${ty.toFixed(1)}" y2="${y.toFixed(1)}" stroke="${c}" stroke-width="2"/>`;
+    g+=low?`<path d="M${(x-6).toFixed(1)},${(y-5).toFixed(1)} L${(x+6).toFixed(1)},${(y-5).toFixed(1)} L${x.toFixed(1)},${(y+6).toFixed(1)} Z" fill="${c}" stroke="#fff" stroke-width="2" paint-order="stroke"/>`:`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="5.5" fill="${c}" stroke="#fff" stroke-width="2"/>`;
+    if(n<=14)g+=`<text x="${x.toFixed(1)}" y="${(low?y+19:y-11).toFixed(1)}" text-anchor="middle" font-size="11.5" font-weight="${on?800:700}" fill="var(--ink)">${faPct(v[i])}</text>`;
+    g+=`<text x="${x.toFixed(1)}" y="${H-12}" text-anchor="middle" font-size="11" font-weight="${on?700:400}" fill="${on?'var(--ink)':'var(--muted)'}">${nd.lvl==='Y'?nd.lab:nd.short}</text>`;
+    const s=S2[i];g+=`<rect class="fa-hit" x="${(x-dx/2).toFixed(1)}" y="${mt-16}" width="${dx.toFixed(1)}" height="${ph+16}" fill="transparent" onclick="faGo('${nd.key}')" data-tip="${esc(T(nd.lab+(nd.sub?' · '+nd.sub:''),[['Accuracy',faPct(s.acc),true],['vs target',faPts(s.acc-FA_TGT)],['Bias',faPts(s.bias)]].concat(s.n>1?[['Weeks below target',s.lo+' of '+s.n]]:[['Actual',fmc(s.a)],['Forecast',fmc(s.f)]]),nd.lvl==='W'?'Click for the week':'Click to go down a level'))}"/>`});
+  g+=`<line x1="${ml}" x2="${W-mr}" y1="${mt+ph}" y2="${mt+ph}" stroke="#B7C2CE"/>`;
+  return `<svg class="fa-svg" viewBox="0 0 ${W} ${H}" role="img" aria-label="Forecast accuracy by period">${g}</svg>`}
+function faTable(ns,sel){return `<div class="dly-tw"><table class="t fa-t"><thead><tr><th>Period</th><th class="r">Accuracy</th><th class="r">vs target</th><th class="r">Bias</th><th class="r">Actual</th><th class="r">Forecast</th><th class="r">Weekly misses</th><th class="r">Weeks below target</th></tr></thead><tbody>
+  ${ns.map(nd=>{const s=faStat(nd.weeks),low=s.acc<FA_TGT;return `<tr class="hov${sel===nd.key?' on':''}" onclick="faGo('${nd.key}')"><td><b>${nd.lab}</b>${nd.sub?`<small>${nd.sub}</small>`:''}</td><td class="r tnum"><b>${faPct(s.acc)}</b></td>
+    <td class="r tnum">${low?`<span class="fa-lo">▼ ${faPts(s.acc-FA_TGT)}</span>`:`<span class="fa-ok">✓ ${faPts(s.acc-FA_TGT)}</span>`}</td><td class="r tnum">${faPts(s.bias)}</td><td class="r tnum">${fmc(s.a)}</td><td class="r tnum">${fmc(s.f)}</td><td class="r tnum">${fmc(s.ae)}</td><td class="r tnum">${s.lo} of ${s.n}</td></tr>`}).join('')}</tbody></table></div>`}
+
+/* ============================ v38 · FORECAST OVERRIDE ============================
+   Finance adds or removes amounts at customer × date × metric (billings, collections, deductions) for the next 13 weeks.
+   Edits never touch the live forecast directly: they are previewed, submitted, approved at Level 1 (Director, FP&A) and
+   Level 2 (VP, FP&A), and only then applied to the forecast for every user. Every step is written to the log.
+   Simple arithmetic, no re-modelling: the amount lands on that metric on that date; AR follows the roll-forward from that
+   day on (opening AR + billings − collections − deductions). No cross-metric validation. One approved override per
+   customer × metric × date: a newer approval supersedes the older request. State lives in memory (resets on reload). */
+const FO_M={b:'Billings',c:'Collections',x:'Deductions'};
+const FO_ST={review:['In review','b-med'],approved:['Approved','b-ok'],rejected:['Rejected','b-crit'],superseded:['Superseded','b-mut']};
+const FO_LV=[{lvl:1,name:'Priya Shah',role:'Director, FP&A'},{lvl:2,name:'Daniel Brooks',role:'VP, FP&A'}];
+const FO_RULES=['Overrides can be made only for the next 13 weeks.',
+  'Overrides are at customer and date level, for Billings, Collections and Deductions. Invoice-level edits are not supported.',
+  'The tool does not validate or reconcile edits across metrics. If you change billings, update collections yourself where needed.',
+  'Overrides are visible to other users only after approval.',
+  'Forecast accuracy is always measured on the original model forecast, not on overridden values. Accuracy of approved overrides is tracked separately.'];
+const FO_TRASH='<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6M10 11v6M14 11v6"/></svg>';
+const foT=(m,d,h,mi)=>new Date(Date.UTC(2026,m-1,d,h+5,mi));   // seed times in ET (EST = UTC−5)
+const foTs=t=>t.toLocaleDateString('en-US',{timeZone:'America/New_York',month:'short',day:'numeric',year:'numeric'})+' · '+t.toLocaleTimeString('en-US',{timeZone:'America/New_York',hour:'2-digit',minute:'2-digit',hourCycle:'h23'})+' ET';
+const foIsoT=t=>t.toLocaleDateString('en-CA',{timeZone:'America/New_York'});
+const foDt=iso=>{const d=hzParse(iso);return ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][d.getDay()]+', '+HZ_MON[d.getMonth()]+' '+d.getDate()};
+const foCu=id=>CUST40.find(c=>c.id===id)||{id,name:'Customer '+id,bu:'USPD',sh:0};
+const foCid=n=>(CUST40.find(c=>c.name===n)||{}).id;
+const foSg=r=>(r.mode==='rem'?-1:1)*(+r.v||0);
+const foAmt=v=>'$'+(+v).toLocaleString('en-US',{maximumFractionDigits:1})+'M';
+const foSAmt=v=>Math.abs(v)<.05?'$0M':(v>0?'+':'−')+foAmt(Math.abs(v));
+const foMe=()=>{try{return S.user&&typeof accP==='function'?accP().name:(PERSONAS[S.persona]||PERSONAS.fpa).name}catch(e){return PERSONAS.fpa.name}};
+const foBlank=()=>({cust:'',d:'',m:'b',mode:'add',v:'',cm:''});
+
+/* ---- state, seeded with five requests across the statuses ---- */
+const FO={ver:0,seq:1005,reqs:[],log:[],tab:'new',rows:[],pv:null,open:null,ok:'',f:{cust:'',m:'',st:'',from:'',to:''}};
+function foLog(t,user,act,q,rows,cm){rows.forEach(r=>FO.log.push({t,user,act,id:q.id,cust:r.cust,m:r.m,d:r.d,mode:r.mode,v:+r.v,cm:cm!=null?cm:r.cm}))}
+(function(){const R=(cust,d,m,mode,v,cm)=>({cust:foCid(cust),d,m,mode,v,cm});
+  const mk=(id,by,on,rows,steps,status,note)=>{const q={id,by,on,rows,status,note:note||'',steps:FO_LV.map((l,i)=>Object.assign({},l,{dec:null,at:null,cm:''},steps[i]||{}))};FO.reqs.push(q);
+    foLog(on,by,'Submitted',q,rows);q.steps.forEach(s=>{if(s.dec)foLog(s.at,s.name,s.dec==='approved'?'Approved L'+s.lvl:'Rejected',q,rows,s.cm)});return q};
+  mk('FO-1000','Jordan Hayes',foT(11,9,10,5),[R('Walmart','2026-11-20','b','add',70,'Early estimate of an extra Walmart order')],
+    [{dec:'approved',at:foT(11,9,15,40),cm:'OK pending final volume'},{dec:'approved',at:foT(11,10,9,12),cm:''}],'superseded',
+    'Superseded by FO-1001 on Nov 13, 2026 · 10:30 ET: a newer approved override for the same customer, metric and date (Walmart · Billings · Fri, Nov 20).');
+  mk('FO-1001','Jordan Hayes',foT(11,12,9,14),[R('Walmart','2026-11-20','b','add',100,'Walmart confirmed the extra order: $100M billed on Nov 20'),
+      R('CVS Health','2026-12-01','c','rem',60,'CVS moved its payment run from Dec 1 to Dec 2'),R('CVS Health','2026-12-02','c','add',60,'CVS moved its payment run from Dec 1 to Dec 2')],
+    [{dec:'approved',at:foT(11,12,14,2),cm:'Matches the sales confirmation'},{dec:'approved',at:foT(11,13,10,30),cm:''}],'approved','Replaces FO-1000 for the same customer, metric and date.');
+  FO.log.push({t:foT(11,13,10,30),user:'System',act:'Superseded',id:'FO-1000',cust:foCid('Walmart'),m:'b',d:'2026-11-20',mode:'add',v:70,cm:'Replaced by FO-1001'});
+  mk('FO-1002','Sam Ortiz',foT(11,15,16,20),[R('HCA Healthcare','2026-11-24','c','add',45,'HCA confirmed a catch-up payment on disputed invoices')],
+    [{dec:'approved',at:foT(11,16,8,20),cm:'Remittance advice attached'}],'review');
+  mk('FO-1003','Jordan Hayes',foT(11,16,7,45),[R('Texas Oncology','2026-12-15','b','add',25,'New infusion-center contract starts billing Dec 15'),
+      R('Florida Cancer Specialists','2026-12-15','x','add',8,'Expected rebate true-up at quarter end')],[],'review');
+  mk('FO-1004','Sam Ortiz',foT(11,11,11,5),[R('Kroger Health','2026-11-27','b','add',150,'Holiday promotion volume')],
+    [{dec:'rejected',at:foT(11,11,15,30),cm:'No customer confirmation yet. Resubmit with the PO.'}],'rejected');
+  FO.rows=[R('Walmart','2026-11-23','b','add',100,'Extra order confirmed by Walmart: billed Nov 23'),R('Walmart','2026-12-23','c','add',100,'Walmart pays the extra order on Net 30')];
+})();
+
+/* ---- approved overrides → per-day deltas ---- */
+function foActive(excl){const L=[];FO.reqs.forEach(q=>{if(q.status==='approved'&&q.id!==excl)q.rows.forEach(r=>L.push({q,r}))});return L}
+function foMap(list,bu,a,b){const m=new Map();list.forEach(({r})=>{if(bu&&bu!=='All'&&foCu(r.cust).bu!==bu)return;if((a&&r.d<a)||(b&&r.d>b))return;
+  const o=m.get(r.d)||{b:0,c:0,x:0};o[r.m]+=foSg(r);m.set(r.d,o)});return m}
+function foApplyDays(days,m){if(!m.size)return days;let ar=days.length?days[0].open:0;
+  return days.map(o=>{const d=!o.act&&m.get(o.iso),n=Object.assign({},o);
+    if(d){n.b=o.b+d.b;n.c=o.c+d.c;n.x=o.x+d.x;n.fo=d;if(o.B)n.B=Object.assign({},o.B,{ai:(o.B.ai||0)+d.b});if(o.C)n.C=Object.assign({},o.C,{ai:(o.C.ai||0)+d.c});if(o.X)n.X=Object.assign({},o.X,{ai:(o.X.ai||0)+d.x})}
+    n.open=ar;ar+=n.b-n.c-n.x;n.close=ar;return n})}
+let FO_RAW=false;const FOC={};
+const foKey=()=>sdCK()+'|'+d5T()+'|'+FO.ver;
+function foRaw(fn){const p=FO_RAW;FO_RAW=true;try{return fn()}finally{FO_RAW=p}}
+/* first forecast day (a landed demo day is actual and cannot be overridden) */
+function foFcStart(bu){const D=foRaw(()=>dlyData(bu||'All')),o=D.days.find(o=>!o.act&&o.d>=ASOF_DT);return o?o.iso:hzIso(ASOF_DT)}
+const FO_MIN=()=>foFcStart('All'),FO_MAX=()=>hzIso(V30_E.W13);
+
+/* the daily forecast every screen reads: base model + approved overrides */
+dlyBU=(function(f0){return function(bu){const b=f0(bu);if(FO_RAW)return b;const L=foActive();if(!L.length)return b;const ck='B|'+bu+'|'+foKey();
+  return FOC[ck]||(FOC[ck]=Object.assign({},b,{days:foApplyDays(b.days,foMap(L,bu))}))}})(dlyBU);
+dlyData=(function(f0){return function(bu){bu=bu||S.bu;if(bu!=='All')return dlyBU(bu);const b=foRaw(()=>f0('All'));if(FO_RAW)return b;const L=foActive();if(!L.length)return b;
+  const ck='A|'+foKey();return FOC[ck]||(FOC[ck]=Object.assign({},b,{days:foApplyDays(b.days,foMap(L,'All'))}))}})(dlyData);
+/* Performance Workspace: the window by day keeps its horizon totals, then the approved amounts go on top */
+v30C=(function(f0){return function(id,fn){return f0(id+'|fo'+FO.ver,fn)}})(v30C);
+v30Days=(function(f0){return function(k,bu){if(bu==='All')return f0(k,bu);const r=foRaw(()=>f0(k,bu));if(FO_RAW)return r;const L=foActive();if(!L.length)return r;
+  return v30C('fod'+k+bu,()=>{const m=foMap(L,bu);return Object.assign({},r,{days:r.days.map(o=>{const d=o.st==='fc'&&m.get(o.iso);return d?Object.assign({},o,{v:{b:o.v.b+d.b,c:o.v.c+d.c,x:o.v.x+d.x},fo:d}):o})})})}})(v30Days);
+v30Win=(function(f0){return function(k,bu){bu=bu||S.bu;const w=f0(k,bu),L=foActive();if(!L.length)return w;
+  const end=k==='W13'&&S.w5?hzIso(hzAdd(ASOF_DT,34)):hzIso(V30_E[k]||V30_E.W13),m=foMap(L,bu,foFcStart(bu),end);if(!m.size)return w;
+  const t={b:0,c:0,x:0};m.forEach(o=>{t.b+=o.b;t.c+=o.c;t.x+=o.x});
+  const o=Object.assign({},w,{bill:w.bill+t.b,coll:w.coll+t.c,ded:w.ded+t.x,drivers:(w.drivers||[]).slice(),fo:t});
+  if(w.close!=null)o.close=w.close+t.b-t.c-t.x;if(w.v!=null)o.v=w.v+t.c;if(o.drivers.length>1)o.drivers[1]+=t.c;return o}})(v30Win);
+/* customers: an override sits on its own customer, not spread across the business unit by share */
+v30CustRows=(function(f0){return function(k,bu,a,b){const rows=f0(k,bu,a,b),L=foActive();if(!L.length)return rows;
+  (bu==='All'?['USPD','O&M']:[bu]).forEach(u=>{const P=cuPer(v30Tree(k,u),k).slice(a,b+1);if(!P.length)return;const s=hzIso(P[0].s),e=hzIso(P[P.length-1].e),f=foFcStart(u),lo=s>f?s:f;
+    const tot={b:0,c:0,x:0},per={};L.forEach(({r})=>{if(foCu(r.cust).bu!==u||r.d<lo||r.d>e)return;const v=foSg(r);tot[r.m]+=v;(per[r.cust]=per[r.cust]||{b:0,c:0,x:0})[r.m]+=v});
+    rows.forEach(o=>{if(o.cu.bu!==u)return;const p=per[o.cu.id]||{b:0,c:0,x:0};['b','c','x'].forEach(q=>o[q]+=p[q]-(o.cu.sh||0)*tot[q]);o.close=o.open+o.b-o.c-o.x})});
+  return rows}})(v30CustRows);
+
+/* ---- "Override applied" markers ---- */
+function foTip(it){const ap=[...new Set(it.map(e=>e.q.id+': '+e.q.steps[1].name+' (Level 2), '+foTs(e.q.steps[1].at)))];
+  return T('Override applied',it.map(e=>[e.q.id+' · '+escH(foCu(e.r.cust).name)+' · '+FO_M[e.r.m]+' · '+foDt(e.r.d).replace(/^\w+, /,''),foSAmt(foSg(e.r))]),'Approved by '+ap.join('; '))}
+const foMk=it=>`<span class="fo-mk" data-tip="${esc(foTip(it))}">Override applied</span>`;
+const foScope=()=>foActive().filter(({r})=>S.bu==='All'||foCu(r.cust).bu===S.bu);
+v30CustCard=(function(f0){return function(k,R){const h=f0(k,R),L=foActive();if(!L.length)return h;const lo=foFcStart(),hi=hzIso(V30_E[k]||V30_E.W13);
+  return h.replace(/(onclick="cuDrill\('([^']+)'\)"[^>]*><b>[^<]*<\/b><\/button>)/g,(m0,a,id)=>{const it=L.filter(({r})=>r.cust===id&&r.d>=lo&&r.d<=hi);return it.length?a+foMk(it):a})}})(v30CustCard);
+v30DayChart=(function(f0){return function(mode){const h=f0(mode),L=foScope();if(!L.length)return h;
+  const W=1120,ml=64,mr=14,mt=18,pw=W-ml-mr,n0=ASOF_DT,nd=Math.round((V30_E.W13-n0)/864e5)+1,dx=pw/nd,lo=foFcStart(),hi=FO_MAX(),by={};
+  L.forEach(e=>{if(e.r.d>=lo&&e.r.d<=hi)(by[e.r.d]=by[e.r.d]||[]).push(e)});
+  let g='';Object.entries(by).forEach(([iso,it])=>{const x=ml+(Math.round((hzParse(iso)-n0)/864e5)+.5)*dx;
+    g+=`<g class="fo-smk" data-tip="${esc(foTip(it))}"><line x1="${x.toFixed(1)}" x2="${x.toFixed(1)}" y1="${mt}" y2="${mt+26}" stroke="#E8870E" stroke-width="1.5" stroke-dasharray="2 2"/><path d="M${(x-5.5).toFixed(1)},${mt-13} L${(x+5.5).toFixed(1)},${mt-13} L${x.toFixed(1)},${mt-3} Z" fill="#E8870E"/></g>`});
+  return g?h.replace(/<\/svg>$/,g+'</svg>'):h}})(v30DayChart);
+v30ChartCard=(function(f0){return function(k,R){const h=f0(k,R);if(!foScope().length)return h;
+  return h.replace(/(<div class="dly-lg v30-lg">[\s\S]*?)(<\/div>)/,`$1<span><i style="background:#E8870E;transform:rotate(45deg);width:8px;height:8px;border-radius:1px"></i>Override applied</span>$2`)}})(v30ChartCard);
+v30Cols=(function(f0){return function(k,R,el){const cols=f0(k,R,el),L=foScope();if(!L.length)return cols;const f=foFcStart();
+  return cols.map(c=>{const nd=c.key&&c.key!=='open'?v30Find(R,c.key).pop():null;if(!nd||!nd.s||nd.key!==c.key)return c;const s=hzIso(nd.s),e=hzIso(nd.e),it=L.filter(({r})=>r.d>=s&&r.d<=e&&r.d>=f);
+    return it.length?Object.assign({},c,{tip:(c.tip||'')+`<div class='tn'>◆ Override applied: ${[...new Set(it.map(x=>x.q.id))].join(', ')}</div>`}):c})}})(v30Cols);
+v30Table=(function(f0){return function(k,R){let h=f0(k,R);const L=foScope();if(!L.length)return h;const lo=foFcStart(),hi=hzIso(V30_E[k]||V30_E.W13),mk=new Map(),add=(l,e)=>{if(!mk.has(l))mk.set(l,[]);mk.get(l).push(e)};
+  L.forEach(e=>{if(e.r.d<lo||e.r.d>hi)return;const d=hzParse(e.r.d),f=hzAdd(d,(5-d.getDay()+7)%7);add(dlyDay(d),e);add('W/E '+HZ_MON[f.getMonth()]+' '+f.getDate(),e);add(HZ_FULLM[d.getMonth()]+' '+d.getFullYear(),e)});
+  mk.forEach((it,l)=>{h=h.split('<b>'+l+'</b>').join('<b>'+l+'</b>'+foMk(it))});return h}})(v30Table);
+
+/* ---- entry points: navigation item and "Edit forecast" on the forecast screen ---- */
+ICONS2.fo='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 013 3L7 19l-4 1 1-4z"/></svg>';
+MODNAV.ar.items.push(['fo','Forecast Override','fo']);
+P2_NAMES.fo='Forecast Override';
+P2_PAGES.fo=function(){return pageFO()};
+function foOpen(tab){FO.tab=tab||'new';FO.open=null;go('fo')}
+function foActiveBadge(){const A=FO.reqs.filter(q=>q.status==='approved');if(!A.length)return '';const L=foActive();
+  return `<span class="badge b-ok" style="cursor:pointer" onclick="foOpen('queue')" data-tip="${esc(foTip(L))}">${A.length} approved override${A.length>1?'s':''} applied</span>`}
+function foEditBtn(){return `${foActiveBadge()}<button class="btn" onclick="foOpen('new')" data-tip="Add or remove amounts by customer and date. Applied only after approval.">✎ Edit forecast</button>`}
+const foHead=h=>h.replace(/(<h1>Performance Workspace<\/h1>[\s\S]*?<span class="sp"><\/span>)/,m=>m+foEditBtn());   // a function: amounts such as "+$100M" in the badge tooltip must not be read as $1
+pageFx=(function(f0){return function(){return foHead(f0())}})(pageFx);
+pageTower=(function(f0){return function(){return foHead(f0())}})(pageTower);
+sideHTML=(function(f0){return function(a){const h=f0(a),n=FO.reqs.filter(q=>q.status==='review').length;
+  return n?h.replace(/(onclick="go\('fo'\)">[\s\S]*?<span>Forecast Override<\/span>)/,`$1<span class="cnt">${n}</span>`):h}})(sideHTML);
+
+/* ---- the page ---- */
+function pageFO(){const nR=FO.reqs.filter(q=>q.status==='review').length;
+  const tabs=[['new','New override'],['queue','Approval queue'+(nR?`<span class="fo-n">${nR}</span>`:'')],['log','Log history']];
+  return `<div class="page-h"><div><h1>Forecast Override</h1><div class="meta">As of Mon, Nov 16 2026 · 06:10 ET · customer × date edits for the next 13 weeks (${foDt(FO_MIN())} – ${foDt(FO_MAX())}, ${V30_E.W13.getFullYear()}) · applied only after Level 1 and Level 2 approval</div></div><span class="sp"></span>${foActiveBadge()}</div>
+    <div class="seg mb">${tabs.map(([k,l])=>`<button class="${FO.tab===k?'on':''}" onclick="foTab('${k}')">${l}</button>`).join('')}</div>
+    ${FO.tab==='queue'?(FO.open?foDetail(FO.open):foQueue()):FO.tab==='log'?foLogPage():foNew()}`}
+function foTab(k){FO.tab=k;FO.open=null;if(k!=='new')FO.ok='';render()}
+
+/* Tab 1 · New override */
+function foCustOpts(sel){return ['USPD','O&M'].map(b=>`<optgroup label="${BU_NAMES[b]}">${CUST40.filter(c=>c.bu===b).slice().sort((x,y)=>x.name.localeCompare(y.name)).map(c=>`<option value="${c.id}"${c.id===sel?' selected':''}>${escH(c.name)}</option>`).join('')}</optgroup>`).join('')}
+function foRowHTML(r,i){return `<tr data-i="${i}"><td class="txt-mut tnum">${i+1}</td>
+  <td><select class="fo-in fo-cu" onchange="foSet(${i},'cust',this.value)" aria-label="Customer, row ${i+1}"><option value="">Select customer…</option>${foCustOpts(r.cust)}</select></td>
+  <td><input type="date" class="fo-in fo-d" min="${FO_MIN()}" max="${FO_MAX()}" value="${r.d||''}" onchange="foSet(${i},'d',this.value)" aria-label="Date, row ${i+1}"></td>
+  <td><select class="fo-in" onchange="foSet(${i},'m',this.value)" aria-label="Metric, row ${i+1}">${Object.entries(FO_M).map(([k,l])=>`<option value="${k}"${r.m===k?' selected':''}>${l}</option>`).join('')}</select></td>
+  <td><div class="seg fo-md">${[['add','Add'],['rem','Remove']].map(([k,l])=>`<button class="${r.mode===k?'on':''}" onclick="foMode(${i},'${k}',this)">${l}</button>`).join('')}</div></td>
+  <td class="r"><input type="number" class="fo-in fo-v tnum" min="0" step="0.1" value="${r.v!==''&&r.v!=null?r.v:''}" placeholder="0.0" oninput="foSet(${i},'v',this.value)" aria-label="Value in $M, row ${i+1}"></td>
+  <td><input type="text" class="fo-in fo-cm" maxlength="140" value="${escH(r.cm||'')}" placeholder="Why the model is missing this" oninput="foSet(${i},'cm',this.value)" aria-label="Comment, row ${i+1}"></td>
+  <td><button class="fo-del" onclick="foDel(${i})" aria-label="Delete row ${i+1}" data-tip="Delete row">${FO_TRASH}</button></td></tr>`}
+const foRowsHTML=()=>FO.rows.map(foRowHTML).join('');
+function foNew(){
+  /* "How overrides work" panel removed from the page */
+  const info=`<div class="card mb fo-info"><div class="ch"><h3>How overrides work</h3></div><ul>${FO_RULES.map(x=>`<li>${x}</li>`).join('')}</ul></div>`;
+  const grid=`<div class="card mb"><div class="ch"><h3>Step 1 · Edits</h3><span class="sub">One row per edit. Several rows for the same customer and date are allowed.</span><span class="sp"></span><button class="btn sm ghost" onclick="foAdd()">+ Add row</button></div>
+    <div class="dly-tw"><table class="t fo-g"><thead><tr><th>#</th><th>Customer</th><th>Date</th><th>Metric</th><th>Mode</th><th class="r">Value ($M)</th><th>Comment</th><th></th></tr></thead><tbody id="foRows">${foRowsHTML()}</tbody></table></div>
+    <div class="fo-act"><span id="foErr" class="txt-bad"></span><span class="sp"></span><button class="btn" onclick="foPreview()">Preview impact</button><button class="btn pri" id="foSub" onclick="foSubmitAsk()"${FO.pv?'':' disabled data-tip="Preview the impact first"'}>Submit for approval</button></div></div>`;
+  return (FO.ok?`<div class="fo-ok mb">✓ ${FO.ok}</div>`:'')+grid+`<div id="foPv">${FO.pv?foPvHTML(FO.pv.rows,null,'Step 2 · Impact preview',true):''}</div>`}
+function foStale(){if(FO.ok){FO.ok='';const k=document.querySelector('.fo-ok');if(k)k.remove()}if(!FO.pv)return;FO.pv=null;
+  const p=document.getElementById('foPv');if(p)p.innerHTML=`<div class="fo-stale">Edits changed since the last preview. Click <b>Preview impact</b> again before submitting.</div>`;
+  const s=document.getElementById('foSub');if(s){s.disabled=true;s.dataset.tip='Preview the impact first'}}
+function foSet(i,f,v){if(!FO.rows[i])return;FO.rows[i][f]=v;const tr=document.querySelector(`#foRows tr[data-i="${i}"]`);if(tr)tr.querySelectorAll('.fo-bad').forEach(e=>e.classList.remove('fo-bad'));foStale()}
+function foMode(i,k,btn){if(!FO.rows[i])return;FO.rows[i].mode=k;btn.parentNode.querySelectorAll('button').forEach(b=>b.classList.toggle('on',b===btn));foStale()}
+function foRedrawRows(){const t=document.getElementById('foRows');if(t)t.innerHTML=foRowsHTML()}
+function foAdd(){FO.rows.push(foBlank());foRedrawRows();foStale()}
+function foDel(i){FO.rows.splice(i,1);if(!FO.rows.length)FO.rows.push(foBlank());foRedrawRows();foStale()}
+function foCheck(){const errs=[],lo=FO_MIN(),hi=FO_MAX();document.querySelectorAll('#foRows .fo-bad').forEach(e=>e.classList.remove('fo-bad'));
+  FO.rows.forEach((r,i)=>{const tr=document.querySelector(`#foRows tr[data-i="${i}"]`),bad=(sel,msg)=>{const e=tr&&tr.querySelector(sel);if(e)e.classList.add('fo-bad');errs.push(`Row ${i+1}: ${msg}`)};
+    if(!r.cust)bad('.fo-cu','choose a customer');
+    if(!r.d)bad('.fo-d','pick a date');else if(r.d<lo||r.d>hi)bad('.fo-d','dates must be within the next 13 weeks');else if(!rvBD(hzParse(r.d)))bad('.fo-d','no banking on '+foDt(r.d)+', pick a business day');
+    if(!(+r.v>0))bad('.fo-v','enter an amount above $0M');
+    if(!String(r.cm||'').trim())bad('.fo-cm','add a short comment');});
+  const el=document.getElementById('foErr');if(el)el.textContent=errs.length?errs.slice(0,2).join(' · ')+(errs.length>2?` · +${errs.length-2} more`:''):'';return !errs.length}
+function foPreview(){if(!foCheck())return;FO.pvTab='b';FO.pv={rows:FO.rows.map(r=>Object.assign({},r,{v:+r.v,cm:String(r.cm).trim()}))};
+  const p=document.getElementById('foPv');if(p){p.innerHTML=foPvHTML(FO.pv.rows,null,'Step 2 · Impact preview',true);if(p.scrollIntoView)p.scrollIntoView({behavior:'smooth',block:'start'})}
+  const s=document.getElementById('foSub');if(s){s.disabled=false;delete s.dataset.tip}}
+
+/* Base vs Updated: base = today's forecast (with approved overrides, minus the request itself), updated = base + the edits */
+function foImpact(rows,excl){const raw=foRaw(()=>dlyData('All')),a=FO_MIN(),b=FO_MAX(),base=foApplyDays(raw.days,foMap(foActive(excl),'All')),upd=foApplyDays(base,foMap(rows.map(r=>({r})),'All')),
+  win=ds=>ds.filter(o=>o.iso>=a&&o.iso<=b);return {base:win(base),upd:win(upd),ed:new Set(rows.map(r=>r.d))}}
+/* one metric over the next 13 weeks, same size and axis styling as the Performance Workspace charts (1120 × 300) */
+function foChart(k,B,U,ed,l){const W=1120,H=300,ml=64,mr=16,mt=18,mb=46,pw=W-ml-mr,ph=H-mt-mb,n=B.length,dx=pw/n,X=i=>ml+(i+.5)*dx,f=k==='ar'?'close':k;
+  const vb=B.map(o=>o[f]),vu=U.map(o=>o[f]),all=vb.concat(vu);let lo=Math.min(...all),hi=Math.max(...all);if(k==='ar'){const p=(hi-lo)*.12||hi*.01;lo-=p;hi+=p}else{lo=Math.min(0,lo);hi=hi*1.12||1}
+  const Y=v=>mt+ph-(v-lo)/((hi-lo)||1)*ph,step=(()=>{const r=(hi-lo)/4||1,p=Math.pow(10,Math.floor(Math.log10(r)));return [1,2,2.5,5,10].map(q=>q*p).find(q=>q>=r)})();
+  let g='';B.forEach((o,i)=>{if(ed.has(o.iso))g+=`<rect x="${(X(i)-Math.max(dx,6)/2).toFixed(1)}" y="${mt}" width="${Math.max(dx,6).toFixed(1)}" height="${ph}" fill="#FBE3C2"/>`});
+  for(let v=Math.ceil(lo/step)*step;v<=hi+1e-9;v+=step)g+=`<line x1="${ml}" x2="${W-mr}" y1="${Y(v).toFixed(1)}" y2="${Y(v).toFixed(1)}" stroke="#E9EEF3"/><text x="${ml-8}" y="${(Y(v)+4).toFixed(1)}" text-anchor="end" font-size="11" fill="var(--muted)">${fmc(v)}</text>`;
+  const ln=a=>a.map((v,i)=>(i?'L':'M')+X(i).toFixed(1)+','+Y(v).toFixed(1)).join('');
+  g+=`<path d="${ln(vb)}" fill="none" stroke="#8D99A6" stroke-width="2" stroke-dasharray="5 4"/><path d="${ln(vu)}" fill="none" stroke="#2F80D1" stroke-width="2.4"/>`;
+  B.forEach((o,i)=>{if(ed.has(o.iso))g+=`<circle cx="${X(i).toFixed(1)}" cy="${Y(vu[i]).toFixed(1)}" r="4" fill="#fff" stroke="#E8870E" stroke-width="2"/>`});
+  /* x axis as on the daily charts: a tick and the date on each Monday, the month underneath */
+  B.forEach((o,i)=>{const d=o.d,x=X(i);if(d.getDay()===1||i===0)g+=`<line x1="${x.toFixed(1)}" x2="${x.toFixed(1)}" y1="${mt+ph}" y2="${mt+ph+4}" stroke="#B7C2CE"/><text x="${x.toFixed(1)}" y="${mt+ph+16}" text-anchor="middle" font-size="10.5" fill="var(--muted)">${d.getDate()}</text>`;
+    if(i===0||d.getMonth()!==B[i-1].d.getMonth())g+=`<text x="${(x-dx/2+2).toFixed(1)}" y="${mt+ph+34}" font-size="11.5" font-weight="700" fill="var(--ink2)">${HZ_FULLM[d.getMonth()]}${d.getMonth()===0?' '+d.getFullYear():''}</text>`;
+    g+=`<rect x="${(x-dx/2).toFixed(1)}" y="${mt}" width="${dx.toFixed(1)}" height="${ph}" fill="transparent" data-tip="${esc(T(foDt(o.iso)+(ed.has(o.iso)?' · edited':''),[['Base',fmc(vb[i])],['Updated',fmc(vu[i])],['Difference',foSAmt(vu[i]-vb[i]),true]]))}"/>`});
+  g+=`<line x1="${ml}" x2="${W-mr}" y1="${mt+ph}" y2="${mt+ph}" stroke="#B7C2CE"/>`;
+  return `<svg class="dly-svg v30-svg" viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="${esc(l)}: base vs updated, next 13 weeks">${g}</svg>`}
+/* tabs in this order; Billings opens first. A dot marks a metric whose numbers the edits change. */
+const FO_PVT=[['b','Billings'],['c','Collections'],['x','Deductions'],['ar','AR']];
+function foPvTab(k){FO.pvTab=k;const el=document.querySelector('#main .fo-pv');if(el&&FO.pvCur)el.outerHTML=foPvHTML(...FO.pvCur)}
+function foPvHTML(rows,excl,title,tag){FO.pvCur=[rows,excl,title,tag];const I=foImpact(rows,excl),B=I.base,U=I.upd,L=B.length-1;if(L<0)return '';
+  const sum=(ds,f)=>ds.reduce((a,o)=>a+o[f],0),tr=[['Billings',sum(B,'b'),sum(U,'b')],['Collections',sum(B,'c'),sum(U,'c')],['Deductions',sum(B,'x'),sum(U,'x')],['Closing AR · '+foDt(B[L].iso),B[L].close,U[L].close]];
+  const hit={ar:B.some((o,i)=>Math.abs(U[i].close-o.close)>=.05)};['b','c','x'].forEach(m=>hit[m]=rows.some(r=>r.m===m&&+r.v>0));
+  const cur=FO_PVT.some(t=>t[0]===FO.pvTab)?FO.pvTab:'b',lab=FO_PVT.find(t=>t[0]===cur)[1];
+  const tabs=fxSeg(cur,FO_PVT.map(([k,l])=>[k,l+(hit[k]?'<i class="fo-tdot" title="Has edits" aria-label="has edits"></i>':'')]),k=>`foPvTab('${k}')`);
+  return `<div class="card mb fo-pv">${tag?`<div class="fo-pvh"><span class="fo-pvtag">Preview only. Not visible to other users until approved.</span></div>`:''}
+    <div class="ch"><h3>${title}</h3><span class="sub">Combined view, both business units · ${foDt(B[0].iso)} – ${foDt(B[L].iso)} · Base = current forecast${foActive(excl).length?' incl. approved overrides':''}</span><span class="sp"></span>${tabs}</div>
+    <div class="dly-lg v30-lg fo-lgd"><span><i class="fo-lb"></i>Base</span><span><i class="fo-lu"></i>Updated</span><span><i class="fo-sw" style="background:#FBE3C2"></i>Edited date</span>${hit[cur]?'':`<span class="txt-mut">No edits change ${lab.toLowerCase()}: Base and Updated overlap</span>`}</div>
+    ${foChart(cur,B,U,I.ed,lab==='AR'?'AR balance':lab)}
+    <div class="dly-tw"><table class="t fo-sum"><thead><tr><th>Metric · 13 weeks</th><th class="r">Base total</th><th class="r">Updated total</th><th class="r">Difference</th></tr></thead><tbody>
+    ${tr.map(([l,b,u])=>`<tr><td><b>${l}</b></td><td class="r tnum">${fmc(b)}</td><td class="r tnum">${fmc(u)}</td><td class="r tnum${Math.abs(u-b)<.05?' txt-mut':''}"><b>${foSAmt(u-b)}</b></td></tr>`).join('')}</tbody></table></div>
+    <div class="txt-mut fo-foot">Simple arithmetic, no re-modelling: each amount is added to or removed from its metric on its date. AR = opening AR + billings − collections − deductions, so it moves on the edited date and every day after. An edit to one metric does not change any other.</div></div>`}
+
+/* Step 3 · submit */
+function foRowsTable(R){return `<div class="dly-tw"><table class="t fo-rt"><thead><tr><th>Customer</th><th>Date</th><th>Metric</th><th>Mode</th><th class="r">Value</th><th>Comment</th></tr></thead><tbody>${R.map(r=>{const c=foCu(r.cust);
+  return `<tr><td><b>${escH(c.name)}</b><small>${c.id} · ${c.bu}</small></td><td class="tnum">${foDt(r.d)}</td><td>${FO_M[r.m]}</td><td>${r.mode==='rem'?'Remove':'Add'}</td><td class="r tnum"><b class="${r.mode==='rem'?'txt-bad':'txt-good'}">${foSAmt(foSg(r))}</b></td><td class="fo-cmc">${escH(r.cm)}</td></tr>`}).join('')}</tbody></table></div>`}
+function foNetTxt(R){const t={b:0,c:0,x:0};R.forEach(r=>t[r.m]+=foSg(r));return Object.keys(FO_M).filter(k=>R.some(r=>r.m===k)).map(k=>`${FO_M[k]} <b class="tnum">${foSAmt(t[k])}</b>`).join(' · ')}
+function foSubmitAsk(){if(!FO.pv||!foCheck())return;const R=FO.pv.rows;
+  ov.classList.remove('hidden');ov.onclick=e=>{if(e.target===ov)closeExplain()};
+  ov.innerHTML=`<div class="modal fo-mod"><h3>Submit for approval</h3><div class="h">${R.length} edit${R.length>1?'s':''} · routed to ${FO_LV[0].name} (Level 1), then ${FO_LV[1].name} (Level 2). Nothing changes for other users until both approve.</div>
+    ${foRowsTable(R)}<div class="fo-net">Net impact: ${foNetTxt(R)}</div>
+    <div class="ft"><button class="btn" onclick="closeExplain()">Cancel</button><button class="btn pri" onclick="foSubmit()">Confirm and submit</button></div></div>`}
+function foSubmit(){if(!FO.pv)return;const R=FO.pv.rows.map(r=>Object.assign({},r)),id='FO-'+(FO.seq++),t=new Date(),me=foMe();
+  const q={id,by:me,on:t,rows:R,status:'review',note:'',steps:FO_LV.map(l=>Object.assign({},l,{dec:null,at:null,cm:''}))};FO.reqs.push(q);foLog(t,me,'Submitted',q,R);
+  FO.rows=[foBlank()];FO.pv=null;FO.ok=`Request ${id} submitted. Status: In review with ${FO_LV[0].name} (Level 1). Track it in the Approval queue.`;
+  closeExplain();render();toast(`${id} submitted for approval`)}
+
+/* Tab 2 · Approval queue */
+function foCur(q){if(q.status!=='review')return '<span class="txt-mut">–</span>';const s=q.steps.find(x=>!x.dec);return s?`${s.name}<small>Level ${s.lvl} · ${s.role}</small>`:'–'}
+function foQueue(){const L=FO.reqs.slice().sort((a,b)=>b.on-a.on),uq=a=>[...new Set(a)];
+  return `<div class="card mb"><div class="ch"><h3>Approval queue</h3><span class="sub">${L.filter(q=>q.status==='review').length} in review · click a request to see the edits, the impact and the approval tracker</span></div>
+    <div class="dly-tw"><table class="t fo-q"><thead><tr><th>Request ID</th><th>Submitted by</th><th>Submitted on</th><th>Customer(s)</th><th>Metric(s)</th><th>Net impact</th><th>Status</th><th>Current approver</th></tr></thead><tbody>
+    ${L.map(q=>{const cs=uq(q.rows.map(r=>foCu(r.cust).name)),st=FO_ST[q.status];
+      return `<tr class="hov" onclick="foOpenReq('${q.id}')"><td><b class="fo-id">${q.id}</b></td><td>${escH(q.by)}</td><td class="tnum" style="white-space:nowrap">${foTs(q.on)}</td><td>${escH(cs.slice(0,2).join(', '))}${cs.length>2?` <span class="txt-mut">+${cs.length-2}</span>`:''}</td><td>${uq(q.rows.map(r=>FO_M[r.m])).join(', ')}</td><td class="fo-ni">${foNetTxt(q.rows)}</td><td><span class="badge ${st[1]}">${st[0]}</span></td><td>${foCur(q)}</td></tr>`}).join('')}</tbody></table></div></div>`}
+function foOpenReq(id){FO.tab='queue';FO.open=id;FO.pvTab='b';if(S.tab!=='fo')go('fo');else{render();document.getElementById('main').scrollTop=0}}
+function foDetail(id){const q=FO.reqs.find(x=>x.id===id);if(!q){FO.open=null;return foQueue()}const st=FO_ST[q.status],cur=q.status==='review'?q.steps.find(s=>!s.dec):null,me=foMe();
+  const step=(s,i)=>{const cls=s.dec==='approved'?'ok':s.dec==='rejected'?'bad':cur===s?'cur':'wait';
+    return `<div class="fo-step ${cls}${i<q.steps.length-1?' fo-ln':''}"><div class="fo-dot">${s.dec==='approved'?'✓':s.dec==='rejected'?'✕':s.lvl}</div><div><div class="fo-sl">Level ${s.lvl} approver</div><b>${s.name}</b><small>${s.role}</small>
+      <div class="fo-sd">${s.dec==='approved'?'Approved · '+foTs(s.at):s.dec==='rejected'?'Rejected · '+foTs(s.at):cur===s?'Waiting for decision':q.status==='rejected'?'Not reached':'Waiting for Level '+(s.lvl-1)}</div>${s.cm?`<div class="fo-scm">“${escH(s.cm)}”</div>`:''}</div></div>`};
+  const sub=`<div class="fo-step ok fo-ln"><div class="fo-dot">✓</div><div><div class="fo-sl">Submitted</div><b>${escH(q.by)}</b><div class="fo-sd">${foTs(q.on)}</div></div></div>`;
+  const acts=cur?`<div class="fo-dec"><label for="foCm">Comment <span class="txt-mut">(required to reject)</span></label><textarea id="foCm" placeholder="Note for the submitter and the log" oninput="this.classList.remove('fo-bad')"></textarea><div id="foDecErr" class="txt-bad" style="font-size:11.5px;min-height:16px"></div>
+    <div class="fo-decb"><span class="txt-mut" style="font-size:11.5px">${me===cur.name?'You are the Level '+cur.lvl+' approver.':'Demo: you act as '+cur.name+' (Level '+cur.lvl+').'}</span><span class="sp"></span><button class="btn fo-rej" onclick="foDecide('${q.id}','rejected')">Reject</button><button class="btn pri" onclick="foDecide('${q.id}','approved')">${cur.lvl===FO_LV.length?'Approve and apply':'Approve'}</button></div></div>`:'';
+  const ttl=q.status==='approved'?'Applied to the forecast: before vs after':q.status==='review'?'Base vs updated (as the submitter saw it, on today\'s forecast)':'Base vs updated (not applied)';
+  return `<div class="crumb"><a onclick="foTab('queue')">Approval queue</a> › ${q.id}</div>
+    <div class="card mb"><div class="ch"><h3>${q.id}</h3><span class="badge ${st[1]}">${st[0]}</span><span class="sub">Submitted by ${escH(q.by)} · ${foTs(q.on)} · net impact: ${foNetTxt(q.rows)}</span></div>${q.note?`<div class="fo-note ${q.status}">${escH(q.note)}</div>`:''}
+    <div class="fo-dg"><div>${foRowsTable(q.rows)}</div><div class="fo-trk"><div class="fo-trh">Approval tracker</div>${sub}${q.steps.map(step).join('')}${acts}</div></div></div>
+    ${foPvHTML(q.rows,q.id,ttl,q.status==='review')}`}
+function foDecide(id,dec){const q=FO.reqs.find(x=>x.id===id),s=q&&q.status==='review'&&q.steps.find(x=>!x.dec);if(!s)return;const ta=document.getElementById('foCm'),cm=(ta?ta.value:'').trim();
+  if(dec==='rejected'&&!cm){const e=document.getElementById('foDecErr');if(e)e.textContent='Add a comment to reject: the submitter needs the reason.';if(ta){ta.classList.add('fo-bad');ta.focus()}return}
+  const t=new Date();Object.assign(s,{dec,at:t,cm});
+  if(dec==='rejected'){q.status='rejected';foLog(t,s.name,'Rejected',q,q.rows,cm);toast(`${q.id} rejected. ${escH(q.by)} sees the reason in the queue.`)}
+  else{foLog(t,s.name,'Approved L'+s.lvl,q,q.rows,cm);
+    if(s.lvl<FO_LV.length)toast(`${q.id} approved at Level ${s.lvl}. Now with ${q.steps[s.lvl].name} (Level ${s.lvl+1}).`);
+    else{q.status='approved';const sup=[];
+      FO.reqs.forEach(o=>{if(o===q||o.status!=='approved')return;const hit=o.rows.filter(r=>q.rows.some(x=>x.cust===r.cust&&x.m===r.m&&x.d===r.d));if(!hit.length)return;
+        o.status='superseded';const h=hit[0];o.note=`Superseded by ${q.id} on ${foTs(t)}: a newer approved override for the same customer, metric and date (${foCu(h.cust).name} · ${FO_M[h.m]} · ${foDt(h.d)}${hit.length>1?` and ${hit.length-1} more`:''}).`;
+        foLog(t,'System','Superseded',o,hit,'Replaced by '+q.id);sup.push(o.id)});
+      if(sup.length)q.note=`Replaces ${sup.join(', ')} for the same customer, metric and date.`;
+      FO.ver++;toast(`${q.id} approved. The override is now applied to the forecast for all users${sup.length?' · '+sup.join(', ')+' superseded':''}.`)}}
+  render()}
+
+/* Tab 3 · Log history */
+function foLogPage(){const F=FO.f,stOf=id=>(FO.reqs.find(q=>q.id===id)||{}).status;
+  const L=FO.log.slice().sort((a,b)=>b.t-a.t).filter(e=>(!F.cust||e.cust===F.cust)&&(!F.m||e.m===F.m)&&(!F.st||stOf(e.id)===F.st)&&(!F.from||foIsoT(e.t)>=F.from)&&(!F.to||foIsoT(e.t)<=F.to));
+  const custs=[...new Set(FO.log.map(e=>e.cust))].map(foCu).sort((a,b)=>a.name.localeCompare(b.name));
+  const sel=(k,opts,all)=>`<select class="fo-in" onchange="FO.f.${k}=this.value;render()"><option value="">${all}</option>${opts.map(([v,l])=>`<option value="${v}"${F[k]===v?' selected':''}>${escH(l)}</option>`).join('')}</select>`;
+  const ac={Submitted:'b-med','Approved L1':'b-ok','Approved L2':'b-ok',Rejected:'b-crit',Superseded:'b-mut'};
+  return `<div class="card mb"><div class="ch"><h3>Log history</h3><span class="sub">${L.length} of ${FO.log.length} entries · newest first · one line per edit row</span></div>
+    <div class="fo-flt"><label>Customer${sel('cust',custs.map(c=>[c.id,c.name]),'All customers')}</label><label>Metric${sel('m',Object.entries(FO_M),'All metrics')}</label><label>Request status${sel('st',Object.entries(FO_ST).map(([k,v])=>[k,v[0]]),'All statuses')}</label>
+      <label>From<input type="date" class="fo-in" value="${F.from}" onchange="FO.f.from=this.value;render()"></label><label>To<input type="date" class="fo-in" value="${F.to}" onchange="FO.f.to=this.value;render()"></label>
+      ${Object.values(F).some(Boolean)?`<button class="btn sm ghost" onclick="FO.f={cust:'',m:'',st:'',from:'',to:''};render()">Clear filters</button>`:''}</div>
+    <div class="dly-tw"><table class="t fo-log"><thead><tr><th>Timestamp</th><th>User</th><th>Action</th><th>Request ID</th><th>Customer</th><th>Metric</th><th>Date</th><th>Mode</th><th class="r">Value</th><th>Comment</th></tr></thead><tbody>
+    ${L.length?L.map(e=>`<tr><td class="tnum">${foTs(e.t)}</td><td>${escH(e.user)}</td><td><span class="badge ${ac[e.act]||'b-mut'}">${e.act}</span></td><td><a class="fo-lnk" onclick="foOpenReq('${e.id}')">${e.id}</a></td><td>${escH(foCu(e.cust).name)}</td><td>${FO_M[e.m]}</td><td class="tnum">${foDt(e.d)}</td><td>${e.mode==='rem'?'Remove':'Add'}</td><td class="r tnum">${foAmt(e.v)}</td><td class="fo-cmc">${escH(e.cm||'–')}</td></tr>`).join('')
+      :`<tr><td colspan="10" class="txt-mut" style="text-align:center;padding:22px">No log entries match these filters.</td></tr>`}</tbody></table></div></div>`}
 
 </script>
 </body>
