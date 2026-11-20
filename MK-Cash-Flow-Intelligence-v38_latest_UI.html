@@ -10791,7 +10791,7 @@ function d40Back(c){const Ms=d40Mondays(c),isos=Ms.map(hzIso);if(!D40.mon||!isos
     const tipP=(lab,A,F,isAR)=>!lastD?`<b>${lab}</b><br>No actuals in this range yet`:`<b>${lab} · prior forecast vs actual</b><br>${isAR?'Actual AR at close of':'Actual to'} ${d40Wd(hzParse(lastD))}: <b>${fmc(A)}</b><br>Forecast of ${mlab} ${isAR?'at the same date':'for the same days'}: ${fmc(F)}<br>Difference: <b class="c45-df">${fs(A-F)}</b> · ${d40Pct(F?(A-F)/F*100:0)}<br><i>Click to see where forecast and actuals differ</i>`;
     const extP=[null,{tip:tipP('Billings',aA.b,aF.b),open:"d45Fva('b')"},{tip:tipP('Collections',aA.c,aF.c),open:"d45Fva('c')"},{tip:tipP('Deductions',aA.x,aF.x),open:"d45Fva('x')"},
       {tip:tipP('Closing AR',opL+aA.b-aA.c-aA.x,opP+aF.b-aF.c-aF.x,true),open:"d45Fva('ar')"}];
-    const tilesEq=d45Eq([[opL,opP,false,'Start of Wk '+(WK[0].k+1)+' · '+d40Md(WK[0].mon)],[LB('b'),PFm('b'),true,RL],[LB('c'),PFm('c'),true,RL+' · accuracy '+pct(acc)],[LB('x'),PFm('x'),false,RL+' · including write-offs'],[clL,clP,false,'Wk '+(lw.k+1)+' end · '+d40Md(lw.fri)]],'Actual + current','prior',extP);
+    const tilesEq=d45Eq([[opL,opP,false,'Start of Wk '+(WK[0].k+1)+' · '+d40Md(WK[0].mon)],[LB('b'),PFm('b'),true,''],[LB('c'),PFm('c'),true,''],[LB('x'),PFm('x'),false,''],[clL,clP,false,'']],'Actual + current','prior',extP);
     tiles=d40Tile(m3==='ar'?'Prior forecast · closing AR':'Prior forecast · '+ML[0],fmc(PF),'Forecast of '+mlab+' · '+(m3==='ar'?'Wk '+(lw.k+1)+' end':RL))+
       d40Tile('Actual + current forecast',fmc(LD),(dn.length?dn.length+' closed week'+(dn.length===1?'':'s')+' actual':'No closed weeks')+(open?' · '+open+' week'+(open===1?'':'s')+' current forecast':''))+
       d40Tile('Variance to prior forecast',d39Sg(dv,good),d40Pct(pc)+' · '+(m3==='ar'?'closing AR':ML[0])+' over '+RL,Math.abs(pc)>=D40.tol?'warn':'')+
@@ -10842,10 +10842,11 @@ function d40Back(c){const Ms=d40Mondays(c),isos=Ms.map(hzIso);if(!D40.mon||!isos
   lag.forEach((o,k)=>{if(!o)return;const x=36+k*lgw,y=LY(o.acc*100);ls+=`<rect x="${x+2}" y="${y}" width="${lgw-4}" height="${lh-22-y}" fill="${o.acc*100>=100-D40.tol?'#9CB8D6':'#E8870E'}" data-tip="${esc((k+1)+(k?' weeks':' week')+' lag · '+(o.acc*100).toFixed(1)+'% · '+o.n+' forecasts')}"/>`;if(k%2===0)ls+=`<text x="${x+lgw/2}" y="${lh-8}" text-anchor="middle" class="c40-ax">${k+1}</text>`});
   const lagC=`<div class="c40-lag"><div class="d39-sh">Accuracy by forecast lag · last 15 forecasts</div><svg viewBox="0 0 ${lw} ${lh}" class="c40-lsv" role="img" aria-label="Accuracy by forecast lag">${ls}</svg></div>`;
   const opts=`<div class="c40-opt"><span class="c40-ol">Forecast of</span><select class="fv-sel" onchange="D40.mon=this.value;D40.wk3=null;render()">${Ms.map((m,i)=>`<option value="${hzIso(m)}"${hzIso(m)===D40.mon?' selected':''}>Mon ${d40Md(m)}${i===Ms.length-1?' · current':' · '+(Ms.length-1-i)+(Ms.length-1-i===1?' week ago':' weeks ago')}</option>`).join('')}</select>
+    <label class="c40-tl">Tolerance ±<input type="number" min="0.5" step="0.5" value="${D40.tol}" aria-label="Tolerance in percent" onchange="d40Tol(this.value)">%</label>
     <div class="seg c40-seg">${[['b','Billings'],['c','Collections'],['x','Deductions and write-offs'],['ar','Closing AR']].map(([k,l])=>`<button class="${m3===k?'on':''}" onclick="D40.m3='${k}';render()">${l}</button>`).join('')}</div>
     <span class="c40-ol">Layers</span>${[['fc','Prior forecast'],['act','Actual'],['today','Current forecast']].map(([k,l])=>`<button class="c40-chip${D40.lay[k]?' on':''}" aria-pressed="${D40.lay[k]}" onclick="D40.lay.${k}=!D40.lay.${k};render()">${l}</button>`).join('')}
     <select class="fv-sel c40-s2" aria-label="Compare with another forecast" onchange="D40.mon2=this.value;render()"><option value="">Compare with…</option>${Ms.filter(m=>hzIso(m)!==D40.mon).map(m=>`<option value="${hzIso(m)}"${hzIso(m)===D40.mon2?' selected':''}>Mon ${d40Md(m)}</option>`).join('')}</select>
-    <span class="sp"></span><button class="c40-pb" onclick="d40DlCut('back')">Export · Treasury cut as submitted</button><button class="c40-sb" onclick="d40DlBack()">Export · ${RL}</button></div>`;
+    </div>`;   /* Export buttons (Treasury cut as submitted, range) removed */
   return {tiles,opts,body:`<div class="card mb c40-ch"><div class="ch"><h3>Prior forecast · ${mlab}</h3><span class="d39-rg">${d40Md(WK[0].mon)} – ${d40Md(WK[WK.length-1].fri)}</span></div>${chart}</div>
     <div class="card mb c40-lb"><div class="ch"><h3>Forecast vs actual</h3><span class="sp"></span>${D40.wk3!=null?'<button class="c40-chip ghost" onclick="D40.wk3=null;render()">All weeks</button>':''}</div><div class="c40-lbg"><div>${tbl}</div><div>${fa}${ff}${lagC}</div></div></div>`,
     sum:`${mlab} · ${acc==null?'no closed weeks':'forecast accuracy '+(acc*100).toFixed(1)+'%'}`,acc5}}
@@ -11454,7 +11455,7 @@ function d45Eq(rows,cn,rn,ext){return rows.map((r,i)=>d45Lk(d45One(r,i,cn,rn),ex
 function d45One([cu,rf,good,sub],i,cn,rn){return [[cu,rf,good,sub]].map(([cu,rf,good,sub])=>{const dv=cu-rf,pc=rf?dv/Math.abs(rf)*100:0,nil=Math.abs(dv)<.5;
   if(i===0)return d40Tile(D45_L[0],fmc(cu),(nil?`Actual · same starting point in both`:`${cn} ${fmc(cu)} · ${rn} ${fmc(rf)} · ${fs(dv)}`)+`<br><span class="txt-mut">${sub}</span>`);
   const dir=nil?'in line with '+rn:(dv>0?'above ':'below ')+rn+' · '+d40Pct(pc);
-  return d40Tile(D45_L[i],nil?'$0M':fs(dv),`<b class="c45-dir">${dir}</b><br>${cn} ${fmc(cu)} · ${rn} ${fmc(rf)}<br><span class="txt-mut">${sub}</span>`,i===4?'hl':'')}).join('')}
+  return d40Tile(D45_L[i],nil?'$0M':fs(dv),`<b class="c45-dir">${dir}</b><br>${cn} ${fmc(cu)} · ${rn} ${fmc(rf)}${sub?`<br><span class="txt-mut">${sub}</span>`:''}`,i===4?'hl':'')}).join('')}
 
 /* ===== MK v46 · three primary cards with sub-tabs =====
    1 Current forecast (range pills in the card) → sub-tabs Overview · Customers
@@ -11662,7 +11663,7 @@ function d43Back(k){const g=k==='QE'?'Q':'M',n=g==='Q'?8:12,u=g==='Q'?'quarter':
   let a5=null;try{const B=d40Back(d40Ctx());a5=B.acc5}catch(e){}
   /* the same five tiles as Current forecast, as variance: actual + current forecast − the BD9 submissions (opening AR is the same in both) */
   const sm2=f=>PP.reduce((t,x)=>t+x[f],0),O0=PP[0].open,cLD=O0+sm2('ldb')-sLD-sm2('ldx'),cPF=O0+sm2('pfb')-sPF-sm2('pfx'),pE=perE(PP[PP.length-1].p);
-  const tilesEq=d45Eq([[O0,O0,false,'Start of '+pl(PP[0])],[sm2('ldb'),sm2('pfb'),true,RLp],[sLD,sPF,true,RLp+' · accuracy '+(accP==null?'–':p(accP*100))],[sm2('ldx'),sm2('pfx'),false,RLp],[cLD,cPF,false,d40Md(pE)+', '+pE.getFullYear()]],'Actual + current','BD9');
+  const tilesEq=d45Eq([[O0,O0,false,'Start of '+pl(PP[0])],[sm2('ldb'),sm2('pfb'),true,''],[sLD,sPF,true,''],[sm2('ldx'),sm2('pfx'),false,''],[cLD,cPF,false,'']],'Actual + current','BD9');
   const tiles0=d40Tile('Prior forecast · collections',fmc(sPF),'BD9 submissions · '+RLp)+
     d40Tile('Actual + current forecast',fmc(sLD),cls.length+' closed '+u+(cls.length===1?'':'s')+' actual'+(opn?' · '+opn+' '+u+(opn===1?'':'s')+' current forecast':''))+
     d40Tile('Variance to prior forecast',d39Sg(dvP,true),d40Pct(pcP)+' · collections over '+PP.length+' '+u+'s',Math.abs(pcP)>=D40.tol?'warn':'')+
@@ -11682,7 +11683,7 @@ function d43Back(k){const g=k==='QE'?'Q':'M',n=g==='Q'?8:12,u=g==='Q'?'quarter':
   const tbl=`<div class="card mb"><div class="ch"><h3>Forecast vs BD9 submission by ${u}</h3><span class="d39-rg">Collections accuracy · 1 − |actual − forecast| / actual</span></div><div class="dly-tw"><table class="t c41-rft"><thead><tr><th>${u[0].toUpperCase()+u.slice(1)}</th><th class="r">Forecast accuracy</th><th class="r">BD9 submission accuracy</th><th class="r">Difference</th></tr></thead><tbody>
     ${a.slice().reverse().map(x=>`<tr><td><b>${nm(x)}</b></td><td class="r tnum"><span class="${x.e>=thr?'txt-good':'c40-o'}">${p(x.e)}</span></td><td class="r tnum">${p(x.b)}</td><td class="r tnum">${(x.e-x.b>=0?'+':'−')+Math.abs(x.e-x.b).toFixed(1)} pts</td></tr>`).join('')}
     <tr class="tot"><td>Average</td><td class="r tnum">${p(e)}</td><td class="r tnum">${p(b)}</td><td class="r tnum">${(e-b>=0?'+':'−')+Math.abs(e-b).toFixed(1)} pts</td></tr></tbody></table></div></div>`;
-  const opts=`<div class="c40-opt"><span class="c40-ol">Prior forecasts</span><span class="c40-pill">Last ${n} ${u}s · collections · scored at ${u} close</span><span class="sp"></span><button class="c40-sb" onclick="d43Dl('${k}','back')">Export · accuracy</button></div>`;
+  const opts=`<div class="c40-opt"><span class="c40-ol">Prior forecasts</span><label class="c40-tl">Tolerance ±<input type="number" min="0.5" step="0.5" value="${D40.tol}" aria-label="Tolerance in percent" onchange="d40Tol(this.value)">%</label><span class="c40-pill">Last ${n} ${u}s · collections · scored at ${u} close</span><span class="sp"></span><button class="c40-sb" onclick="d43Dl('${k}','back')">Export · accuracy</button></div>`;
   return {tiles,opts,body:`<div class="card mb c40-ch"><div class="ch"><h3>Forecast accuracy by ${u}</h3><span class="d39-rg">${nm(a[0])} – ${nm(a[a.length-1])}</span></div>${chart}</div>${tbl}`,
     sum:`BD9 submissions · ${RLp} · forecast accuracy ${accP==null?'–':p(accP*100)}`,a}}
 
