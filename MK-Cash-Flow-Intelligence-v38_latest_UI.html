@@ -10780,7 +10780,7 @@ function d40MonView(c){const {E,R,Rm,t,w,s0}=c,wks=[],M0=d39Mon(c.B,w),fwI=new M
     <label class="c40-tl">Tolerance ±<input type="number" min="0.5" step="0.5" value="${D40.tol}" onchange="d40Tol(this.value)">%</label>
     <span class="sp"></span><button class="c40-pb" onclick="d40DlCut('mon')">Export · Treasury cut</button></div>`;
   return {tiles,opts,body:`<div class="card mb c40-ch"><div class="ch"><h3>Variance to baseline by ${dly?'day':'week'}</h3><span class="d39-rg">${dly&&dly.sub?dly.sub:d40Wd(d0)+' – '+d40Wd(lwk.past?fri(lwk):last!=null?c.E.days[last].d:fri(lwk))}</span><span class="sp"></span>${d46Ctl(dly)}</div>${dly?dly.html:chart}</div>`,
-    sum:(w0.past?`From ${d40Md(w0.mon)} · past weeks vs their Monday forecast · `:`Baseline ${d40Wd(E.days[s0].d)} · `)+(nOut?`${nOut} week${nOut===1?'':'s'} outside ±${D40.tol}%`:`all weeks within ±${D40.tol}%`),warn:nOut>0}}
+    sum:(w0.past?`From ${d40Md(w0.mon)} · past weeks vs their Monday forecast · `:`Baseline ${d40Wd(E.days[s0].d)} · `)+(nOut?`${nOut} week${nOut===1?'':'s'} outside ±${D40.tol}%`:`all weeks within ±${D40.tol}%`),warn:nOut>0,wks,open0,wl}}
 
 /* ---------------- 3 · LOOK BACK ---------------- */
 function d40Back(c){const Ms=d40Mondays(c),isos=Ms.map(hzIso);if(!D40.mon||!isos.includes(D40.mon))D40.mon=isos[Math.max(0,isos.length-6)];
@@ -10905,7 +10905,45 @@ function d40Cockpit(){const c=d40Ctx(),V={fc:d40Fc,mon:d40MonView,back:d40Back},
 pageFx=(function(f0){return function(){const h=f0.apply(this,arguments);if(S.hz!=='W13'||!can('pw.daily'))return h;
   const i=h.indexOf('<div class="eq');if(i<0)return h;let add='';try{add=d40Cockpit()}catch(e){console.error(e);return h}return h.slice(0,i)+add+h.slice(i)}})(pageFx);
 const d35Card0=d35Card,d35Treas0=d35Treas;
-d35Card=function(){return S.hz==='W13'&&D40.view!=='mon'?'':d35Card0()};
+d35Card=function(){if(S.hz!=='W13')return d35Card0();if(D40.view!=='mon')return '';try{return d35Rng()}catch(e){console.error(e);return d35Card0()}};
+/* Variance to baseline · Weekly AR bridge follows the range picked, like the chart above it:
+   chart by week → one row per week of the range; chart by day → one row per business day (or the days of the week clicked).
+   Same baseline as the chart and tiles: this Monday's run for the current and future weeks, the forecast released that Monday for a past week
+   (split across its days in proportion to the actuals). Closing AR builds from the opening AR of the range, so the last row = the Closing AR tile.
+   The current week on its own keeps the detailed day-by-day bridge (variance factors per day). */
+function d35Rng(){const bu=S.bu,c=d40Ctx(bu),{E,R,Rm,t,w}=c,V=d40MonView(c),wks=V.wks,wl=V.wl,dly=D40.mvG==='D',T=d5T();
+  if(wks.length===1&&wks[0].k===w&&!wks[0].part)return d35Card0();
+  const sel=dly&&D40.mvWk!=null?wks.filter(x=>x.k===D40.mvWk):[],W0=sel.length?sel:wks;
+  /* the flows of one business day: current (actual or forecast) and baseline */
+  const day=(x,i,d)=>{if(!x.past)return {d:E.days[i].d,h:E.days[i].h,st:i<t?'a':i===t?'t':'f',cb:R.b[i],cc:R.c[i],cx:R.x[i]+R.wo[i],bb:Rm.b[i],bc:Rm.c[i],bx:Rm.x[i]+Rm.wo[i]};
+    const a=d40Act(c,hzIso(d));if(!a)return null;
+    if(!x._A)x._A=x.days.reduce((s,q)=>{const z=d40Act(c,hzIso(q));if(z){s.b+=z.b;s.c+=z.c;s.x+=z.x}return s},{b:0,c:0,x:0});
+    const sh=f=>x._A[f]?a[f]/x._A[f]:0;   // the day's share of the week's actual: the days add to the week (and to the tiles)
+    return {d,st:'a',cb:x.tb*sh('b'),cc:x.td*sh('c'),cx:x.tx*sh('x'),bb:x.bb*sh('b'),bc:x.bs*sh('c'),bx:x.bx*sh('x')}};
+  const rowsD=[];W0.forEach(x=>{(x.past?x.days.map(d=>day(x,null,d)):x.ix.map(i=>day(x,i))).forEach(o=>{if(o)rowsD.push(Object.assign(o,{x}))})});
+  const rowsW=W0.map(x=>({x,lab:x.past?'W/E '+d40Md(x.dE||hzAdd(x.mon,4)):wl(x),sub:d40Md(x.past?x.d1:E.days[x.ix[0]].d)+(x.part?' – '+d40Md(x.past?x.dE:E.days[x.ix[x.ix.length-1]].d):''),
+    st:x.past||x.ix.every(i=>i<t)?'a':x.ix.some(i=>i>=t)&&x.ix.some(i=>i<t)?'t':'f',cb:x.tb,cc:x.td,cx:x.tx,bb:x.bb,bc:x.bs,bx:x.bx}));
+  const rows=dly?rowsD:rowsW;
+  /* opening AR of the first row: the range's opening AR, or for one week picked, AR at the start of that week */
+  const first=W0[0],op0=sel.length?(first.past?rvAR(bu,first.d1):R.open[first.ix[0]]):V.open0;
+  /* a future week picked on its own starts from the baseline's own AR at that Monday, so the AR gap carried in from earlier weeks shows */
+  let oc=op0,ob=sel.length&&!first.past&&Rm.open?Rm.open[first.ix[0]]:op0;rows.forEach(o=>{o.oc=oc;o.ob=ob;oc+=o.cb-o.cc-o.cx;ob+=o.bb-o.bc-o.bx;o.clc=oc;o.clb=ob});
+  const ST={a:d35St.a,t:d35St.t,f:d35St.f},stW={a:d35St.a,t:'<span class="d35-st t">In progress</span>',f:d35St.f};
+  const tipC=o=>`<b>${dly?d5Lab(o.d):o.lab} · collections variance ${fs(o.cc-o.bc)}${o.bc?' ('+d40Pct((o.cc-o.bc)/o.bc*100)+')':''}</b><br>Baseline${o.x.past?' (forecast of Mon '+d40Md(o.x.mon)+(dly?', split by day':'')+')':''} ${fmc(o.bc)} → ${o.st==='a'?'actual':'current forecast'} ${fmc(o.cc)}`+
+    (!dly&&!o.x.past?(()=>{const L=d41Ln(c,o.x.ix).L;return L.length?'<br><b>Contributing factors</b><br>'+L.join('<br>'):''})():'');
+  const tipAR=o=>{let db=0,dc=0,dx=0;for(const q of rows){db+=q.cb-q.bb;dc+=q.cc-q.bc;dx+=q.cx-q.bx;if(q===o)break}
+    return `<b>${dly?d5Lab(o.d):o.lab} · closing AR variance ${fs(o.clc-o.clb)}</b><br>Baseline ${fmc(o.clb)} → ${o.st==='a'?'actual':'current forecast'} ${fmc(o.clc)}<br><b>Contributing factors since ${d40Wd(dly?rows[0].d:first.past?first.d1:E.days[first.ix[0]].d)}</b><br>• Billings ${fs(db)} → AR <b>${fs(db)}</b><br>• Collections ${fs(dc)} → AR <b>${fs(-dc)}</b><br>• Deductions and write-offs ${fs(dx)} → AR <b>${fs(-dx)}</b>`};
+  const over=o=>o.st!=='a'&&o.bc&&Math.abs((o.cc-o.bc)/o.bc*100)>=D40.tol;
+  const tr=rows.map(o=>`<tr class="${o.st==='t'&&dly?'d35-now':''}${!dly?' go':''}"${!dly?` onclick="d46Wk(${o.x.k})" title="Show the days of this week"`:''}><td><b>${dly?d5Lab(o.d):o.lab}</b>${dly?(o.h?' <small class="txt-mut">holiday</small>':''):'<small class="c41-d">'+o.sub+'</small>'}</td><td>${(dly?ST:stW)[o.st]}</td>
+    <td class="r tnum">${fmc(o.oc)}</td><td class="r tnum">${fmc(o.cb)}</td><td class="r tnum">${fmc(o.cc)}</td><td class="r tnum">${over(o)?'<span class="d39-ov">':''}${d41Tv(tipC(o),d39Sg(o.cc-o.bc,true))}${over(o)?'</span>':''}</td>
+    <td class="r tnum">${fmc(o.cx)}</td><td class="r tnum"><b>${fmc(o.clc)}</b></td><td class="r tnum">${d41Tv(tipAR(o),d39Sg(o.clc-o.clb,false))}</td></tr>`).join('');
+  const Sx=f=>rows.reduce((a,o)=>a+o[f],0),lst=rows[rows.length-1];
+  const tot=`<tr class="d35-tot"><td><b>${sel.length?wl(first):'Range'}</b></td><td></td><td class="r tnum">${fmc(op0)}</td><td class="r tnum">${fmc(Sx('cb'))}</td><td class="r tnum">${fmc(Sx('cc'))}</td><td class="r tnum">${d41Tv(`<b>Collections variance ${fs(Sx('cc')-Sx('bc'))}</b><br>Baseline ${fmc(Sx('bc'))} → actual + current forecast ${fmc(Sx('cc'))}`,d39Sg(Sx('cc')-Sx('bc'),true))}</td><td class="r tnum">${fmc(Sx('cx'))}</td><td class="r tnum"><b>${fmc(lst.clc)}</b></td><td class="r tnum">${d39Sg(lst.clc-lst.clb,false)}</td></tr>`;
+  const lab=d40Wd(dly?rowsD[0].d:first.past?first.d1:E.days[first.ix[0]].d)+' – '+d40Wd(dly?rowsD[rowsD.length-1].d:(()=>{const z=W0[W0.length-1];return z.past?z.dE:E.days[z.ix[z.ix.length-1]].d})());
+  return `<div class="card mb d35 d39"><div class="ch"><h3>${dly?'Daily':'Weekly'} AR bridge</h3><span class="d39-rg">${lab} · ${rows.length} ${dly?'business day':'week'}${rows.length===1?'':'s'}</span>${sel.length?`<button class="c40-chip on" onclick="d46G('D')">${esc(wl(first))} ✕</button>`:''}<span class="sp"></span><span class="d35-ml">Forecast run</span>
+      <button class="d35-nav" onclick="d35Go(-1)" aria-label="Previous run"${T<=0?' disabled':''}>‹</button>${fvTodaySel()}<button class="d35-nav" onclick="d35Go(1)" aria-label="Next run"${T>=25?' disabled':''}>›</button></div>
+    <div class="dly-tw"><table class="t d35-t d39-dt"><thead><tr><th>${dly?'Day':'Week'}</th><th>Status</th><th class="r">Opening AR</th><th class="r">Billings</th><th class="r">Collections</th><th class="r">Variance</th><th class="r">Deductions and write-offs</th><th class="r">Closing AR</th><th class="r">Variance</th></tr></thead>
+      <tbody>${tr}${tot}</tbody></table></div></div>`}
 d35Treas=function(){return S.hz==='W13'&&D40.view!=='mon'?'':d35Treas0()};
 render=(function(f0){return function(){const r=f0.apply(this,arguments);try{const root=document.querySelector('#main .v30');if(root){root.classList.toggle('v40',!!root.querySelector(':scope > .c40'));root.dataset.v=D40.view}}catch(e){}return r}})(render);
 P36_SEC[0][2]=['.c40','.eq'];
@@ -11657,8 +11695,8 @@ function d43Mon(k){const bu=S.bu,D=d43Data(k,bu),P=d43P(k,bu),bd=D.bd;
   const ms=D.M.filter(m=>v30Mi(m.s)>=0&&(k!=='Y3'||m.s<=D43_Y3E)&&v30Mi(m.s)<P.c.f.length).map(m=>{const i=v30Mi(m.s),q=f=>m.v[f]-P[f].f[i]+P[f].pf[i];
     const o={m,i,s:m.s,td:m.v.c,bs:q('c'),tb:m.v.b,bb:q('b'),tx:m.v.x,bx:q('x'),ac:m.el?m.el.c:0};o.dv=o.td-o.bs;o.pc=o.bs?o.dv/o.bs*100:0;o.out=Math.abs(o.pc)>=D40.tol;return o});
   /* the periods of the horizon: months (Month to FYE), quarters (Quarter to FYE), fiscal years (Long-Range Plan) — summed from the months */
-  const pr=k==='YE'?ms:ms.reduce((a,o)=>{const g=d43Grp(k,o.s),p=a[a.length-1];if(p&&p.lab===g){['td','bs','tb','bb','tx','bx','ac'].forEach(f=>p[f]+=o[f]);p.e=o.s;p.n++}
-      else a.push({lab:g,s:o.s,e:o.s,n:1,td:o.td,bs:o.bs,tb:o.tb,bb:o.bb,tx:o.tx,bx:o.bx,ac:o.ac});return a},[]);
+  const pr=k==='YE'?ms:ms.reduce((a,o)=>{const g=d43Grp(k,o.s),p=a[a.length-1];if(p&&p.lab===g){['td','bs','tb','bb','tx','bx','ac'].forEach(f=>p[f]+=o[f]);p.e=o.s;p.n++;p.mc=o.m}
+      else a.push({lab:g,s:o.s,e:o.s,n:1,td:o.td,bs:o.bs,tb:o.tb,bb:o.bb,tx:o.tx,bx:o.bx,ac:o.ac,mo:o.m,mc:o.m});return a},[]);
   pr.forEach(o=>{if(o.lab){o.dv=o.td-o.bs;o.pc=o.bs?o.dv/o.bs*100:0;o.out=Math.abs(o.pc)>=D40.tol}});
   const PN=k==='YE'?'month':k==='QE'?'quarter':'fiscal year',PT=k==='YE'?'Month':k==='QE'?'Quarter':'Fiscal year',
     PL=o=>o.lab||HZ_FULLM[o.s.getMonth()]+' '+o.s.getFullYear(),PR=o=>o.lab?(o.n>1?(o.s.getFullYear()===o.e.getFullYear()?HZ_MON[o.s.getMonth()]:d43Mo(o.s))+' – '+d43Mo(o.e):d43Mo(o.s)):'';
@@ -11691,9 +11729,22 @@ function d43Mon(k){const bu=S.bu,D=d43Data(k,bu),P=d43P(k,bu),bd=D.bd;
   pr.forEach((o,j)=>s.push(`<rect class="c40-hit" x="${X(j)}" y="${top-8}" width="${gw}" height="${H-26-(top-8)}" fill="transparent" data-tip="${esc('<b>'+PL(o)+'</b>'+(o.lab?' · '+PR(o):'')+'<br>Baseline (BD9) '+fmc(o.bs)+'<br>Current forecast '+fmc(o.td)+(o.ac>0?'<br>Actual to date '+fmc(o.ac):'')+'<br>Variance <b>'+fs(o.dv)+' · '+d40Pct(o.pc)+'</b>')}"/>`));
   const chart=`<div class="c40-lg"><span><i class="mbb"></i>Baseline · BD9 submission</span><span><i class="ac"></i>Actual</span><span><i class="hc"></i>Current forecast</span><span><i class="tol"></i>Tolerance ±${D40.tol}%</span><span><i class="out"></i>Outside tolerance</span></div>
     <svg class="c40-svg" viewBox="0 0 ${W} ${H}" role="img" aria-label="Variance to baseline by ${PN}">${s.join('')}</svg>`;
-  const tr=pr.map(o=>`<tr><td><b>${PL(o)}</b>${o.lab?'<small class="c41-d">'+PR(o)+'</small>':''}${o.ac>0?' <span class="c40-tw">Actual to date '+fmc(o.ac)+'</span>':''}</td><td class="r tnum">${fmc(o.bs)}</td><td class="r tnum">${fmc(o.td)}</td><td class="r tnum">${d39Sg(o.dv,true)}</td><td class="r tnum"><span class="${o.out?'c40-o':''}">${d40Pct(o.pc)}</span></td><td class="r tnum">${d39Sg(o.tb-o.bb,true)}</td><td class="r tnum">${d39Sg(o.tx-o.bx,false)}</td></tr>`).join('');
-  const tbl=`<div class="card mb c43-vt"><div class="ch"><h3>Variance to baseline by ${PN}</h3><span class="d39-rg">Current forecast vs the BD9 submission of ${d40Wd(bd)}</span></div><div class="dly-tw"><table class="t c41-rft"><thead><tr><th>${PT}</th><th class="r">Baseline collections</th><th class="r">Current forecast</th><th class="r">Variance</th><th class="r">%</th><th class="r">Billings variance</th><th class="r">Deductions variance</th></tr></thead><tbody>${tr}
-    <tr class="tot"><td>Total</td><td class="r tnum">${fmc(bs)}</td><td class="r tnum">${fmc(td)}</td><td class="r tnum">${d39Sg(td-bs,true)}</td><td class="r tnum">${d40Pct(bs?(td-bs)/bs*100:0)}</td><td class="r tnum">${d39Sg(S0('tb')-S0('bb'),true)}</td><td class="r tnum">${d39Sg(S0('tx')-S0('bx'),false)}</td></tr></tbody></table></div></div>`;
+  /* AR bridge by period — the same columns as the 13-Week Rolling Weekly AR bridge:
+     Period · Status · Opening AR · Billings · Collections · Variance · Deductions and write-offs · Closing AR · Variance.
+     Baseline closing AR = current closing AR − the flow variances so far, so the last row equals the Closing AR tile */
+  let cum=0,cb=0,cc=0,cx=0;const BR=pr.map((o,j)=>{const m0=o.mo||o.m,m1=o.mc||o.m;cb+=o.tb-o.bb;cc+=o.td-o.bs;cx+=o.tx-o.bx;cum=cb-cc-cx;
+    return {o,op:m0.open,cl:m1.close,clb:m1.close-cum,db:cb,dc:cc,dx:cx,st:o.ac>0?'t':'f'}});
+  const BST={t:'<span class="d35-st t">In progress</span>',f:'<span class="d35-st f">Forecast</span>'};
+  const tipC=r=>{const o=r.o;return `<b>${PL(o)} · collections variance ${fs(o.dv)} (${d40Pct(o.pc)})</b><br>Baseline (BD9 ${d40Md(bd)}) ${fmc(o.bs)} → current forecast ${fmc(o.td)}`+(o.ac>0?`<br>Actual to date ${fmc(o.ac)}`:'')+
+    `<br><b>Contributing factors</b><br>• Billings ${fs(o.tb-o.bb)} · deductions and write-offs ${fs(o.tx-o.bx)}<br>• Re-forecast since BD9 · payment patterns, actuals landed and new information`+(o.out?`<br><i>Outside tolerance ±${D40.tol}%</i>`:'')};
+  const tipAR=r=>`<b>${PL(r.o)} · closing AR variance ${fs(r.cl-r.clb)}</b><br>Baseline ${fmc(r.clb)} → current forecast ${fmc(r.cl)}<br><b>Contributing factors since ${d43Mo(ms[0].s)}</b><br>• Billings ${fs(r.db)} → AR <b>${fs(r.db)}</b><br>• Collections ${fs(r.dc)} → AR <b>${fs(-r.dc)}</b><br>• Deductions and write-offs ${fs(r.dx)} → AR <b>${fs(-r.dx)}</b>`;
+  const tr=BR.map(r=>{const o=r.o;return `<tr class="${r.st==='t'?'d35-now':''}"><td><b>${PL(o)}</b>${o.lab?'<small class="c41-d">'+PR(o)+'</small>':''}${o.ac>0?' <span class="c40-tw">Actual to date '+fmc(o.ac)+'</span>':''}</td><td>${BST[r.st]}</td>
+    <td class="r tnum">${fmc(r.op)}</td><td class="r tnum">${fmc(o.tb)}</td><td class="r tnum">${fmc(o.td)}</td><td class="r tnum">${o.out?'<span class="d39-ov">':''}${d41Tv(tipC(r),d39Sg(o.dv,true))}${o.out?'</span>':''}</td>
+    <td class="r tnum">${fmc(o.tx)}</td><td class="r tnum"><b>${fmc(r.cl)}</b></td><td class="r tnum">${d41Tv(tipAR(r),d39Sg(r.cl-r.clb,false))}</td></tr>`}).join('');
+  const lB=BR[BR.length-1];
+  const tbl=`<div class="card mb d35 d39 c43-vt"><div class="ch"><h3>${PT==='Month'?'Monthly':PT==='Quarter'?'Quarterly':'Fiscal-year'} AR bridge</h3><span class="d39-rg">${RL} · current forecast vs the BD9 submission of ${d40Wd(bd)}</span></div>
+    <div class="dly-tw"><table class="t d35-t d39-dt"><thead><tr><th>${PT}</th><th>Status</th><th class="r">Opening AR</th><th class="r">Billings</th><th class="r">Collections</th><th class="r">Variance</th><th class="r">Deductions and write-offs</th><th class="r">Closing AR</th><th class="r">Variance</th></tr></thead><tbody>${tr}
+    <tr class="d35-tot"><td><b>Range</b></td><td></td><td class="r tnum">${fmc(BR[0].op)}</td><td class="r tnum">${fmc(S0('tb'))}</td><td class="r tnum">${fmc(td)}</td><td class="r tnum">${d41Tv(`<b>Collections variance ${fs(td-bs)} (${d40Pct(bs?(td-bs)/bs*100:0)})</b><br>Baseline ${fmc(bs)} → current forecast ${fmc(td)}`,d39Sg(td-bs,true))}</td><td class="r tnum">${fmc(S0('tx'))}</td><td class="r tnum"><b>${fmc(lB.cl)}</b></td><td class="r tnum">${d39Sg(lB.cl-lB.clb,false)}</td></tr></tbody></table></div></div>`;
   const opts=`<div class="c40-opt"><span class="c40-ol">Baseline</span><span class="c40-pill">BD9 submission · ${d40Wd(bd)}</span>
     <label class="c40-tl">Tolerance ±<input type="number" min="0.5" step="0.5" value="${D40.tol}" onchange="d40Tol(this.value)">%</label>
     <span class="sp"></span><button class="c40-sb" onclick="d43Dl('${k}','mon')">Export · variance to baseline</button></div>`;
