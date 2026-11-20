@@ -4229,9 +4229,11 @@ function etNow(){const d=new Date(),o={timeZone:'America/New_York'};
   return day+' · '+tm+' ET'}
 // keep the side-panel time current without a full re-render
 setInterval(()=>{const e=document.getElementById('lastRefresh');if(e)e.textContent=etNow()},30000);
+/* the Alerts badge = open Critical / High alerts + approvals waiting for the signed-in user; the tooltip says so */
+function alBadgeTip(){const a=ALERTS.filter(x=>x.status!=='Resolved'&&(x.sev==='Critical'||x.sev==='High')).length,p=APPROVALS.filter(x=>x.to===S.persona&&x.status==='Pending').length,o=ALERTS.filter(x=>x.status!=='Resolved').length;return '<b>'+(a+p)+' need attention</b><br>'+a+' critical or high alert'+(a===1?'':'s')+' open<br>'+p+' approval'+(p===1?'':'s')+' waiting for you<br><i>'+o+' open alerts in all</i>'}
 function sideHTML(arAlerts){
   const m=modOf(S.tab), cfg=MODNAV[m], cnt={alerts:arAlerts,'ap.alerts':apOpenAlerts(),'inv.alerts':invOpenAlerts()};
-  const items=cfg.items.filter(([k])=>!SIDE_HIDE.includes(k)).map(([k,n,ic])=>`<button class="nav ${S.tab===k?'on':''}" onclick="go('${k}')">${ICONS[ic]||ICONS2[ic]}<span>${n}</span>${cnt[k]?`<span class="cnt">${cnt[k]}</span>`:''}</button>`).join('');
+  const items=cfg.items.filter(([k])=>!SIDE_HIDE.includes(k)).map(([k,n,ic])=>`<button class="nav ${S.tab===k?'on':''}" onclick="go('${k}')">${ICONS[ic]||ICONS2[ic]}<span>${n}</span>${cnt[k]?`<span class="cnt"${k==='alerts'?` data-tip="${esc(alBadgeTip())}"`:''}>${cnt[k]}</span>`:''}</button>`).join('');
   const rows=[['ar','Accounts Receivable','PHASE 1','tower','Phase 1 · Accounts Receivable','Collections forecast, customer risk, alerts, scenarios'],
     ['ap','Accounts Payable','PHASE 2','ap.tower','Phase 2 preview · Accounts Payable','Payment forecast, supplier terms, discounts, supply-chain finance, DPO levers'],
     ['inv','Inventory','PHASE 2','inv.tower','Phase 2 preview · Inventory','Receipts vs shipments, DSA caps, WAC forward buys, expiry, DC balance, DIO levers'],
@@ -8579,7 +8581,14 @@ function v30CustCard(k,R){if(!CU_COLS.some(x=>x[0]===S.cuS.k))S.cuS={k:'c',d:-1}
   const th=([key,l])=>`<th class="r v30-srt${s.k===key?' on':''}" onclick="v30CuSort('${key}')" aria-sort="${s.k===key?(s.d<0?'descending':'ascending'):'none'}" role="button" tabindex="0" onkeydown="if(event.key==='Enter')this.click()">${l}<i>${s.k===key?(s.d<0?'▼':'▲'):'↕'}</i></th>`;
   return `<div class="card v30-cu" id="v30cu"><div class="ch"><h3>Top 10 customers by ${lab.toLowerCase()}</h3><span class="sp"></span><button class="btn sm ghost" onclick="gdOpen('c','root');S.gd.tab='p';gdDraw()">All customers</button></div>
     <div class="dly-tw"><table class="t v30-ctb v30-cu10"><thead><tr><th>#</th><th>Customer</th>${CU_COLS.map(th).join('')}</tr></thead><tbody>${top.map((r,i)=>`<tr><td class="txt-mut tnum">${i+1}</td><td><button class="cud-nm" onclick="cuDrill('${r.cu.id}')" data-tip="${esc('See the invoices behind '+r.cu.name+'\'s collections')}"><b>${r.cu.name}</b></button><small>${r.cu.id} · ${r.cu.bu}</small></td>
-      <td class="r tnum">${fmc(r.open)}</td><td class="r tnum">${fmc(r.b)}</td><td class="r tnum"><b>${fmc(r.c)}</b></td><td class="r tnum">${fmc(r.x)}</td><td class="r tnum"><b>${fmc(r.close)}</b></td></tr>`).join('')}</tbody></table></div>
+      <td class="r tnum">${fmc(r.open)}</td><td class="r tnum">${fmc(r.b)}</td><td class="r tnum"><b>${fmc(r.c)}</b></td><td class="r tnum">${fmc(r.x)}</td><td class="r tnum"><b>${fmc(r.close)}</b></td></tr>`).join('')}</tbody>
+      ${(()=>{/* reconciliation: top 10 + every other customer = the business-unit total for the same periods */
+        const sm=(L,f)=>L.reduce((t,r)=>t+r[f],0),Pr=P.slice(a,b+1),T={open:Pr[0].open,b:Pr.reduce((t,p)=>t+p.v.b,0),c:Pr.reduce((t,p)=>t+p.v.c,0),x:Pr.reduce((t,p)=>t+p.v.x,0),close:Pr[Pr.length-1].close};
+        const tp={open:sm(top,'open'),b:sm(top,'b'),c:sm(top,'c'),x:sm(top,'x'),close:sm(top,'close')},ot={};['open','b','c','x','close'].forEach(f=>ot[f]=T[f]-tp[f]);
+        const cl=o=>['open','b','c','x','close'].map(f=>`<td class="r tnum">${f==='c'||f==='close'?'<b>'+fmc(o[f])+'</b>':fmc(o[f])}</td>`).join('');
+        return `<tfoot><tr class="v32-tot"><td></td><td><b>Top 10</b><small>${(tp.c/(T.c||1)*100).toFixed(1)}% of collections</small></td>${cl(tp)}</tr>
+          <tr><td></td><td>All other customers<small>${Math.max(0,rows.length-10)} named · plus the long tail</small></td>${cl(ot)}</tr>
+          <tr class="v32-tot"><td></td><td><b>Total</b><small>same as the forecast tiles for these periods</small></td>${cl(T)}</tr></tfoot>`})()}</table></div>
     <div class="txt-mut" style="font-size:11.5px;margin-top:8px">${V30[k].lab} · ${S.bu==='All'?'both business units':S.bu} · click a column to sort · click a customer for the invoices behind its collections</div></div>`}
 /* ---- Collections drill-down: Top 10 customer → the invoices behind its expected collections (ILLUSTRATIVE) ----
    Path: Top 10 customers → customer name → expected collections by due date → "Expected collections on [date]".
@@ -9116,7 +9125,9 @@ const scmEd=()=>can('sc.edit')&&!S.scm.ro;
 /* ---- the simulation for the horizon and business unit on screen ---- */
 function scmCalc(terms,notes){const k=S.hz,R=v30Tree(k,S.bu),P=cuPer(R,k),rows=v30CustRows(k,S.bu,0,P.length-1),s=R.s,e=R.e;
   const start=s>ASOF_DT?s:ASOF_DT,days=Math.max(1,Math.round((e-s)/864e5)+1),per=P.map(p=>({p,base:p.v.c,d:0})),ch=[];
-  const spread=(eff,a,m)=>{if(m<=0)return;const b=hzAdd(a,m-1);per.forEach(x=>{const o0=x.p.s>a?x.p.s:a,o1=x.p.e<b?x.p.e:b,ov=o1>=o0?Math.round((o1-o0)/864e5)+1:0;x.d+=eff*ov/m})};
+  /* the effect spreads over the days it covers; days between periods (weekends) give their share to the periods, so Σ periods = the effect */
+  const spread=(eff,a,m)=>{if(m<=0)return;const b=hzAdd(a,m-1),ov=per.map(x=>{const o0=x.p.s>a?x.p.s:a,o1=x.p.e<b?x.p.e:b;return o1>=o0?Math.round((o1-o0)/864e5)+1:0}),tot=ov.reduce((s,v)=>s+v,0);
+    if(tot>0)per.forEach((x,j)=>x.d+=eff*ov[j]/tot);else{const j=per.findIndex(x=>x.p.e>=a);if(j>=0)per[j].d+=eff}};
   const byId=new Map(rows.map(r=>[r.cu.id,r]));
   Object.entries(terms||{}).forEach(([id,t1])=>{const r=byId.get(id);if(!r)return;const t0=scmT0(r.cu);if(t1===t0)return;
     const daily=r.c/days,lag=Math.min(t0,t1),a=hzAdd(start,lag),left=Math.max(0,Math.round((e-a)/864e5)+1),m=Math.min(Math.abs(t1-t0),left),eff=-Math.sign(t1-t0)*daily*m;
@@ -11835,6 +11846,22 @@ ICONS2.acc='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="
 (function(){const it=MODNAV.ar.items,i=it.findIndex(x=>x[0]==='tower');it.splice(i+1,0,['facc','Forecast Performance','acc'])})();
 P2_NAMES.facc='Forecast Performance';
 P2_PAGES.facc=function(){return pageFA2()};
+
+/* ===== MK v48 · one forecast across horizons =====
+   Inside the 13-week window (to Fri Feb 12, 2027), Month to FYE, Quarter to FYE and Long-Range Plan use the same daily run as
+   13-Week Rolling (actuals for landed days, today's re-forecast after), so the same date carries the same AR and flows on every horizon.
+   After Feb 12 each horizon keeps its monthly model. */
+/* also 13-Week Rolling itself: the period tree (customers, Scenario Workspace) reads the same run as the tiles.
+   The run is built from the raw daily data, so while it is being built (D48_BUSY) the raw days are returned. */
+let D48_BUSY=false;
+/* the 13-week run is built from the raw daily data: its two inputs always read it raw, and raw results are cached apart */
+v30C=(function(f0){return function(id,fn){return f0(id+(D48_BUSY?'|raw48':''),fn)}})(v30C);
+d35Base=(function(f0){return function(bu){const p=D48_BUSY;D48_BUSY=true;try{return f0(bu)}finally{D48_BUSY=p}}})(d35Base);
+d40E=(function(f0){return function(bu){const p=D48_BUSY;D48_BUSY=true;try{return f0(bu)}finally{D48_BUSY=p}}})(d40E);
+v30Days=(function(f0){return function(k,bu){const r=f0(k,bu);if(bu==='All'||FO_RAW||D48_BUSY)return r;
+  return v30C('d48'+k+bu,()=>{let c;D48_BUSY=true;try{c=d40Ctx(bu)}catch(e){return r}finally{D48_BUSY=false}const {E,R,t}=c,e13=hzIso(V30_E.W13),s13=E.days[0].iso;
+    return Object.assign({},r,{days:r.days.map(o=>{if(o.st==='act'||o.iso>e13||o.iso<s13)return o;const i=E.idx[o.iso];if(i==null)return o;
+      const v={b:R.b[i],c:R.c[i],x:R.x[i]+R.wo[i]};return Object.assign({},o,{v,a:i<t?Object.assign({},v):o.a})})})})}})(v30Days);
 /* a page hidden from the side panel cannot stay open: fall back to the Forecast Control Tower */
 render=(function(f0){return function(){if(S.tab==='facc'&&SIDE_HIDE.includes('facc'))S.tab='tower';return f0.apply(this,arguments)}})(render);
 
